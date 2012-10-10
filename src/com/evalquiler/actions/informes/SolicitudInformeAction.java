@@ -24,7 +24,7 @@ public class SolicitudInformeAction extends ActionBase {
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			String botonPulsado = (String)request.getParameter("tipoBoton");
+			String botonPulsado = (String)request.getParameter("BOTON_PULSADO");
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -43,6 +43,6 @@ public class SolicitudInformeAction extends ActionBase {
 		}
 	
 		// Finish with
-		return (forward);
+		return forward;
     }
 }
