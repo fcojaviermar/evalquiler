@@ -17,9 +17,8 @@ import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 public class DatosUsuarioParaEncuestasActionForm extends DatosUsuarioActionForm {
 
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("DatosUsuarioActionForm.validate()");
+    	System.out.println("DatosUsuarioParaEncuestasActionForm.validate()");
     	ActionErrors errors = null;
-    	DatosInicioSesionActionForm datosUsuario = (DatosInicioSesionActionForm)request.getSession().getAttribute("datosUsuario");
     	
     	return errors;
     }
