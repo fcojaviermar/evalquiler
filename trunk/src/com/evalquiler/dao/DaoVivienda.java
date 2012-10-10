@@ -30,6 +30,18 @@ public class DaoVivienda {
 															"PUERTA, CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO) " +
 															"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, TIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
+															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
+															"FROM VIVIENDA WHERE TIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
+															"AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ?" +
+															"AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";
+	
+	private final static String CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO 		  
+														  = "SELECT IDVIVIENDA, TIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
+														    "CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
+														    "FROM VIVIENDA WHERE TIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
+														    "AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ?" +
+														    "AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";
 	
 	public static final ArrayList<DatosViviendaActionForm> consutarPorPk(final long idVivienda) {
 		ArrayList<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
@@ -65,7 +77,7 @@ public class DaoVivienda {
 					System.out.println("No se ha podido obtener un pstmt valido.") ;
 				}
 			} else {
-				listaVivienda = null;
+				
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage()) ;
@@ -167,16 +179,42 @@ public class DaoVivienda {
 	private final static String obtenerSentencia(final int sentencia) {
 		String sentenciaEjecutar ="";
 		switch (sentencia) {
-			case 1: break;
+			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA;
+					break;
+			case 2: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
+					break;
 			default:break; 
 		}
 		return sentenciaEjecutar;
 	}
 	
+	private final static PreparedStatement prepararWhere(final DatosViviendaActionForm vivienda, PreparedStatement pstmt, 
+														 final int sentencia) throws SQLException {
+		switch (sentencia) {
+			case 1: pstmt.setLong(1, vivienda.getIdVivienda());
+					break;
+			case 2: pstmt.setInt(1, vivienda.getTipoVia());
+			    	pstmt.setString(2, vivienda.getNombreVia());
+			    	pstmt.setInt(3, vivienda.getNumeroVia());
+			    	pstmt.setString(4, vivienda.getBloque());
+			    	pstmt.setInt(5, vivienda.getPortal());
+			    	pstmt.setString(6, vivienda.getEscalera());
+			    	pstmt.setInt(7, vivienda.getPlanta());
+			    	pstmt.setString(8, vivienda.getPuerta());
+			    	pstmt.setInt(9, vivienda.getCodigoPostal());
+			    	pstmt.setInt(10, vivienda.getMunicipio());
+			    	pstmt.setInt(11, vivienda.getProvincia());
+			    	pstmt.setInt(12, vivienda.getPais());
+			    	pstmt.setString(13, vivienda.getNifPropietario());
+					break;
+			default:break; 
+		}
+		return pstmt;
+	}
 	
-	public static final ArrayList<DatosViviendaActionForm> consultar(final int sentencia) {
+	public static final ArrayList<DatosViviendaActionForm> consultar(final DatosViviendaActionForm vivienda, final int sentencia) {
 		ArrayList<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
-		DatosViviendaActionForm vivienda = null;
+		DatosViviendaActionForm viviendaAux = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
@@ -186,30 +224,31 @@ public class DaoVivienda {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(sentenciaEjecutar);
 				if (null != pstmt) {
-//					pstmt.setString(1, idVivienda);
+					pstmt = prepararWhere(vivienda, pstmt, sentencia);
 					rs = pstmt.executeQuery() ; 
 					while(rs.next()) {
-						vivienda = new DatosViviendaActionForm();
-						vivienda.setIdVivienda(rs.getLong("IDVIVIENDA"));
-						vivienda.setTipoVia(rs.getInt("TIPOVIA"));
-						vivienda.setNombreVia(rs.getString("NOMBREVIA"));
-						vivienda.setNumeroVia(rs.getInt("NUMEROVIA"));
-						vivienda.setBloque(rs.getString("BLOQUE"));
-						vivienda.setPortal(rs.getInt("PORTAL"));
-						vivienda.setEscalera(rs.getString("ESCALERA"));
-						vivienda.setPlanta(rs.getInt("PLANTA"));
-						vivienda.setPuerta(rs.getString("PUERTA"));
-						vivienda.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
-						vivienda.setMunicipio(rs.getInt("MUNICIPIO"));
-						vivienda.setProvincia(rs.getInt("PROVINCIA"));
-						vivienda.setPais(rs.getInt("PAIS"));
-						vivienda.setNifPropietario(rs.getString("NIFPROPIETARIO"));
+						viviendaAux = new DatosViviendaActionForm();
+						viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
+						viviendaAux.setTipoVia(rs.getInt("TIPOVIA"));
+						viviendaAux.setNombreVia(rs.getString("NOMBREVIA"));
+						viviendaAux.setNumeroVia(rs.getInt("NUMEROVIA"));
+						viviendaAux.setBloque(rs.getString("BLOQUE"));
+						viviendaAux.setPortal(rs.getInt("PORTAL"));
+						viviendaAux.setEscalera(rs.getString("ESCALERA"));
+						viviendaAux.setPlanta(rs.getInt("PLANTA"));
+						viviendaAux.setPuerta(rs.getString("PUERTA"));
+						viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
+						viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
+						viviendaAux.setProvincia(rs.getInt("PROVINCIA"));
+						viviendaAux.setPais(rs.getInt("PAIS"));
+						viviendaAux.setNifPropietario(rs.getString("NIFPROPIETARIO"));
+						listaVivienda.add(viviendaAux);
 					}
 				} else {
 					System.out.println("No se ha podido obtener un pstmt valido.") ;
 				}
 			} else {
-				listaVivienda = null;
+				
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage()) ;
