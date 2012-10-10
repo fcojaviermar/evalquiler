@@ -16,7 +16,8 @@
          
         <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
          
-        <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
+<!-- Revisar si se usa --> <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
+        <form-bean name="criteriosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
 		<form-bean name="datosViviendaActionForm"    			type="com.evalquiler.actionforms.vivienda.DatosViviendaActionForm"/>
         <form-bean name="datosBasicosViviendaActionForm"        type="com.evalquiler.actionforms.vivienda.DatosBasicosViviendaActionForm"/>
     
@@ -119,7 +120,7 @@
         </action>
 	
         <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
-                name="resultadosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.ResultadosBusquedaViviendaAction">
+                name="criteriosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.RealizarBusquedaViviendaAction">
             <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
             <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
             <forward name="ERROR"                 path="/IrBusquedaDireccionAction.do"></forward>
