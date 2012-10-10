@@ -16,11 +16,17 @@ import com.evalquiler.dao.DaoVivienda;
  */
 public final class OpVivienda {
 	
-	public static final ArrayList<DatosViviendaActionForm> consutarPorPk(ActionForm viviendaIn) {
-		ArrayList<DatosViviendaActionForm> listaViviendas = DaoVivienda.consutarPorPk( ((DatosViviendaActionForm)viviendaIn).getIdVivienda());
+	public static final ArrayList<DatosViviendaActionForm> consultarPorPk(ActionForm viviendaIn) {
+		ArrayList<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultarPorPk( ((DatosViviendaActionForm)viviendaIn).getIdVivienda());
 		return listaViviendas; 
 	}
+
 	
+	public static final ArrayList<DatosViviendaActionForm> consultar(ActionForm viviendaIn) {
+		ArrayList<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultar(viviendaIn, DaoVivienda.CONSULTA_VIVIENDA);
+		return listaViviendas; 
+	}
+
 	
 	public static final int insertar(ActionForm viviendaIn) {
 		int iResultado = DaoVivienda.insertar((DatosViviendaActionForm)viviendaIn);
@@ -30,7 +36,6 @@ public final class OpVivienda {
 
 	public static final long contar() {
 		long lNumeroViviendas = DaoVivienda.contar();
-		
 		return lNumeroViviendas; 
 	}
 	
