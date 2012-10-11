@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.operaciones.OpEncuesta;
 
 /**
  * @version 	1.0
@@ -23,9 +24,16 @@ public class RecuperarEncuestaAction extends ActionBase
 		System.out.println("RecuperarEncuestaAction.action()");
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
-
+		String botonPulsado   = null;
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
+			if ("Nueva vivienda".equals(botonPulsado)) {
+				forward = mapping.findForward("NEW_HOUSE");
+			} else {
+				OpEncuesta.consultar(form);
+				forward = mapping.findForward("THERE_IS_POLL");
+			}
+
 	
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
@@ -41,7 +49,6 @@ public class RecuperarEncuestaAction extends ActionBase
 		    forward = mapping.findForward("SALIR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			String botonPulsado = (String)request.getParameter("BOTON_PULSADO");
 			if ("Nueva vivienda".equals(botonPulsado)) {
 				forward = mapping.findForward("NEW_HOUSE");
 			} else {

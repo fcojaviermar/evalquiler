@@ -1,6 +1,7 @@
 package com.evalquiler.actions.usuario;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,27 +31,36 @@ public class InicioSesionUsuarioAction extends ActionBase
 	    throws Exception {
     	
     	System.out.println("InicioSesionUsuarioAction.action()");
+    	DatosInicioSesionActionForm usuario = null;
     	ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		
 		try {
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			ArrayList<DatosInicioSesionActionForm> listaUsuario = OpUsuario.consutarPorPk(form);
+			Collection<DatosInicioSesionActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
+			
 			if (!listaUsuario.isEmpty()) {
-				if (1 == listaUsuario.size()) {
-					DatosInicioSesionActionForm usuario = listaUsuario.get(0);
-					final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
-					if (pwd.equals(usuario.getPassword())) {
-						System.out.println("La password es igual.");
-						
 
-						request.getSession().setAttribute("datosUsuario", usuario);
-						
-						forward = mapping.findForward("VALID_USER");
+				if (1 == listaUsuario.size()) {
+					Iterator<DatosInicioSesionActionForm> iterUsuario = listaUsuario.iterator();
+
+					if (iterUsuario.hasNext()) {
+						usuario = (DatosInicioSesionActionForm)iterUsuario.next();  
+						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
+					
+						if (pwd.equals(usuario.getPassword())) {
+							System.out.println("La password es igual.");
+							request.getSession().setAttribute("datosUsuario", usuario);
+							forward = mapping.findForward("VALID_USER");
+						} else {
+							System.out.println("La password NO es igual 1.");
+				        	errors.add("errorValidacion", new ActionMessage("error.distinta.password"));
+							forward = mapping.findForward("NO_EQUAL_PSW");
+						}
 					} else {
-						System.out.println("La password NO es igual 1.");
-			        	errors.add("errorValidacion", new ActionMessage("error.distinta.password"));
-						forward = mapping.findForward("NO_EQUAL_PSW");
+						request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
+						request.getSession().setAttribute("elementoSeleccionado", new ElementoCombo("0", "") );				
+						forward = mapping.findForward("NO_USER");
 					}
 				} else {
 					System.out.println("La password NO es igual 2.");
@@ -61,7 +71,6 @@ public class InicioSesionUsuarioAction extends ActionBase
 				System.out.println("La password NO es igual 3.");
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 				request.getSession().setAttribute("elementoSeleccionado", new ElementoCombo("0", "") );				
-
 				forward = mapping.findForward("NO_USER");
 			}
 		} catch (Exception e) {

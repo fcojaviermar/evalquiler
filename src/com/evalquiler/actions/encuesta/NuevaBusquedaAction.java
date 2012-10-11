@@ -38,10 +38,10 @@ public class NuevaBusquedaAction extends ActionBase
 		if (!errors.isEmpty()) {
 		    //saveErrors(request, errors);
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    forward = mapping.findForward("SALIR");
+		    forward = mapping.findForward("EXIT");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-		    forward = mapping.findForward("BUSCAR");
+		    forward = mapping.findForward("SEARCH");
 		}
 	
 		// Finish with
