@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.struts.action.ActionForm;
 
@@ -49,8 +50,8 @@ public class DaoVivienda {
 														    "OR PORTAL = ? OR ESCALERA = ? OR PLANTA = ? OR PUERTA = ? OR CODIGOPOSTAL = ? " +
 														    "OR MUNICIPIO = ? OR PROVINCIA = ? OR PAIS = ? OR NIFPROPIETARIO = ?";
 	
-	public static final ArrayList<DatosViviendaActionForm> consultarPorPk(final long idVivienda) {
-		ArrayList<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
+	public static final Collection<DatosViviendaActionForm> consultarPorPk(final long idVivienda) {
+		Collection<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
 		DatosViviendaActionForm vivienda = null;
 		
 		PreparedStatement pstmt = null;
@@ -182,44 +183,9 @@ public class DaoVivienda {
 		}
 	}
 	
-	private final static String obtenerSentencia(final int sentencia) {
-		String sentenciaEjecutar ="";
-		switch (sentencia) {
-			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA;
-					break;
-			case 2: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
-					break;
-			default:break; 
-		}
-		return sentenciaEjecutar;
-	}
-	
-	private final static PreparedStatement prepararWhere(final ActionForm vivienda, PreparedStatement pstmt, 
-														 final int sentencia) throws SQLException {
-		switch (sentencia) {
-			case 1: pstmt.setLong(1, ((DatosViviendaActionForm)vivienda).getIdVivienda());
-					break;
-			case 2: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getTipoVia());
-			    	pstmt.setString(2, ((CriteriosBusquedaViviendaActionForm)vivienda).getNombreVia());
-			    	pstmt.setInt(3, ((CriteriosBusquedaViviendaActionForm)vivienda).getNumeroVia());
-			    	pstmt.setString(4, ((CriteriosBusquedaViviendaActionForm)vivienda).getBloque());
-			    	pstmt.setInt(5, ((CriteriosBusquedaViviendaActionForm)vivienda).getPortal());
-			    	pstmt.setString(6, ((CriteriosBusquedaViviendaActionForm)vivienda).getEscalera());
-			    	pstmt.setInt(7, ((CriteriosBusquedaViviendaActionForm)vivienda).getPlanta());
-			    	pstmt.setString(8, ((CriteriosBusquedaViviendaActionForm)vivienda).getPuerta());
-			    	pstmt.setInt(9, ((CriteriosBusquedaViviendaActionForm)vivienda).getCodigoPostal());
-			    	pstmt.setInt(10, ((CriteriosBusquedaViviendaActionForm)vivienda).getMunicipio());
-			    	pstmt.setInt(11, ((CriteriosBusquedaViviendaActionForm)vivienda).getProvincia());
-			    	pstmt.setInt(12, ((CriteriosBusquedaViviendaActionForm)vivienda).getPais());
-			    	pstmt.setString(13, ((CriteriosBusquedaViviendaActionForm)vivienda).getNifPropietario());
-					break;
-			default:break; 
-		}
-		return pstmt;
-	}
-	
-	public static final ArrayList<DatosViviendaActionForm> consultar(final ActionForm vivienda, final int sentencia) {
-		ArrayList<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
+
+	public static final Collection<DatosViviendaActionForm> consultar(final ActionForm vivienda, final int sentencia) {
+		Collection<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
 		DatosViviendaActionForm viviendaAux = null;
 		
 		PreparedStatement pstmt = null;
@@ -340,5 +306,40 @@ public class DaoVivienda {
 		}
 	}
 
+
+	private final static String obtenerSentencia(final int sentencia) {
+		String sentenciaEjecutar ="";
+		switch (sentencia) {
+			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA;
+					break;
+			case 2: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
+					break;
+			default:break; 
+		}
+		return sentenciaEjecutar;
+	}
 	
+	private final static PreparedStatement prepararWhere(final ActionForm vivienda, PreparedStatement pstmt, 
+														 final int sentencia) throws SQLException {
+		switch (sentencia) {
+			case 1: pstmt.setLong(1, ((DatosViviendaActionForm)vivienda).getIdVivienda());
+					break;
+			case 2: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getTipoVia());
+			    	pstmt.setString(2, ((CriteriosBusquedaViviendaActionForm)vivienda).getNombreVia());
+			    	pstmt.setInt(3, ((CriteriosBusquedaViviendaActionForm)vivienda).getNumeroVia());
+			    	pstmt.setString(4, ((CriteriosBusquedaViviendaActionForm)vivienda).getBloque());
+			    	pstmt.setInt(5, ((CriteriosBusquedaViviendaActionForm)vivienda).getPortal());
+			    	pstmt.setString(6, ((CriteriosBusquedaViviendaActionForm)vivienda).getEscalera());
+			    	pstmt.setInt(7, ((CriteriosBusquedaViviendaActionForm)vivienda).getPlanta());
+			    	pstmt.setString(8, ((CriteriosBusquedaViviendaActionForm)vivienda).getPuerta());
+			    	pstmt.setInt(9, ((CriteriosBusquedaViviendaActionForm)vivienda).getCodigoPostal());
+			    	pstmt.setInt(10, ((CriteriosBusquedaViviendaActionForm)vivienda).getMunicipio());
+			    	pstmt.setInt(11, ((CriteriosBusquedaViviendaActionForm)vivienda).getProvincia());
+			    	pstmt.setInt(12, ((CriteriosBusquedaViviendaActionForm)vivienda).getPais());
+			    	pstmt.setString(13, ((CriteriosBusquedaViviendaActionForm)vivienda).getNifPropietario());
+					break;
+			default:break; 
+		}
+		return pstmt;
+	}	
 }
