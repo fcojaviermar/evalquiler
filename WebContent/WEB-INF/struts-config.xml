@@ -14,7 +14,7 @@
          
         <form-bean name="datosClienteActionForm"               	type="com.evalquiler.actionforms.cliente.DatosClienteActionForm"/>
          
-        <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
+        <form-bean name="respuestasPreguntaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm"/>
          
 <!-- Revisar si se usa --> <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
         <form-bean name="criteriosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
@@ -115,8 +115,8 @@
          
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
                 name="datosUsuarioParaEncuestasActionForm" scope="request"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction">
-            <forward name="BUSCAR" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
-            <forward name="SALIR"  path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="EXIT"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
 	
         <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
@@ -135,7 +135,7 @@
         </action>
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
-                name="respuestasEncuestaActionForm" scope="request" type="com.evalquiler.actions.encuesta.RespuestasEncuestaAction">
+                name="respuestasPreguntaActionForm" scope="request" type="com.evalquiler.actions.encuesta.RespuestasEncuestaAction">
             <forward name="OK"     path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
             <forward name="ERROR"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
