@@ -1,6 +1,4 @@
-package com.evalquiler.actions.vivienda;
-
-import java.util.Collection;
+package com.evalquiler.actions.encuesta;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,25 +9,24 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.operaciones.OpVivienda;
 
 /**
  * @version 	1.0
  * @author
  */
-public class RealizarBusquedaViviendaAction extends ActionBase {
-	
+public class RespuestasPreguntaAction extends ActionBase
+
+{
+
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("ResultadosBusquedaViviendaAction.action()");
+		System.out.println("RespuestasEncuestaAction.action()");
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
-		Collection<DatosViviendaActionForm> listaViviendas = null;
-		
+
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			listaViviendas = OpVivienda.consultar(form);
+	
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -44,8 +41,7 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		    forward = mapping.findForward("SALIR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			request.setAttribute("listaViviendas", listaViviendas);
-		    forward = mapping.findForward("ONE_RESULT");
+		    forward = mapping.findForward("OK");
 		}
 	
 		// Finish with
