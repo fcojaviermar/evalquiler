@@ -3,7 +3,7 @@
  */
 package com.evalquiler.operaciones;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.struts.action.ActionForm;
 
@@ -17,8 +17,8 @@ import com.evalquiler.dao.DaoCliente;
  */
 public final class OpCliente {
 	
-	public static final ArrayList<DatosInicioSesionActionForm> consutarPorPk(ActionForm ClienteIn) {
-		ArrayList<DatosInicioSesionActionForm> listaClientes = DaoCliente.consutarPorPk( ((DatosInicioSesionActionForm)ClienteIn).getUser());
+	public static final Collection<DatosInicioSesionActionForm> consultarPorPk(ActionForm ClienteIn) {
+		Collection<DatosInicioSesionActionForm> listaClientes = DaoCliente.consultarPorPk( ((DatosInicioSesionActionForm)ClienteIn).getUser());
 		
 		return listaClientes; 
 	}

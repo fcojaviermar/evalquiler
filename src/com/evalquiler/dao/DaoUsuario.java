@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
@@ -24,8 +25,8 @@ public class DaoUsuario {
 	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, TIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, SYSDATE())";
 	
-	public static final ArrayList<DatosInicioSesionActionForm> consutarPorPk(final String idUsuario) {
-		ArrayList<DatosInicioSesionActionForm> listaUsuario = new ArrayList<DatosInicioSesionActionForm>();
+	public static final Collection<DatosInicioSesionActionForm> consutarPorPk(final String idUsuario) {
+		Collection<DatosInicioSesionActionForm> listaUsuario = new ArrayList<DatosInicioSesionActionForm>();
 		DatosInicioSesionActionForm usuario = null;
 		
 		PreparedStatement pstmt = null;

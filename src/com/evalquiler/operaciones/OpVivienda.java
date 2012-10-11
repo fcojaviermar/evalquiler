@@ -3,7 +3,7 @@
  */
 package com.evalquiler.operaciones;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.struts.action.ActionForm;
 
@@ -16,14 +16,14 @@ import com.evalquiler.dao.DaoVivienda;
  */
 public final class OpVivienda {
 	
-	public static final ArrayList<DatosViviendaActionForm> consultarPorPk(ActionForm viviendaIn) {
-		ArrayList<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultarPorPk( ((DatosViviendaActionForm)viviendaIn).getIdVivienda());
+	public static final Collection<DatosViviendaActionForm> consultarPorPk(ActionForm viviendaIn) {
+		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultarPorPk( ((DatosViviendaActionForm)viviendaIn).getIdVivienda());
 		return listaViviendas; 
 	}
 
 	
-	public static final ArrayList<DatosViviendaActionForm> consultar(ActionForm viviendaIn) {
-		ArrayList<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultar(viviendaIn, DaoVivienda.CONSULTA_VIVIENDA);
+	public static final Collection<DatosViviendaActionForm> consultar(ActionForm viviendaIn) {
+		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultar(viviendaIn, DaoVivienda.CONSULTA_VIVIENDA);
 		return listaViviendas; 
 	}
 
