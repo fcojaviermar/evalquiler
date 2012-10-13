@@ -17,7 +17,7 @@
                                 <td align="center">Tipo documento:
                                     <bean:write name="datosUsuario" property="descTipoDocumento"/>
                                     <bean:define id="id" name="datosUsuario" property="id"/>
-                                    <html:hidden property="elementoSeleccionado" value="<%= (String)id %>"/>
+                                    <html:hidden property="tipoDocumentoSeleccionado" value="<%=(String)id %>"/>
                                 </td>
                             </tr>
 							<tr>
