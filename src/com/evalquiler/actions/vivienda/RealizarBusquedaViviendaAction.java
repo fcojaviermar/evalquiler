@@ -49,6 +49,6 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		}
 	
 		// Finish with
-		return (forward);
+		return forward;
     }
 }

@@ -100,7 +100,7 @@ public class DaoUsuario {
 				if (null != usuario) {
 					pstmt.setString(1, usuario.getUser());
 					pstmt.setString(2, usuario.getPassword());
-					pstmt.setString(3, usuario.getId());
+					pstmt.setString(3, usuario.getIdTipoDocumento());
 					pstmt.setString(4, usuario.getNifcif());
 					pstmt.setString(5, usuario.getEmail());
 
