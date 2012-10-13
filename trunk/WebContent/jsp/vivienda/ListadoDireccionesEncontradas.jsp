@@ -6,8 +6,40 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Listado de viviendasn</title>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Colorgeneral.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Tipografia.css" media="screen" />        
+        <link rel="stylesheet" type="text/css" href="./css/Colorgeneral.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />
+        <style type="text/css">
+            body {
+                color: purple;
+                background-color: #d8da3d }
+                
+input[type="radio"] {
+    display:inline-block;
+    height:20px;
+    text-indent:-9999px;
+    width:20px;
+}
+
+input[type="radio"], .notchecked {
+    background:url("notchecked.png") no-repeat;
+}
+
+input[type="radio"]:checked, .checked {
+    background:url("checked.png") no-repeat;
+}                
+
+.checkbox, .radio {
+  width: 19px;
+  height: 25px;
+  padding: 0 5px 0 0;
+  background: url(checkbox.png) no-repeat;
+  display: block;
+  clear: left;
+  float: left;
+  
+}
+
+        </style>
     </head>
     <body>
 		<html:form action="/IrHacerEncuestaAction.do" method="post">    
@@ -27,7 +59,7 @@
 	            </dl>
                         
                 <fieldset>
-                    <legend>Resumen de encuestas</legend>
+                    <legend>Resultados de la búsqueda</legend>
                     <table>
                         <thead>
                             <tr>
@@ -41,24 +73,28 @@
 							<logic:iterate name="listaViviendas" id="listaViviendasEnc" >
 	                            <tr>
 	                                <th>
-	                                	<html:radio name="listaViviendasEnc" property="idVivienda" value=""/>
+                                        <bean:define id="idViviendaAux">
+                                            <bean:write name="listaViviendasEnc" property="idVivienda"/>
+                                        </bean:define>
+	                                	<html:radio name="listaViviendasEnc" property="idVivienda" value="<%=idViviendaAux%>"/>
+	                                	
+	                                	<html:radio name="listaViviendasEnc" property="idVivienda" styleClass="checked" value=""/>
+	                                	
+                                        <input type="radio" name="radioProp" value="<bean:write name="listaViviendasEnc" property="idVivienda"/>"> 
+	                                	
 	                                </th>
 	                                <th>
 	                                	<bean:write name="listaViviendasEnc" property="nombreVia"/>
+	                                	<bean:write name="listaViviendasEnc" property="numeroVia"/>
 									</th>
 	                                <th>
-	                                	<bean:write name="listaViviendasEnc" property="planta"/>
+	                                	<bean:write name="listaViviendasEnc" property="planta"/>&nbsp; -- 
 	                                	<bean:write name="listaViviendasEnc" property="puerta"/>
 	                                </th>
 	                                <th>Vivienda</th>
 	                            </tr>
 							</logic:iterate>                                        
 		                </tbody>
-		                <tfoot>
-		                	<tr>
-		                		Pie de la tabla
-		                	</tr>
-		                </tfoot>
 		            </table>
 		        </fieldset>
                 <html:submit property="BOTON_PULSADO" value="Realizar encuesta"/>
