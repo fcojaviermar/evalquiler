@@ -7,9 +7,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
+import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.utilidades.Validaciones;
-import com.evalquiler.entidad.ComboTipoDocumento;
-import com.evalquiler.entidad.ElementoCombo;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 
 public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
@@ -95,7 +95,7 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionMessage("error.tipodocumento.novalido"));            	
             } else {
             	ComboTipoDocumento combo = new ComboTipoDocumento();
-            	ElementoCombo elCombo = combo.get(Integer.parseInt(this.getId()));
+            	ElementoComboTipoDocumento elCombo = combo.get(Integer.parseInt(this.getId()));
             	this.setDescTipoDocumento(elCombo.getDescripcion());
             }
 
