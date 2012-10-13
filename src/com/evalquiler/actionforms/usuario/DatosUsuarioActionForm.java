@@ -7,32 +7,44 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
+import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.utilidades.Validaciones;
-import com.evalquiler.entidad.ComboTipoDocumento;
-import com.evalquiler.entidad.ElementoCombo;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 
 public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 
-	private String email  = null;
-	private String nifcif = null;
-	private String password2 = null;
+	private String email  			 = null;
+	private String nifcif 			 = null;
+	private String password2 		 = null;
 	private String descTipoDocumento = null;
-	private String id = null;
+	private int    tipoUsuario		 = 0;
+	private String idTipoDocumento 	 = null;
 	
 	
-	public String getId() {
-		return id;
+
+	public String getIdTipoDocumento() {
+		return idTipoDocumento;
 	}
 
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdTipoDocumento(String idTipoDocumento) {
+		this.idTipoDocumento = idTipoDocumento;
 	}
 
 
 	public String getPassword2() {
 		return password2;
+	}
+
+
+	public int getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+
+	public void setTipoUsuario(int tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 
@@ -88,20 +100,20 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionMessage("error.email.novalido"));
             }
 
-            if ( (null == this.getId()) ||  ("".equals(this.getId())) || "0".equals(this.getId())) {
+            if ( (null == this.getIdTipoDocumento()) ||  ("".equals(this.getIdTipoDocumento())) || "0".equals(this.getIdTipoDocumento())) {
                 //if (0 == this.getTipoDocumento()) {        	
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipodocumento"));
-            } else if (!ComboTipoDocumento.elementoValido(this.getId())) {
+            } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
             	errors.add("errorValidacion", new ActionMessage("error.tipodocumento.novalido"));
             } else {
             	ComboTipoDocumento combo = new ComboTipoDocumento();
-            	ElementoCombo elCombo = combo.get(Integer.parseInt(this.getId()));
+            	ElementoComboTipoDocumento elCombo = combo.get(Integer.parseInt(this.getIdTipoDocumento()));
             	this.setDescTipoDocumento(elCombo.getDescripcion());
             }
             
             if ( (null == this.getNifcif()) ||  ("".equals(this.getNifcif()))) {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.nifcif"));
-            } else if (!documentoValido(this.getId(), this.getNifcif())) {
+            } else if (!documentoValido(this.getIdTipoDocumento(), this.getNifcif())) {
            		errors.add("errorValidacion", new ActionMessage("error.nifcif.novalido"));
             }
     

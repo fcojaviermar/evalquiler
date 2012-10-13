@@ -14,8 +14,8 @@ import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.entidad.ComboTipoDocumento;
-import com.evalquiler.entidad.ElementoCombo;
+import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.operaciones.OpUsuario;
 
 /**
@@ -59,7 +59,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 						}
 					} else {
 						request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-						request.getSession().setAttribute("elementoSeleccionado", new ElementoCombo("0", "") );				
+						request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 						forward = mapping.findForward("NO_USER");
 					}
 				} else {
@@ -70,7 +70,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 			} else {
 				System.out.println("La password NO es igual 3.");
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-				request.getSession().setAttribute("elementoSeleccionado", new ElementoCombo("0", "") );				
+				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 				forward = mapping.findForward("NO_USER");
 			}
 		} catch (Exception e) {
