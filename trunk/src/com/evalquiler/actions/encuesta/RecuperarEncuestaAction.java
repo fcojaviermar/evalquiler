@@ -1,5 +1,7 @@
 package com.evalquiler.actions.encuesta;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
+import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.operaciones.OpEncuesta;
 
@@ -30,7 +33,7 @@ public class RecuperarEncuestaAction extends ActionBase
 			if ("Nueva vivienda".equals(botonPulsado)) {
 				forward = mapping.findForward("NEW_HOUSE");
 			} else {
-				OpEncuesta.consultar(form);
+				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultar(form);
 				forward = mapping.findForward("THERE_IS_POLL");
 			}
 
