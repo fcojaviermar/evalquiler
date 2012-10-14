@@ -14,20 +14,20 @@ import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
 
-	private String email  = null;
-	private String nifcif = null;
-	private String password2 = null;
+	private String email  			 = null;
+	private String nifcif 			 = null;
+	private String password2 		 = null;
 	private String descTipoDocumento = null;
-	private String id = null;
+	private int idTipoDocumento 	 = 0;
 	
 	
-	public String getId() {
-		return id;
+	public int getIdTipoDocumento() {
+		return idTipoDocumento;
 	}
 
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdTipoDocumento(int idTipoDocumento) {
+		this.idTipoDocumento = idTipoDocumento;
 	}
 
 
@@ -88,20 +88,19 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionMessage("error.email.novalido"));
             }
 
-            if ( (null == this.getId()) ||  ("".equals(this.getId())) || "0".equals(this.getId())) {
-                //if (0 == this.getTipoDocumento()) {        	
+            if ( "0".equals(this.getIdTipoDocumento()) ) {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipodocumento"));
-            } else if (!ComboTipoDocumento.elementoValido(this.getId())) {
+            } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
             	errors.add("errorValidacion", new ActionMessage("error.tipodocumento.novalido"));            	
             } else {
             	ComboTipoDocumento combo = new ComboTipoDocumento();
-            	ElementoComboTipoDocumento elCombo = combo.get(Integer.parseInt(this.getId()));
+            	ElementoComboTipoDocumento elCombo = combo.get(this.getIdTipoDocumento());
             	this.setDescTipoDocumento(elCombo.getDescripcion());
             }
 
             if ( (null == this.getNifcif()) ||  ("".equals(this.getNifcif()))) {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.nifcif"));
-            } else if (!documentoValido(this.getId(), this.getNifcif())) {
+            } else if (!documentoValido(this.getIdTipoDocumento(), this.getNifcif())) {
            		errors.add("errorValidacion", new ActionMessage("error.documento.novalido"));
             }
     
@@ -117,14 +116,14 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
         return errors;
     }
 
-    private final static boolean documentoValido(final String tipoDocumento, final String documento) {
+    private final static boolean documentoValido(final int tipoDocumento, final String documento) {
     	boolean esValido = false;
-    	switch (tipoDocumento.charAt(0)) {
-        	case '1': esValido = Validaciones.nifValido(documento);
+    	switch (tipoDocumento) {
+        	case 1: esValido = Validaciones.nifValido(documento);
         			  break;
-        	case '2': esValido = Validaciones.nieValido(documento);
+        	case 2: esValido = Validaciones.nieValido(documento);
         			  break;
-        	case '3': esValido = Validaciones.cifValido(documento);
+        	case 3: esValido = Validaciones.cifValido(documento);
         			  break;
         	default: break;
     	}
