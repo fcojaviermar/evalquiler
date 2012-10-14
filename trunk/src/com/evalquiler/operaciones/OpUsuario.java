@@ -17,8 +17,8 @@ import com.evalquiler.dao.DaoUsuario;
  */
 public final class OpUsuario {
 	
-	public static final Collection<DatosInicioSesionActionForm> consultarPorPk(ActionForm usuarioIn) {
-		Collection<DatosInicioSesionActionForm> listaUsuarios = DaoUsuario.consutarPorPk( ((DatosInicioSesionActionForm)usuarioIn).getUser());
+	public static final Collection<DatosUsuarioActionForm> consultarPorPk(ActionForm usuarioIn) {
+		Collection<DatosUsuarioActionForm> listaUsuarios = DaoUsuario.consutarPorPk( ((DatosInicioSesionActionForm)usuarioIn).getUser());
 		
 		return listaUsuarios; 
 	}

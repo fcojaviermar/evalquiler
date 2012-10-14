@@ -7,18 +7,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 /**
  * @author cachorro
  *
  */
-public final class ComboTipoUsuario extends ArrayList<ElementoComboTipoDocumento> implements Serializable {
+public final class ComboTipoUsuario extends ArrayList<ElementoComboTipoUsuario> implements Serializable {
 	
 	public ComboTipoUsuario() {
-		add(new ElementoComboTipoDocumento("0", "--- Seleccione un elemento... ---" ));
-		add(new ElementoComboTipoDocumento("1", "Inquilino" ));
-		add(new ElementoComboTipoDocumento("2", "Arrendador"));
-		add(new ElementoComboTipoDocumento("3", "Ambos"));
+		add(new ElementoComboTipoUsuario("0", "--- Seleccione un elemento... ---" ));
+		add(new ElementoComboTipoUsuario("1", "Inquilino" ));
+		add(new ElementoComboTipoUsuario("2", "Arrendador"));
+		add(new ElementoComboTipoUsuario("3", "Ambos"));
 	}
 
 	
