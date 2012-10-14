@@ -9,16 +9,16 @@ import org.apache.struts.action.ActionMapping;
 
 public class RespuestasPreguntaActionForm extends ActionForm {
 
-	private String idRespuesta = null;
+	private int idRespuesta = 0;
 	private String descripcion = null;
-	private String respuestaDada = null;
+	private int respuestaDada = 0;
 	//private String tipoRespuesta = null;	
 
-	public String getIdRespuesta() {
+	public int getIdRespuesta() {
 		return idRespuesta;
 	}
 
-	public void setIdRespuesta(String idRespuesta) {
+	public void setIdRespuesta(int idRespuesta) {
 		this.idRespuesta = idRespuesta;
 	}
 
@@ -30,11 +30,11 @@ public class RespuestasPreguntaActionForm extends ActionForm {
 		this.descripcion = descripcion;
 	}
 
-	public String getRespuestaDada() {
+	public int getRespuestaDada() {
 		return respuestaDada;
 	}
 
-	public void setRespuestaDada(String respuestaDada) {
+	public void setRespuestaDada(int respuestaDada) {
 		this.respuestaDada = respuestaDada;
 	}
  

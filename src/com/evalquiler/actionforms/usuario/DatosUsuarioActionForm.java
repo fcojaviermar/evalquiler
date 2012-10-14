@@ -122,8 +122,7 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password2"));
             }
     	} else {
-    		errors = new ActionErrors();
-    		errors.add("errorValidacion", new ActionMessage("error.no.objeto.datosUsuario"));
+    		
     	}
         
         return errors;
