@@ -5,7 +5,7 @@
 <html:html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Listado de viviendasn</title>
+        <title>Listado de viviendas</title>
         <link rel="stylesheet" type="text/css" href="./css/Colorgeneral.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />
         <style type="text/css">
