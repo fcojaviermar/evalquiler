@@ -9,7 +9,7 @@ import org.apache.struts.action.ActionMapping;
 
 public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
-	private int tipoVia		  	   = 0;
+	private int idTipoVia		   = 0;
 	private String nombreVia	   = null;
 	private int numeroVia	  	   = 0;
 	private String bloque		   = null;
@@ -24,13 +24,13 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	private String nifPropietario  = null;
 
 	
-	public int getTipoVia() {
-		return tipoVia;
+	public int getIdTipoVia() {
+		return idTipoVia;
 	}
 
 
-	public void setTipoVia(int tipoVia) {
-		this.tipoVia = tipoVia;
+	public void setIdTipoVia(int idTipoVia) {
+		this.idTipoVia = idTipoVia;
 	}
 
 	

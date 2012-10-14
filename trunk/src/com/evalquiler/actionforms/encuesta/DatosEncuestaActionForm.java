@@ -11,28 +11,38 @@ import org.apache.struts.action.ActionMapping;
 
 public class DatosEncuestaActionForm extends ActionForm {
 
-	private String idEncuesta = null;
-	private String quienContesta = null;
-	
-	public String getQuienContesta() {
-		return quienContesta;
-	}
-
-
-	public void setQuienContesta(String quienContesta) {
-		this.quienContesta = quienContesta;
-	}
-
-
+	private int idEncuesta 	 	 = 0;
+	private String titulo	 	 = null;
+	private String idTipoUsuario = null;
 	private Collection<PreguntasEncuestaActionForm> preguntas = null;
 	
-	public String getIdEncuesta() {
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+
+	public int getIdEncuesta() {
 		return idEncuesta;
 	}
 
 
-	public void setIdEncuesta(String idEncuesta) {
+	public void setIdEncuesta(int idEncuesta) {
 		this.idEncuesta = idEncuesta;
+	}
+
+
+	public String getIdTipoUsuario() {
+		return idTipoUsuario;
+	}
+
+
+	public void setIdTipoUsuario(String idTipoUsuario) {
+		this.idTipoUsuario = idTipoUsuario;
 	}
 
 

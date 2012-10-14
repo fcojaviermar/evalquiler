@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
+import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.operaciones.OpEncuesta;
 
@@ -28,13 +29,16 @@ public class RecuperarEncuestaAction extends ActionBase
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 		String botonPulsado   = null;
+		String forwardAux 	  = null;		
 		try {
 			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
 			if ("Nueva vivienda".equals(botonPulsado)) {
-				forward = mapping.findForward("NEW_HOUSE");
+				forwardAux = "NEW_HOUSE";
 			} else {
-				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultar(form);
-				forward = mapping.findForward("THERE_IS_POLL");
+				DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
+				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultarPorPk(datosUsuario);
+				request.setAttribute("datosEncuesta", datosEncuesta);
+				forwardAux = "THERE_IS_POLL";
 			}
 
 	
@@ -52,14 +56,10 @@ public class RecuperarEncuestaAction extends ActionBase
 		    forward = mapping.findForward("SALIR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			if ("Nueva vivienda".equals(botonPulsado)) {
-				forward = mapping.findForward("NEW_HOUSE");
-			} else {
-				forward = mapping.findForward("THERE_IS_POLL");
-			}
+			forward = mapping.findForward(forwardAux);
 		}
 	
 		// Finish with
-		return (forward);
+		return forward;
     }
 }

@@ -11,19 +11,19 @@ import org.apache.struts.action.ActionMapping;
 
 public class PreguntasEncuestaActionForm extends ActionForm {
 
-	private String idPregunta = null;
+	private int idPregunta = 0;
 	private String descripcion = null;
 	private Collection<RespuestasPreguntaActionForm> respuestas = null;
 	//private String tipoRespuesta = null;	
 
 	
-	public String getIdPregunta() {
+	public int getIdPregunta() {
 		return idPregunta;
 	}
 
 
 
-	public void setIdPregunta(String idPregunta) {
+	public void setIdPregunta(int idPregunta) {
 		this.idPregunta = idPregunta;
 	}
 
