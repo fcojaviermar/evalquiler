@@ -37,8 +37,8 @@
 			                <tr>
 	                            <td>
 						            <p>
-						                <label for="tipoVia" title=""><strong >Tipo vía:&nbsp;</strong>
-						                    <html:text property="tipoVia" size="20" maxlength="20"></html:text>                  
+						                <label for="idTipoVia" title=""><strong >Tipo vía:&nbsp;</strong>
+						                    <html:text property="idTipoVia" size="20" maxlength="20"></html:text>                  
 						                </label>
 						                <label for="nombreVia" title=""><strong >Nombre vía:&nbsp;</strong>
 						                    <html:text property="nombreVia" size="100" maxlength="100"></html:text>                  
