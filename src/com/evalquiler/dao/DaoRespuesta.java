@@ -24,7 +24,7 @@ public class DaoRespuesta {
 	private final static String CONSULTAR_RESPUESTA_POR_ID_PREGUNTA = "";
 
 	
-	public static final Collection<RespuestasPreguntaActionForm> consultarPorPk(final String idRespuesta) {
+	public static final Collection<RespuestasPreguntaActionForm> consultarPorPk(final int idRespuesta) {
 		Collection<RespuestasPreguntaActionForm> respuestasPregunta = new ArrayList<RespuestasPreguntaActionForm>();
 		RespuestasPreguntaActionForm respuesta = null;
 		
@@ -35,7 +35,7 @@ public class DaoRespuesta {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(CONSULTAR_RESPUESTA_POR_PK);
 				if (null != pstmt) {
-					pstmt.setString(1, idRespuesta);
+					pstmt.setInt(1, idRespuesta);
 					rs = pstmt.executeQuery() ; 
 					while(rs.next()) {
 						respuesta = new RespuestasPreguntaActionForm();
@@ -80,7 +80,7 @@ public class DaoRespuesta {
 	}
 
 	
-	public static final Collection<RespuestasPreguntaActionForm> consultar(final String idPregunta) {
+	public static final Collection<RespuestasPreguntaActionForm> consultar(final int idPregunta) {
 		Collection<RespuestasPreguntaActionForm> respuestasPregunta = new ArrayList<RespuestasPreguntaActionForm>();
 		RespuestasPreguntaActionForm respuesta = null;
 		
@@ -91,7 +91,7 @@ public class DaoRespuesta {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(CONSULTAR_RESPUESTA_POR_ID_PREGUNTA);
 				if (null != pstmt) {
-					pstmt.setString(1, idPregunta);
+					pstmt.setInt(1, idPregunta);
 					rs = pstmt.executeQuery() ; 
 					while(rs.next()) {
 						respuesta = new RespuestasPreguntaActionForm();

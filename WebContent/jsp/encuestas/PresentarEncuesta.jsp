@@ -1,12 +1,13 @@
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 
 <html:html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Encuesta a responder</title>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Colorgeneral.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Tipografia.css" media="screen" />        
+        <link rel="stylesheet" type="text/css" href="./css/Colorgeneral.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
         <html:form action="/IrConfirmarRespuestasAction.do" method="post">            
@@ -25,26 +26,43 @@
 		            <dd>3</dd>
 		        </dl>
 	
+   	
+	
 		        <fieldset>
 		            <legend>Preguntas de la encuesta</legend>
-		            <table>
-		                <thead>
-		                    <tr>
-		                        <td>
-		                           <th>Reponder encuesta</th>
-		                    </tr>
-		                </thead>
-
-		                <tbody>
-							<logic:iterate name="listaPreguntas" id="listaPreguntasEnc" >
-	                            <tr>
-	                                <th>
-	                                	<html:radio name="listaPreguntasEnc" property="idVivienda" value=""/>
-	                                </th>
-	                            </tr>
-							</logic:iterate>
-		                </tbody>
-
+                    <logic:iterate name="datosEncuesta" id="datosEncuestaEnc" scope="request">		            
+			            <table>
+			                <thead>
+			                    <tr>
+			                        <td>
+			                           <th><bean:write name="datosEncuestaEnc" property="titulo"/></th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+	                            <logic:iterate name="datosEncuestaEnc" id="preguntasEnc" property="preguntas">
+                                    <tr>
+			                            <td>
+			                                <bean:write name="preguntasEnc" property="descripcion"/>
+			                            </td>
+			                        </tr>
+			                        <tr>
+                                        <logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
+			                                <td>
+			                                    <bean:write name="respuestasEnc" property="descripcion"/>
+			                                </td>
+                                        </logic:iterate>
+			                        </tr>  
+	                            </logic:iterate>
+			                </tbody>
+		                </table>
+		            </logic:iterate>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                   <th>Reponder encuesta</th>
+                            </tr>
+                        </thead>
 		                <tbody>
 		                    <tr>
 		                        <td>
