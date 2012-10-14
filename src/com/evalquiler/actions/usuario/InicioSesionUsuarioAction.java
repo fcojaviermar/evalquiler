@@ -13,9 +13,12 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
+import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.operaciones.OpUsuario;
 
 /**
@@ -37,12 +40,12 @@ public class InicioSesionUsuarioAction extends ActionBase
 		
 		try {
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			Collection<DatosInicioSesionActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
+			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
 			
 			if (!listaUsuario.isEmpty()) {
 
 				if (1 == listaUsuario.size()) {
-					Iterator<DatosInicioSesionActionForm> iterUsuario = listaUsuario.iterator();
+					Iterator<DatosUsuarioActionForm> iterUsuario = listaUsuario.iterator();
 
 					if (iterUsuario.hasNext()) {
 						usuario = (DatosInicioSesionActionForm)iterUsuario.next();  
@@ -60,6 +63,8 @@ public class InicioSesionUsuarioAction extends ActionBase
 					} else {
 						request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 						request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
+						request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
+						request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );						
 						forward = mapping.findForward("NO_USER");
 					}
 				} else {
@@ -68,9 +73,11 @@ public class InicioSesionUsuarioAction extends ActionBase
 					forward = mapping.findForward("TWO_EQUAL_USERS");
 				}
 			} else {
-				System.out.println("La password NO es igual 3.");
+				System.out.println("El usuario no existe.");
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
+				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );
+				request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
+				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );						
 				forward = mapping.findForward("NO_USER");
 			}
 		} catch (Exception e) {

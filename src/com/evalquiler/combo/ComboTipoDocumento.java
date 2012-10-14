@@ -22,9 +22,9 @@ public final class ComboTipoDocumento extends ArrayList<ElementoComboTipoDocumen
 	}
 
 	
-	public final static boolean elementoValido(String id) {
+	public final static boolean elementoValido(int idTipoDocumento) {
 		boolean esValido = false;
-		if ( ("1".equals(id)) || ("2".equals(id)) || ("3".equals(id)) ) {
+		if ( (1 == idTipoDocumento) || (2 == idTipoDocumento) || (3 == idTipoDocumento) ) {
 			esValido = true;
 		}
 		

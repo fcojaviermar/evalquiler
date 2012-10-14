@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 
@@ -21,13 +20,14 @@ import com.evalquiler.comun.bbdd.ConexionBD;
  */
 public class DaoUsuario {
 	
-	private final static String CONSULTAR_USUARIO_POR_PK = "SELECT IDUSUARIO, PASSWORD FROM USUARIO WHERE IDUSUARIO = ?";
-	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, TIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
-												   "VALUES (?, ?, ?, ?, ?, SYSDATE())";
+	private final static String CONSULTAR_USUARIO_POR_PK = "SELECT IDUSUARIO, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA " +
+														   "FROM USUARIO WHERE IDUSUARIO = ?";
+	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, TIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA) " +
+												   "VALUES (?, ?, ?, ?, ?, ? SYSDATE())";
 	
-	public static final Collection<DatosInicioSesionActionForm> consutarPorPk(final String idUsuario) {
-		Collection<DatosInicioSesionActionForm> listaUsuario = new ArrayList<DatosInicioSesionActionForm>();
-		DatosInicioSesionActionForm usuario = null;
+	public static final Collection<DatosUsuarioActionForm> consutarPorPk(final String idUsuario) {
+		Collection<DatosUsuarioActionForm> listaUsuario = new ArrayList<DatosUsuarioActionForm>();
+		DatosUsuarioActionForm usuario = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
@@ -41,9 +41,14 @@ public class DaoUsuario {
 					pstmt.setString(1, idUsuario);
 					rs = pstmt.executeQuery() ; 
 					while(rs.next()) {
-						usuario = new DatosInicioSesionActionForm();
+						usuario = new DatosUsuarioActionForm();
 						usuario.setUser(rs.getString("IDUSUARIO"));
 						usuario.setPassword(rs.getString("PASSWORD"));
+						usuario.setIdTipoDocumento(rs.getInt("IDTIPODOCUMENTO"));
+						usuario.setNifcif(rs.getString("NIFCIF"));
+						usuario.setEmail(rs.getString("EMAIL"));
+						usuario.setIdTipoUsuario(rs.getInt("IDTIPOUSUARIO"));
+						
 						listaUsuario.add(usuario);
 					}
 
@@ -51,7 +56,7 @@ public class DaoUsuario {
 					System.out.println("Usuario: " + usuario.getUser());
 					System.out.println("Psw: " + usuario.getPassword());
 				} else {
-					System.out.println("No se ha podido obtener una conexi�n v�lida. pstmt") ;
+					System.out.println("No se ha podido obtener una conexion valida. pstmt") ;
 				}
 			} else {
 				listaUsuario = null;
@@ -100,9 +105,10 @@ public class DaoUsuario {
 				if (null != usuario) {
 					pstmt.setString(1, usuario.getUser());
 					pstmt.setString(2, usuario.getPassword());
-					pstmt.setString(3, usuario.getIdTipoDocumento());
+					pstmt.setInt(3, usuario.getIdTipoDocumento());
 					pstmt.setString(4, usuario.getNifcif());
 					pstmt.setString(5, usuario.getEmail());
+					pstmt.setInt(6, usuario.getIdTipoUsuario());
 
 					iResultado = pstmt.executeUpdate();
 

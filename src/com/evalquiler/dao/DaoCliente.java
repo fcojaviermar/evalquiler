@@ -22,7 +22,7 @@ import com.evalquiler.comun.bbdd.ConexionBD;
 public class DaoCliente {
 	
 	private final static String CONSULTAR_CLIENTE_POR_PK = "SELECT IDCLIENTE, PASSWORD FROM CLIENTE WHERE IDCLIENTE = ?";
-	private final static String INSERTAR_CLIENTE = "INSERT INTO CLIENTE (IDCLIENTE, PASSWORD, TIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
+	private final static String INSERTAR_CLIENTE = "INSERT INTO CLIENTE (IDCLIENTE, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, SYSDATE())";
 	
 	public static final Collection<DatosInicioSesionActionForm> consultarPorPk(final String idCliente) {
@@ -100,7 +100,7 @@ public class DaoCliente {
 				if (null != cliente) {
 					pstmt.setString(1, cliente.getUser());
 					pstmt.setString(2, cliente.getPassword());
-					pstmt.setString(3, cliente.getId());
+					pstmt.setInt(3, cliente.getIdTipoDocumento());
 					pstmt.setString(4, cliente.getNifcif());
 					pstmt.setString(5, cliente.getEmail());
 
