@@ -28,25 +28,25 @@ public class DaoVivienda {
 	
 	private final static String CONTAR_VIVIENDAS = "SELECT COUNT(*) AS NUMEROVIVIENDAS FROM VIVIENDA";
 	
-	private final static String CONSULTAR_VIVIENDA_POR_PK = "SELECT IDVIVIENDA, TIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
+	private final static String CONSULTAR_VIVIENDA_POR_PK = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
 															"FROM VIVIENDA WHERE IDVIVIENDA = ?";
 
 	private final static String INSERTAR_VIVIENDA		  = "INSERT INTO VIVIENDA " +
-															"(IDVIVIENDA, TIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, " +
+															"(IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, " +
 															"PUERTA, CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO) " +
 															"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, TIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
+	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-															"FROM VIVIENDA WHERE TIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
-															"AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ?" +
+															"FROM VIVIENDA WHERE IDTIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
+															"AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ? " +
 															"AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";
 	
 	private final static String CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO 		  
-														  = "SELECT IDVIVIENDA, TIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
+														  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 														    "CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-														    "FROM VIVIENDA WHERE TIPOVIA = ? OR NOMBREVIA = ? OR NUMEROVIA = ? OR BLOQUE = ? " +
+														    "FROM VIVIENDA WHERE IDTIPOVIA = ? OR NOMBREVIA = ? OR NUMEROVIA = ? OR BLOQUE = ? " +
 														    "OR PORTAL = ? OR ESCALERA = ? OR PLANTA = ? OR PUERTA = ? OR CODIGOPOSTAL = ? " +
 														    "OR MUNICIPIO = ? OR PROVINCIA = ? OR PAIS = ? OR NIFPROPIETARIO = ?";
 	
@@ -66,7 +66,7 @@ public class DaoVivienda {
 					while(rs.next()) {
 						vivienda = new DatosViviendaActionForm();
 						vivienda.setIdVivienda(rs.getLong("IDVIVIENDA"));
-						vivienda.setTipoVia(rs.getInt("TIPOVIA"));
+						vivienda.setIdTipoVia(rs.getInt("IDTIPOVIA"));
 						vivienda.setNombreVia(rs.getString("NOMBREVIA"));
 						vivienda.setNumeroVia(rs.getInt("NUMEROVIA"));
 						vivienda.setBloque(rs.getString("BLOQUE"));
@@ -129,7 +129,7 @@ public class DaoVivienda {
 
 				if (null != vivienda) {
 					pstmt.setLong(1, vivienda.getIdVivienda());
-					pstmt.setInt(2, vivienda.getTipoVia());
+					pstmt.setInt(2, vivienda.getIdTipoVia());
 					pstmt.setString(3, vivienda.getNombreVia());
 					pstmt.setInt(4, vivienda.getNumeroVia());
 					pstmt.setString(5, vivienda.getBloque());
@@ -201,7 +201,7 @@ public class DaoVivienda {
 					while(rs.next()) {
 						viviendaAux = new DatosViviendaActionForm();
 						viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
-						viviendaAux.setTipoVia(rs.getInt("TIPOVIA"));
+						viviendaAux.setIdTipoVia(rs.getInt("IDTIPOVIA"));
 						viviendaAux.setNombreVia(rs.getString("NOMBREVIA"));
 						viviendaAux.setNumeroVia(rs.getInt("NUMEROVIA"));
 						viviendaAux.setBloque(rs.getString("BLOQUE"));
@@ -324,7 +324,7 @@ public class DaoVivienda {
 		switch (sentencia) {
 			case 1: pstmt.setLong(1, ((DatosViviendaActionForm)vivienda).getIdVivienda());
 					break;
-			case 2: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getTipoVia());
+			case 2: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getIdTipoVia());
 			    	pstmt.setString(2, ((CriteriosBusquedaViviendaActionForm)vivienda).getNombreVia());
 			    	pstmt.setInt(3, ((CriteriosBusquedaViviendaActionForm)vivienda).getNumeroVia());
 			    	pstmt.setString(4, ((CriteriosBusquedaViviendaActionForm)vivienda).getBloque());

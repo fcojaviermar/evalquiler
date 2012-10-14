@@ -17,11 +17,6 @@ import com.evalquiler.dao.DaoPregunta;
  */
 public final class OpPregunta {
 	
-	public static final Collection<PreguntasEncuestaActionForm> consultarPorPk(ActionForm preguntaIn) {
-		Collection<PreguntasEncuestaActionForm> listaPreguntas = DaoPregunta.consultarPorPk( ((PreguntasEncuestaActionForm)preguntaIn).getIdPregunta());
-		return listaPreguntas; 
-	}
-	
 
 	public static final Collection<PreguntasEncuestaActionForm> consultar(ActionForm encuestaIn) {
 		Collection<PreguntasEncuestaActionForm> listaPreguntas = DaoPregunta.consultar( ((DatosEncuestaActionForm)encuestaIn).getIdEncuesta());
