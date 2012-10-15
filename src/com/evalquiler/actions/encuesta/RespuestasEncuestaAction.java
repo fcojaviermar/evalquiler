@@ -12,37 +12,35 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
-import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.operaciones.OpEncuesta;
 
 /**
  * @version 	1.0
  * @author
  */
-public class RecuperarEncuestaAction extends ActionBase
-
-{
+public class RespuestasEncuestaAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("RecuperarEncuestaAction.action()");
+		System.out.println("RespuestasEncuestaAction.action()");
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
-		String botonPulsado   = null;
-		String forwardAux 	  = null;		
-		try {
-			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
-			if ("Nueva vivienda".equals(botonPulsado)) {
-				forwardAux = "NEW_HOUSE";
-			} else {
-				DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
-				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultarPorPk(datosUsuario);
-				request.setAttribute("datosEncuesta", datosEncuesta);
-				request.getSession().setAttribute("datosEncuesta", datosEncuesta);
-				forwardAux = "THERE_IS_POLL";
-			}
 
+		int iContador = 0;
+		try {
+			iContador = Integer.parseInt((String)request.getParameter("Contador"));	
+		} catch (NumberFormatException e) {
+			
+		}
+		
+		try {
+		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+			Collection<DatosEncuestaActionForm> datosEncuesta = (Collection<DatosEncuestaActionForm>)request.getSession().getAttribute("datosEncuesta");
+			
+			for (int i=0; i<iContador; i++) {
+				System.out.println(request.getParameter("idRespuesta" + i));
+			}
 	
+			int i =0;
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -57,10 +55,10 @@ public class RecuperarEncuestaAction extends ActionBase
 		    forward = mapping.findForward("SALIR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			forward = mapping.findForward(forwardAux);
+		    forward = mapping.findForward("OK");
 		}
 	
 		// Finish with
-		return forward;
+		return (forward);
     }
 }
