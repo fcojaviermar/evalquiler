@@ -10,7 +10,8 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
-        <html:form action="/IrConfirmarRespuestasAction.do" method="post">            
+        <html:form action="/IrConfirmarRespuestasAction.do" method="post">
+            <%int iContador = 0; %>
 		    <fieldset>
 		        <legend>Datos del usuario</legend>
 		        <dl class="datosSalida">    
@@ -26,78 +27,37 @@
 		            <dd>3</dd>
 		        </dl>
 	
-   	
-	
 		        <fieldset>
-		            <legend>Preguntas de la encuesta</legend>
-                    <logic:iterate name="datosEncuesta" id="datosEncuestaEnc" scope="request">		            
-			            <table>
-			                <thead>
-			                    <tr>
-			                        <td>
-			                           <th><bean:write name="datosEncuestaEnc" property="titulo"/></th>
-			                    </tr>
-			                </thead>
-			                <tbody>
-	                            <logic:iterate name="datosEncuestaEnc" id="preguntasEnc" property="preguntas">
-                                    <tr>
-			                            <td>
-			                                <bean:write name="preguntasEnc" property="descripcion"/>
-			                            </td>
-			                        </tr>
-			                        <tr>
-                                        <logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
-			                                <td>
-			                                    <bean:write name="respuestasEnc" property="descripcion"/>
-			                                </td>
-                                        </logic:iterate>
-			                        </tr>  
-	                            </logic:iterate>
-			                </tbody>
-		                </table>
+                    <logic:iterate name="datosEncuesta" id="datosEncuestaEnc" scope="request">
+                        <legend><bean:write name="datosEncuestaEnc" property="titulo"/></legend>		            
+						<logic:iterate name="datosEncuestaEnc" id="preguntasEnc" property="preguntas" indexId="indicePregunta">
+							<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
+								<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
+									<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
+										<span>Pregunta </span> 
+										<bean:write name="indicePregunta"/>
+									</legend>		
+									<p class="p1 rellenoIzq12 margenSup0 rellenoSup0 textoAmarilloMedio">
+										<bean:write name="preguntasEnc" property="descripcion"/>
+									</p>
+						    		<p class="margen0 relleno12 fondoAmarilloClaro bordeSuperior bordeAzulOscuro">
+						    			<logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
+											<bean:define id="valorRespuestaAux">
+                                   				<bean:write name="respuestasEnc" property="idRespuesta"/>
+                               				</bean:define>
+                               				<bean:write name="respuestasEnc" property="descripcion"/>
+                               				<input type="radio" name="idRespuesta<%=indicePregunta%>" value="<%=valorRespuestaAux%>"/>
+    						    		</logic:iterate>
+						    		</p>
+						    	</fieldset>
+					    	</div>		                            
+					    	<%iContador = iContador + 1;%>
+						</logic:iterate>
 		            </logic:iterate>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>
-                                   <th>Reponder encuesta</th>
-                            </tr>
-                        </thead>
-		                <tbody>
-		                    <tr>
-		                        <td>
-						          	<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
-										<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
-											<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio"><span class="oculto">Pregunta</span> 1</legend>		
-											<p class="p1 rellenoIzq12 margenSup0 rellenoSup0 textoAmarilloMedio"> Usted calificaría su carga de trabajo habitual como:</p>
-									    	<p class="margen0 relleno12 fondoAmarilloClaro bordeSuperior bordeAzulOscuro"> 
-										      	<label><input name="encuestaPeriodica1"  type="radio" value="01" />Excesiva</label>
-										      	<label><input name="aleatoria1" type="radio" value="02" />Abundante</label>
-											    <label><input name="respUnica1" type="radio" value="03" />Adecuada</label>
-												<label><input name="anonima1"   type="radio" value="04" />Limitada</label>
-												<label><input name="anonima1"   type="radio" value="04" />Insuficiente</label>
-										    </p>							
-										</fieldset>
-						  			</div>
-						          	<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
-										<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
-											<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio"><span class="oculto">Pregunta</span> 1</legend>		
-											<p class="p1 rellenoIzq12 margenSup0 rellenoSup0 textoAmarilloMedio"> Usted calificaría su carga de trabajo habitual como:</p>
-									    	<p class="margen0 relleno12 fondoAmarilloClaro bordeSuperior bordeAzulOscuro"> 
-										      	<label><input name="encuestaPeriodica2"  type="radio" value="01" />Excesiva</label>
-										      	<label><input name="aleatoria2" type="radio" value="02" />Abundante</label>
-											    <label><input name="respUnica2" type="radio" value="03" />Adecuada</label>
-												<label><input name="anonima2"   type="radio" value="04" />Limitada</label>
-												<label><input name="anonima2"   type="radio" value="04" />Insuficiente</label>
-										    </p>							
-										</fieldset>
-						  			</div>
-	                              	<html:submit property="BOTON_PULSADO" value="Responder"/>
-	                              	<html:submit property="BOTON_PULSADO" value="Cancelar"/>
-							    </td>
-							</tr>
-		                </tbody>
-		            </table>
+                    
+		            <input type="hidden" name="Contador" value="<%=String.valueOf(iContador)%>"/>
+                  	<html:submit property="BOTON_PULSADO" value="Responder"/>
+                  	<html:submit property="BOTON_PULSADO" value="Cancelar"/>
 		    	</fieldset>
 			</fieldset>
         </html:form>							
