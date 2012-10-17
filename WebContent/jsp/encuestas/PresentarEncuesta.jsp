@@ -28,9 +28,8 @@
 		        </dl>
 	
 		        <fieldset>
-                    <logic:iterate name="datosEncuesta" id="datosEncuestaEnc" scope="request">
-                        <legend><bean:write name="datosEncuestaEnc" property="titulo"/></legend>		            
-						<logic:iterate name="datosEncuestaEnc" id="preguntasEnc" property="preguntas" indexId="indicePregunta">
+                        <legend><bean:write name="datosEncuesta" property="titulo"/></legend>		            
+						<logic:iterate name="datosEncuesta" id="preguntasEnc" property="preguntas" indexId="indicePregunta">
 							<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
 								<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
 									<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
@@ -53,7 +52,6 @@
 					    	</div>		                            
 					    	<%iContador = iContador + 1;%>
 						</logic:iterate>
-		            </logic:iterate>
                     
 		            <input type="hidden" name="Contador" value="<%=String.valueOf(iContador)%>"/>
                   	<html:submit property="BOTON_PULSADO" value="Responder"/>
