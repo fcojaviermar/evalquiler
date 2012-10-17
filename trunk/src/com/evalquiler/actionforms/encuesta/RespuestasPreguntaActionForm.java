@@ -11,8 +11,6 @@ public class RespuestasPreguntaActionForm extends ActionForm {
 
 	private int idRespuesta = 0;
 	private String descripcion = null;
-	private int respuestaDada = 0;
-	//private String tipoRespuesta = null;	
 
 	public int getIdRespuesta() {
 		return idRespuesta;
@@ -30,14 +28,6 @@ public class RespuestasPreguntaActionForm extends ActionForm {
 		this.descripcion = descripcion;
 	}
 
-	public int getRespuestaDada() {
-		return respuestaDada;
-	}
-
-	public void setRespuestaDada(int respuestaDada) {
-		this.respuestaDada = respuestaDada;
-	}
- 
 	/*
      * Validamamos los datos introducidos por el usuario
      */

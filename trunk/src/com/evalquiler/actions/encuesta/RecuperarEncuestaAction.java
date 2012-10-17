@@ -20,9 +20,7 @@ import com.evalquiler.operaciones.OpEncuesta;
  * @version 	1.0
  * @author
  */
-public class RecuperarEncuestaAction extends ActionBase
-
-{
+public class RecuperarEncuestaAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("RecuperarEncuestaAction.action()");
@@ -37,9 +35,13 @@ public class RecuperarEncuestaAction extends ActionBase
 			} else {
 				DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
 				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultarPorPk(datosUsuario);
-				request.setAttribute("datosEncuesta", datosEncuesta);
-				request.getSession().setAttribute("datosEncuesta", datosEncuesta);
-				forwardAux = "THERE_IS_POLL";
+				if (!datosEncuesta.isEmpty()) {
+					request.setAttribute("datosEncuesta", datosEncuesta.iterator().next());
+					request.getSession().setAttribute("datosEncuesta", datosEncuesta);
+					forwardAux = "THERE_IS_POLL";
+				} else {
+					
+				}
 			}
 
 	

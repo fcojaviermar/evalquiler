@@ -34,12 +34,14 @@ public class RespuestasEncuestaAction extends ActionBase {
 		
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			Collection<DatosEncuestaActionForm> datosEncuesta = (Collection<DatosEncuestaActionForm>)request.getSession().getAttribute("datosEncuesta");
+			DatosEncuestaActionForm datosEncuesta = (DatosEncuestaActionForm)request.getSession().getAttribute("datosEncuesta");
 			
 			for (int i=0; i<iContador; i++) {
 				System.out.println(request.getParameter("idRespuesta" + i));
+				datosEncuesta.getPreguntas().iterator().next().setIdRespuesta(Integer.parseInt(request.getParameter("idRespuesta" + i)));
 			}
-	
+
+			
 			int i =0;
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
@@ -59,6 +61,6 @@ public class RespuestasEncuestaAction extends ActionBase {
 		}
 	
 		// Finish with
-		return (forward);
+		return forward;
     }
 }
