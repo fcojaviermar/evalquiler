@@ -137,7 +137,7 @@
         </action>
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
-                name="datosVacioActionForm" scope="request" type="com.evalquiler.actions.encuesta.RespuestasEncuestaAction" validate="false" >
+                name="datosVacioActionForm" scope="request" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction" validate="false" >
             <forward name="OK"     path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
             <forward name="ERROR"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
@@ -148,6 +148,8 @@
             <forward name="ERROR"  path="/IrHacerEncuestaAction.do"></forward>
         </action>
 
+        
+        <!-- =========================== Modulo de viviendas =========================== -->
         <action input="/jsp/vivienda/AltaNuevaVivienda.jsp" path="/IrAceptarDatosViviendaAction"
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.ConfirmarDatosViviendaAction">
             <forward name="OK"     path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
