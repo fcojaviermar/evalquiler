@@ -11,7 +11,7 @@
     </head>
     <body>
         <html:form action="/IrConfirmarRespuestasAction.do" method="post">
-            <%int iContador = 0; %>
+            <%int iNumeroPreguntas = 0; %>
 		    <fieldset>
 		        <legend>Datos del usuario</legend>
 		        <dl class="datosSalida">    
@@ -41,19 +41,19 @@
 									</p>
 						    		<p class="margen0 relleno12 fondoAmarilloClaro bordeSuperior bordeAzulOscuro">
 						    			<logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
-											<bean:define id="valorRespuestaAux">
-                                   				<bean:write name="respuestasEnc" property="idRespuesta"/>
-                               				</bean:define>
+                                            <bean:define id="valorRespuestaAux">
+                                                <bean:write name="respuestasEnc" property="idRespuesta"/>
+                                            </bean:define>
+											<input type="radio" name="idRespuesta<%=indicePregunta%>" value="<%=valorRespuestaAux%>"/>
                                				<bean:write name="respuestasEnc" property="descripcion"/>
-                               				<input type="radio" name="idRespuesta<%=indicePregunta%>" value="<%=valorRespuestaAux%>"/>
     						    		</logic:iterate>
 						    		</p>
 						    	</fieldset>
 					    	</div>		                            
-					    	<%iContador = iContador + 1;%>
+					    	<%iNumeroPreguntas = iNumeroPreguntas + 1;%>
 						</logic:iterate>
                     
-		            <input type="hidden" name="Contador" value="<%=String.valueOf(iContador)%>"/>
+		            <input type="hidden" name="NumeroPreguntas" value="<%=String.valueOf(iNumeroPreguntas)%>"/>
                   	<html:submit property="BOTON_PULSADO" value="Responder"/>
                   	<html:submit property="BOTON_PULSADO" value="Cancelar"/>
 		    	</fieldset>
