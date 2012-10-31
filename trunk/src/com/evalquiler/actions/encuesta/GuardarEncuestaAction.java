@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;

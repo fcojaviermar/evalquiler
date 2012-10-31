@@ -1,7 +1,5 @@
 package com.evalquiler.actions.encuesta;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +14,6 @@ import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.operaciones.OpEncuesta;
 
 /**
  * @version 	1.0
@@ -28,7 +25,8 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		System.out.println("ConfirmarRespuestasEncuestaAction.action()");
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
-
+		RespuestasEncuestaActionForm respuestasEncuesta = null;
+		
 		int iNumeroPreguntas = 0;
 		try {
 			iNumeroPreguntas = Integer.parseInt((String)request.getParameter("NumeroPreguntas"));	
@@ -39,17 +37,22 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			DatosEncuestaActionForm datosEncuesta = (DatosEncuestaActionForm)request.getSession().getAttribute("datosEncuesta");
-			RespuestasEncuestaActionForm respuestasEncuesta = (RespuestasEncuestaActionForm)datosEncuesta;
-			for (int i=0; i<iNumeroPreguntas; i++) {
-				System.out.println(request.getParameter("idRespuesta" + i));
-				respuestasEncuesta.getPreguntas().iterator().next().setIdRespuesta(Integer.parseInt(request.getParameter("idRespuesta" + i)));
+			if (null != datosEncuesta) {
+    			respuestasEncuesta = new RespuestasEncuestaActionForm();
+    			respuestasEncuesta.setDatosEncuesta(datosEncuesta);
+    			for (int i=0; i<iNumeroPreguntas; i++) {
+    				System.out.println(request.getParameter("idRespuesta" + i));
+    				respuestasEncuesta.getDatosEncuesta().getPreguntas().iterator().next().setIdRespuesta(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
+    			}
+    
+    			respuestasEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario"));
+    			respuestasEncuesta.setDatosVivienda((DatosViviendaActionForm)request.getSession().getAttribute("datosVivienda"));
+    
+    			//Se guarda en sesión para ir a la pantalla de confirmación y mostrar los datos y si son correctos se guarda en bbdd.
+    			request.getSession().setAttribute("respuestasEncuesta", respuestasEncuesta);
+			} else {
+				
 			}
-
-			respuestasEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario"));
-			respuestasEncuesta.setDatosVivienda((DatosViviendaActionForm)request.getSession().getAttribute("datosVivienda"));
-			
-			request.getSession().setAttribute("respuestasEncuesta", respuestasEncuesta);
-			
 			int i =0;
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
@@ -62,7 +65,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		if (!errors.isEmpty()) {
 		    //saveErrors(request, errors);
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    forward = mapping.findForward("SALIR");
+		    forward = mapping.findForward("ERROR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
 		    forward = mapping.findForward("OK");
