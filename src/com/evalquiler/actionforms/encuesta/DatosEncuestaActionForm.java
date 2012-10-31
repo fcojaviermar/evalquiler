@@ -13,7 +13,7 @@ public class DatosEncuestaActionForm extends ActionForm {
 
 	private int idEncuesta 	 	= 0;
 	private String titulo	 	= null;
-	private int idTipoUsuario 	= 0;
+	private int idTipoUsuario 	= 0;  // O va aquí o va en la clase RespuestasEncuestaActionForm
 	private Collection<PreguntasEncuestaActionForm> preguntas = null;
 	
 	public String getTitulo() {
