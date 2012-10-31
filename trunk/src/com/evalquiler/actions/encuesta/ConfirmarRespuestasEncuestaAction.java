@@ -12,7 +12,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
+import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.operaciones.OpEncuesta;
 
@@ -20,31 +22,35 @@ import com.evalquiler.operaciones.OpEncuesta;
  * @version 	1.0
  * @author
  */
-public class RecuperarEncuestaAction extends ActionBase {
+public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("RecuperarEncuestaAction.action()");
+		System.out.println("ConfirmarRespuestasEncuestaAction.action()");
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
-		String botonPulsado   = null;
-		String forwardAux 	  = null;		
+
+		int iNumeroPreguntas = 0;
 		try {
-			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
-			if ("Nueva vivienda".equals(botonPulsado)) {
-				forwardAux = "NEW_HOUSE";
-			} else {
-				DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
-				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultarPorPk(datosUsuario);
-				if (!datosEncuesta.isEmpty()) {
-					//request.setAttribute("datosEncuesta", datosEncuesta.iterator().next());
-					request.getSession().setAttribute("datosEncuesta", datosEncuesta.iterator().next());
-					forwardAux = "THERE_IS_POLL";
-				} else {
-					
-				}
+			iNumeroPreguntas = Integer.parseInt((String)request.getParameter("NumeroPreguntas"));	
+		} catch (NumberFormatException e) {
+			
+		}
+		
+		try {
+		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+			DatosEncuestaActionForm datosEncuesta = (DatosEncuestaActionForm)request.getSession().getAttribute("datosEncuesta");
+			RespuestasEncuestaActionForm respuestasEncuesta = (RespuestasEncuestaActionForm)datosEncuesta;
+			for (int i=0; i<iNumeroPreguntas; i++) {
+				System.out.println(request.getParameter("idRespuesta" + i));
+				respuestasEncuesta.getPreguntas().iterator().next().setIdRespuesta(Integer.parseInt(request.getParameter("idRespuesta" + i)));
 			}
 
-	
+			respuestasEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario"));
+			respuestasEncuesta.setDatosVivienda((DatosViviendaActionForm)request.getSession().getAttribute("datosVivienda"));
+			
+			request.getSession().setAttribute("respuestasEncuesta", respuestasEncuesta);
+			
+			int i =0;
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -59,7 +65,7 @@ public class RecuperarEncuestaAction extends ActionBase {
 		    forward = mapping.findForward("SALIR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			forward = mapping.findForward(forwardAux);
+		    forward = mapping.findForward("OK");
 		}
 	
 		// Finish with
