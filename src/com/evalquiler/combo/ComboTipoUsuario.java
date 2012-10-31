@@ -6,7 +6,6 @@ package com.evalquiler.combo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 /**
