@@ -9,7 +9,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
+import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
 /**
  * @version 	1.0
@@ -26,6 +29,8 @@ public class GuardarEncuestaAction extends ActionBase
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+			RespuestasEncuestaActionForm respuestasEncuesta = (RespuestasEncuestaActionForm)request.getSession().getAttribute("respuestasEncuesta");
+			OpRespuestasEncuesta.insertar(respuestasEncuesta);
 	
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
@@ -44,7 +49,6 @@ public class GuardarEncuestaAction extends ActionBase
 		    forward = mapping.findForward("OK");
 		}
 	
-		// Finish with
-		return (forward);
+		return forward;
     }
 }

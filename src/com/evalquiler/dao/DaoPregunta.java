@@ -20,7 +20,6 @@ import com.evalquiler.comun.bbdd.ConexionBD;
  */
 public class DaoPregunta {
 	
-	private final static String CONSULTAR_PREGUNTA_POR_PK		   = "";	
 	private final static String CONSULTAR_PREGUNTA_POR_ID_ENCUESTA = "";
 
 	
