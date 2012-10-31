@@ -1,7 +1,5 @@
 package com.evalquiler.actions.encuesta;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +10,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
+import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
+import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 
 /**
@@ -35,14 +36,18 @@ public class RespuestasEncuestaAction extends ActionBase {
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			DatosEncuestaActionForm datosEncuesta = (DatosEncuestaActionForm)request.getSession().getAttribute("datosEncuesta");
-			
+			RespuestasEncuestaActionForm respuestasEncuesta = (RespuestasEncuestaActionForm)datosEncuesta;
 			for (int i=0; i<iContador; i++) {
 				System.out.println(request.getParameter("idRespuesta" + i));
-				datosEncuesta.getPreguntas().iterator().next().setIdRespuesta(Integer.parseInt(request.getParameter("idRespuesta" + i)));
+				respuestasEncuesta.getPreguntas().iterator().next().setIdRespuesta(Integer.parseInt(request.getParameter("idRespuesta" + i)));
 			}
 
+			respuestasEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario"));
+			respuestasEncuesta.setDatosVivienda((DatosViviendaActionForm)request.getSession().getAttribute("datosVivienda"));
 			
-			int i =0;
+			request.getSession().setAttribute("respuestasEncuesta", respuestasEncuesta);
+			//request.getSession().setAttribute("datosEncuesta", null);
+			
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
