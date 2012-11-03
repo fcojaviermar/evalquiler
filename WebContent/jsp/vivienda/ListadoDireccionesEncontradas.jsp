@@ -42,12 +42,15 @@ input[type="radio"]:checked, .checked {
         </style>
     </head>
     <body>
-		<html:form action="/IrHacerEncuestaAction.do" method="post">    
+		<html:form action="/IrHacerEncuestaAction.do" method="post">   
 	        <fieldset>
 	            <legend>Datos del usuario</legend>
 	            <dl class="datosSalida">    
 	                <dt>Usuario:</dt>
-	                <dd><bean:write name="datosUsuario" property="user"/></dd>
+                    <dd>
+                        <bean:define name="datoRealizacionEncuestaActionForm" property="datosUsuario"  id="datosUsuario"/>  
+                        <bean:write name="datosUsuario" property="user"/>
+                    </dd>  
 	                <dt>Número documento:</dt>
 	                <dd>50859114L</dd>
 	                <dt>Dirección de correo electrónico:</dt>
@@ -70,26 +73,21 @@ input[type="radio"]:checked, .checked {
                             </tr>
                         </thead>
                         <tbody>
-							<logic:iterate name="listaViviendas" id="listaViviendasEnc" >
+                            <logic:iterate name="datosViviendaActionForm" id="datosViviendaActionFormEnc">
 	                            <tr>
 	                                <th>
                                         <bean:define id="idViviendaAux">
-                                            <bean:write name="listaViviendasEnc" property="idVivienda"/>
+                                            <bean:write name="datosViviendaActionFormEnc" property="idVivienda"/>
                                         </bean:define>
-	                                	<html:radio name="listaViviendasEnc" property="idVivienda" value="<%=idViviendaAux%>"/>
-	                                	
-	                                	<html:radio name="listaViviendasEnc" property="idVivienda" styleClass="checked" value=""/>
-	                                	
-                                        <input type="radio" name="radioProp" value="<bean:write name="listaViviendasEnc" property="idVivienda"/>"> 
-	                                	
+                                        <input type="radio" name="idVivienda" value="<bean:write name="datosViviendaActionFormEnc" property="idVivienda"/>"> 
 	                                </th>
 	                                <th>
-	                                	<bean:write name="listaViviendasEnc" property="nombreVia"/>
-	                                	<bean:write name="listaViviendasEnc" property="numeroVia"/>
+	                                	<bean:write name="datosViviendaActionFormEnc" property="nombreVia"/>
+	                                	<bean:write name="datosViviendaActionFormEnc" property="numeroVia"/>
 									</th>
 	                                <th>
-	                                	<bean:write name="listaViviendasEnc" property="planta"/>&nbsp; -- 
-	                                	<bean:write name="listaViviendasEnc" property="puerta"/>
+	                                	<bean:write name="datosViviendaActionFormEnc" property="planta"/>&nbsp; -- 
+	                                	<bean:write name="datosViviendaActionFormEnc" property="puerta"/>
 	                                </th>
 	                                <th>Vivienda</th>
 	                            </tr>

@@ -16,7 +16,10 @@
 		        <legend>Datos del usuario</legend>
 		        <dl class="datosSalida">    
 		            <dt>Usuario:</dt>
-		            <dd><bean:write name="datosUsuario" property="user"/></dd>
+                    <dd>
+                        <bean:define name="datoRealizacionEncuestaActionForm" property="datosUsuario" id="datosUsuario"/>  
+                        <bean:write name="datosUsuario" property="user"/>
+                    </dd>  
 		            <dt>Número documento:</dt>
 		            <dd>50859114L</dd>
 		            <dt>Dirección de correo electrónico:</dt>
@@ -28,8 +31,8 @@
 		        </dl>
 	
 		        <fieldset>
-                        <legend><bean:write name="datosEncuesta" property="titulo"/></legend>		            
-						<logic:iterate name="datosEncuesta" id="preguntasEnc" property="preguntas" indexId="indicePregunta">
+                        <legend><bean:write name="datosEncuestaActionForm" property="titulo"/></legend>		            
+						<logic:iterate name="datosEncuestaActionForm" property="preguntas" id="preguntasEnc" indexId="indicePregunta">
 							<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
 								<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
 									<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
