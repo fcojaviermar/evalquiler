@@ -9,7 +9,7 @@ import org.apache.struts.action.ActionMapping;
 
 public class DatosBasicosViviendaActionForm extends ActionForm  {
 
-	private long idVivienda 	  = 0;
+	private long idVivienda = 0;
 	
 	
 	public long getIdVivienda() {

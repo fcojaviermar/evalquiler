@@ -12,9 +12,13 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
+import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.dao.DaoEncuesta;
 import com.evalquiler.operaciones.OpEncuesta;
+import com.evalquiler.operaciones.OpVivienda;
 
 /**
  * @version 	1.0
@@ -28,17 +32,32 @@ public class RecuperarEncuestaAction extends ActionBase {
 		ActionForward forward = new ActionForward(); // return value
 		String botonPulsado   = null;
 		String forwardAux 	  = null;		
+		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
+		
 		try {
 			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
 			if ("Nueva vivienda".equals(botonPulsado)) {
 				forwardAux = "NEW_HOUSE";
 			} else {
-				DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
-				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultarPorPk(datosUsuario);
-				if (!datosEncuesta.isEmpty()) {
-					//request.setAttribute("datosEncuesta", datosEncuesta.iterator().next());
-					request.getSession().setAttribute("datosEncuesta", datosEncuesta.iterator().next());
-					forwardAux = "THERE_IS_POLL";
+				DatosViviendaActionForm viviendaSeleccionada = new DatosViviendaActionForm();
+				viviendaSeleccionada.setIdVivienda(Integer.parseInt((String)request.getParameter("idVivienda")));
+				Collection<DatosViviendaActionForm> vivienda = OpVivienda.consultarPorPk(viviendaSeleccionada);
+
+				if (!vivienda.isEmpty()) {
+					viviendaSeleccionada = vivienda.iterator().next();
+					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datoRealizacionEncuestaActionForm");
+					
+    				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultar(datosRealizacionEncuesta.getDatosUsuario(), 
+    																					     DaoEncuesta.CONSULTAR_PARA_QUIEN_ES_ENCUESTA);
+    			
+    				if (!datosEncuesta.isEmpty()) {
+    					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
+
+    					request.getSession().setAttribute("datosEncuestaActionForm", (DatosEncuestaActionForm)datosEncuesta.iterator().next());
+    					forwardAux = "THERE_IS_POLL";
+    				} else {
+    					
+    				}
 				} else {
 					
 				}
