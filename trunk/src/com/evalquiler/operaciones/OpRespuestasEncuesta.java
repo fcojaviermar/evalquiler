@@ -5,7 +5,7 @@ package com.evalquiler.operaciones;
 
 import org.apache.struts.action.ActionForm;
 
-import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.dao.DaoRespuestasEncuesta;
 
 /**
@@ -14,8 +14,8 @@ import com.evalquiler.dao.DaoRespuestasEncuesta;
  */
 public final class OpRespuestasEncuesta {
 	
-	public static final int insertar(ActionForm respuestasEncuestaIn) {
-		int iResultado = DaoRespuestasEncuesta.insertar((RespuestasEncuestaActionForm)respuestasEncuestaIn);
+	public static final int insertar(ActionForm datosEncuestaIn) {
+		int iResultado = DaoRespuestasEncuesta.insertar((DatosEncuestaActionForm)datosEncuestaIn);
 		
 		return iResultado;
 	}

@@ -30,6 +30,7 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			listaViviendas = OpVivienda.consultar(form);
+			request.setAttribute("datosViviendaActionForm", listaViviendas);
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -44,7 +45,6 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		    forward = mapping.findForward("SALIR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			request.setAttribute("listaViviendas", listaViviendas);
 		    forward = mapping.findForward("ONE_RESULT");
 		}
 	

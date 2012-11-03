@@ -30,6 +30,9 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			long lSecuencial = OpVivienda.contar();
 			((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
+			
+			request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
+			
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -43,8 +46,7 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
 		    forward = mapping.findForward("SALIR");
 		} else {
-			request.getSession().setAttribute("datosVivienda", (DatosViviendaActionForm)form);
-		    // Forward control to the appropriate 'success' URI (change name as desired)
+			// Forward control to the appropriate 'success' URI (change name as desired)
 		    forward = mapping.findForward("OK");
 		}
 	
