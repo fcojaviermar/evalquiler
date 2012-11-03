@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 
 
@@ -21,7 +21,7 @@ public class DaoRespuestasEncuesta {
 	private final static String INSERTAR_RESPUESTAS_ENCUESTA = "";
 
 	
-	public static final int insertar(RespuestasEncuestaActionForm encuesta) {
+	public static final int insertar(DatosEncuestaActionForm encuesta) {
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();
@@ -35,12 +35,12 @@ public class DaoRespuestasEncuesta {
 						if (null != pstmt) {
 							pstmt.setInt(1, encuesta.getIdEncuesta());
 							pstmt.setInt(2, encuesta.getPreguntas().iterator().next().getIdPregunta());
-							pstmt.setInt(3, encuesta.getPreguntas().iterator().next().getIdRespuesta());
-							pstmt.setDate(4, new Date(encuesta.getFechaInicio().getTime()));
-							pstmt.setDate(5, new Date(encuesta.getFechaFin().getTime()));
+							pstmt.setInt(3, encuesta.getPreguntas().iterator().next().getIdRespuestaDada());
+							pstmt.setDate(4, new Date(encuesta.getFechaInicioEvaluacionAlquiler().getTime()));
+							pstmt.setDate(5, new Date(encuesta.getFechaFinEvaluacionAlquiler().getTime()));
 							pstmt.setInt(6, encuesta.getIdTipoUsuario());
 							pstmt.setString(7, encuesta.getDatosUsuario().getUser());
-							pstmt.setLong(6, encuesta.getDatosVivienda().getIdVivienda());
+							pstmt.setLong(8, encuesta.getDatosVivienda().getIdVivienda());
 							
 							iResultado = pstmt.executeUpdate();
 							if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd

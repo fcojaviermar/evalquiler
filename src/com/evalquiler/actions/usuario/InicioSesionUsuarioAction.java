@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
+import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
@@ -34,7 +35,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 	    throws Exception {
     	
     	System.out.println("InicioSesionUsuarioAction.action()");
-    	DatosInicioSesionActionForm usuario = null;
+    	DatosInicioSesionActionForm datosUsuario = null;
     	ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		
@@ -48,12 +49,16 @@ public class InicioSesionUsuarioAction extends ActionBase
 					Iterator<DatosUsuarioActionForm> iterUsuario = listaUsuario.iterator();
 
 					if (iterUsuario.hasNext()) {
-						usuario = (DatosInicioSesionActionForm)iterUsuario.next();  
+						datosUsuario = (DatosInicioSesionActionForm)iterUsuario.next();  
 						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
 					
-						if (pwd.equals(usuario.getPassword())) {
+						if (pwd.equals(datosUsuario.getPassword())) {
 							System.out.println("La password es igual.");
-							request.getSession().setAttribute("datosUsuario", usuario);
+							DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
+							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
+							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);
+							request.setAttribute("datosInicioSesionActionForm", datosUsuario);
+							
 							forward = mapping.findForward("VALID_USER");
 						} else {
 							System.out.println("La password NO es igual 1.");

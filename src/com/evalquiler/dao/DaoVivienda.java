@@ -79,6 +79,7 @@ public class DaoVivienda {
 						vivienda.setProvincia(rs.getInt("PROVINCIA"));
 						vivienda.setPais(rs.getInt("PAIS"));
 						vivienda.setNifPropietario(rs.getString("NIFPROPIETARIO"));
+						listaVivienda.add(vivienda);
 					}
 				} else {
 					System.out.println("No se ha podido obtener un pstmt valido.") ;
