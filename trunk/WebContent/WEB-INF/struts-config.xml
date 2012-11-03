@@ -15,8 +15,9 @@
         <form-bean name="datosClienteActionForm"               	type="com.evalquiler.actionforms.cliente.DatosClienteActionForm"/>
          
 <!-- Revisar si se usa -->        <form-bean name="respuestasPreguntaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm"/>
-        <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
+<!-- Revisar si se usa -->        <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
         <form-bean name="datosEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm"/>
+        <form-bean name="datoRealizacionEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm"/>
          
 <!-- Revisar si se usa --> <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
         <form-bean name="criteriosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
@@ -74,7 +75,6 @@
             <forward name="ERROR" path="/Inicio.do"></forward>
         </action>
 
-<!--  <action input="/jsp/usuario/ConfirmarDatosUsuario.jsp" path="/IrAceptarDatosUsuarioAction"-->
         <action input="/jsp/usuario/AltaDatosUsuario.jsp" path="/IrAceptarDatosUsuarioAction" 
                 name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.AceptarDatosUsuarioAction">
 			<forward name="OK"    path="/Inicio.do"></forward>
@@ -116,7 +116,7 @@
                                                       validate="false"/>
          
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
-                name="datosUsuarioActionForm" scope="request"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction">
+                name="datoRealizacionEncuestaActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction">
             <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
             <forward name="EXIT"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
@@ -137,13 +137,13 @@
         </action>
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
-                name="datosVacioActionForm" scope="request" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction" validate="false" >
+                name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction" validate="false" >
             <forward name="OK"     path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
             <forward name="ERROR"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
 
         <action input="/jsp/encuestas/ConfirmarRespuestas.jsp" path="/IrGuardarRespuestasEncuestaAction"
-                name="respuestasEncuestaActionForm" scope="request" type="com.evalquiler.actions.encuesta.GuardarEncuestaAction">
+                name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.GuardarEncuestaAction">
             <forward name="OK"     path="/IrBusquedaDireccionAction.do"></forward>
             <forward name="ERROR"  path="/IrHacerEncuestaAction.do"></forward>
         </action>

@@ -21,7 +21,7 @@
 						        <legend>Datos del usuario</legend>
 						        <dl class="datosSalida">    
 						            <dt>Usuario:</dt>
-						            <dd><bean:write name="datosUsuario" property="user"/></dd>
+						            <dd><bean:write name="datosInicioSesionActionForm" property="user"/>
 						            <dt>Número documento:</dt>
 						            <dd>50859114L</dd>
 						            <dt>Dirección de correo electrónico:</dt>
