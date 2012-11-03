@@ -14,18 +14,18 @@ public class PreguntasEncuestaActionForm extends ActionForm {
 	private int idPregunta = 0;
 	private String descripcion = null;
 	private Collection<RespuestasPreguntaActionForm> respuestas = null;
-	private int idRespuesta = 0;
+	private int idRespuestaDada = 0;
 	//private String tipoRespuesta = null;	
 
 	
-	public int getIdRespuesta() {
-		return idRespuesta;
+	public int getIdRespuestaDada() {
+		return idRespuestaDada;
 	}
 
 
 
-	public void setIdRespuesta(int idRespuesta) {
-		this.idRespuesta = idRespuesta;
+	public void setIdRespuestaDada(int idRespuestaDada) {
+		this.idRespuestaDada = idRespuestaDada;
 	}
 
 
