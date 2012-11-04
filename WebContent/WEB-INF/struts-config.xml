@@ -76,7 +76,7 @@
         </action>
 
         <action input="/jsp/usuario/AltaDatosUsuario.jsp" path="/IrAceptarDatosUsuarioAction" 
-                name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.AceptarDatosUsuarioAction">
+                name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.GuardarDatosUsuarioAction">
 			<forward name="OK"    path="/Inicio.do"></forward>
             <forward name="ERROR" path="/Inicio.do"></forward>
         </action>                                                      
@@ -102,7 +102,7 @@
         </action>
 
         <action input="/jsp/cliente/AltaDatosCliente.jsp" path="/IrAceptarDatosClienteAction" 
-                name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.AceptarDatosClienteAction">
+                name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.GuardarDatosClienteAction">
             <forward name="OK"    path="/Inicio.do"></forward>
             <forward name="ERROR" path="/Inicio.do"></forward>
         </action>                                                      
