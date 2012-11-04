@@ -36,6 +36,9 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 			
 		}
 		
+//		fechaInicioEvaluacionAlquiler
+//		fechaFinEvaluacionAlquiler
+		
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			DatosEncuestaActionForm datosEncuesta = (DatosEncuestaActionForm)request.getSession().getAttribute("datosEncuestaActionForm");
@@ -47,13 +50,9 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 					pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
 					i = i +1;
 				}
-//    			for (int i=0; i<iNumeroPreguntas; i++) {
-//    				System.out.println(request.getParameter("idRespuesta" + i));
-//    				datosEncuesta.getPreguntas().iterator().next().setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
-//    			}
     
     			request.getSession().setAttribute("datosEncuestaActionForm", datosEncuesta);    			
-//    			datosEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario"));
+//    			datosEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm"));
     			request.getSession().getAttribute("datosVivienda");
     
 			} else {

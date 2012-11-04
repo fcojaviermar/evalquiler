@@ -1,7 +1,5 @@
 package com.evalquiler.actionforms.encuesta;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
@@ -14,9 +12,9 @@ import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 
 public class DatosRealizacionEncuestaActionForm extends ActionForm {
 
-	private Date fechaInicioEvaluacionAlquiler = null;
-	private Date fechaFinEvaluacionAlquiler    = null;
-	private Date fechaRealizacion 			   = null;
+	private String fechaInicioEvaluacionAlquiler = null;
+	private String fechaFinEvaluacionAlquiler    = null;
+	private String fechaRealizacion 			   = null;
 	
 	private DatosInicioSesionActionForm  datosUsuario  = null;
 	private DatosViviendaActionForm 	 datosVivienda = null;
@@ -42,32 +40,32 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public Date getFechaInicioEvaluacionAlquiler() {
+	public String getFechaInicioEvaluacionAlquiler() {
 		return fechaInicioEvaluacionAlquiler;
 	}
 
 
-	public void setFechaInicioEvaluacionAlquiler(Date fechaInicioEvaluacionAlquiler) {
+	public void setFechaInicioEvaluacionAlquiler(String fechaInicioEvaluacionAlquiler) {
 		this.fechaInicioEvaluacionAlquiler = fechaInicioEvaluacionAlquiler;
 	}
 
 
-	public Date getFechaFinEvaluacionAlquiler() {
+	public String getFechaFinEvaluacionAlquiler() {
 		return fechaFinEvaluacionAlquiler;
 	}
 
 
-	public void setFechaFinEvaluacionAlquiler(Date fechaFinEvaluacionAlquiler) {
+	public void setFechaFinEvaluacionAlquiler(String fechaFinEvaluacionAlquiler) {
 		this.fechaFinEvaluacionAlquiler = fechaFinEvaluacionAlquiler;
 	}
 
 
-	public Date getFechaRealizacion() {
+	public String getFechaRealizacion() {
 		return fechaRealizacion;
 	}
 
 
-	public void setFechaRealizacion(Date fechaRealizacion) {
+	public void setFechaRealizacion(String fechaRealizacion) {
 		this.fechaRealizacion = fechaRealizacion;
 	}
 

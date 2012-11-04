@@ -24,8 +24,8 @@ public final class Validaciones {
 	
 	
 	public final static boolean nifValido(final String nif) {
-		int numero 	  = Integer.parseInt(nif.substring(0, nif.length()-1));
-		String letra  = nif.substring(nif.length()-1, 1);
+		final int numero   = Integer.parseInt(nif.substring(0, nif.length()-1));
+		final String letra = nif.substring(nif.length()-1, nif.length());
 		int resto 	  = numero % 23;
 		
 		//String letraResultante = letras.substring(resto, resto+1);
