@@ -22,8 +22,8 @@ public class DaoUsuario {
 	
 	private final static String CONSULTAR_USUARIO_POR_PK = "SELECT IDUSUARIO, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA " +
 														   "FROM USUARIO WHERE IDUSUARIO = ?";
-	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, TIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA) " +
-												   "VALUES (?, ?, ?, ?, ?, ? SYSDATE())";
+	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA) " +
+												   "VALUES (?, ?, ?, ?, ?, ?, SYSDATE())";
 	
 	public static final Collection<DatosUsuarioActionForm> consutarPorPk(final String idUsuario) {
 		Collection<DatosUsuarioActionForm> listaUsuario = new ArrayList<DatosUsuarioActionForm>();

@@ -22,14 +22,14 @@ public class AceptarDatosUsuarioAction extends ActionBase
 {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	System.out.println("GuardarDatosUsuarioAction.action()");
+    	System.out.println("AceptarDatosUsuarioAction.action()");
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 		
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			//Guardar los datos del usuario en base de datos y enviar mail.
-			DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
+			DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
 			OpUsuario.insertar(datosUsuario);
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
@@ -44,7 +44,7 @@ public class AceptarDatosUsuarioAction extends ActionBase
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
 		    forward = mapping.findForward("ERROR");
 		} else {
-			request.getSession().setAttribute("datosUsuario", null);
+			request.getSession().setAttribute("datosUsuarioActionForm", null);
 		    forward = mapping.findForward("OK");
 		}
 	

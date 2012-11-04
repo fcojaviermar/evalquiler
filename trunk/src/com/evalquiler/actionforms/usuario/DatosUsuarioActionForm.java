@@ -88,7 +88,7 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosUsuarioActionForm.validate()");
     	ActionErrors errors = null;
-    	DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuario");
+    	DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
     	
     	if (null == datosUsuario) {
         	super.validate(mapping, request);

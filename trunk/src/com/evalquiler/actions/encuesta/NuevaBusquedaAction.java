@@ -26,7 +26,7 @@ public class NuevaBusquedaAction extends ActionBase
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-	
+			int i = 0;
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
@@ -45,6 +45,6 @@ public class NuevaBusquedaAction extends ActionBase
 		}
 	
 		// Finish with
-		return (forward);
+		return forward;
     }
 }

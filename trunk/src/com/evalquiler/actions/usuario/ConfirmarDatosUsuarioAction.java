@@ -42,8 +42,8 @@ public class ConfirmarDatosUsuarioAction extends ActionBase
 		    forward = mapping.findForward("ERROR");
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			request.getSession().setAttribute("datosUsuario", (DatosUsuarioActionForm)form);
-			//request.setAttribute("datosUsuario", (InformacionDatosUsuarioActionForm)form);
+			request.getSession().setAttribute("datosUsuarioActionForm", (DatosUsuarioActionForm)form);
+			//request.setAttribute("datosUsuarioActionForm", (InformacionDatosUsuarioActionForm)form);
 		    forward = mapping.findForward("OK");
 		}
 	
