@@ -15,27 +15,27 @@
 						<table>
                             <tr>
                                 <td align="center">Tipo documento:
-                                    <bean:write name="datosUsuario" property="descTipoDocumento"/>
-                                    <bean:define id="id" name="datosUsuario" property="id"/>
-                                    <html:hidden property="tipoDocumentoSeleccionado" value="<%=(String)id %>"/>
+                                    <bean:write name="datosUsuarioActionForm" property="descTipoDocumento"/>
+                                    <bean:define id="idTipoDocumento" name="datosUsuarioActionForm" property="idTipoDocumento"/>
+                                    <html:hidden property="tipoDocumentoSeleccionado" value="<%=String.valueOf(idTipoDocumento)%>"/>
                                 </td>
                             </tr>
 							<tr>
 						     	<td align="center">N.I.F./C.I.F.:
-			                        <bean:write name="datosUsuario" property="nifcif"/>
-			                        <html:hidden name="datosUsuario" property="nifcif"/>
+			                        <bean:write name="datosUsuarioActionForm" property="nifcif"/>
+			                        <html:hidden name="datosUsuarioActionForm" property="nifcif"/>
 			                    </td>
 							</tr>
 							<tr>
 						     	<td align="center">Usuario:
-			                        <bean:write name="datosUsuario" property="user"/>
-			                        <html:hidden name="datosUsuario" property="user"/>
+			                        <bean:write name="datosUsuarioActionForm" property="user"/>
+			                        <html:hidden name="datosUsuarioActionForm" property="user"/>
 			                    </td>
 							</tr>
 							<tr>
 						     	<td align="center">Correo electrónico:
-			                        <bean:write name="datosUsuario" property="email"/>
-			                        <html:hidden name="datosUsuario" property="email"/>
+			                        <bean:write name="datosUsuarioActionForm" property="email"/>
+			                        <html:hidden name="datosUsuarioActionForm" property="email"/>
 			                    </td>
 							</tr>
 						</table>                        

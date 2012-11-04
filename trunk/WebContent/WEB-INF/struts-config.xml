@@ -42,7 +42,7 @@
 
         <!-- =========================== Acciones comunes =========================== -->
 		<action input="/register.jsp" path="/IrFinSesionAction" name="datosVacioActionForm" 
-                                            scope="request" type="com.evalquiler.actions.comun.FinalizarSesionAction">
+                                            scope="request" type="com.evalquiler.actions.comun.FinalizarSesionAction" validate="false" >
 			<forward name="END" path="/Inicio.do"></forward>
             <forward name="NEW" path="/IrSolicitarInformeAction.do"></forward>
 		</action>
@@ -116,7 +116,7 @@
                                                       validate="false"/>
          
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
-                name="datoRealizacionEncuestaActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction">
+                name="datosVacioActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
             <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
             <forward name="EXIT"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
@@ -137,7 +137,7 @@
         </action>
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
-                name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction" validate="false" >
+                name="datoRealizacionEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction">
             <forward name="OK"     path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
             <forward name="ERROR"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>

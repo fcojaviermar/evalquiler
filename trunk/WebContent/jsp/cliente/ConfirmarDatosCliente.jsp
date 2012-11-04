@@ -15,27 +15,27 @@
                         <table>
                             <tr>
                                 <td align="center">Tipo documento:
-                                    <bean:write name="datosCliente" property="descTipoDocumento"/>
-                                    <bean:define id="id" name="datosCliente" property="id"/>
-                                    <html:hidden property="tipoDocumentoSeleccionado" value="<%= (String)id %>"/>
+                                    <bean:write name="datosClienteActionForm" property="descTipoDocumento"/>
+                                    <bean:define id="idTipoDocumento" name="datosClienteActionForm" property="idTipoDocumento"/>
+                                    <html:hidden property="tipoDocumentoSeleccionado" value="<%=String.valueOf(idTipoDocumento)%>"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="center">N.I.F./C.I.F.:
-                                    <bean:write name="datosCliente" property="nifcif"/>
-                                    <html:hidden name="datosCliente" property="nifcif"/>
+                                    <bean:write name="datosClienteActionForm" property="nifcif"/>
+                                    <html:hidden name="datosClienteActionForm" property="nifcif"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="center">Usuario:
-                                    <bean:write name="datosCliente" property="user"/>
-                                    <html:hidden name="datosCliente" property="user"/>
+                                    <bean:write name="datosClienteActionForm" property="user"/>
+                                    <html:hidden name="datosClienteActionForm" property="user"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="center">Correo electrónico:
-                                    <bean:write name="datosCliente" property="email"/>
-                                    <html:hidden name="datosCliente" property="email"/>
+                                    <bean:write name="datosClienteActionForm" property="email"/>
+                                    <html:hidden name="datosClienteActionForm" property="email"/>
                                 </td>
                             </tr>
                         </table>                        

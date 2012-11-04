@@ -27,8 +27,8 @@
                             </div>                            
                             <div class="tipo_nifcif-div">
                                 <label for="tipo_nifcif"><strong class="tipo_nifcif-label">Tipo documento:&nbsp;</strong></label>
-							    <html:select name="tipoDocumentoSeleccionado" property="id">
-							        <html:optionsCollection name="tipoDocumento" value="id" label="descripcion"/>
+							    <html:select name="tipoDocumentoSeleccionado" property="idTipoDocumento">
+							        <html:optionsCollection name="tipoDocumento" value="idTipoDocumento" label="descripcion"/>
 							    </html:select>
                             </div>                                              
                             <div class="nifcif-div">
