@@ -18,8 +18,20 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	
 	private DatosInicioSesionActionForm  datosUsuario  = null;
 	private DatosViviendaActionForm 	 datosVivienda = null;
+	private DatosEncuestaActionForm		 datosEncuesta = null;
 	
 	
+	
+	public DatosEncuestaActionForm getDatosEncuesta() {
+		return datosEncuesta;
+	}
+
+
+	public void setDatosEncuesta(DatosEncuestaActionForm datosEncuesta) {
+		this.datosEncuesta = datosEncuesta;
+	}
+
+
 	public DatosInicioSesionActionForm getDatosUsuario() {
 		return datosUsuario;
 	}

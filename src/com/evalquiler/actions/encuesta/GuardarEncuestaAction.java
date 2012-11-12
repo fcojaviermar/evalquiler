@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
+import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
@@ -28,8 +29,8 @@ public class GuardarEncuestaAction extends ActionBase
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			DatosEncuestaActionForm datosEncuesta = (DatosEncuestaActionForm)request.getSession().getAttribute("datosEncuesta");
-			OpRespuestasEncuesta.insertar(datosEncuesta);
+			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+			OpRespuestasEncuesta.insertar(datosRealizacionEncuesta);
 	
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
