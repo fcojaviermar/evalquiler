@@ -30,7 +30,14 @@
                 </dl>
 
                 <fieldset>
-                        <legend><bean:write name="datosEncuestaActionForm" property="titulo"/></legend>                   
+                        <legend><bean:write name="datosEncuestaActionForm" property="titulo"/></legend>     
+                        <div class="fechas-div">
+                            <label for="fechaInicioEvaluacionAlquiler"><strong class="user-label">Fecha inicial evaluación:&nbsp;</strong></label>
+                            <bean:write name="datosRealizacionEncuestaActionForm" property="fechaInicioEvaluacionAlquiler"/>
+                            <label for="fechaFinEvaluacionAlquiler"><strong class="user-label">Fecha final evaluación:&nbsp;</strong></label>
+                            <bean:write name="datosRealizacionEncuestaActionForm" property="fechaFinEvaluacionAlquiler"/>
+                        </div>
+                                                            
                         <logic:iterate name="datosEncuestaActionForm" property="preguntas" id="preguntasEnc" indexId="indicePregunta">
                             <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
                                 <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">

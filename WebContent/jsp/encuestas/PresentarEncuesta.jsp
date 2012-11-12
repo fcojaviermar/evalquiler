@@ -33,9 +33,9 @@
 		        <fieldset>
                         <legend><bean:write name="datosEncuestaActionForm" property="titulo"/></legend>		
                         <div class="fechas-div">
-                            <label for="fechaInicioEvaluacionAlquiler"><strong class="user-label">Fecha inicial evaluación (dd/mm/aaaa):&nbsp;</strong></label>
+                            <label for="fechaInicioEvaluacionAlquiler"><strong class="user-label">Fecha inicial evaluación (dd-mm-aaaa):&nbsp;</strong></label>
                             <html:text property="fechaInicioEvaluacionAlquiler" size="15" maxlength="10" ></html:text>
-                            <label for="fechaFinEvaluacionAlquiler"><strong class="user-label">Fecha final evaluación (dd/mm/aaaa):&nbsp;</strong></label>
+                            <label for="fechaFinEvaluacionAlquiler"><strong class="user-label">Fecha final evaluación (dd-mm-aaaa):&nbsp;</strong></label>
                             <html:text property="fechaFinEvaluacionAlquiler" size="15" maxlength="10" ></html:text>
                         </div>
                                     
