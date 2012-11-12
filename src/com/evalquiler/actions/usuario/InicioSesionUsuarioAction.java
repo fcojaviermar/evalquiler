@@ -6,6 +6,7 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -41,49 +42,54 @@ public class InicioSesionUsuarioAction extends ActionBase
 		
 		try {
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
+			String botonPulsado = request.getParameter("BOTON_PULSADO");
 			
-			if (!listaUsuario.isEmpty()) {
-
-				if (1 == listaUsuario.size()) {
-					Iterator<DatosUsuarioActionForm> iterUsuario = listaUsuario.iterator();
-
-					if (iterUsuario.hasNext()) {
-						datosUsuario = (DatosInicioSesionActionForm)iterUsuario.next();  
-						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
-					
-						if (pwd.equals(datosUsuario.getPassword())) {
-							System.out.println("La password es igual.");
-							DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
-							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
-							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);
-							request.setAttribute("datosInicioSesionActionForm", datosUsuario);
-							
-							forward = mapping.findForward("VALID_USER");
-						} else {
-							System.out.println("La password NO es igual 1.");
-				        	errors.add("errorValidacion", new ActionMessage("error.distinta.password"));
-							forward = mapping.findForward("NO_EQUAL_PSW");
-						}
-					} else {
-						request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-						request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
-						request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
-						request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );						
-						forward = mapping.findForward("NO_USER");
-					}
-				} else {
-					System.out.println("La password NO es igual 2.");
-					errors.add("errorValidacion", new ActionMessage("error.mas.de.un.usuario"));
-					forward = mapping.findForward("TWO_EQUAL_USERS");
-				}
-			} else {
-				System.out.println("El usuario no existe.");
+			if ("Registrarse".equals(botonPulsado)) {
+				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );
+				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 				request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
-				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );						
-				forward = mapping.findForward("NO_USER");
+				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );
+				forward = mapping.findForward("REGISTER_USER");
+			} else {
+    			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
+    			
+    			if (!listaUsuario.isEmpty()) {
+    
+    				if (1 == listaUsuario.size()) {
+    					Iterator<DatosUsuarioActionForm> iterUsuario = listaUsuario.iterator();
+    
+    					if (iterUsuario.hasNext()) {
+    						datosUsuario = (DatosInicioSesionActionForm)iterUsuario.next();  
+    						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
+    					
+    						if (pwd.equals(datosUsuario.getPassword())) {
+    							System.out.println("La password es igual.");
+    							DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
+    							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
+    							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);
+    							request.setAttribute("datosInicioSesionActionForm", datosUsuario);
+    							
+    							forward = mapping.findForward("VALID_USER");
+    						} else {
+    							System.out.println("La password NO es igual 1.");
+    				        	errors.add("errorValidacion", new ActionError("error.distinta.password"));
+    							forward = mapping.findForward("NO_EQUAL_PSW");
+    						}
+    					} else {
+    						errors.add("errorValidacion", new ActionError("error.no.existe.usuario"));
+    						forward = mapping.findForward("NO_USER");
+    					}
+    				} else {
+    					System.out.println("La password NO es igual 2.");
+    					errors.add("errorValidacion", new ActionError("error.mas.de.un.usuario"));
+    					forward = mapping.findForward("TWO_EQUAL_USERS");
+    				}
+    			} else {
+    				System.out.println("El usuario no existe.");
+    				errors.add("errorValidacion", new ActionError("error.no.existe.usuario"));
+    				forward = mapping.findForward("NO_USER");
+    			}
 			}
 		} catch (Exception e) {
 			System.out.println("La password usuario NO es igual 4.");
