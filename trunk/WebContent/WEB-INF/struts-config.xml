@@ -61,7 +61,8 @@
          -->
         <action input="/register.jsp" path="/IrInicioSesionUsuarioAction" name="datosInicioSesionActionForm" 
                                             scope="request" type="com.evalquiler.actions.usuario.InicioSesionUsuarioAction">
-            <forward name="NO_USER"    		 	 path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
+            <forward name="REGISTER_USER"        path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
+            <forward name="NO_USER"    		 	 path="/Inicio.do"></forward>
             <forward name="VALID_USER" 		 	 path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
             <forward name="FORGET_USER_DATA"     path="/IrFogotYourUserDataAction.do"></forward>
             <forward name="NO_EQUAL_PSW" 		 path="/Inicio.do"></forward>
@@ -87,7 +88,8 @@
         <!-- =========================== Modulo Registro Clientes =========================== -->
         <action input="/register.jsp" path="/IrInicioSesionClienteAction" name="datosInicioSesionActionForm" 
                                             scope="request" type="com.evalquiler.actions.cliente.InicioSesionClienteAction">
-            <forward name="NO_CLIENT"        path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
+            <forward name="REGISTER_CLIENT"  path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
+            <forward name="NO_CLIENT"        path="/Inicio.do"></forward>
             <forward name="VALID_CLIENT"     path="/jsp/informes/FormularioSolicitudInforme.jsp"></forward>
             <forward name="ERROR_PSW_NO_IGUALES" path="/Inicio.do"></forward>
             <forward name="ERROR_2_EQUAL_CLIENTS"  path="/Inicio.do"></forward>

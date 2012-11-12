@@ -57,45 +57,39 @@
 </style> -->
     <body>
         <html:errors/>
-		<table>
-		    <tr>
- 		        <td>
-					<div class="fondoAzulClaro">
-					    <h2>Iniciar sesión usuario<strong></strong></h2>
-					    <html:form action="/IrInicioSesionUsuarioAction.do" method="post">
-					        <div>
-					           <label for="user"><strong class="user-label">Usuario:&nbsp;</strong></label>
-					           <html:text property="user" size="20" maxlength="20"></html:text>
-					        </div>
-					        <div>
-                               <label for="Password"><strong class="password-label">Contraseña:&nbsp;</strong></label>
-                               <html:password property="password" size="20" maxlength="20"></html:password>
-					        </div>
-				        	<html:submit styleClass="g-button g-button-submit">Iniciar Sesión</html:submit>
-                        </html:form>
-                        <html:link styleClass="remember" href="IrFogotYourUserDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de usuario?</html:link>						    
-					</div>
-				</td>
- 				
-		        <td>
-		            <div  class="fondoAzulMedio">
-		                <h2>Iniciar sesión cliente<strong></strong></h2>
-		                <html:form action="/IrInicioSesionClienteAction.do" method="post">
-                            <div class="User-div">
-                               <label for="user"><strong class="user-label">Usuario:&nbsp;</strong></label>
-                               <html:text property="user" size="20" maxlength="20" ></html:text>
-                            </div>
-		                    <div class="passwd-div">
-		                        <label for="Password"><strong class="password-label">Contraseña:&nbsp;</strong></label>
-		                         <html:password property="password" size="20" maxlength="20"></html:password>
-		                    </div>
-                            <html:submit styleClass="g-button g-button-submit">Iniciar Sesión</html:submit>
-                        </html:form>
-                        <html:link styleClass="remember" href="IrFogotYourClientDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de cliente?</html:link>
-		            </div>
-		        </td>
-		
-			</tr>
-		</table>
+		<div class="fondoAzulClaro">
+		    <h2>Iniciar sesión usuario<strong></strong></h2>
+		    <html:form action="/IrInicioSesionUsuarioAction.do" method="post">
+		        <div>
+		           <label for="user"><strong class="user-label">Usuario:&nbsp;</strong></label>
+		           <html:text property="user" size="20" maxlength="20"></html:text>
+		        </div>
+		        <div>
+                   <label for="Password"><strong class="password-label">Contraseña:&nbsp;</strong></label>
+                   <html:password property="password" size="20" maxlength="20"></html:password>
+		        </div>
+                <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
+                <html:submit property="BOTON_PULSADO" value="Registrarse"/>
+            </html:form>
+            <html:link styleClass="remember" href="IrFogotYourUserDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de usuario?</html:link>						    
+		</div>
+
+        <div  class="fondoAzulMedio">
+            <h2>Iniciar sesión cliente<strong></strong></h2>
+            <html:form action="/IrInicioSesionClienteAction.do" method="post">
+                <div class="User-div">
+                   <label for="user"><strong class="user-label">Usuario:&nbsp;</strong></label>
+                   <html:text property="user" size="20" maxlength="20" ></html:text>
+                </div>
+                <div class="passwd-div">
+                    <label for="Password"><strong class="password-label">Contraseña:&nbsp;</strong></label>
+                     <html:password property="password" size="20" maxlength="20"></html:password>
+                </div>
+                      <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
+                      <html:submit property="BOTON_PULSADO" value="Registrarse"/>
+                  </html:form>
+                  <html:link styleClass="remember" href="IrFogotYourClientDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de cliente?</html:link>
+        </div>
+
     </body>
 </html:html>
