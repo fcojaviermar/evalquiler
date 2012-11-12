@@ -34,23 +34,4 @@ public abstract class ActionBase extends Action {
 	protected abstract ActionForward action(ActionMapping mapping, ActionForm form,
             								HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-
-//	public void crearConectionBD_MySQL() {
-//		dataSource = getDataSource(requestAux, "gestionmultasMySQL");
-//	}
-//
-//	public void crearConectionBD_PostgreSQL() {
-//		dataSource = getDataSource(requestAux, "evalquilePostgreSQL");
-//	}
-
-//	public Connection getConnection() {
-//		Connection con = null;
-//		try {
-//			con = dataSource.getConnection();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return con;
-//	}
-
 }

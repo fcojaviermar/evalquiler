@@ -38,20 +38,23 @@ public class DatosInicioSesionActionForm extends ActionForm  {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("InformacionUsuarioActionForm.validate()");
+    	ActionErrors errors = new ActionErrors();
 //    	DOMConfigurator.configure("log4j.xml");
 //        logger.info("Test Log");
 //    	logger.debug("Prueba de log");
 
-    	ActionErrors errors = new ActionErrors();
-        if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
-        	errors.add("errorValidacion", new ActionMessage("error.obligatorio.user"));
-//        	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
-        }
-        if ( (null == this.getPassword()) ||  ("".equals(this.getPassword()))) {
-        	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password"));
-//        	errors.add("errorValidacion", new ActionError("error.obligatorio.password"));
-        }
-
+		String botonPulsado = request.getParameter("BOTON_PULSADO");
+		if (!"Registrarse".equals(botonPulsado)) {
+            if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
+            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.user"));
+    //        	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
+            }
+            if ( (null == this.getPassword()) ||  ("".equals(this.getPassword()))) {
+            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password"));
+    //        	errors.add("errorValidacion", new ActionError("error.obligatorio.password"));
+            }
+		}
+		
         return errors;
     }
 

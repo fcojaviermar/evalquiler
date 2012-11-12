@@ -6,6 +6,7 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -37,39 +38,46 @@ public class InicioSesionClienteAction extends ActionBase
 		
 		try {
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			Collection<DatosInicioSesionActionForm> listaCliente = OpCliente.consultarPorPk(form);
+			String botonPulsado = request.getParameter("BOTON_PULSADO");
 			
-			if (!listaCliente.isEmpty()) {
-				if (1 == listaCliente.size()) {
-					Iterator<DatosInicioSesionActionForm> iterUsuario = listaCliente.iterator();
-
-					if (iterUsuario.hasNext()) {
-						cliente = (DatosInicioSesionActionForm)iterUsuario.next();					
-						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
-						
-						if (pwd.equals(cliente.getPassword())) {
-							System.out.println("La password es igual.");
-							forward = mapping.findForward("VALID_CLIENT");
-						} else {
-							System.out.println("La password NO es igual 1.");
-				        	errors.add("errorValidacion", new ActionMessage("error.distinta.password"));
-							forward = mapping.findForward("ERROR_PSW_NO_IGUALES");
-						}
-					} else {
-						request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-						request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
-						forward = mapping.findForward("NO_CLIENT");
-					}
-				} else {
-					System.out.println("La password NO es igual 2.");
-					errors.add("errorValidacion", new ActionMessage("error.mas.de.un.cliente"));
-					forward = mapping.findForward("ERROR_2_EQUAL_CLIENT");
-				}
-			} else {
-				System.out.println("La password NO es igual 3.");
+			if ("Registrarse".equals(botonPulsado)) {
+				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
-				forward = mapping.findForward("NO_CLIENT");
+				forward = mapping.findForward("REGISTER_CLIENT");
+			} else {
+    			Collection<DatosInicioSesionActionForm> listaCliente = OpCliente.consultarPorPk(form);
+    			
+    			if (!listaCliente.isEmpty()) {
+    				if (1 == listaCliente.size()) {
+    					Iterator<DatosInicioSesionActionForm> iterUsuario = listaCliente.iterator();
+    
+    					if (iterUsuario.hasNext()) {
+    						cliente = (DatosInicioSesionActionForm)iterUsuario.next();					
+    						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
+    						
+    						if (pwd.equals(cliente.getPassword())) {
+    							System.out.println("La password es igual.");
+    							forward = mapping.findForward("VALID_CLIENT");
+    						} else {
+    							System.out.println("La password NO es igual 1.");
+    				        	errors.add("errorValidacion", new ActionError("error.distinta.password"));
+    							forward = mapping.findForward("NO_EQUAL_PSW");
+    						}
+    					} else {
+    						errors.add("errorValidacion", new ActionError("error.no.existe.cliente"));
+    						forward = mapping.findForward("NO_CLIENT");
+    					}
+    				} else {
+    					System.out.println("La password NO es igual 2.");
+    					errors.add("errorValidacion", new ActionError("error.mas.de.un.cliente"));
+    					forward = mapping.findForward("ERROR_2_EQUAL_CLIENT");
+    				}
+    			} else {
+    				System.out.println("La password NO es igual 3.");
+    				errors.add("errorValidacion", new ActionError("error.no.existe.cliente"));				
+    				forward = mapping.findForward("NO_CLIENT");
+    			}
 			}
 		} catch (Exception e) {
 			System.out.println("La password Cliente NO es igual 4.");
