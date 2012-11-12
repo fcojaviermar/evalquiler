@@ -3,19 +3,49 @@
  */
 package com.evalquiler.comun.utilidades;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author cachorro
  *
  */
-public class UtilidadesFechas {
+public final class UtilidadesFechas {
 
-    public String getAhora() {
-    	SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final String getAhora() {
+    	SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     	Date fechaDate = new Date();
     	String fechaAlta = formateador.format(fechaDate);
     	return fechaAlta;
 	}
+    
+    
+    public static final Date getDate(final String strfecha) {
+    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
+    	Date fecha = null;
+    	try {
+    		fecha = formatoDelTexto.parse(strfecha);
+    	} catch (ParseException ex) {
+    		
+    	}
+    	
+    	return fecha;
+    }
+    
+    
+    public static final java.sql.Date getDateForSql(final String strfecha) {
+    	java.sql.Date fecFormatoDate = null;
+    	try {
+    	      SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy", new Locale("es", "ES"));
+    	      fecFormatoDate = new java.sql.Date(sdf.parse(strfecha).getTime());
+    	      System.out.println("Fecha con el formato java.sql.Date: " + fecFormatoDate);
+    	} catch (Exception ex) {
+    	      System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+    	}
+    	
+    	return fecFormatoDate;
+    }
+    
 }
