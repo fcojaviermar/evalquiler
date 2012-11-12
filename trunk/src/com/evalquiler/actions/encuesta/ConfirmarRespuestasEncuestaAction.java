@@ -14,8 +14,6 @@ import org.apache.struts.action.ActionMessages;
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
-import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
-import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 
 /**
@@ -51,9 +49,10 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 					i = i +1;
 				}
     
-    			request.getSession().setAttribute("datosEncuestaActionForm", datosEncuesta);    			
-//    			datosEncuesta.setDatosUsuario((DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm"));
-    			request.getSession().getAttribute("datosVivienda");
+				((DatosRealizacionEncuestaActionForm)form).setDatosEncuesta(datosEncuesta);
+    			request.getSession().setAttribute("datosRealizacionEncuestaActionForm", form);
+//    			request.getSession().setAttribute("datosEncuestaActionForm", datosEncuesta);    			
+//    			request.getSession().getAttribute("datosViviendaActionForm");
     
 			} else {
 				
