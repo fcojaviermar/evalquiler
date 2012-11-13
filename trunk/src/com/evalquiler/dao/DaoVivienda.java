@@ -23,14 +23,14 @@ import com.evalquiler.comun.bbdd.ConexionBD;
  */
 public class DaoVivienda {
 
-	public final static int CONSULTA_VIVIENDA_POR_PK = 1;
-	public final static int CONSULTA_VIVIENDA 		 = 2;
+	public final static int CONSULTA_VIVIENDA 		 = 1;
 	
 	private final static String CONTAR_VIVIENDAS = "SELECT COUNT(*) AS NUMEROVIVIENDAS FROM VIVIENDA";
 	
 	private final static String CONSULTAR_VIVIENDA_POR_PK = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-															"FROM VIVIENDA WHERE IDVIVIENDA = ?";
+															"FROM VIVIENDA " +
+															"WHERE IDVIVIENDA = ?";
 
 	private final static String INSERTAR_VIVIENDA		  = "INSERT INTO VIVIENDA " +
 															"(IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, " +
@@ -39,14 +39,16 @@ public class DaoVivienda {
 
 	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-															"FROM VIVIENDA WHERE IDTIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
+															"FROM VIVIENDA " +
+															"WHERE IDTIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
 															"AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ? " +
 															"AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";
 	
 	private final static String CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO 		  
 														  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 														    "CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-														    "FROM VIVIENDA WHERE IDTIPOVIA = ? OR NOMBREVIA = ? OR NUMEROVIA = ? OR BLOQUE = ? " +
+														    "FROM VIVIENDA " +
+														    "WHERE IDTIPOVIA = ? OR NOMBREVIA = ? OR NUMEROVIA = ? OR BLOQUE = ? " +
 														    "OR PORTAL = ? OR ESCALERA = ? OR PLANTA = ? OR PUERTA = ? OR CODIGOPOSTAL = ? " +
 														    "OR MUNICIPIO = ? OR PROVINCIA = ? OR PAIS = ? OR NIFPROPIETARIO = ?";
 	
@@ -311,9 +313,7 @@ public class DaoVivienda {
 	private final static String obtenerSentencia(final int sentencia) {
 		String sentenciaEjecutar ="";
 		switch (sentencia) {
-			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA;
-					break;
-			case 2: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
+			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
 					break;
 			default:break; 
 		}
@@ -323,9 +323,7 @@ public class DaoVivienda {
 	private final static PreparedStatement prepararWhere(final ActionForm vivienda, PreparedStatement pstmt, 
 														 final int sentencia) throws SQLException {
 		switch (sentencia) {
-			case 1: pstmt.setLong(1, ((DatosViviendaActionForm)vivienda).getIdVivienda());
-					break;
-			case 2: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getIdTipoVia());
+			case 1: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getIdTipoVia());
 			    	pstmt.setString(2, ((CriteriosBusquedaViviendaActionForm)vivienda).getNombreVia());
 			    	pstmt.setInt(3, ((CriteriosBusquedaViviendaActionForm)vivienda).getNumeroVia());
 			    	pstmt.setString(4, ((CriteriosBusquedaViviendaActionForm)vivienda).getBloque());

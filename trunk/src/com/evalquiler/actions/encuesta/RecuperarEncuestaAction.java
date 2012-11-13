@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
-import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.dao.DaoEncuesta;

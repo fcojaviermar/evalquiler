@@ -8,7 +8,6 @@ import java.util.Collection;
 import org.apache.struts.action.ActionForm;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
-import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.dao.DaoEncuesta;
 
 /**
