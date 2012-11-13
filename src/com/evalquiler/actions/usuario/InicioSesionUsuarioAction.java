@@ -20,6 +20,7 @@ import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
+import com.evalquiler.operaciones.OpRespuestasEncuesta;
 import com.evalquiler.operaciones.OpUsuario;
 
 /**
@@ -64,6 +65,7 @@ public class InicioSesionUsuarioAction extends ActionBase
     					
     						if (pwd.equals(datosUsuario.getPassword())) {
     							System.out.println("La password es igual.");
+    							OpRespuestasEncuesta.
     							DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
     							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
     							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);

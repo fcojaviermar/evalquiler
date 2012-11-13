@@ -20,6 +20,14 @@ import com.evalquiler.comun.utilidades.UtilidadesFechas;
  */
 public class DaoRespuestasEncuesta {
 	
+	public static final int SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS = 1;
+	
+	private final static String CONSULTAR_ENCUESTAS_RESPONDIDAS = "SELECT DISTINCT(A.IDENCUESTA), B.DESCRIPCION, A.FECHA_ENCUESTA, C.NOMBREVIA, C.NUMEROVIA, " +
+															   "FECHA_INICIO, FECHA_FIN " +
+															   "FROM RESPUESTAS_ENCUESTA A, ENCUESTA B, VIVIENDA C " +
+															   "WHERE IDUSUARIO = ? AND A.IDENCUESTA = B.IDENCUESTA AND A.IDVIVIENDA = C.IDVIVIENDA";
+	
+	
 	private final static String INSERTAR_RESPUESTAS_ENCUESTA = "INSERT INTO RESPUESTAS_ENCUESTA " +
 															    "(IDENCUESTA, IDPREGUNTA, IDRESPUESTADADA, IDUSUARIO, FECHA_INICIO, FECHA_FIN, FECHA_ENCUESTA, " +
 															    "IDTIPOUSUARIO, IDVIVIENDA) " +
