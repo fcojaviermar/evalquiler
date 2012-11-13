@@ -1,27 +1,25 @@
+/* Tipos de borde */
+.bordeLevantado{border-top-color:#FFFFFF !important; border-left-color:#FFFFFF !important;}
+.bordeHundido{border-bottom-color:#FFFFFF !important; border-right-color:#FFFFFF !important;}
 
-HTML, BODY {background-color:#FAFAFA;} 
+/* Colores de borde */
+.bordeAmarilloOscuro{border-color:#E2E2DA !important;}
+.bordeAmarilloMedio{border-color:#EAEAE2 !important;}
+.bordeAmarilloClaro{border-color:#EEEEE7 !important;}
+.bordeRojoOscuro{border-color:#E2DEDA !important;}
+.bordeRojoMedio{border-color:#EAE7E2 !important;}
+.bordeRojoClaro{border-color:#EFECE7 !important;}
+.bordeVerdeOscuro{border-color:#DAE2DA !important;}
+.bordeVerdeMedio{border-color:#E2EAE2 !important;}
+.bordeVerdeClaro{border-color:#E7EFE7 !important;}
+.bordeAzulOscuro{border-color:#DAE2E2 !important;}
+.bordeAzulMedio{border-color:#E2EAEA !important;}
+.bordeAzulClaro{border-color:#E7EFEF !important;}
+.bordeGrisOscuro{border-color:#A0A0A0 !important;}
+.bordeGrisMedio{border-color:#C0C0C0 !important;}
+.bordeGrisClaro{border-color:#E0E0E0 !important;}
+.bordeBlanco{border-color:#FFFFFF !important;}
 
-#ARQtitulos {color:#FFFFFF;}
-#ARQcapaPrincipal, #ARQcapaPrincipalPest, #ARQcapaPrincipalMensaje, #ARQcapaPrincipalPestMensaje {background-color:#FFFFFF;}
-
-dd.numNegativo {color:#FF0000;}
-INPUT[readonly=readonly] {color:#888888;}
-TEXTAREA.error, INPUT.error, INPUT.errorder {background-image:none; background-color:#FEFECC; border:1px solid #000000;}
-
-.p3 {border-bottom-color:#ECEDF1;}
-.estiloDOC {background:url(../../img/ParqDOC.gif) no-repeat right; padding-right: 20px;}
-.estiloPPT {background:url(../../img/ParqPPT.gif) no-repeat right; padding-right: 20px;}
-.estiloXLS {background:url(../../img/ParqXLS.gif) no-repeat right; padding-right: 20px; }
-.estilodocg {background:url(../../img/ParqDocGenerico.gif) no-repeat right; padding-right: 20px;}
-.estiloPDF {background:url(../../img/ParqPDF.gif) no-repeat right; padding-right: 20px;}
-.numNegativo {color:#FF0000;}
-
-.informes, .documentos, .solo_documentos, .solo_informes  {background-color:#EEFBEF; border-bottom-color:#DBEBD7;}
-
-#ARQsubCab P, #ARQsubCab .pVacio, #ARQsubCab .PSinBorde  {border-right-color:#FFF;}
-.ARQsubCab1 {border-top-color: #FFF;}
-
-.celdaCab, #celdaCab, TR.cabecera, TR.cabecera TH {color:#FFFFFF;}
 
 /* Colores de Fondo */
 .fondoAmarilloOscuro{background-color:#F2F2EA; border-color:#E2E2DA !important;}
@@ -58,25 +56,4 @@ TEXTAREA.error, INPUT.error, INPUT.errorder {background-image:none; background-c
 .textoGrisMedio{color:#6A6A6A !important;}  
 .textoGrisClaro{color:#6C6C6C !important;}
 
-/* Tipos de borde */
-.bordeLevantado{border-top-color:#FFFFFF !important; border-left-color:#FFFFFF !important;}
-.bordeHundido{border-bottom-color:#FFFFFF !important; border-right-color:#FFFFFF !important;}
-
-/* Colores de borde */
-.bordeAmarilloOscuro{border-color:#E2E2DA !important;}
-.bordeAmarilloMedio{border-color:#EAEAE2 !important;}
-.bordeAmarilloClaro{border-color:#EEEEE7 !important;}
-.bordeRojoOscuro{border-color:#E2DEDA !important;}
-.bordeRojoMedio{border-color:#EAE7E2 !important;}
-.bordeRojoClaro{border-color:#EFECE7 !important;}
-.bordeVerdeOscuro{border-color:#DAE2DA !important;}
-.bordeVerdeMedio{border-color:#E2EAE2 !important;}
-.bordeVerdeClaro{border-color:#E7EFE7 !important;}
-.bordeAzulOscuro{border-color:#DAE2E2 !important;}
-.bordeAzulMedio{border-color:#E2EAEA !important;}
-.bordeAzulClaro{border-color:#E7EFEF !important;}
-.bordeGrisOscuro{border-color:#A0A0A0 !important;}
-.bordeGrisMedio{border-color:#C0C0C0 !important;}
-.bordeGrisClaro{border-color:#E0E0E0 !important;}
-.bordeBlanco{border-color:#FFFFFF !important;}
 

@@ -5,8 +5,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Alta de una nueva vivienda</title>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Colorgeneral.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Tipografia.css" media="screen" />        
+        <link rel="stylesheet" type="text/css" href="./css/ColorGeneral.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
          <table>
