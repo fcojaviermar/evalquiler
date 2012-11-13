@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
@@ -45,15 +46,15 @@ public class InicioSesionClienteAction extends ActionBase
 				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 				forward = mapping.findForward("REGISTER_CLIENT");
 			} else {
-    			Collection<DatosInicioSesionActionForm> listaCliente = OpCliente.consultarPorPk(form);
+    			Collection<DatosClienteActionForm> listaCliente = OpCliente.consultarPorPk(form);
     			
     			if (!listaCliente.isEmpty()) {
     				if (1 == listaCliente.size()) {
-    					Iterator<DatosInicioSesionActionForm> iterUsuario = listaCliente.iterator();
+    					Iterator<DatosClienteActionForm> iterUsuario = listaCliente.iterator();
     
     					if (iterUsuario.hasNext()) {
-    						cliente = (DatosInicioSesionActionForm)iterUsuario.next();					
-    						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
+    						cliente = (DatosClienteActionForm)iterUsuario.next();					
+    						final String pwd = ((DatosClienteActionForm)form).getPassword(); 
     						
     						if (pwd.equals(cliente.getPassword())) {
     							System.out.println("La password es igual.");
