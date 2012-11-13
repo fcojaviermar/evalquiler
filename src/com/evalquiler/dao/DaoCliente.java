@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
-import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 
 
@@ -21,13 +20,14 @@ import com.evalquiler.comun.bbdd.ConexionBD;
  */
 public class DaoCliente {
 	
-	private final static String CONSULTAR_CLIENTE_POR_PK = "SELECT IDCLIENTE, PASSWORD FROM CLIENTE WHERE IDCLIENTE = ?";
+	private final static String CONSULTAR_CLIENTE_POR_PK = "SELECT IDCLIENTE, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA " +
+														   "FROM CLIENTE WHERE IDCLIENTE = ?";
 	private final static String INSERTAR_CLIENTE = "INSERT INTO CLIENTE (IDCLIENTE, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, SYSDATE())";
 	
-	public static final Collection<DatosInicioSesionActionForm> consultarPorPk(final String idCliente) {
-		Collection<DatosInicioSesionActionForm> listaCliente = new ArrayList<DatosInicioSesionActionForm>();
-		DatosInicioSesionActionForm cliente = null;
+	public static final Collection<DatosClienteActionForm> consultarPorPk(final String idCliente) {
+		Collection<DatosClienteActionForm> listaCliente = new ArrayList<DatosClienteActionForm>();
+		DatosClienteActionForm cliente = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
@@ -41,9 +41,13 @@ public class DaoCliente {
 					pstmt.setString(1, idCliente);
 					rs = pstmt.executeQuery() ; 
 					while(rs.next()) {
-						cliente = new DatosInicioSesionActionForm();
+						cliente = new DatosClienteActionForm();
 						cliente.setUser(rs.getString("IDCLIENTE"));
 						cliente.setPassword(rs.getString("PASSWORD"));
+						cliente.setIdTipoDocumento(rs.getInt("IDTIPODOCUMENTO"));
+						cliente.setNifcif(rs.getString("NIFCIF"));
+						cliente.setEmail(rs.getString("EMAIL"));
+						
 						listaCliente.add(cliente);
 					}
 
