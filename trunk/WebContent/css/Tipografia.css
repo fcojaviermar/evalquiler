@@ -1,25 +1,3 @@
-
-* {margin:0; padding:0;}
-HTML, BODY {width:100%; height:100%; max-width:100%; max-height:100%; overflow:hidden; font-family:Trebuchet MS,sans-serif; font-size:1em;}
-*body{font-size:100%;}
-
-P {padding:8px 0 2px 0;}
-P.contenidos{font-size:75%; font-weight:normal; text-align:justify; color:#123456;}
-H3{font-size:1em; padding:0.5em 0em; word-spacing:0.25em;}
-H4{font-size:0.95em; padding:0.25em 0.20em; word-spacing:0.15em;}
-H5{font-size:0.90em; padding:0.20em 0.25em; word-spacing:0.10em;}
-H6{font-size:0.80em; padding:0.15em 0.30em; word-spacing:0.15em;}
-
-FIELDSET P{position:relative;}
-FIELDSET{margin:0px 0px 10px 0px; padding:0px 20px 14px 20px; border:1px solid #525252;}
-LEGEND{padding:10px 5px; font-size:0.8em; font-weight:bold; text-align:right;}
-IMG{border:0px;}
-A{padding-left:20px; padding-top:0px; margin-right:0px; font-size:75%; text-decoration:none;}
-SPAN{white-space:nowrap; clear:both;}
-ABBR{text-decoration:none;}
-
-UL {list-style:none; font-size:0.75em;}
-
 /* GENERICOS */
 #pieFoto{font-size:60%; line-height:3em; float:right;}
 .p0{font-size:0.75em; letter-spacing:0.12em; font-weight:bold; margin:3px 0px;}
@@ -45,28 +23,56 @@ UL {list-style:none; font-size:0.75em;}
 .lista0 {padding-top:0.2em;}
 .lista0 LI {padding-left:12px;}
 li.select{ padding:2px 2px; border:1px solid #125617; font-weight:bold; background-image:none; background-color:#FCFCFC;}
-.noCapitalize{text-transform:none;}
 
-/* COLUMNAS y ANCHOS*/
-.col5{float:left; width:5%; position:relative;}
-.col9{float:left; width:7%; position:relative; padding-right:1%;}
-.col10{float:left; width:9%; position:relative; padding-right:1%;}
-.col15{float:left; width:14%; position:relative; padding-right:1%;}
-.col20{float:left; width:19%; position:relative; padding-right:1%;}
-.col25{float:left; width:24%; position:relative; padding-right:1%;}
-.col30{float:left; width:29%; position:relative; padding-right:1%;}
-.col33{float:left; width:32%; position:relative; padding-right:1%;}
-.col40{float:left; width:39%; position:relative; padding-right:1%;}
-.col45{float:left; width:44%; position:relative; padding-right:1%;}
-.col50{float:left; width:49%; position:relative; padding-right:1%;}
-.col55{float:left; width:54%; position:relative; padding-right:1%;}
-.col60{float:left; width:59%; position:relative; padding-right:1%;}
-.col66{float:left; width:65%; position:relative; padding-right:1%;}
-.col70{float:left; width:69%; position:relative; padding-right:1%;}
-.col75{float:left; width:74%; position:relative; padding-right:1%;}
-.col80{float:left; width:79%; position:relative; padding-right:1%;}
-.col85{float:left; width:84%; position:relative; padding-right:1%;}
-.col95{float:left; width:94%; position:relative; padding-right:1%;}
+/* Alineacion horizontal del contenido */
+.alineacionIzquierda{text-align:left !important;}
+.alineacionCentrada{text-align:center !important;}
+.alineacionDerecha{text-align:right !important;}
+.alineacionJustificada{text-align:justify !important;}
+
+/* Alineacion vertical del contenido */
+.alineacionVerticalSuperior{vertical-align:top !important;}
+.alineacionVerticalCentrada{vertical-align:middle !important;}
+.alineacionVerticalInferior{vertical-align:bottom !important;}
+
+/* Altura de cajas */
+.alto10{height:10px;}
+.alto25{height:25px;}
+.alto50{height:50px;}
+.alto75{height:75px;}
+.alto100{height:100px;}
+.alto125{height:125px;}
+.alto150{height:150px;}
+.alto175{height:176px;}
+.alto200{height:200px;}
+.alto225{height:225px;}
+.alto250{height:250px;}
+.alto275{height:275px;}
+.alto300{height:300px;}
+.alto325{height:325px;}
+.alto350{height:350px;}
+.alto375{height:375px;}
+.alto400{height:400px;}
+
+/* Altura de l�nea */
+
+.altoLinea10{line-height:10px;}
+.altoLinea25{line-height:25px;}
+.altoLinea50{line-height:50px;}
+.altoLinea75{line-height:75px;}
+.altoLinea100{line-height:100px;}
+.altoLinea125{line-height:125px;}
+.altoLinea150{line-height:150px;}
+.altoLinea175{line-height:176px;}
+.altoLinea200{line-height:200px;}
+.altoLinea225{line-height:225px;}
+.altoLinea250{line-height:250px;}
+.altoLinea275{line-height:275px;}
+.altoLinea300{line-height:300px;}
+.altoLinea325{line-height:325px;}
+.altoLinea350{line-height:350px;}
+.altoLinea375{line-height:375px;}
+.altoLinea400{line-height:400px;}
 
 .ancho5{width:5.5%;}
 .ancho10{width:9.5%;}
@@ -96,108 +102,6 @@ li.select{ padding:2px 2px; border:1px solid #125617; font-weight:bold; backgrou
 .anchoFijo25{width:25em;}
 .anchoFijo30{width:30em;}
 
-/* FORMULARIOS */
-INPUT{background:url(../../img/ParqFondoInput.gif) repeat-x 0 0; border:1px solid; padding:2px 2px 0px 2px; margin-right:0px; margin-left:3px; font-size:0.9em;}
-TEXTAREA{font-size:100%; border:1px solid; padding:0px 0px 0px 5px; vertical-align:top; font-size:1.2em;}
-SELECT{margin:0px 0px 0px 5px; font-size:0.9em;}
-LABEL{padding:0px 3px 0px 0px; margin:3px 0px; white-space: normal;/**/ font-size:75%; font-weight:normal; text-align:justify;}
-LABEL A{font-size:1em;}
-P LABEL{margin-right:35px;}
-P LABEL A{margin-left:5px; white-space: normal;/**/}
-LABEL.busqueda{float:left;}  
-.busqueda{display:block;}
-input[type=file]{background:url(../../img/ParqFondoInput.gif) repeat-x 0 0; border:1px solid; padding:2px;}
-input.BotBoton{cursor:default; border:1px outset; padding:1px 2px; margin:4px 3px 0px 3px; font-size:0.75em; font-family:Verdana, sans-serif; overflow:visible;}
-.botoneraInterna{margin:7px 0px 0px 0px; text-align:center;}
-.pTextArea{vertical-align:top; margin-top:2px;}
-.avisoOblig{padding:2px 5px; font-size:70%; background:#E9EDF0;}
-.campo_obligatorio {color:#000; font-weight:bold;}
-.ayudaInput{font-size:80%; font-style:oblique;}
-LABEL.gtb{margin-right:0px;}
-label span {float:left;overflow:hidden; padding-right:5px;}
-
-dl{clear:both;}
-.datosSalidaInline dt, .datosSalida dt{font-size:0.75em; float:left; padding-right:10px; white-space:nowrap;}
-.datosSalidaInline dd{font-size:0.75em; word-spacing:0.05em; letter-spacing:0.05em; float:left; padding-right:20px; white-space:nowrap;}
-.datosSalida dd{font-size:0.75em; word-spacing:0.05em; letter-spacing:0.05em; white-space:nowrap;}
-.BtIntermedios{padding:1.2em 0em; float:left; position:relative;}
-.listaBtInter {padding:0em 0.4em; float:left; Position:relative;}
-
-/* Estilo exclusivo para GMED */
-input.preguntas{border:0.1em solid ; width:38px; height:20px; margin:0.1em 0.2em; text-align:center; font-weight:bold;}
-
-/* estilos para deprecar */
-.salida {background:url(../../img/ParqFondoInputSalida.gif) repeat-x 0 0; cursor:auto;}
-.camposSalida { padding:0px 5px 0px 0px; margin:3px 30px 3px 0px;  white-space:nowrap; font-size:75%;}
-.datoSalida {font-size:0.75em; text-align:justify; color:#123456;}
-.datoSalida EM {word-spacing:0.05em; color:#285272; letter-spacing:0.05em; font-style:normal; padding-right:20px; padding-left:3px;}
-input.salidader { text-align:right;}
-input.errorder{text-align:right;}
-
-/* TABLAS */
-TABLE {width:100%;}
-CAPTION {font-weight:bold; font-size:0.85em; text-align:left; padding-left:1em; padding:1em;}
-TH {padding:0PX 3px; margin:5px 0px; font-size:0.8em;}
-TD {border-bottom:1px solid; padding:2px 4px; font-size:0.7em;}
-TABLE A{font-size:1em;}
-TR.cabecera, TR.subCabecera, TD.cabecera {text-align:center; font-weight:bold;}
-.accionesTabla {text-align:left;}
-.paginacion {text-align:right;}
-
-#posicionar{border-top:1px dashed ; border-bottom:1px dashed ; padding:0.10em 0.5em; margin:0em 0em 0.25em 0em;}
-#posicionar INPUT {font-size:0.55em;}
-#posicionar P{font-size:0.65em; font-weight:bold; text-align:right;}
-
-#resultados {float:left; position:relative; padding:0.50em 0em; text-align:right; font-size:0.65em; font-weight:bold;}
-#paginar {float:right; position:relative; padding:0.15em 0em;}
-#resumenTabla{border-top:1px dashed ; border-bottom:1px dashed ; padding:0.20em 0.5em; margin:0.25em 0em 0.50em 0em;}
-#resumenTabla P{font-size:0.75em;}
-
-TFOOT .subtotal{font-size:0.95em;}
-TFOOT .subtotal TD {border-bottom:none; background-color:#EEEFEE;}
-TFOOT .total{font-size:1em;}
-TFOOT .total TD {border-bottom:1px dashed #125617; background-color:#E8EFE9;}
-TFOOT .total TD, TFOOT .subtotal TD {padding-right:5px; font-weight:bold; border-top:1px dashed #125617; text-align:right;}
-
-
-/* TABLAS SIMULADAS */
-/* ESTOS ESTILOS SON LOS CORRETOS PARA TABLAS SIMULADAS */
-.fila {padding:4px 0px; width:100%}
-.celda , .celdaPar{padding:4px; font-size:1em;}
-.celdaCab {padding:1px 0px; text-align:center; font-weight:bold; font-size:0.8em; border-right:1px solid #FFF;}
-.celdaPar {border-bottom:1px solid ;}
-
-/* TABLAS CON SCROLL */
-.cajaScroll {margin:0.15em; height:200px; overflow-x:auto; overflow-y:auto; clear:both;}
-.cajaScroll td {white-space:nowrap;}
-
-/* Alineaci�n horizontal del contenido */
-.alineacionIzquierda{text-align:left !important;}
-.alineacionCentrada{text-align:center !important;}
-.alineacionDerecha{text-align:right !important;}
-.alineacionJustificada{text-align:justify !important;}
-
-/* Alineaci�n vertical del contenido */
-.alineacionVerticalSuperior{vertical-align:top !important;}
-.alineacionVerticalCentrada{vertical-align:middle !important;}
-.alineacionVerticalInferior{vertical-align:bottom !important;}
-
-/* Tama�o de texto */
-.texto060{font-size:0.60em;}
-.texto065{font-size:0.65em;}
-.texto070{font-size:0.70em;}
-.texto075{font-size:0.75em;}
-.texto080{font-size:0.80em;}
-.texto085{font-size:0.85em;}
-.texto090{font-size:0.90em;}
-.texto095{font-size:0.95em;}
-.texto100{font-size:1.00em;}
-
-/* Estilos de texto */
-.textoCursiva{font-style:italic;}
-.textoSubrayado{text-decoration:underline;}
-.textoTachado{text-decoration:line-through;}
-
 /* Tipos de borde */
 .bordeCerrado{border:solid 1px !important;}
 .bordeSuperior{border-top:solid 1px !important;}
@@ -220,7 +124,28 @@ TFOOT .total TD, TFOOT .subtotal TD {padding-right:5px; font-weight:bold; border
 .borde7{border-width:7px;}
 .borde8{border-width:8px;}
 
-/* M�rgenes */
+/* COLUMNAS y ANCHOS*/
+.col5{float:left; width:5%; position:relative;}
+.col9{float:left; width:7%; position:relative; padding-right:1%;}
+.col10{float:left; width:9%; position:relative; padding-right:1%;}
+.col15{float:left; width:14%; position:relative; padding-right:1%;}
+.col20{float:left; width:19%; position:relative; padding-right:1%;}
+.col25{float:left; width:24%; position:relative; padding-right:1%;}
+.col30{float:left; width:29%; position:relative; padding-right:1%;}
+.col33{float:left; width:32%; position:relative; padding-right:1%;}
+.col40{float:left; width:39%; position:relative; padding-right:1%;}
+.col45{float:left; width:44%; position:relative; padding-right:1%;}
+.col50{float:left; width:49%; position:relative; padding-right:1%;}
+.col55{float:left; width:54%; position:relative; padding-right:1%;}
+.col60{float:left; width:59%; position:relative; padding-right:1%;}
+.col66{float:left; width:65%; position:relative; padding-right:1%;}
+.col70{float:left; width:69%; position:relative; padding-right:1%;}
+.col75{float:left; width:74%; position:relative; padding-right:1%;}
+.col80{float:left; width:79%; position:relative; padding-right:1%;}
+.col85{float:left; width:84%; position:relative; padding-right:1%;}
+.col95{float:left; width:94%; position:relative; padding-right:1%;}
+
+/* Margenes */
 .margen0{margin:0px;}
 .margen1{margin:1px;}
 .margen2{margin:2px;}
@@ -304,59 +229,22 @@ TFOOT .total TD, TFOOT .subtotal TD {padding-right:5px; font-weight:bold; border
 .rellenoDer10{padding-right:10px;}
 .rellenoDer12{padding-right:12px;}
 
-/* Modos de visualizaci�n */
-.modoBloque{display:block;}
-.modoEnLinea{display:inline;}
+/* Tamaño de texto */
+.texto060{font-size:0.60em;}
+.texto065{font-size:0.65em;}
+.texto070{font-size:0.70em;}
+.texto075{font-size:0.75em;}
+.texto080{font-size:0.80em;}
+.texto085{font-size:0.85em;}
+.texto090{font-size:0.90em;}
+.texto095{font-size:0.95em;}
+.texto100{font-size:1.00em;}
 
-/* Altura de cajas */
-.alto10{height:10px;}
-.alto25{height:25px;}
-.alto50{height:50px;}
-.alto75{height:75px;}
-.alto100{height:100px;}
-.alto125{height:125px;}
-.alto150{height:150px;}
-.alto175{height:176px;}
-.alto200{height:200px;}
-.alto225{height:225px;}
-.alto250{height:250px;}
-.alto275{height:275px;}
-.alto300{height:300px;}
-.alto325{height:325px;}
-.alto350{height:350px;}
-.alto375{height:375px;}
-.alto400{height:400px;}
+/* Estilos de texto */
+.textoCursiva{font-style:italic;}
+.textoSubrayado{text-decoration:underline;}
+.textoTachado{text-decoration:line-through;}
 
-/* Altura de l�nea */
-
-.altoLinea10{line-height:10px;}
-.altoLinea25{line-height:25px;}
-.altoLinea50{line-height:50px;}
-.altoLinea75{line-height:75px;}
-.altoLinea100{line-height:100px;}
-.altoLinea125{line-height:125px;}
-.altoLinea150{line-height:150px;}
-.altoLinea175{line-height:176px;}
-.altoLinea200{line-height:200px;}
-.altoLinea225{line-height:225px;}
-.altoLinea250{line-height:250px;}
-.altoLinea275{line-height:275px;}
-.altoLinea300{line-height:300px;}
-.altoLinea325{line-height:325px;}
-.altoLinea350{line-height:350px;}
-.altoLinea375{line-height:375px;}
-.altoLinea400{line-height:400px;}
-
-/* Alineaci�n horizontal de bloques */
-.posCentrada{margin-left:auto !important; margin-right:auto !important;}
-.posDerecha{margin-left:auto !important;}
-.posIzquierda{margin-right:auto !important;}
-
-/* Clear */
-.noFlotar{float:none;}
-.clearL{clear:left;}
-.clearR{clear:right;}
-.clearB{clear:both;}
 
 
 
