@@ -16,8 +16,12 @@ public final class OpRespuestasEncuesta {
 	
 	public static final int insertar(ActionForm datosEncuestaIn) {
 		int iResultado = DaoRespuestasEncuesta.insertar((DatosRealizacionEncuestaActionForm)datosEncuestaIn);
-		
 		return iResultado;
 	}
 
+	
+	public static final void consultar (ActionForm datosEncuestaIn) {
+		int iResultado = DaoRespuestasEncuesta.consultar( (DatosRealizacionEncuestaActionForm)datosEncuestaIn, 
+														  DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS);
+	}
 }

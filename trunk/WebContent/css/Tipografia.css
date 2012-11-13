@@ -1,29 +1,3 @@
-/* GENERICOS */
-#pieFoto{font-size:60%; line-height:3em; float:right;}
-.p0{font-size:0.75em; letter-spacing:0.12em; font-weight:bold; margin:3px 0px;}
-.p1{font-size:0.75em; font-weight:bold; margin:3px 0px;}
-.p2{font-size:0.75em; text-align:justify; margin:8px 13px 8px 0px;}
-.p2 A{font-size:100%; text-decoration:none;}
-.p3{font-size:0.75em; text-align:justify; margin:3px 0px; padding-bottom:2px; border-bottom:1px solid;}
-.p4{margin:0em 0em 0em 1.5em;}
-.p4 label{text-indent:0em;}
-.p5{font-size:0.75em; text-indent:1.8em;}
-.p6{font-size:0.75em; text-align:justify; font-weight:bold; border:1px solid ; padding:0.25em 0.40em;}
-.flotarDcha{float:right;}
-.flotarIzda{float:left;}
-.izq{text-align:left;}
-.cen{text-align:center;}
-.der{text-align:right;}
-.agrupaciones{font-weight:bold; font-style:oblique;}
-.anotaciones{font-size:0.60em; padding:1em;}
-.comentario{margin:8px 0px 10px 0px; padding:4px 4px 4px 8px; overflow:auto; overflow-x:hidden; border:1px solid; height:150px; font-size:0.7em; font-family:"Courier New", Courier, monospace;}
-.clear{clear:both;}
-.pdf{width:17px; height:17px; background:url(../../img/ParqPDF.gif) no-repeat 0 0;}
-.oculto {display:none;}
-.lista0 {padding-top:0.2em;}
-.lista0 LI {padding-left:12px;}
-li.select{ padding:2px 2px; border:1px solid #125617; font-weight:bold; background-image:none; background-color:#FCFCFC;}
-
 /* Alineacion horizontal del contenido */
 .alineacionIzquierda{text-align:left !important;}
 .alineacionCentrada{text-align:center !important;}
@@ -246,5 +220,39 @@ li.select{ padding:2px 2px; border:1px solid #125617; font-weight:bold; backgrou
 .textoTachado{text-decoration:line-through;}
 
 
+/* GENERICOS */
+#pieFoto{font-size:60%; line-height:3em; float:right;}
+.p0{font-size:0.75em; letter-spacing:0.12em; font-weight:bold; margin:3px 0px;}
+.p1{font-size:0.75em; font-weight:bold; margin:3px 0px;}
+.p2{font-size:0.75em; text-align:justify; margin:8px 13px 8px 0px;}
+.p2 A{font-size:100%; text-decoration:none;}
+.p3{font-size:0.75em; text-align:justify; margin:3px 0px; padding-bottom:2px; border-bottom:1px solid;}
+.p4{margin:0em 0em 0em 1.5em;}
+.p4 label{text-indent:0em;}
+.p5{font-size:0.75em; text-indent:1.8em;}
+.p6{font-size:0.75em; text-align:justify; font-weight:bold; border:1px solid ; padding:0.25em 0.40em;}
+.flotarDcha{float:right;}
+.flotarIzda{float:left;}
+.izq{text-align:left;}
+.cen{text-align:center;}
+.der{text-align:right;}
+.agrupaciones{font-weight:bold; font-style:oblique;}
+.anotaciones{font-size:0.60em; padding:1em;}
+.comentario{margin:8px 0px 10px 0px; padding:4px 4px 4px 8px; overflow:auto; overflow-x:hidden; border:1px solid; height:150px; font-size:0.7em; font-family:"Courier New", Courier, monospace;}
+.clear{clear:both;}
+.pdf{width:17px; height:17px; background:url(../../img/ParqPDF.gif) no-repeat 0 0;}
+.oculto {display:none;}
+.lista0 {padding-top:0.2em;}
+.lista0 LI {padding-left:12px;}
+li.select{ padding:2px 2px; border:1px solid #125617; font-weight:bold; background-image:none; background-color:#FCFCFC;}
 
 
+/* TABLAS */
+TABLE A{font-size:1em;}
+TR.cabecera, TR.subCabecera, TD.cabecera {text-align:center; font-weight:bold;}
+TD {border-bottom:1px solid; padding:2px 4px; font-size:0.9em;}
+TH {padding:0PX 3px; margin:5px 0px; font-size:1.0em;}
+
+
+/* FIELDSET */
+LEGEND{padding:10px 5px; font-size:0.8em; font-weight:bold; text-align:right;}

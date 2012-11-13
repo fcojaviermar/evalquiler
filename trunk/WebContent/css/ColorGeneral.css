@@ -56,4 +56,5 @@
 .textoGrisMedio{color:#6A6A6A !important;}  
 .textoGrisClaro{color:#6C6C6C !important;}
 
-
+/* Colores tablas */
+.celdaCab, #celdaCab, TR.cabecera, TR.cabecera TH {color:#FFFFFF;}
