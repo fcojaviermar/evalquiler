@@ -20,8 +20,19 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 	private String descTipoDocumento = null;
 	private int idTipoDocumento 	 = 0;
 	private int idTipoUsuario 	 	 = 0;
+	private String fechaAlta		 = null;
 	
 	
+
+	public String getFechaAlta() {
+		return fechaAlta;
+	}
+
+
+	public void setFechaAlta(String fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
 
 	public int getIdTipoUsuario() {
 		return idTipoUsuario;

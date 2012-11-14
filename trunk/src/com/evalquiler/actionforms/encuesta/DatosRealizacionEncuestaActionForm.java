@@ -6,19 +6,20 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
+import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
+import com.evalquiler.comun.utilidades.UtilidadesFechas;
 
 
 public class DatosRealizacionEncuestaActionForm extends ActionForm {
 
 	private String fechaInicioEvaluacionAlquiler = null;
 	private String fechaFinEvaluacionAlquiler    = null;
-	private String fechaRealizacion 			   = null;
+	private String fechaRealizacion 		     = null;
 	
-	private DatosInicioSesionActionForm  datosUsuario  = null;
-	private DatosViviendaActionForm 	 datosVivienda = null;
-	private DatosEncuestaActionForm		 datosEncuesta = null;
+	private DatosUsuarioActionForm  datosUsuario  = null;
+	private DatosViviendaActionForm datosVivienda = null;
+	private DatosEncuestaActionForm	datosEncuesta = null;
 	
 	
 	
@@ -32,12 +33,12 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public DatosInicioSesionActionForm getDatosUsuario() {
+	public DatosUsuarioActionForm getDatosUsuario() {
 		return datosUsuario;
 	}
 
 
-	public void setDatosUsuario(DatosInicioSesionActionForm datosUsuario) {
+	public void setDatosUsuario(DatosUsuarioActionForm datosUsuario) {
 		this.datosUsuario = datosUsuario;
 	}
 
@@ -53,7 +54,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 
 
 	public String getFechaInicioEvaluacionAlquiler() {
-		return fechaInicioEvaluacionAlquiler;
+		return UtilidadesFechas.dateSqlToString(fechaInicioEvaluacionAlquiler);
 	}
 
 
@@ -63,7 +64,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 
 
 	public String getFechaFinEvaluacionAlquiler() {
-		return fechaFinEvaluacionAlquiler;
+		return UtilidadesFechas.dateSqlToString(fechaFinEvaluacionAlquiler);
 	}
 
 
@@ -73,7 +74,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 
 
 	public String getFechaRealizacion() {
-		return fechaRealizacion;
+		return UtilidadesFechas.dateSqlToString(fechaRealizacion);
 	}
 
 
