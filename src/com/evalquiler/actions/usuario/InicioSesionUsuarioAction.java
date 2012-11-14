@@ -36,7 +36,9 @@ public class InicioSesionUsuarioAction extends ActionBase
 	    throws Exception {
     	
     	System.out.println("InicioSesionUsuarioAction.action()");
-    	DatosInicioSesionActionForm datosUsuario = null;
+    	Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = null;
+    	
+    	DatosUsuarioActionForm datosUsuario = null;
     	ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		
@@ -60,12 +62,14 @@ public class InicioSesionUsuarioAction extends ActionBase
     					Iterator<DatosUsuarioActionForm> iterUsuario = listaUsuario.iterator();
     
     					if (iterUsuario.hasNext()) {
-    						datosUsuario = (DatosInicioSesionActionForm)iterUsuario.next();  
+    						datosUsuario = (DatosUsuarioActionForm)iterUsuario.next();  
     						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
     					
     						if (pwd.equals(datosUsuario.getPassword())) {
     							System.out.println("La password es igual.");
-    							OpRespuestasEncuesta.
+    							encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosUsuario);
+    							request.setAttribute("encuestasRespondidas", encuestasRespondidas);
+    							
     							DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
     							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
     							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);
@@ -98,6 +102,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 		    //errors.add("name", new ActionMessage("id"));
 		}
 
+		forward = mapping.findForward("VALID_USER");
 		
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
