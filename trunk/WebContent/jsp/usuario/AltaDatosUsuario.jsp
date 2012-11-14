@@ -9,50 +9,44 @@
     </head>
     <body>
         <html:errors/>
-        <table border="1">
-            <tr>
-                <td>
-                    <div class="signin-box">
-                        <h2>Datos de alta del usuario<strong></strong></h2>
-                        <html:form action="/IrConfirmarDatosUsuarioAction.do" method="post">
-                            <div class="User-div">
-                               <label for="user"><strong class="user-label">Usuario:&nbsp;</strong></label>
-                               <html:text property="user" size="20" maxlength="20" ></html:text>
-                            </div>
-                            <div class="Password-div">
-                               <label for="Password"><strong class="passwd-label">Contraseña:&nbsp;</strong></label>
-                               <html:password property="password" size="20" maxlength="20"></html:password>
-                            </div>
-                            <div class="Password-div">
-                               <label for="Password"><strong class="passwd-label">Repetir contraseña:&nbsp;</strong></label>
-                               <html:password property="password2" size="20" maxlength="20"></html:password>
-                            </div>                            
-							<div class="tipo_nifcif-div">
-                                <label for="tipo_nifcif"><strong class="tipo_nifcif-label">Tipo documento:&nbsp;</strong></label>
-							    <html:select name="tipoDocumentoSeleccionado" property="idTipoDocumento">
-							        <html:optionsCollection name="tipoDocumento" value="idTipoDocumento" label="descripcion"/>
-							    </html:select>
-                            </div>                                              
-                            <div class="nifcif-div">
-                               <label for="nifcif"><strong class="nifcif-label">N.I.F./C.I.F:&nbsp;</strong></label>
-                               <html:text property="nifcif" size="9" maxlength="9" ></html:text>
-                            </div>                            
-                            <div class="email-div">
-                               <label for="email"><strong class="email-label">Correo electrónico:&nbsp;</strong></label>
-                               <html:text property="email" size="30" maxlength="30" ></html:text>
-                            </div>
-                            <div class="tipo_usuario-div">
-                                <label for="tipo_usuario"><strong class="tipo_usuario-label">Tipo usuario:&nbsp;</strong></label>
-                                <html:select name="tipoUsuarioSeleccionado" property="idTipoUsuario">
-                                    <html:optionsCollection name="tipoUsuario" value="idTipoUsuario" label="descripcion"/>
-                                </html:select>
-                            </div>                                              
-                            
-                            <html:submit>Aceptar</html:submit>
-                        </html:form>
-                    </div>
-                </td>
-            </tr>
-        </table>
+         <div class="signin-box">
+             <h2>Datos de alta del usuario<strong></strong></h2>
+             <html:form action="/IrConfirmarDatosUsuarioAction.do" method="post">
+                 <div class="User-div">
+                    <label for="user"><strong class="user-label">Usuario:&nbsp;</strong></label>
+                    <html:text property="user" size="20" maxlength="20" ></html:text>
+                 </div>
+                 <div class="Password-div">
+                    <label for="Password"><strong class="passwd-label">Contraseña:&nbsp;</strong></label>
+                    <html:password property="password" size="20" maxlength="20"></html:password>
+                 </div>
+                 <div class="Password-div">
+                    <label for="Password"><strong class="passwd-label">Repetir contraseña:&nbsp;</strong></label>
+                    <html:password property="password2" size="20" maxlength="20"></html:password>
+                     </div>                            
+					<div class="tipo_nifcif-div">
+                        <label for="tipo_nifcif"><strong class="tipo_nifcif-label">Tipo documento:&nbsp;</strong></label>
+					    <html:select name="tipoDocumentoSeleccionado" property="idTipoDocumento">
+					    <html:optionsCollection name="tipoDocumento" value="idTipoDocumento" label="descripcion"/>
+					</html:select>
+                 </div>                                              
+                 <div class="nifcif-div">
+                    <label for="nifcif"><strong class="nifcif-label">N.I.F./C.I.F:&nbsp;</strong></label>
+                    <html:text property="nifcif" size="9" maxlength="9" ></html:text>
+                 </div>                            
+                 <div class="email-div">
+                    <label for="email"><strong class="email-label">Correo electrónico:&nbsp;</strong></label>
+                    <html:text property="email" size="30" maxlength="30" ></html:text>
+                 </div>
+                 <div class="tipo_usuario-div">
+                     <label for="tipo_usuario"><strong class="tipo_usuario-label">Tipo usuario:&nbsp;</strong></label>
+                     <html:select name="tipoUsuarioSeleccionado" property="idTipoUsuario">
+                         <html:optionsCollection name="tipoUsuario" value="idTipoUsuario" label="descripcion"/>
+                     </html:select>
+                 </div>                                              
+                 
+                 <html:submit>Aceptar</html:submit>
+             </html:form>
+         </div>
     </body>
 </html:html>

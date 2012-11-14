@@ -8,96 +8,56 @@
         <title>Listado de viviendas</title>
         <link rel="stylesheet" type="text/css" href="./css/Colorgeneral.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />
-        <style type="text/css">
-            body {
-                color: purple;
-                background-color: #d8da3d }
-                
-input[type="radio"] {
-    display:inline-block;
-    height:20px;
-    text-indent:-9999px;
-    width:20px;
-}
-
-input[type="radio"], .notchecked {
-    background:url("notchecked.png") no-repeat;
-}
-
-input[type="radio"]:checked, .checked {
-    background:url("checked.png") no-repeat;
-}                
-
-.checkbox, .radio {
-  width: 19px;
-  height: 25px;
-  padding: 0 5px 0 0;
-  background: url(checkbox.png) no-repeat;
-  display: block;
-  clear: left;
-  float: left;
-  
-}
-
-        </style>
     </head>
     <body>
-		<html:form action="/IrHacerEncuestaAction.do" method="post">   
+		<html:form action="/IrHacerEncuestaAction.do" method="post">
+	        <div id="titulo">
+	            <H3 class="alineacionCentrada">Resumen de encuestas respondidas</H3>
+	        </div>
+		   
 	        <fieldset>
 	            <legend>Datos del usuario</legend>
-	            <dl class="datosSalida">    
-	                <dt>Usuario:</dt>
-                    <dd>
-                        <bean:define name="datoRealizacionEncuestaActionForm" property="datosUsuario"  id="datosUsuario"/>  
-                        <bean:write name="datosUsuario" property="user"/>
-                    </dd>  
-	                <dt>Número documento:</dt>
-	                <dd>50859114L</dd>
-	                <dt>Dirección de correo electrónico:</dt>
-	                <dd>fcojaviermar@gmail.com</dd>
-	                <dt>Fecha de alta:</dt>
-	                <dd>12/10/2010</dd>
-	                <dt>Encuestas realizadas:</dt>
-	                <dd>3</dd>
-	            </dl>
-                        
-                <fieldset>
+                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
+                                        
+                <fieldset class="bordeGrisOscuro borde1 alto200">
                     <legend>Resultados de la búsqueda</legend>
-                    <table>
+                    <table class="ancho100">
                         <thead>
-                            <tr>
-                                <th>Selección</th>
-                                <th>Dirección</th>
-                                <th>Tipo vivienda</th>
-                                <th>Vivienda</th>
+                            <tr class="alineacionIzquierda">
+                                <th class="fondoVerdeMedio texto100">Selección</th>
+                                <th class="fondoVerdeMedio texto100">Dirección</th>
+                                <th class="fondoVerdeMedio texto100">Tipo vivienda</th>
+                                <th class="fondoVerdeMedio texto100">Vivienda</th>
                             </tr>
                         </thead>
                         <tbody>
                             <logic:iterate name="datosViviendaActionForm" id="datosViviendaActionFormEnc">
 	                            <tr>
-	                                <th>
+	                                <td class="ancho10">
                                         <bean:define id="idViviendaAux">
                                             <bean:write name="datosViviendaActionFormEnc" property="idVivienda"/>
                                         </bean:define>
                                         <input type="radio" name="idVivienda" value="<bean:write name="datosViviendaActionFormEnc" property="idVivienda"/>"> 
-	                                </th>
-	                                <th>
+	                                </td>
+	                                <td>
 	                                	<bean:write name="datosViviendaActionFormEnc" property="nombreVia"/>
 	                                	<bean:write name="datosViviendaActionFormEnc" property="numeroVia"/>
-									</th>
-	                                <th>
+									</td>
+	                                <td>
 	                                	<bean:write name="datosViviendaActionFormEnc" property="planta"/>&nbsp; -- 
 	                                	<bean:write name="datosViviendaActionFormEnc" property="puerta"/>
-	                                </th>
-	                                <th>Vivienda</th>
+	                                </td>
+	                                <td>Vivienda</td>
 	                            </tr>
 							</logic:iterate>                                        
 		                </tbody>
 		            </table>
 		        </fieldset>
-                <html:submit property="BOTON_PULSADO" value="Realizar encuesta"/>
-                <html:submit property="BOTON_PULSADO" value="Nueva vivienda"/>
-                <html:submit property="BOTON_PULSADO" value="Salir"/>
+		        <div id="botonera">
+                    <html:submit property="BOTON_PULSADO" value="Realizar encuesta"/>
+                    <html:submit property="BOTON_PULSADO" value="Nueva vivienda"/>
+                    <html:submit property="BOTON_PULSADO" value="Salir"/>
+                </div>
 			</fieldset>
 		</html:form>        
     </body>
