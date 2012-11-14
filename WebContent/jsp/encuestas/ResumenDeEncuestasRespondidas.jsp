@@ -1,5 +1,6 @@
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 
 <html:html>
     <head>
@@ -9,50 +10,44 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
-        <div>
-            <H3>Resumen de encuestas respondidas</H3>
+        <div id="titulo">
+            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>
         </div>
 	    <fieldset class="bordeGrisOscuro borde1">
-	        <legend>Datos del usuario</legend>
-	        <dl class="datosSalida">    
-	            <dt>Usuario:</dt>
-	            <dd><bean:write name="datosInicioSesionActionForm" property="user"/>
-	            <dt>Número documento:</dt>
-	            <dd>50859114L</dd>
-	            <dt>Dirección de correo electrónico:</dt>
-	            <dd>fcojaviermar@gmail.com</dd>
-	            <dt>Fecha de alta:</dt>
-	            <dd>12/10/2010</dd>
-	            <dt>Encuestas realizadas:</dt>
-	            <dd>3</dd>
-	        </dl>
-	
+            <legend>Datos del usuario</legend>
+		    <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
+<!--  	    <jsp:include page="../comun/DatosUsuarioEncuesta.jsp"/>-->
+	    
 	        <fieldset class="bordeGrisOscuro borde1 alto200">
 	            <legend>Resumen de últimas encuestas</legend>
 	            <table class="ancho100">
 	                <thead>
-	                    <tr class="alineacionIzquierda ">
-	                        <th class="fondoVerdeMedio texto100">Descripción encuestas</th>
-	                        <th>Fecha realización</th>
-	                        <th>Vivienda</th>
+	                    <tr class="alineacionIzquierda">
+	                        <th class="fondoVerdeMedio texto100">Descripción encuesta</th>
+                            <th class="fondoVerdeMedio texto100">Dirección vivienda</th>	                        
+	                        <th class="fondoVerdeMedio texto100">Fecha realización</th>
+	                        <th class="fondoVerdeMedio texto100">Periodo evaluación</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <tr>
-	                        <td>Encuesta sobre propietario</td>
-	                        <td>12/10/2011</td>
-	                        <td>Calle Peregil nº5</td>
-	                    </tr>
-	                    <tr>
-                            <td>Encuesta sobre propietario</td>
-                            <td>12/10/2011</td>
-                            <td>Calle Peregil nº5</td>
-	                    </tr>
-	                    <tr>
-                            <td>Encuesta sobre propietario</td>
-                            <td>12/10/2011</td>
-                            <td>Calle Peregil nº5</td>
-	                    </tr>
+                        <logic:iterate name="encuestasRespondidas" id="encuesta">
+                            <tr>
+                                <td>
+                                    <bean:write name="encuesta" property="datosEncuesta.titulo"/>
+                                </td>
+                                <td>
+                                    <bean:write name="encuesta" property="datosVivienda.nombreVia"/>
+                                    <bean:write name="encuesta" property="datosVivienda.numeroVia"/>
+                                </td>
+                                <td>
+                                    <bean:write name="encuesta" property="fechaRealizacion"/>
+                                </td>
+                                <td>
+                                    <bean:write name="encuesta" property="fechaInicioEvaluacionAlquiler"/> a
+                                    <bean:write name="encuesta" property="fechaFinEvaluacionAlquiler"/>
+                                </td>
+                            </tr>
+                        </logic:iterate>
 	                </tbody>
 	            </table>
 	        </fieldset>

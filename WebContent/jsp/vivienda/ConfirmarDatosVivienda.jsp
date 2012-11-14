@@ -21,19 +21,7 @@
                     <td>
                         <div id="capaPrincipal">
                             <fieldset>
-                                <legend>Datos del usuario</legend>
-                                <dl class="datosSalida">    
-                                    <dt>Usuario:</dt>
-                                    <dd><bean:write name="datosUsuario" property="user"/></dd>
-                                    <dt>Número documento:</dt>
-                                    <dd>50859114L</dd>
-                                    <dt>Dirección de correo electrónico:</dt>
-                                    <dd>fcojaviermar@gmail.com</dd>
-                                    <dt>Fecha de alta:</dt>
-                                    <dd>12/10/2010</dd>
-                                    <dt>Encuestas realizadas:</dt>
-                                    <dd>3</dd>
-                                </dl>
+                                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
                          
                                 <fieldset>
                                     <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
