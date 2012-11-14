@@ -3,6 +3,8 @@
  */
 package com.evalquiler.operaciones;
 
+import java.util.Collection;
+
 import org.apache.struts.action.ActionForm;
 
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
@@ -20,8 +22,10 @@ public final class OpRespuestasEncuesta {
 	}
 
 	
-	public static final void consultar (ActionForm datosEncuestaIn) {
-		int iResultado = DaoRespuestasEncuesta.consultar( (DatosRealizacionEncuestaActionForm)datosEncuestaIn, 
+	public static final Collection<DatosRealizacionEncuestaActionForm> consultarEncuestasRespondidas (ActionForm datosUsuarioIn) {
+		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = DaoRespuestasEncuesta.consultar(datosUsuarioIn, 
 														  DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS);
+		
+		return encuestasRespondidas;
 	}
 }

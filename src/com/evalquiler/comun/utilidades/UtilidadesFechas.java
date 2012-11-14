@@ -38,7 +38,7 @@ public final class UtilidadesFechas {
     public static final java.sql.Date getDateForSql(final String strfecha) {
     	java.sql.Date fecFormatoDate = null;
     	try {
-    	      SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy", new Locale("es", "ES"));
+    	      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", new Locale("es", "ES"));
     	      fecFormatoDate = new java.sql.Date(sdf.parse(strfecha).getTime());
     	      System.out.println("Fecha con el formato java.sql.Date: " + fecFormatoDate);
     	} catch (Exception ex) {
@@ -48,4 +48,18 @@ public final class UtilidadesFechas {
     	return fecFormatoDate;
     }
     
+    
+    public static final String dateSqlToString(String fechaSql) {
+    	String fecha = null;
+    	try {
+    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    		Date fecFormatoDate = new Date(sdf.parse(fechaSql).getTime());
+    		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+    		fecha =sdf1.format(fecFormatoDate);
+    	} catch (Exception ex) {
+  	      System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
+    	}
+    	
+    	return fecha;
+    }
 }
