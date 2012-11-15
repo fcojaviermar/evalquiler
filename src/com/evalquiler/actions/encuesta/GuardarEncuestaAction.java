@@ -18,7 +18,7 @@ import com.evalquiler.operaciones.OpRespuestasEncuesta;
  * @author
  */
 public class GuardarEncuestaAction extends ActionBase
-
+//CAMBIAR NOMBRE POR GuardarRespuestasEncuestaAction
 {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

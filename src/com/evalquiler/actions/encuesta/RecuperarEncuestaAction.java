@@ -51,8 +51,8 @@ public class RecuperarEncuestaAction extends ActionBase {
     			
     				if (!datosEncuesta.isEmpty()) {
     					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
+    					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
 
-    					request.getSession().setAttribute("datosEncuestaActionForm", (DatosEncuestaActionForm)datosEncuesta.iterator().next());
     					forwardAux = "THERE_IS_POLL";
     				} else {
     					
