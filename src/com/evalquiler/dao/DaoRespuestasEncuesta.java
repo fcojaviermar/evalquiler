@@ -28,7 +28,21 @@ import com.evalquiler.comun.utilidades.UtilidadesFechas;
  */
 public class DaoRespuestasEncuesta {
 	
-	public static final int SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS = 1;
+	public static final int SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS 			 = 1;
+	public static final int SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS = 2;
+	
+
+	private final static String CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS = "SELECT IDENCUESTA " +
+																			 "FROM RESPUESTAS_ENCUESTA " +
+																			 "WHERE IDUSUARIO = ? AND IDENCUESTA = ? AND IDVIVIENDA " +
+																			 "AND FECHA_INICIO > ? AND FECHA_FIN < ?";
+	
+	SELECT IDENCUESTA, FECHA_INICIO, FECHA_FIN  
+	FROM evalquiler.RESPUESTAS_ENCUESTA 
+	WHERE IDUSUARIO = 'cachorro' AND IDENCUESTA = 1 AND IDVIVIENDA = 2
+	AND FECHA_INICIO >= DATE_FORMAT('2010-12-12',GET_FORMAT(DATE,'USA'))
+	AND FECHA_FIN <= DATE_FORMAT('2012-12-12',GET_FORMAT(DATE,'USA'));	
+	
 	
 	private final static String CONSULTAR_ENCUESTAS_RESPONDIDAS = "SELECT DISTINCT(A.IDENCUESTA), B.DESCRIPCION, A.FECHA_ENCUESTA, C.NOMBREVIA, C.NUMEROVIA, " +
 															   "FECHA_INICIO, FECHA_FIN, FECHA_INICIO, FECHA_FIN " +
@@ -57,7 +71,6 @@ public class DaoRespuestasEncuesta {
 						pstmt = conn.prepareStatement(INSERTAR_RESPUESTAS_ENCUESTA);	
 						if (null != pstmt) {
 							PreguntasEncuestaActionForm pregunta = iterPreguntas.next();
-							
 							pstmt.setInt(1, encuestaRealizada.getDatosEncuesta().getIdEncuesta());
 							pstmt.setInt(2, pregunta.getIdPregunta());
 							pstmt.setInt(3, pregunta.getIdRespuestaDada());
@@ -124,11 +137,10 @@ public class DaoRespuestasEncuesta {
 		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
-		Connection 		  conn  = null;
+		Connection 		  conn  = ConexionBD.getConnection();
 		try {
-			if (tipoConsulta == SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS) {
-				conn = ConexionBD.getConnection();
-    			if (null != conn) {
+			if (null != conn) {
+				if (tipoConsulta == SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS) {
     				pstmt = conn.prepareStatement(CONSULTAR_ENCUESTAS_RESPONDIDAS);
     				if (null != pstmt) {
     					pstmt.setString(1, ((DatosUsuarioActionForm)objetoIn).getUser());
@@ -152,11 +164,32 @@ public class DaoRespuestasEncuesta {
     				} else {
     					System.out.println("No se ha podido obtener un pstmt valido.") ;
     				}
+				} else if (tipoConsulta == SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS) {
+    				pstmt = conn.prepareStatement(CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS);
+    				if (null != pstmt) {
+    					pstmt.setString(1, ((DatosRealizacionEncuestaActionForm)objetoIn).getDatosUsuario().getUser());
+    					pstmt.setInt(2, ((DatosRealizacionEncuestaActionForm)objetoIn).getDatosEncuesta().getIdEncuesta());
+    					pstmt.setLong(3, ((DatosRealizacionEncuestaActionForm)objetoIn).getDatosVivienda().getIdVivienda());
+    					pstmt.setDate(4, UtilidadesFechas.getDateForSql(
+    												((DatosRealizacionEncuestaActionForm)objetoIn).getFechaInicioEvaluacionAlquiler()));
+    					pstmt.setDate(5, UtilidadesFechas.getDateForSql(
+    												((DatosRealizacionEncuestaActionForm)objetoIn).getFechaFinEvaluacionAlquiler()));
+    					rs = pstmt.executeQuery() ;
+    					while(rs.next()) {
+    						encuestaRespondida = new DatosRealizacionEncuestaActionForm();
+    						datosEncuesta = new DatosEncuestaActionForm();
+    						datosEncuesta.setIdEncuesta(rs.getInt("IDENCUESTA"));
+    						encuestaRespondida.setDatosEncuesta(datosEncuesta);
+    						listaEncuestasRespondidas.add(encuestaRespondida);    						
+    					}
+    				} else {
+    					//pstm nulo
+    				}
     			} else {
-    				
+    				//Tipo de consulta no v�lido.
     			}
 			} else {
-				
+				//No se ha obtenido una conexi�n
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage()) ;

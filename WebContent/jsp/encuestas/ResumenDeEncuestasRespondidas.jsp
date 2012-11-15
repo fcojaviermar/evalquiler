@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="titulo">
-            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>
+            <H3 class="alineacionCentrada">Últimas encuestas respondidas</H3>
         </div>
 	    <fieldset class="bordeGrisOscuro borde1">
             <legend>Datos del usuario</legend>
