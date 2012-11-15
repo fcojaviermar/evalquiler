@@ -2,10 +2,10 @@ package com.evalquiler.actionforms.comun;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
 
 public class DatosInicioSesionActionForm extends ActionForm  {
@@ -46,12 +46,10 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 		String botonPulsado = request.getParameter("BOTON_PULSADO");
 		if (!"Registrarse".equals(botonPulsado)) {
             if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.user"));
-    //        	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
             }
             if ( (null == this.getPassword()) ||  ("".equals(this.getPassword()))) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password"));
-    //        	errors.add("errorValidacion", new ActionError("error.obligatorio.password"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.password"));
             }
 		}
 		
