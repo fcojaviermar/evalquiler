@@ -2,9 +2,9 @@ package com.evalquiler.actionforms.usuario;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.combo.ComboTipoDocumento;
@@ -106,15 +106,15 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
         	
         	errors = new ActionErrors();
             if ( (null == this.getEmail()) ||  ("".equals(this.getEmail()))) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.email"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.email"));
             } else if (!Validaciones.emailValido(this.getEmail())) {
-            	errors.add("errorValidacion", new ActionMessage("error.email.novalido"));
+            	errors.add("errorValidacion", new ActionError("error.email.novalido"));
             }
 
             if (0 == this.getIdTipoDocumento()) {        	
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipodocumento"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.tipodocumento"));
             } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
-            	errors.add("errorValidacion", new ActionMessage("error.tipodocumento.novalido"));
+            	errors.add("errorValidacion", new ActionError("error.tipodocumento.novalido"));
             } else {
             	ComboTipoDocumento combo = new ComboTipoDocumento();
             	ElementoComboTipoDocumento elCombo = combo.get(this.getIdTipoDocumento());
@@ -122,15 +122,15 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             }
             
             if ( (null == this.getNifcif()) ||  ("".equals(this.getNifcif()))) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.nifcif"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.nifcif"));
             } else if (!documentoValido(this.getIdTipoDocumento(), this.getNifcif())) {
-           		errors.add("errorValidacion", new ActionMessage("error.nifcif.novalido"));
+           		errors.add("errorValidacion", new ActionError("error.nifcif.novalido"));
             }
     
             if ( (null == this.getPassword2()) ||  ("".equals(this.getPassword2()))) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password2"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.password2"));
             } else if (!this.getPassword().equals(this.getPassword2())) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password2"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.password2"));
             }
     	} else {
     		

@@ -1,7 +1,10 @@
 package com.evalquiler.actionforms.encuesta;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -53,7 +56,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public String getFechaInicioEvaluacionAlquiler() {
+	public String getFechaInicioEvaluacionAlquiler() throws ParseException {
 		return UtilidadesFechas.dateSqlToString(fechaInicioEvaluacionAlquiler);
 	}
 
@@ -63,7 +66,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public String getFechaFinEvaluacionAlquiler() {
+	public String getFechaFinEvaluacionAlquiler() throws ParseException  {
 		return UtilidadesFechas.dateSqlToString(fechaFinEvaluacionAlquiler);
 	}
 
@@ -73,7 +76,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public String getFechaRealizacion() {
+	public String getFechaRealizacion() throws ParseException {
 		return UtilidadesFechas.dateSqlToString(fechaRealizacion);
 	}
 
@@ -88,8 +91,38 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("RespuestasEncuestaActionForm.validate()");
-    	ActionErrors errors = null;
-        
+    	ActionErrors errors = new ActionErrors();
+
+    	try {
+    		if (null == this.getFechaInicioEvaluacionAlquiler()) {
+    			errors.add("errorValidacion", new ActionError("error.fecha.inicio.evaluacion.obligatoria"));
+    		} /*else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicioEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
+    			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
+    		}*/
+    	} catch (ParseException e) {
+    		errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
+    	}
+    	try {
+        	if (null == this.getFechaFinEvaluacionAlquiler()) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.fin.evaluacion.obligatoria"));
+        	} /*else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFinEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
+        	}*/
+    	} catch (ParseException e) {
+    		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
+    	}
+    	try{
+        	if (UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).after(
+        																	UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
+        	} else if (!UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).before(
+    																		UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
+        	}
+    	} catch (ParseException e) {
+    		//Si se llega a esta excepción tiene que haber pasado antes por alguna de las excepciones anteriores.
+    	}
+    	
         return errors;
     }
     
