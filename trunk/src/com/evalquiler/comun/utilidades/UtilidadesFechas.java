@@ -14,16 +14,25 @@ import java.util.Locale;
  */
 public final class UtilidadesFechas {
 
+    public final static String FORMATO_FECHA 	   = "dd-MM-yyyy";
+    public final static String FORMATO_FECHA_HORA  = "dd-MM-yyyy HH:mm:ss";
+    public final static String FORMATO_FECHA_MYSQL = "yyyy-MM-dd";
+	
     public static final String getAhora() {
-    	SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     	Date fechaDate = new Date();
-    	String fechaAlta = formateador.format(fechaDate);
+    	String fechaAlta = null;
+    	SimpleDateFormat formateador = new SimpleDateFormat(FORMATO_FECHA_HORA);    	
+    	try {
+    		fechaAlta = formateador.format(fechaDate);
+    	} catch (Exception ex) {
+    		
+    	}
     	return fechaAlta;
 	}
     
     
     public static final Date getDate(final String strfecha) {
-    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
+    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat(FORMATO_FECHA);
     	Date fecha = null;
     	try {
     		fecha = formatoDelTexto.parse(strfecha);
@@ -38,7 +47,7 @@ public final class UtilidadesFechas {
     public static final java.sql.Date getDateForSql(final String strfecha) {
     	java.sql.Date fecFormatoDate = null;
     	try {
-    	      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", new Locale("es", "ES"));
+    	      SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES"));
     	      fecFormatoDate = new java.sql.Date(sdf.parse(strfecha).getTime());
     	      System.out.println("Fecha con el formato java.sql.Date: " + fecFormatoDate);
     	} catch (Exception ex) {
@@ -49,17 +58,35 @@ public final class UtilidadesFechas {
     }
     
     
-    public static final String dateSqlToString(String fechaSql) {
+    public static final String dateSqlToString(final String fechaSql) throws ParseException {
     	String fecha = null;
     	try {
-    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA_MYSQL);
     		Date fecFormatoDate = new Date(sdf.parse(fechaSql).getTime());
-    		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+    		SimpleDateFormat sdf1 = new SimpleDateFormat(FORMATO_FECHA);
     		fecha =sdf1.format(fecFormatoDate);
+    	} catch (ParseException e) {
+    		throw e;
     	} catch (Exception ex) {
   	      System.out.println("Error al obtener el formato de la fecha/hora: " + ex.getMessage());
     	}
     	
     	return fecha;
     }
+    
+    
+    public static final boolean tieneFormatoCorrecto(final String strfecha, final String formatoFecha) {
+    	boolean formatoCorrecto = false;
+    	SimpleDateFormat formatoDelTexto = new SimpleDateFormat(formatoFecha);
+    	try {
+    		formatoDelTexto.parse(strfecha);
+    		formatoCorrecto = true;
+    	} catch (ParseException ex) {
+    		//Si el formato no es correcto se devuelve false, no hay que lanzar ninguna excepci�n.
+    	}
+    	
+    	return formatoCorrecto;
+    }    
+    
+   
 }
