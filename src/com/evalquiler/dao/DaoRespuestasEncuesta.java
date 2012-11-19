@@ -32,10 +32,10 @@ public class DaoRespuestasEncuesta {
 	public static final int SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS = 2;
 	
 
-	private final static String CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS = "SELECT IDENCUESTA " +
+	private final static String CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS = "SELECT DISTINCT(IDENCUESTA) " +
 																			 "FROM RESPUESTAS_ENCUESTA " +
-																			 "WHERE IDUSUARIO = ? AND IDENCUESTA = ? AND IDVIVIENDA " +
-																			 "AND FECHA_INICIO > ? AND FECHA_FIN < ?";
+																			 "WHERE IDUSUARIO = ? AND IDENCUESTA = ? AND IDVIVIENDA = ? " +
+																			 "AND FECHA_INICIO < ? AND FECHA_FIN > ?";
 	
 //	SELECT IDENCUESTA, FECHA_INICIO, FECHA_FIN  
 //	FROM evalquiler.RESPUESTAS_ENCUESTA 
@@ -93,10 +93,9 @@ public class DaoRespuestasEncuesta {
 					}
 					if (error) {
 						conn.rollback();
-						iResultado = 1;
+						iResultado = 0;
 					} else {
 						conn.commit();
-						iResultado = 0;
 					}
 				} else {
 
@@ -148,9 +147,12 @@ public class DaoRespuestasEncuesta {
     					
     					while(rs.next()) {
     						encuestaRespondida = new DatosRealizacionEncuestaActionForm();
-    						encuestaRespondida.setFechaRealizacion(rs.getString("FECHA_ENCUESTA"));
-    						encuestaRespondida.setFechaInicioEvaluacionAlquiler(rs.getString("FECHA_INICIO"));
-    						encuestaRespondida.setFechaFinEvaluacionAlquiler(rs.getString("FECHA_FIN"));
+    						encuestaRespondida.setFechaRealizacion(
+    													UtilidadesFechas.getStringFromDate(rs.getDate("FECHA_ENCUESTA")));
+    						encuestaRespondida.setFechaInicioEvaluacionAlquiler(
+    													UtilidadesFechas.getStringFromDate(rs.getDate("FECHA_INICIO")));
+    						encuestaRespondida.setFechaFinEvaluacionAlquiler(
+    													UtilidadesFechas.getStringFromDate(rs.getDate("FECHA_FIN")));
     						datosEncuesta = new DatosEncuestaActionForm();
     						datosEncuesta.setTitulo(rs.getString("DESCRIPCION"));
     						datosVivienda = new DatosViviendaActionForm();
@@ -171,9 +173,9 @@ public class DaoRespuestasEncuesta {
     					pstmt.setInt(2, ((DatosRealizacionEncuestaActionForm)objetoIn).getDatosEncuesta().getIdEncuesta());
     					pstmt.setLong(3, ((DatosRealizacionEncuestaActionForm)objetoIn).getDatosVivienda().getIdVivienda());
     					pstmt.setDate(4, UtilidadesFechas.getDateForSql(
-    												((DatosRealizacionEncuestaActionForm)objetoIn).getFechaInicioEvaluacionAlquiler()));
-    					pstmt.setDate(5, UtilidadesFechas.getDateForSql(
     												((DatosRealizacionEncuestaActionForm)objetoIn).getFechaFinEvaluacionAlquiler()));
+    					pstmt.setDate(5, UtilidadesFechas.getDateForSql(
+    												((DatosRealizacionEncuestaActionForm)objetoIn).getFechaInicioEvaluacionAlquiler()));
     					rs = pstmt.executeQuery() ;
     					while(rs.next()) {
     						encuestaRespondida = new DatosRealizacionEncuestaActionForm();
