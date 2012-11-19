@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
@@ -28,6 +29,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
+		String destino = "OK";
 		
 		int iNumeroPreguntas = 0;
 		try {
@@ -40,7 +42,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 //			fechaInicioEvaluacionAlquiler
 //			fechaFinEvaluacionAlquiler
 			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = 
-												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datoRealizacionEncuestaActionForm");
+												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 			datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaInicioEvaluacionAlquiler());
 			datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaFinEvaluacionAlquiler());
 			
@@ -56,32 +58,26 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 					}
 	    
 					((DatosRealizacionEncuestaActionForm)form).setDatosEncuesta(datosEncuesta);
-	    			request.getSession().setAttribute("datosRealizacionEncuestaActionForm", form);
-	//    			request.getSession().setAttribute("datosEncuestaActionForm", datosEncuesta);    			
-	//    			request.getSession().getAttribute("datosViviendaActionForm");
-	    
+//	    			request.getSession().setAttribute("datosRealizacionEncuestaActionForm", form);
 				} else {
 					
 				}
 			} else {
-				errors.add("errorValidacion", new ActionError("error.periodo.ya.evaluado.para.vivienda"));
+				destino = "ALREADY_EVAL";
+				errors.add("errorValidacion", new ActionMessage("error.periodo.ya.evaluado.para.vivienda"));
 			}
-			int i =0;
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionError("id"));
 		}
 	
-		// If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
-	
 		if (!errors.isEmpty()) {
 		    //saveErrors(request, errors);
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    forward = mapping.findForward("ERROR");
+		    forward = mapping.findForward(destino);
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-		    forward = mapping.findForward("OK");
+		    forward = mapping.findForward(destino);
 		}
 	
 		// Finish with

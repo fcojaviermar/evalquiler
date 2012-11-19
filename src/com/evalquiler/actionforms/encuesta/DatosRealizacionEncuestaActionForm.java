@@ -56,28 +56,8 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public String getFechaInicioEvaluacionAlquiler() throws ParseException {
-		return UtilidadesFechas.dateSqlToString(fechaInicioEvaluacionAlquiler);
-	}
-
-
-	public void setFechaInicioEvaluacionAlquiler(String fechaInicioEvaluacionAlquiler) {
-		this.fechaInicioEvaluacionAlquiler = fechaInicioEvaluacionAlquiler;
-	}
-
-
-	public String getFechaFinEvaluacionAlquiler() throws ParseException  {
-		return UtilidadesFechas.dateSqlToString(fechaFinEvaluacionAlquiler);
-	}
-
-
-	public void setFechaFinEvaluacionAlquiler(String fechaFinEvaluacionAlquiler) {
-		this.fechaFinEvaluacionAlquiler = fechaFinEvaluacionAlquiler;
-	}
-
-
 	public String getFechaRealizacion() throws ParseException {
-		return UtilidadesFechas.dateSqlToString(fechaRealizacion);
+		return fechaRealizacion;
 	}
 
 
@@ -85,6 +65,41 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 		this.fechaRealizacion = fechaRealizacion;
 	}
 
+	
+	public String getFechaInicioEvaluacionAlquiler() throws ParseException {
+		return fechaInicioEvaluacionAlquiler;
+	}
+
+	public String getFechaInicioEvaluacionAlquilerForSql() throws ParseException {
+		return fechaInicioEvaluacionAlquiler;
+	}
+
+	public String getFechaInicioEvaluacionAlquilerToString() throws ParseException {
+		return UtilidadesFechas.dateSqlToString(fechaInicioEvaluacionAlquiler);
+	}
+
+	public void setFechaInicioEvaluacionAlquiler(String fechaInicioEvaluacionAlquiler) {
+		this.fechaInicioEvaluacionAlquiler = fechaInicioEvaluacionAlquiler;
+	}
+
+
+	public String getFechaFinEvaluacionAlquiler() throws ParseException  {
+		return fechaFinEvaluacionAlquiler;
+	}
+
+	public String getFechaFinEvaluacionAlquilerForSql() throws ParseException  {
+		return UtilidadesFechas.dateSqlToString(fechaFinEvaluacionAlquiler);
+	}
+
+	public String getFechaFinEvaluacionAlquilerToString() throws ParseException  {
+		return UtilidadesFechas.dateSqlToString(fechaFinEvaluacionAlquiler);
+	}
+
+
+	public void setFechaFinEvaluacionAlquiler(String fechaFinEvaluacionAlquiler) {
+		this.fechaFinEvaluacionAlquiler = fechaFinEvaluacionAlquiler;
+	}
+	
 
 	/*
      * Validamamos los datos introducidos por el usuario
@@ -96,18 +111,18 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
     	try {
     		if (null == this.getFechaInicioEvaluacionAlquiler()) {
     			errors.add("errorValidacion", new ActionError("error.fecha.inicio.evaluacion.obligatoria"));
-    		} /*else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicioEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
+    		}  else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicioEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
     			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
-    		}*/
+    		}
     	} catch (ParseException e) {
     		errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
     	}
     	try {
         	if (null == this.getFechaFinEvaluacionAlquiler()) {
         		errors.add("errorValidacion", new ActionError("error.fecha.fin.evaluacion.obligatoria"));
-        	} /*else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFinEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
+        	} else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFinEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
         		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
-        	}*/
+        	}
     	} catch (ParseException e) {
     		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
     	}

@@ -18,6 +18,7 @@ import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.combo.ComboTipoUsuario;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
@@ -39,6 +40,7 @@ public class InicioSesionUsuarioAction extends ActionBase
     	Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = null;
     	
     	DatosUsuarioActionForm datosUsuario = null;
+    	DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
     	ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		
@@ -46,13 +48,18 @@ public class InicioSesionUsuarioAction extends ActionBase
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			String botonPulsado = request.getParameter("BOTON_PULSADO");
 			
-			if ("Registrarse".equals(botonPulsado)) {
+			if (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) {
 				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 				request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
 				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );
 				forward = mapping.findForward("REGISTER_USER");
+			} else if (ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) {
+				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datoRealizacionEncuestaActionForm");
+				encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosRealizacionEncuesta.getDatosUsuario());
+				request.setAttribute("encuestasRespondidas", encuestasRespondidas);
+				forward = mapping.findForward("POOL_RECOVERY");
 			} else {
     			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
     			
@@ -70,10 +77,9 @@ public class InicioSesionUsuarioAction extends ActionBase
     							encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosUsuario);
     							request.setAttribute("encuestasRespondidas", encuestasRespondidas);
     							
-    							DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
+    							datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
     							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
     							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);
-    							request.setAttribute("datosInicioSesionActionForm", datosUsuario);
     							
     							forward = mapping.findForward("VALID_USER");
     						} else {
@@ -102,8 +108,6 @@ public class InicioSesionUsuarioAction extends ActionBase
 		    //errors.add("name", new ActionMessage("id"));
 		}
 
-		forward = mapping.findForward("VALID_USER");
-		
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
 			System.out.println("Hay errores.");
