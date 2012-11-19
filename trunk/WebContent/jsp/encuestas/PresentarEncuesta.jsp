@@ -6,10 +6,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Encuesta a responder</title>
-        <link rel="stylesheet" type="text/css" href="./css/Colorgeneral.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./css/ColorGeneral.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+        <html:messages id="mensajes"></html:messages>
         <html:form action="/IrConfirmarRespuestasAction.do" method="post">
             <%int iNumeroPreguntas = 0; %>
 		    <fieldset>

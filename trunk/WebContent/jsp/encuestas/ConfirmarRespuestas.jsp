@@ -15,7 +15,7 @@
                 <legend>Datos del usuario</legend>            
                 <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
                 <fieldset>
-                        <legend><bean:write name="datosEncuestaActionForm" property="titulo"/></legend>     
+                    <legend><bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/></legend>     
                         <div class="fechas-div">
                             <label for="fechaInicioEvaluacionAlquiler"><strong class="user-label">Fecha inicial evaluación:&nbsp;</strong></label>
                             <bean:write name="datosRealizacionEncuestaActionForm" property="fechaInicioEvaluacionAlquiler"/>
@@ -23,7 +23,7 @@
                             <bean:write name="datosRealizacionEncuestaActionForm" property="fechaFinEvaluacionAlquiler"/>
                         </div>
                                                             
-                        <logic:iterate name="datosEncuestaActionForm" property="preguntas" id="preguntasEnc" indexId="indicePregunta">
+                        <logic:iterate name="datosRealizacionEncuestaActionForm" property="datosEncuesta.preguntas" id="preguntasEnc" indexId="indicePregunta">
                             <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
                                 <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
                                     <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
@@ -42,8 +42,6 @@
                                             <bean:define id="valorRespuestaAux">
                                                 <bean:write name="respuestasEnc" property="idRespuesta"/>
                                             </bean:define>
-
-
                                             <logic:equal name="respuestasEnc" property="idRespuesta" value="<%=idRespuestaDadaAux%>">
                                                 <input type="radio" name="idRespuesta<%=indicePregunta%>" checked="checked" disabled="disabled"/>
                                             </logic:equal>
@@ -59,7 +57,7 @@
                 </fieldset>
 
                 
-                <html:submit property="BOTON_PULSADO" value="Guardar"/>
+                <html:submit property="BOTON_PULSADO" value="Guardar encuesta"/>
                 <html:submit property="BOTON_PULSADO" value="Cancelar"/>
 		    </fieldset>
         </html:form>							
