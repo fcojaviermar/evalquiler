@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
 /**
@@ -28,19 +29,19 @@ public class GuardarEncuestaAction extends ActionBase
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
-			OpRespuestasEncuesta.insertar(datosRealizacionEncuesta);
+			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = 
+												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+			if (Constantes.RESULTADO_NOOK == OpRespuestasEncuesta.insertar(datosRealizacionEncuesta)) {
+				
+			} else {
+				//La operación se ha realizado correctamente.
+			}
 	
 		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));
 		}
 	
-		// If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
-	
 		if (!errors.isEmpty()) {
-		    //saveErrors(request, errors);
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
 		    forward = mapping.findForward("SALIR");
 		} else {

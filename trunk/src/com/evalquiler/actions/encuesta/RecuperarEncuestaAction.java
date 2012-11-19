@@ -37,6 +37,9 @@ public class RecuperarEncuestaAction extends ActionBase {
 			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
 			if ("Nueva vivienda".equals(botonPulsado)) {
 				forwardAux = "NEW_HOUSE";
+			} else if ("Responder".equals(botonPulsado)) {
+				//Entra por aquí si se produce una redirección del tipo ALREADY_EVAL
+				forwardAux = "THERE_IS_POLL";
 			} else {
 				DatosViviendaActionForm viviendaSeleccionada = new DatosViviendaActionForm();
 				viviendaSeleccionada.setIdVivienda(Integer.parseInt((String)request.getParameter("idVivienda")));
