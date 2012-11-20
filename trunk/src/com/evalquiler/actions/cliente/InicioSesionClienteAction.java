@@ -16,6 +16,7 @@ import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.operaciones.OpCliente;
 
@@ -38,9 +39,9 @@ public class InicioSesionClienteAction extends ActionBase
 		
 		try {
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			String botonPulsado = request.getParameter("BOTON_PULSADO");
+			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 			
-			if ("Registrarse".equals(botonPulsado)) {
+			if (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) {
 				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
