@@ -55,8 +55,6 @@
                             </div>                                  
                         </logic:iterate>
                 </fieldset>
-
-                
                 <html:submit property="BOTON_PULSADO" value="Guardar encuesta"/>
                 <html:submit property="BOTON_PULSADO" value="Cancelar"/>
 		    </fieldset>

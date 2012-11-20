@@ -16,7 +16,7 @@ import com.evalquiler.dao.DaoEncuesta;
  */
 public final class OpEncuesta {
 	
-	public static final Collection<DatosEncuestaActionForm> consultar(final ActionForm objetoIn, final String tipoConsulta) {
+	public static final Collection<DatosEncuestaActionForm> consultar(ActionForm objetoIn, final String tipoConsulta) {
 		Collection<DatosEncuestaActionForm> listaEncuesta = DaoEncuesta.consultar(objetoIn, tipoConsulta);
 		return listaEncuesta; 
 	}
