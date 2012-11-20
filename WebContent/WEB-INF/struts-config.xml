@@ -44,7 +44,6 @@
 		<action input="/register.jsp" path="/IrFinSesionAction" name="datosVacioActionForm" 
                                             scope="request" type="com.evalquiler.actions.comun.FinalizarSesionAction" validate="false" >
 			<forward name="END" path="/Inicio.do"></forward>
-            <forward name="NEW" path="/IrSolicitarInformeAction.do"></forward>
 		</action>
         
 		<!-- =========================== Modulo Registro Usuarios =========================== -->
