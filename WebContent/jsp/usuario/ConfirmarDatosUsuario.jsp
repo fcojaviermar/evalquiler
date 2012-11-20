@@ -14,6 +14,12 @@
                         <h2>Confirmar datos de alta del usuario<strong></strong></h2>
 						<table>
                             <tr>
+                                <td align="center">Usuario:
+                                    <bean:write name="datosUsuarioActionForm" property="user"/>
+                                    <html:hidden name="datosUsuarioActionForm" property="user"/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td align="center">Tipo documento:
                                     <bean:write name="datosUsuarioActionForm" property="descTipoDocumento"/>
                                     <bean:define id="idTipoDocumento" name="datosUsuarioActionForm" property="idTipoDocumento"/>
@@ -24,12 +30,6 @@
 						     	<td align="center">N.I.F./C.I.F.:
 			                        <bean:write name="datosUsuarioActionForm" property="nifcif"/>
 			                        <html:hidden name="datosUsuarioActionForm" property="nifcif"/>
-			                    </td>
-							</tr>
-							<tr>
-						     	<td align="center">Usuario:
-			                        <bean:write name="datosUsuarioActionForm" property="user"/>
-			                        <html:hidden name="datosUsuarioActionForm" property="user"/>
 			                    </td>
 							</tr>
 							<tr>
