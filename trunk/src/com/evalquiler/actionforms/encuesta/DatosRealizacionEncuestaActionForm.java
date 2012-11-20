@@ -66,12 +66,12 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 	
-	public String getFechaInicioEvaluacionAlquiler() throws ParseException {
+	public String getFechaInicioEvaluacionAlquiler() {
 		return fechaInicioEvaluacionAlquiler;
 	}
 
 	public String getFechaInicioEvaluacionAlquilerForSql() throws ParseException {
-		return fechaInicioEvaluacionAlquiler;
+		return UtilidadesFechas.dateSqlToString(fechaInicioEvaluacionAlquiler);
 	}
 
 	public String getFechaInicioEvaluacionAlquilerToString() throws ParseException {
@@ -83,7 +83,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
 	}
 
 
-	public String getFechaFinEvaluacionAlquiler() throws ParseException  {
+	public String getFechaFinEvaluacionAlquiler() {
 		return fechaFinEvaluacionAlquiler;
 	}
 
@@ -108,25 +108,18 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
     	System.out.println("RespuestasEncuestaActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
 
-    	try {
     		if (null == this.getFechaInicioEvaluacionAlquiler()) {
     			errors.add("errorValidacion", new ActionError("error.fecha.inicio.evaluacion.obligatoria"));
     		}  else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicioEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
     			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
     		}
-    	} catch (ParseException e) {
-    		errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
-    	}
-    	try {
+
         	if (null == this.getFechaFinEvaluacionAlquiler()) {
         		errors.add("errorValidacion", new ActionError("error.fecha.fin.evaluacion.obligatoria"));
         	} else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFinEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
         		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
         	}
-    	} catch (ParseException e) {
-    		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
-    	}
-    	try{
+
         	if (UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).after(
         																	UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
         		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
@@ -134,9 +127,6 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
     																		UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
         		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
         	}
-    	} catch (ParseException e) {
-    		//Si se llega a esta excepción tiene que haber pasado antes por alguna de las excepciones anteriores.
-    	}
     	
         return errors;
     }

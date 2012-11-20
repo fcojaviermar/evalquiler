@@ -48,7 +48,7 @@ public class RecuperarEncuestaAction extends ActionBase {
 
 				if (!vivienda.isEmpty()) {
 					viviendaSeleccionada = vivienda.iterator().next();
-					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datoRealizacionEncuestaActionForm");
+					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 					
     				Collection<DatosEncuestaActionForm> datosEncuesta = OpEncuesta.consultar(datosRealizacionEncuesta.getDatosUsuario(), 
     																					     DaoEncuesta.CONSULTAR_PARA_QUIEN_ES_ENCUESTA);

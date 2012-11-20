@@ -7,7 +7,6 @@ import java.util.Collection;
 
 import org.apache.struts.action.ActionForm;
 
-import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.dao.DaoRespuestasEncuesta;
