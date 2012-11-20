@@ -15,9 +15,7 @@ import com.evalquiler.actions.comun.ActionBase;
  * @version 	1.0
  * @author
  */
-public class NuevaBusquedaAction extends ActionBase
-
-{
+public class NuevaBusquedaAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("NuevaBusquedaAction.action()");

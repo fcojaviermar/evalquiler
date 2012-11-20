@@ -26,6 +26,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("ConfirmarRespuestasEncuestaAction.action()");
+		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
@@ -39,15 +40,14 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		}
 		
 		try {
-//			fechaInicioEvaluacionAlquiler
-//			fechaFinEvaluacionAlquiler
-			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = 
-												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
-			datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaInicioEvaluacionAlquiler());
-			datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaFinEvaluacionAlquiler());
+			datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 			
 			if (!OpRespuestasEncuesta.hayEncuestasRespondidasEnPeriodo(datosRealizacionEncuesta)) {
+
+				datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaInicioEvaluacionAlquiler());
+				datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaFinEvaluacionAlquiler());
 				DatosEncuestaActionForm datosEncuesta = datosRealizacionEncuesta.getDatosEncuesta();
+
 				if (null != datosEncuesta) {
 					Iterator<PreguntasEncuestaActionForm> oIter = datosEncuesta.getPreguntas().iterator();
 					int i=0;

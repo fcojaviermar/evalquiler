@@ -32,9 +32,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 
 {
 
-    public final ActionForward action(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
-	    throws Exception {
+    public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
     	System.out.println("InicioSesionUsuarioAction.action()");
     	Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = null;
@@ -56,7 +54,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );
 				forward = mapping.findForward("REGISTER_USER");
 			} else if (ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) {
-				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datoRealizacionEncuestaActionForm");
+				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 				encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosRealizacionEncuesta.getDatosUsuario());
 				request.setAttribute("encuestasRespondidas", encuestasRespondidas);
 				forward = mapping.findForward("POOL_RECOVERY");
@@ -81,7 +79,7 @@ public class InicioSesionUsuarioAction extends ActionBase
     							
     							datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();
     							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
-    							request.getSession().setAttribute("datoRealizacionEncuestaActionForm", datosRealizacionEncuesta);
+    							request.getSession().setAttribute("datosRealizacionEncuestaActionForm", datosRealizacionEncuesta);
     							
     							forward = mapping.findForward("VALID_USER");
     						} else {
