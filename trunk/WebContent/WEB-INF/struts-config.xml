@@ -44,6 +44,7 @@
 		<action input="/register.jsp" path="/IrFinSesionAction" name="datosVacioActionForm" 
                                             scope="request" type="com.evalquiler.actions.comun.FinalizarSesionAction" validate="false" >
 			<forward name="END" path="/Inicio.do"></forward>
+            <forward name="NEW" path="/IrSolicitarInformeAction.do"></forward>
 		</action>
         
 		<!-- =========================== Modulo Registro Usuarios =========================== -->
@@ -62,10 +63,10 @@
                                             scope="request" type="com.evalquiler.actions.usuario.InicioSesionUsuarioAction">
             <forward name="REGISTER_USER"        path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
             <forward name="NO_USER"    		 	 path="/Inicio.do"></forward>
+            <forward name="VALID_USER" 		 	 path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
             <forward name="FORGET_USER_DATA"     path="/IrFogotYourUserDataAction.do"></forward>
             <forward name="NO_EQUAL_PSW" 		 path="/Inicio.do"></forward>
             <forward name="TWO_EQUAL_USERS"  	 path="/Inicio.do"></forward>
-            <forward name="VALID_USER"           path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
             <forward name="POOL_RECOVERY"        path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
         </action>
     
@@ -142,7 +143,6 @@
                 name="datosRealizacionEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction">
             <forward name="OK"     path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
             <forward name="ERROR"  path="/IrInicioSesionUsuarioAction.do"></forward>
-            <forward name="ALREADY_EVAL"  path="/IrHacerEncuestaAction.do"></forward>
         </action>
 
         <action input="/jsp/encuestas/ConfirmarRespuestas.jsp" path="/IrGuardarRespuestasEncuestaAction"
