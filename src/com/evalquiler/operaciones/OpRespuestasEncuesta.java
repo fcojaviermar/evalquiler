@@ -37,7 +37,7 @@ public final class OpRespuestasEncuesta {
 	}
 
 	
-	public static final boolean hayEncuestasRespondidasEnPeriodo (final DatosRealizacionEncuestaActionForm datosRealizacionEncuestaIn) {
+	public static final boolean hayEncuestasRespondidasEnPeriodo (DatosRealizacionEncuestaActionForm datosRealizacionEncuestaIn) {
 		boolean hayEncuestas = true;
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = 
 														DaoRespuestasEncuesta.consultar(datosRealizacionEncuestaIn, 

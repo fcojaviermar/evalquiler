@@ -258,3 +258,4 @@ TH {padding:0PX 3px; margin:5px 0px; font-size:1.0em;}
 LEGEND{padding:10px 5px; font-size:0.8em; font-weight:bold; text-align:right;}
 LABEL{padding:0px 3px 0px 0px; margin:3px 0px; white-space: normal;/**/ font-size:75%; font-weight:normal; text-align:justify;}
 LABEL A{font-size:1em;}
+input.BotBoton{cursor:default; border:1px outset; padding:1px 2px; margin:4px 3px 0px 3px; font-size:0.75em; font-family:Verdana, sans-serif; overflow:visible;}
