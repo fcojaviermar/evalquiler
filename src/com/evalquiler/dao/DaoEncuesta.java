@@ -40,7 +40,7 @@ public class DaoEncuesta {
 	public final static String CONSULTAR_PARA_QUIEN_ES_ENCUESTA = "1";
 	
 	
-	public static final Collection<DatosEncuestaActionForm> consultar(final ActionForm objetoIn, final String tipoConsulta) {
+	public static final Collection<DatosEncuestaActionForm> consultar(ActionForm objetoIn, final String tipoConsulta) {
 		Collection<DatosEncuestaActionForm> datosEncuesta = new ArrayList<DatosEncuestaActionForm>();
 		DatosEncuestaActionForm encuesta = null;
 		RespuestasPreguntaActionForm respuesta = null;

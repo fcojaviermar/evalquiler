@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 
 /**
  * @version 	1.0
@@ -24,7 +25,7 @@ public class SolicitudInformeAction extends ActionBase {
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			String botonPulsado = (String)request.getParameter("BOTON_PULSADO");
+			String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 		    errors.add("name", new ActionMessage("id"));

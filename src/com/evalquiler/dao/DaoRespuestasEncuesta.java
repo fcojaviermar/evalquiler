@@ -128,7 +128,7 @@ public class DaoRespuestasEncuesta {
 		}
 	}	
 
-	public static final Collection<DatosRealizacionEncuestaActionForm> consultar(final ActionForm objetoIn, final int tipoConsulta) {
+	public static final Collection<DatosRealizacionEncuestaActionForm> consultar(ActionForm objetoIn, final int tipoConsulta) {
 		Collection<DatosRealizacionEncuestaActionForm> listaEncuestasRespondidas = new ArrayList<DatosRealizacionEncuestaActionForm>();
 		DatosRealizacionEncuestaActionForm encuestaRespondida = null;		
 		DatosEncuestaActionForm datosEncuesta = null;
