@@ -2,6 +2,7 @@ package com.evalquiler.actionforms.cliente;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
@@ -15,6 +16,16 @@ import com.evalquiler.entidad.ElementoComboTipoDocumento;
 public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
 
 	private String email  			 = null;
+	private String email2  			 = null;
+	public String getEmail2() {
+		return email2;
+	}
+
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+
 	private String nifcif 			 = null;
 	private String password2 		 = null;
 	private String descTipoDocumento = null;
@@ -88,6 +99,12 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionMessage("error.email.novalido"));
             }
 
+            if ( (null == this.getEmail2()) ||  ("".equals(this.getEmail2()))) {
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.email2"));
+            } else if (!Validaciones.emailValido(this.getEmail2())) {
+            	errors.add("errorValidacion", new ActionError("error.email2.novalido"));
+            }               
+            
             if ( "0".equals(this.getIdTipoDocumento()) ) {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipodocumento"));
             } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
@@ -109,6 +126,14 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
             } else if (!this.getPassword().equals(this.getPassword2())) {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.password2"));
             }
+            
+            if (!this.getPassword().equals(this.getPassword2())) {
+            	errors.add("errorValidacion", new ActionMessage("error.passwords.distintas"));
+            }
+            if (!this.getEmail().equals(this.getEmail2())) {
+            	errors.add("errorValidacion", new ActionMessage("error.emails.distintos"));
+            }
+            
     	} else {
     		System.out.println("Hay que borrar el objeto de sesion");
     	}

@@ -46,7 +46,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 		
 		try {
 			//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			String botonPulsado = request.getParameter("BOTON_PULSADO");
+			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 			
 			if (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) {
 				//Cargar las combos necesarias para dar de alta un usuario
@@ -61,6 +61,8 @@ public class InicioSesionUsuarioAction extends ActionBase
 				request.setAttribute("encuestasRespondidas", encuestasRespondidas);
 				forward = mapping.findForward("POOL_RECOVERY");
 			} else {
+//forward = mapping.findForward("NO_USER");				
+				
     			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
     			
     			if (!listaUsuario.isEmpty()) {

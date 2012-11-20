@@ -57,7 +57,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 						i = i +1;
 					}
 	    
-					((DatosRealizacionEncuestaActionForm)form).setDatosEncuesta(datosEncuesta);
+					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
 //	    			request.getSession().setAttribute("datosRealizacionEncuestaActionForm", form);
 				} else {
 					
