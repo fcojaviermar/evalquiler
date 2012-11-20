@@ -45,7 +45,7 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 //        logger.info("Test Log");
 //    	logger.debug("Prueba de log");
 
-		String botonPulsado = request.getParameter("BOTON_PULSADO");
+		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.REGISTRARSE.equals(botonPulsado)) && 
 			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) ) {
             if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {

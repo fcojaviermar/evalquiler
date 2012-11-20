@@ -15,6 +15,7 @@ import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.dao.DaoEncuesta;
 import com.evalquiler.operaciones.OpEncuesta;
 import com.evalquiler.operaciones.OpVivienda;
@@ -34,10 +35,10 @@ public class RecuperarEncuestaAction extends ActionBase {
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		
 		try {
-			botonPulsado = (String)request.getParameter("BOTON_PULSADO");
-			if ("Nueva vivienda".equals(botonPulsado)) {
+			botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
+			if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
 				forwardAux = "NEW_HOUSE";
-			} else if ("Responder".equals(botonPulsado)) {
+			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
 				//Entra por aquí si se produce una redirección del tipo ALREADY_EVAL
 				forwardAux = "THERE_IS_POLL";
 			} else {
