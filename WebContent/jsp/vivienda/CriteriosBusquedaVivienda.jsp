@@ -1,5 +1,6 @@
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 
 <html:html>
     <head>
@@ -9,6 +10,18 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+        <logic:messagesPresent>
+            <div id="errores" class="fondoAmarilloOscuro col90 alto200">
+                <html:errors/>
+                dd
+                <html:messages id="mensajes"/>
+            </div>
+        </logic:messagesPresent>
+        <logic:messagesNotPresent>
+            <div>
+            </div>
+        </logic:messagesNotPresent>     
+    
         <html:form action="/IrBuscarViviendaAction.do" method="post">    
 			<fieldset>
 			    <legend>Datos del usuario</legend>

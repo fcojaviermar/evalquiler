@@ -47,20 +47,19 @@ public class InicioSesionUsuarioAction extends ActionBase
 			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 			
 			if (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.REGISTER_USER;
 				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 				request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
 				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );
-				comandoDestino = ConstantesComandos.REGISTER_USER;
 			} else if (ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.POOL_RECOVERY;				
 				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 				encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosRealizacionEncuesta.getDatosUsuario());
 				request.setAttribute("encuestasRespondidas", encuestasRespondidas);
-				comandoDestino = ConstantesComandos.POOL_RECOVERY;				
 			} else {
     			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
-    			
     			if (!listaUsuario.isEmpty()) {
     
     				if (1 == listaUsuario.size()) {
@@ -71,7 +70,6 @@ public class InicioSesionUsuarioAction extends ActionBase
     						final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
     					
     						if (pwd.equals(datosUsuario.getPassword())) {
-    							System.out.println("La password es igual.");
     							datosRealizacionEncuesta = new DatosRealizacionEncuestaActionForm();    							
     							datosRealizacionEncuesta.setDatosUsuario(datosUsuario);
     							
@@ -81,7 +79,6 @@ public class InicioSesionUsuarioAction extends ActionBase
     							request.setAttribute("encuestasRespondidas", encuestasRespondidas);    							
     							request.getSession().setAttribute("datosRealizacionEncuestaActionForm", datosRealizacionEncuesta);    							
     						} else {
-    							System.out.println("La password NO es igual 1.");
     							comandoDestino = ConstantesComandos.NO_EQUAL_PSW;
     							errors.add("errorValidacion", new ActionError("error.distinta.password"));
     						}
@@ -90,21 +87,17 @@ public class InicioSesionUsuarioAction extends ActionBase
     						errors.add("errorValidacion", new ActionError("error.no.existe.usuario"));
     					}
     				} else {
-    					System.out.println("La password NO es igual 2.");
     					comandoDestino = ConstantesComandos.TWO_EQUAL_USERS;
     					errors.add("errorValidacion", new ActionError("error.mas.de.un.usuario"));
     				}
     			} else {
-    				System.out.println("El usuario no existe.");
     				comandoDestino = ConstantesComandos.NO_USER;
     				errors.add("errorValidacion", new ActionError("error.no.existe.usuario"));    				
     			}
 			}
 		} catch (Exception e) {
-			System.out.println("La password usuario NO es igual 4.");
 			comandoDestino = ConstantesComandos.ERROR;
-		    // Report the error using the appropriate name and ID.
-		    //errors.add("name", new ActionMessage("id"));
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
 
 		forward = mapping.findForward(comandoDestino);
@@ -112,11 +105,8 @@ public class InicioSesionUsuarioAction extends ActionBase
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-//		    // Forward control to the appropriate 'failure' URI (change name as desired)
 		} else {
-			System.out.println("No hay errores.");
-		    // Forward control to the appropriate 'success' URI (change name as desired)
-//			request.setAttribute("datosPropietario", (DatosPropietarioActionForm)form);
+
 		}
 	
 		return forward;

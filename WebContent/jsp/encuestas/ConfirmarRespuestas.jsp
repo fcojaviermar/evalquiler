@@ -16,10 +16,10 @@
                 <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
                 <fieldset>
                     <legend><bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/></legend>     
-                        <div class="fechas-div">
-                            <label for="fechaInicioEvaluacionAlquiler"><strong class="user-label">Fecha inicial evaluación:&nbsp;</strong></label>
+                        <div>
+                            <label for="fechaInicioEvaluacionAlquiler"><strong>Fecha inicial evaluación:&nbsp;</strong></label>
                             <bean:write name="datosRealizacionEncuestaActionForm" property="fechaInicioEvaluacionAlquiler"/>
-                            <label for="fechaFinEvaluacionAlquiler"><strong class="user-label">Fecha final evaluación:&nbsp;</strong></label>
+                            <label for="fechaFinEvaluacionAlquiler"><strong>Fecha final evaluación:&nbsp;</strong></label>
                             <bean:write name="datosRealizacionEncuestaActionForm" property="fechaFinEvaluacionAlquiler"/>
                         </div>
                                                             
