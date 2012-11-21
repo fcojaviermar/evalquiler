@@ -50,9 +50,8 @@
 			                        </logic:iterate>
 			                    </logic:notEmpty>
 			                    <logic:empty name="encuestasRespondidas">
-	 								<tr>
-			                        	<td>Todavía no ha contestado ninguna encuesta.
-			                        	</td>
+	 								<tr class="alineacionCentrada">
+			                        	<td colspan="4">Todavía no ha contestado ninguna encuesta.</td>
 			                        </tr>		                    
 			                    </logic:empty>
 			                </tbody>
