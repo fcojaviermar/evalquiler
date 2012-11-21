@@ -111,9 +111,7 @@ public class InicioSesionUsuarioAction extends ActionBase
 		
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
-			System.out.println("Hay errores.");
 		    saveErrors(request, errors);
-		    System.out.println("Errores guardados.");	
 //		    // Forward control to the appropriate 'failure' URI (change name as desired)
 		} else {
 			System.out.println("No hay errores.");
