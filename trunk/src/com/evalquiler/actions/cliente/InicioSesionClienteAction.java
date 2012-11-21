@@ -17,6 +17,7 @@ import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.operaciones.OpCliente;
 
@@ -24,15 +25,11 @@ import com.evalquiler.operaciones.OpCliente;
  * @version 	1.0
  * @author
  */
-public class InicioSesionClienteAction extends ActionBase
+public class InicioSesionClienteAction extends ActionBase {
 
-{
-
-    public final ActionForward action(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
-	    throws Exception {
-
+    public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	System.out.println("InicioSesionClienteAction.action()");
+    	String comandoDestino = ConstantesComandos.NO_CLIENT;
     	DatosInicioSesionActionForm cliente = null;    	
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
@@ -45,7 +42,7 @@ public class InicioSesionClienteAction extends ActionBase
 				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
 				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
-				forward = mapping.findForward("REGISTER_CLIENT");
+				comandoDestino = ConstantesComandos.REGISTER_CLIENT;
 			} else {
     			Collection<DatosClienteActionForm> listaCliente = OpCliente.consultarPorPk(form);
     			
@@ -58,47 +55,38 @@ public class InicioSesionClienteAction extends ActionBase
     						final String pwd = ((DatosClienteActionForm)form).getPassword(); 
     						
     						if (pwd.equals(cliente.getPassword())) {
-    							System.out.println("La password es igual.");
-    							forward = mapping.findForward("VALID_CLIENT");
+    							comandoDestino = ConstantesComandos.VALID_CLIENT;
     						} else {
     							System.out.println("La password NO es igual 1.");
-    				        	errors.add("errorValidacion", new ActionError("error.distinta.password"));
-    							forward = mapping.findForward("NO_EQUAL_PSW");
+    				        	comandoDestino = ConstantesComandos.NO_EQUAL_PSW;
+    							errors.add("errorValidacion", new ActionError("error.distinta.password"));
     						}
     					} else {
+    						comandoDestino = ConstantesComandos.NO_CLIENT;
     						errors.add("errorValidacion", new ActionError("error.no.existe.cliente"));
-    						forward = mapping.findForward("NO_CLIENT");
     					}
     				} else {
-    					System.out.println("La password NO es igual 2.");
+    					comandoDestino = ConstantesComandos.ERROR_2_EQUAL_CLIENTS;
     					errors.add("errorValidacion", new ActionError("error.mas.de.un.cliente"));
-    					forward = mapping.findForward("ERROR_2_EQUAL_CLIENT");
     				}
     			} else {
-    				System.out.println("La password NO es igual 3.");
-    				errors.add("errorValidacion", new ActionError("error.no.existe.cliente"));				
-    				forward = mapping.findForward("NO_CLIENT");
+    				comandoDestino = ConstantesComandos.NO_CLIENT;    				
+    				errors.add("errorValidacion", new ActionError("error.no.existe.cliente"));
     			}
 			}
 		} catch (Exception e) {
-			System.out.println("La password Cliente NO es igual 4.");
+			comandoDestino = ConstantesComandos.ERROR;
 		    // Report the error using the appropriate name and ID.
 		    //errors.add("name", new ActionMessage("id"));
 		}
 
-		
+		forward = mapping.findForward(comandoDestino);
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
 			System.out.println("Hay errores.");
 		    saveErrors(request, errors);
-		    System.out.println("Errores guardados.");	
-//		    // Forward control to the appropriate 'failure' URI (change name as desired)
-//		    forward = mapping.findForward("ERROR");
 		} else {
-			System.out.println("No hay errores.");
-		    // Forward control to the appropriate 'success' URI (change name as desired)
-//			request.setAttribute("datosPropietario", (DatosPropietarioActionForm)form);
-//		    forward = mapping.findForward("OK");
+
 		}
 	
 		return forward;

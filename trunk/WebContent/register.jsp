@@ -78,9 +78,7 @@
                         <html:link styleClass="alto25" href="IrFogotYourClientDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de cliente?</html:link>                    
                     </div>
                 </html:form>
-				
 			</fieldset>
         </div>
-
     </body>
 </html:html>

@@ -27,7 +27,7 @@
                             <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
                                 <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
                                     <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
-                                        <span>Pregunta </span> 
+                                        <span>Pregunta <%=String.valueOf(indicePregunta+1)%></span> 
                                         <bean:write name="indicePregunta"/>
                                     </legend>       
                                     <p class="p1 rellenoIzq12 margenSup0 rellenoSup0 textoAmarilloMedio">
@@ -55,9 +55,12 @@
                             </div>                                  
                         </logic:iterate>
                 </fieldset>
-                <html:submit property="BOTON_PULSADO" value="Guardar encuesta"/>
-                <html:submit property="BOTON_PULSADO" value="Cancelar"/>
+                <div id="botonera">
+                    <html:submit property="BOTON_PULSADO" value="Guardar encuesta"/>
+                    <html:submit property="BOTON_PULSADO" value="Cancelar"/>
+                </div>
 		    </fieldset>
-        </html:form>							
+        </html:form>		
+        <%@include file="../comun/Salir.jsp"%>
     </body>
 </html:html>

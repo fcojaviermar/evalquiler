@@ -52,8 +52,6 @@
         		</fieldset>
 			</html:form>
         </div>
-		<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro ancho85">
-			<%@include file="../comun/Salir.jsp"%>		
-		</div>        
+		<%@include file="../comun/Salir.jsp"%>		
     </body>
 </html:html>

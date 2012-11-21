@@ -60,15 +60,16 @@
 			                </label>
 			            </p>
 			            <p>
-			                   <label for="nifPropietario" title=""><strong >N.I.F/C.I.F:&nbsp;</strong>
-			                       <html:text property="nifPropietario" size="9" maxlength="10"></html:text>                  
-			                   </label>
+			                <label for="nifPropietario" title=""><strong >N.I.F/C.I.F:&nbsp;</strong>
+                                <html:text property="nifPropietario" size="9" maxlength="10"></html:text>                  
+			                </label>
 			            </p>                                            	                            
 			            <html:submit title="Buscar una dirección">Buscar</html:submit>
-			            <html:submit title="Volver al listado de encuestas respondidas">Salir</html:submit>
-                             </div>						            
+			            <html:submit title="Volver al listado de encuestas respondidas">Cancelar</html:submit>
+                    </div>						            
 	            </fieldset>
 	        </fieldset>
-        </html:form>                
+        </html:form>          
+        <%@include file="../comun/Salir.jsp"%>              
     </body>
 </html:html>
