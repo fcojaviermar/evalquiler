@@ -30,10 +30,14 @@
 
 <!-- ================================= Global Exception Definitions -->
     <global-exceptions>
+        <exception key="error.global.mesage" type="java.lang.Exception" path="/jsp/comun/Error.jsp" />
     </global-exceptions>
 
 <!-- =================================== Global Forward Definitions -->
     <global-forwards>
+        <forward name="ERROR" path="/jsp/comun/Error.jsp"/>
+        <forward name="EXIT"  path="/IrInicioSesionUsuarioAction.do"></forward>
+        <forward name="END"   path="/Inicio.do"></forward>        
     </global-forwards>
 
 <!-- =================================== Action Mapping Definitions -->
@@ -43,7 +47,6 @@
         <!-- =========================== Acciones comunes =========================== -->
 		<action input="/register.jsp" path="/IrFinSesionAction" name="datosVacioActionForm" 
                                             scope="request" type="com.evalquiler.actions.comun.FinalizarSesionAction" validate="false" >
-			<forward name="END" path="/Inicio.do"></forward>
             <forward name="NEW" path="/IrSolicitarInformeAction.do"></forward>
 		</action>
         
@@ -121,7 +124,6 @@
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
                 name="datosVacioActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
             <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
-            <forward name="EXIT"  path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
 	
         <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"

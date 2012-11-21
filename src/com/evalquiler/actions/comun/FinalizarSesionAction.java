@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.comun.constantes.ConstantesComandos;
 
 /**
  * @version 	1.0
@@ -24,10 +25,10 @@ public class FinalizarSesionAction extends ActionBase {
 		
 		if (ConstantesBotones.SALIR.equals(botonPulsado)) {
 			//Destruimos la sesion.
-			request.getSession().invalidate();
-			forward = mapping.findForward("END");
+			forward = mapping.findForward(ConstantesComandos.END);
+			request.getSession().invalidate();			
 		} else {
-			forward = mapping.findForward("END");
+			forward = mapping.findForward(ConstantesComandos.ERROR);
 		}
 
 		return forward;

@@ -40,11 +40,13 @@
                             </tr>
                         </table>                        
                         <html:form action="/IrAceptarDatosClienteAction.do" method="post">
-                            <html:submit>Aceptar</html:submit>
+                            <html:submit property="BOTON_PULSADO" value="Aceptar"/>
+                            <html:submit property="BOTON_PULSADO" value="Cancelar"/>                            
                         </html:form>
                     </div>
                 </td>
             </tr>
         </table>
+        <%@include file="../comun/Salir.jsp"%>        
     </body>
 </html:html>

@@ -16,6 +16,7 @@ import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.dao.DaoEncuesta;
 import com.evalquiler.operaciones.OpEncuesta;
 import com.evalquiler.operaciones.OpVivienda;
@@ -28,19 +29,20 @@ public class RecuperarEncuestaAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("RecuperarEncuestaAction.action()");
+		String comandoDestino = ConstantesComandos.EXIT;
+	
 		ActionMessages errors = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 		String botonPulsado   = null;
-		String forwardAux 	  = null;		
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		
 		try {
 			botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
 			if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
-				forwardAux = "NEW_HOUSE";
+				comandoDestino = ConstantesComandos.NEW_HOUSE;
 			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
-				//Entra por aquí si se produce una redirección del tipo ALREADY_EVAL
-				forwardAux = "THERE_IS_POLL";
+				//Entra por aquí si se produce una redireccion del tipo ALREADY_EVAL
+				comandoDestino = ConstantesComandos.THERE_IS_POLL;
 			} else {
 				DatosViviendaActionForm viviendaSeleccionada = new DatosViviendaActionForm();
 				viviendaSeleccionada.setIdVivienda(Integer.parseInt((String)request.getParameter("idVivienda")));
@@ -57,7 +59,7 @@ public class RecuperarEncuestaAction extends ActionBase {
     					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
     					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
 
-    					forwardAux = "THERE_IS_POLL";
+    					comandoDestino = ConstantesComandos.THERE_IS_POLL;
     				} else {
     					
     				}
@@ -69,19 +71,21 @@ public class RecuperarEncuestaAction extends ActionBase {
 	
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
+			comandoDestino = ConstantesComandos.ERROR;
 		    errors.add("name", new ActionMessage("id"));
 		}
-	
-		// If a message is required, save the specified key(s)
+
+	    forward = mapping.findForward(comandoDestino);
+		
+	    // If a message is required, save the specified key(s)
 		// into the request for use by the <struts:errors> tag.
-	
 		if (!errors.isEmpty()) {
 		    //saveErrors(request, errors);
 		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    forward = mapping.findForward("SALIR");
+
 		} else {
 		    // Forward control to the appropriate 'success' URI (change name as desired)
-			forward = mapping.findForward(forwardAux);
+
 		}
 	
 		// Finish with
