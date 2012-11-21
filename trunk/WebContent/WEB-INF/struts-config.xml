@@ -130,7 +130,7 @@
                 name="criteriosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.RealizarBusquedaViviendaAction">
             <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
             <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
-            <forward name="ERROR"                 path="/IrBusquedaDireccionAction.do"></forward>
+            <forward name="NO_RESULT"             path="/IrBusquedaDireccionAction.do"></forward>
         </action>
 
         <action input="/jsp/vivienda/ListadoDireccionesEncontradas.jsp" path="/IrHacerEncuestaAction"

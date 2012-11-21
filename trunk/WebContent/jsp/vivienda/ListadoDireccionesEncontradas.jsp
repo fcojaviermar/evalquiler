@@ -5,14 +5,14 @@
 <html:html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Listado de viviendas</title>
+        <title>Listado de viviendas encontradas</title>
         <link rel="stylesheet" type="text/css" href="./css/ColorGeneral.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />
     </head>
     <body>
 		<html:form action="/IrHacerEncuestaAction.do" method="post">
 	        <div id="titulo">
-	            <H3 class="alineacionCentrada">Resumen de encuestas respondidas</H3>
+	            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>
 		   
 		        <fieldset>
 		            <legend>Datos del usuario</legend>
