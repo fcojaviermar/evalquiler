@@ -13,6 +13,7 @@ public abstract class Constantes {
 	
 	public final static int ELEMENTO_NO_SELECCIONADO = 0;
 	public final static int SIN_NUMERICO_EN_VIA		 = 0;
+	public final static int SIN_NUMERO_O_PORTAL		 = -1;
 	
 	public final static int MAXIMO_TIPO_VIA 	= 99;
 	public final static int MAXIMO_NUMERO_VIA 	= 9999;

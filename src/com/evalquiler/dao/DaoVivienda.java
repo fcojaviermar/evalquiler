@@ -383,27 +383,27 @@ public class DaoVivienda {
 		switch (sentencia) {
 			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
 					if (vivienda.tieneInfoNombreVia()) 
-						sentenciaEjecutar.concat(AND_NOMBREVIA);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_NOMBREVIA);
 					if (vivienda.tieneIdTipoVia()) 
-						sentenciaEjecutar.concat(AND_IDTIPOVIA);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_IDTIPOVIA);
 					if (vivienda.tieneNumeroVia()) 
-						sentenciaEjecutar.concat(AND_NUMEROVIA);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_NUMEROVIA);
 					if (vivienda.tieneBloque()) 
-						sentenciaEjecutar.concat(AND_BLOQUE);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_BLOQUE);
 					if (vivienda.tienePortal()) 
-						sentenciaEjecutar.concat(AND_PORTAL);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_PORTAL);
 					if (vivienda.tieneEscalera()) 
-						sentenciaEjecutar.concat(AND_ESCALERA);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_ESCALERA);
 					if (vivienda.tienePlanta()) 
-						sentenciaEjecutar.concat(AND_PLANTA);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_PLANTA);
 					if (vivienda.tienePuerta()) 
-						sentenciaEjecutar.concat(AND_PUERTA);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_PUERTA);
 					if (vivienda.tieneCodigoPostal()) 
-						sentenciaEjecutar.concat(AND_CODIGOPOSTAL);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_CODIGOPOSTAL);
 					if (vivienda.tieneMunicipio()) 
-						sentenciaEjecutar.concat(AND_MUNICIPIO);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_MUNICIPIO);
 					if (vivienda.tieneNifPropietario()) 
-						sentenciaEjecutar.concat(AND_NIFPROPIETARIO);
+						sentenciaEjecutar = sentenciaEjecutar.concat(AND_NIFPROPIETARIO);
 					break;
 			default:break; 
 		}
