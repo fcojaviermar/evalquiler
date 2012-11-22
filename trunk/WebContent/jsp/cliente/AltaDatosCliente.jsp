@@ -16,35 +16,35 @@
 					<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
 						Datos de alta del cliente
 					</legend>        
-	            	<div id="div-vacio" class="alto50"></div>
-	                <div id="User-div" class="alto50">
-	                   <label for="user" class="texto100 col20"><strong>Usuario:&nbsp;</strong></label>
+	            	<div id="div-vacio" class="alto25"></div>
+	                <div id="User-div" class="alto25">
+	                   <label for="user" class="texto90 col20"><strong>Usuario:&nbsp;</strong></label>
 	                   <html:text property="user" size="20" maxlength="20" styleClass="fondoBlanco" title="Introducir usuario"></html:text>
 	                </div>
-	                <div id="Password-div"  class="alto50">
-	                   <label for="Password" class="texto100 col20"><strong>Contraseña:&nbsp;</strong></label>
+	                <div id="Password-div"  class="alto25">
+	                   <label for="Password" class="texto90 col20"><strong>Contraseña:&nbsp;</strong></label>
 	                   <html:password property="password" size="20" maxlength="20" styleClass="fondoBlanco" title="Introducir contraseña"></html:password>
 	                </div>
-	                <div id="Password-div" class="alto50">
-	                   <label for="Password" class="texto100 col20"><strong>Repetir contraseña:&nbsp;</strong></label>
+	                <div id="Password-div" class="alto25">
+	                   <label for="Password" class="texto90 col20"><strong>Repetir contraseña:&nbsp;</strong></label>
 	                   <html:password property="password2" size="20" maxlength="20" styleClass="fondoBlanco" title="Repetir contraseña"></html:password>
 	                </div>                            
-	                <div id="tipo_nifcif-div" class="alto50">
-	                    <label for="tipo_nifcif" class="texto100 col20"><strong>Tipo documento:&nbsp;</strong></label>
+	                <div id="tipo_nifcif-div" class="alto25">
+	                    <label for="tipo_nifcif" class="texto90 col20"><strong>Tipo documento:&nbsp;</strong></label>
 						<html:select name="tipoDocumentoSeleccionado" property="idTipoDocumento" styleClass="fondoBlanco" title="Seleccionar tipo de documento">
 						   <html:optionsCollection name="tipoDocumento" value="idTipoDocumento" label="descripcion"/>
 						</html:select>
 	                </div>                                              
-	                <div id="nifcif-div" class="alto50">
-	                   <label for="nifcif" class="texto100 col20"><strong>N.I.F./C.I.F:&nbsp;</strong></label>
+	                <div id="nifcif-div" class="alto25">
+	                   <label for="nifcif" class="texto90 col20"><strong>N.I.F./C.I.F:&nbsp;</strong></label>
 	                   <html:text property="nifcif" size="9" maxlength="9" styleClass="fondoBlanco" title="Introducir NIF"></html:text>
 	                </div>                            
-	                <div id="email-div" class="alto50">
-	                   <label for="email" class="texto100 col20"><strong>Correo electrónico:&nbsp;</strong></label>
+	                <div id="email-div" class="alto25">
+	                   <label for="email" class="texto90 col20"><strong>Correo electrónico:&nbsp;</strong></label>
 	                   <html:text property="email" size="100" maxlength="30" styleClass="fondoBlanco" title="Introducir dirección de correo electrónico"></html:text>
 	                </div>
-	                <div id="email2-div" class="alto50">
-	                   <label for="email2" class="texto100 col20"><strong>Correo electrónico:&nbsp;</strong></label>
+	                <div id="email2-div" class="alto25">
+	                   <label for="email2" class="texto90 col20"><strong>Correo electrónico:&nbsp;</strong></label>
 	                   <html:text property="email2" size="100" maxlength="30" styleClass="fondoBlanco" title="Repetir dirección de correo electrónico"></html:text>
 	                </div>
                  	<div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
