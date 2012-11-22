@@ -37,20 +37,31 @@ public class DaoVivienda {
 															"PUERTA, CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO) " +
 															"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
-															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
+	private final static String CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, " +
+																		 "ESCALERA, PLANTA, PUERTA, CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, " +
+																		 "NIFPROPIETARIO " +
+																		 "FROM VIVIENDA " +
+																		 "WHERE PROVINCIA = ? AND PAIS = ? ";
+	private final static String AND_NOMBREVIA = "AND NOMBREVIA LIKE ? ";
+	private final static String AND_IDTIPOVIA = "AND IDTIPOVIA = ? ";
+	private final static String AND_NUMEROVIA = "AND NUMEROVIA = ? ";
+	private final static String AND_BLOQUE = "AND BLOQUE = ? ";
+	private final static String AND_PORTAL = "AND PORTAL = ? ";
+	private final static String AND_ESCALERA = "AND ESCALERA = ? ";
+	private final static String AND_PLANTA = "AND PLANTA = ? ";
+	private final static String AND_PUERTA = "AND PUERTA = ? ";
+	private final static String AND_CODIGOPOSTAL = "AND CODIGOPOSTAL = ? ";
+	private final static String AND_MUNICIPIO = "AND MUNICIPIO = ? ";
+	private final static String AND_NIFPROPIETARIO = "AND NIFPROPIETARIO = ?";
+
+	
+
+	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, " +
+															"PUERTA, CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
 															"FROM VIVIENDA " +
 															"WHERE IDTIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
 															"AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ? " +
-															"AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";
-	
-	private final static String CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO 		  
-														  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
-														    "CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-														    "FROM VIVIENDA " +
-														    "WHERE IDTIPOVIA = ? OR NOMBREVIA = ? OR NUMEROVIA = ? OR BLOQUE = ? " +
-														    "OR PORTAL = ? OR ESCALERA = ? OR PLANTA = ? OR PUERTA = ? OR CODIGOPOSTAL = ? " +
-														    "OR MUNICIPIO = ? OR PROVINCIA = ? OR PAIS = ? OR NIFPROPIETARIO = ?";
+															"AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";	
 	
 	public static final Collection<DatosViviendaActionForm> consultarPorPk(final long idVivienda) {
 		Collection<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
@@ -74,7 +85,7 @@ public class DaoVivienda {
 						vivienda.setBloque(rs.getString("BLOQUE"));
 						vivienda.setPortal(rs.getInt("PORTAL"));
 						vivienda.setEscalera(rs.getString("ESCALERA"));
-						vivienda.setPlanta(rs.getInt("PLANTA"));
+						vivienda.setPlanta(rs.getString("PLANTA"));
 						vivienda.setPuerta(rs.getString("PUERTA"));
 						vivienda.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
 						vivienda.setMunicipio(rs.getInt("MUNICIPIO"));
@@ -138,7 +149,7 @@ public class DaoVivienda {
 					pstmt.setString(5, vivienda.getBloque());
 					pstmt.setInt(6, vivienda.getPortal());
 					pstmt.setString(7, vivienda.getEscalera());
-					pstmt.setInt(8, vivienda.getPlanta());
+					pstmt.setString(8, vivienda.getPlanta());
 					pstmt.setString(9, vivienda.getPuerta());
 					pstmt.setInt(10, vivienda.getCodigoPostal());
 					pstmt.setInt(11, vivienda.getMunicipio());
@@ -193,13 +204,13 @@ public class DaoVivienda {
 		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
-		final String sentenciaEjecutar = obtenerSentencia(sentencia);
+		final String sentenciaEjecutar = obtenerSentencia(sentencia, (CriteriosBusquedaViviendaActionForm)vivienda);
 		Connection conn = ConexionBD.getConnection();
 		try {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(sentenciaEjecutar);
 				if (null != pstmt) {
-					pstmt = prepararWhere(vivienda, pstmt, sentencia);
+					pstmt = prepararWhere((CriteriosBusquedaViviendaActionForm)vivienda, pstmt, sentencia);
 					rs = pstmt.executeQuery() ; 
 					while(rs.next()) {
 						viviendaAux = new DatosViviendaActionForm();
@@ -210,7 +221,7 @@ public class DaoVivienda {
 						viviendaAux.setBloque(rs.getString("BLOQUE"));
 						viviendaAux.setPortal(rs.getInt("PORTAL"));
 						viviendaAux.setEscalera(rs.getString("ESCALERA"));
-						viviendaAux.setPlanta(rs.getInt("PLANTA"));
+						viviendaAux.setPlanta(rs.getString("PLANTA"));
 						viviendaAux.setPuerta(rs.getString("PUERTA"));
 						viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
 						viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
@@ -310,35 +321,92 @@ public class DaoVivienda {
 	}
 
 
-	private final static String obtenerSentencia(final int sentencia) {
-		String sentenciaEjecutar ="";
-		switch (sentencia) {
-			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
-					break;
-			default:break; 
-		}
-		return sentenciaEjecutar;
-	}
-	
-	private final static PreparedStatement prepararWhere(final ActionForm vivienda, PreparedStatement pstmt, 
+	private final static PreparedStatement prepararWhere(final CriteriosBusquedaViviendaActionForm vivienda, PreparedStatement pstmt, 
 														 final int sentencia) throws SQLException {
 		switch (sentencia) {
-			case 1: pstmt.setInt(1, ((CriteriosBusquedaViviendaActionForm)vivienda).getIdTipoVia());
-			    	pstmt.setString(2, ((CriteriosBusquedaViviendaActionForm)vivienda).getNombreVia());
-			    	pstmt.setInt(3, ((CriteriosBusquedaViviendaActionForm)vivienda).getNumeroVia());
-			    	pstmt.setString(4, ((CriteriosBusquedaViviendaActionForm)vivienda).getBloque());
-			    	pstmt.setInt(5, ((CriteriosBusquedaViviendaActionForm)vivienda).getPortal());
-			    	pstmt.setString(6, ((CriteriosBusquedaViviendaActionForm)vivienda).getEscalera());
-			    	pstmt.setInt(7, ((CriteriosBusquedaViviendaActionForm)vivienda).getPlanta());
-			    	pstmt.setString(8, ((CriteriosBusquedaViviendaActionForm)vivienda).getPuerta());
-			    	pstmt.setInt(9, ((CriteriosBusquedaViviendaActionForm)vivienda).getCodigoPostal());
-			    	pstmt.setInt(10, ((CriteriosBusquedaViviendaActionForm)vivienda).getMunicipio());
-			    	pstmt.setInt(11, ((CriteriosBusquedaViviendaActionForm)vivienda).getProvincia());
-			    	pstmt.setInt(12, ((CriteriosBusquedaViviendaActionForm)vivienda).getPais());
-			    	pstmt.setString(13, ((CriteriosBusquedaViviendaActionForm)vivienda).getNifPropietario());
+			case 1: pstmt.setInt(1, vivienda.getProvincia());
+					pstmt.setInt(2, vivienda.getPais());  
+					int i=3;
+					if (vivienda.tieneInfoNombreVia()) { 
+						pstmt.setString(i, vivienda.getNombreViaLike());
+						i = i + 1;
+					}
+					if (vivienda.tieneIdTipoVia()) { 
+						pstmt.setInt(i, vivienda.getIdTipoVia());
+						i = i + 1;
+					}
+					if (vivienda.tieneNumeroVia()) { 
+						pstmt.setInt(i, vivienda.getNumeroVia());
+						i = i + 1;
+					}
+					if (vivienda.tieneBloque()) { 
+						pstmt.setString(i, vivienda.getBloqueLike());
+						i = i + 1;
+					}
+					if (vivienda.tienePortal()) { 
+						pstmt.setInt(i, vivienda.getPortal());
+						i = i + 1;
+					}
+					if (vivienda.tieneEscalera()) { 
+						pstmt.setString(i, vivienda.getEscaleraLike());
+						i = i + 1;
+					}
+					if (vivienda.tienePlanta()) { 
+						pstmt.setInt(i, vivienda.getPlanta());
+						i = i + 1;
+					}
+					if (vivienda.tienePuerta()) { 
+						pstmt.setString(i, vivienda.getPuertaLike());
+						i = i + 1;
+					}
+					if (vivienda.tieneCodigoPostal()) { 
+						pstmt.setInt(i, vivienda.getCodigoPostal());
+						i = i + 1;
+					}
+					if (vivienda.tieneMunicipio()) { 
+						pstmt.setInt(i, vivienda.getMunicipio());
+						i = i + 1;
+					}
+					if (vivienda.tieneNifPropietario()) { 
+						pstmt.setString(i, vivienda.getNifPropietarioLike());
+						i = i + 1;
+					}
 					break;
 			default:break; 
 		}
 		return pstmt;
+	}
+
+	
+	private final static String obtenerSentencia(final int sentencia, final CriteriosBusquedaViviendaActionForm vivienda) {
+		String sentenciaEjecutar ="";
+		switch (sentencia) {
+			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
+					if (vivienda.tieneInfoNombreVia()) 
+						sentenciaEjecutar.concat(AND_NOMBREVIA);
+					if (vivienda.tieneIdTipoVia()) 
+						sentenciaEjecutar.concat(AND_IDTIPOVIA);
+					if (vivienda.tieneNumeroVia()) 
+						sentenciaEjecutar.concat(AND_NUMEROVIA);
+					if (vivienda.tieneBloque()) 
+						sentenciaEjecutar.concat(AND_BLOQUE);
+					if (vivienda.tienePortal()) 
+						sentenciaEjecutar.concat(AND_PORTAL);
+					if (vivienda.tieneEscalera()) 
+						sentenciaEjecutar.concat(AND_ESCALERA);
+					if (vivienda.tienePlanta()) 
+						sentenciaEjecutar.concat(AND_PLANTA);
+					if (vivienda.tienePuerta()) 
+						sentenciaEjecutar.concat(AND_PUERTA);
+					if (vivienda.tieneCodigoPostal()) 
+						sentenciaEjecutar.concat(AND_CODIGOPOSTAL);
+					if (vivienda.tieneMunicipio()) 
+						sentenciaEjecutar.concat(AND_MUNICIPIO);
+					if (vivienda.tieneNifPropietario()) 
+						sentenciaEjecutar.concat(AND_NIFPROPIETARIO);
+					break;
+			default:break; 
+		}
+		return sentenciaEjecutar;
 	}	
 }
