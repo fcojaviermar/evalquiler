@@ -9,77 +9,12 @@ import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.utilidades.Validaciones;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 
 public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
-
-	private String email  			 = null;
-	private String email2  			 = null;
-	public String getEmail2() {
-		return email2;
-	}
-
-
-	public void setEmail2(String email2) {
-		this.email2 = email2;
-	}
-
-	private String nifcif 			 = null;
-	private String password2 		 = null;
-	private String descTipoDocumento = null;
-	private int idTipoDocumento 	 = 0;
-	
-	
-	public int getIdTipoDocumento() {
-		return idTipoDocumento;
-	}
-
-
-	public void setIdTipoDocumento(int idTipoDocumento) {
-		this.idTipoDocumento = idTipoDocumento;
-	}
-
-
-	public String getPassword2() {
-		return password2;
-	}
-
-
-	public void setPassword2(String password2) {
-		this.password2 = password2;
-	}
-
-
-	public String getDescTipoDocumento() {
-		return descTipoDocumento;
-	}
-
-
-	public void setDescTipoDocumento(String descTipoDocumento) {
-		this.descTipoDocumento = descTipoDocumento;
-	}
-
-
-	public String getNifcif() {
-		return nifcif;
-	}
-
-
-	public void setNifcif(String nifcif) {
-		this.nifcif = nifcif;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 
 	/*
      * Validamamos los datos introducidos por el usuario
@@ -105,7 +40,7 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionError("error.email2.novalido"));
             }               
             
-            if ( "0".equals(this.getIdTipoDocumento()) ) {
+            if (Constantes.ELEMENTO_NO_SELECCIONADO == this.getIdTipoDocumento()) {
             	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipodocumento"));
             } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
             	errors.add("errorValidacion", new ActionMessage("error.tipodocumento.novalido"));            	

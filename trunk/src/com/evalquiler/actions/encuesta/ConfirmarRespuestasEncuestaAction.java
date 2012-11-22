@@ -6,16 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
 /**
@@ -27,19 +28,15 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("ConfirmarRespuestasEncuestaAction.action()");
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
-		
-		ActionMessages errors = new ActionMessages();
+		String comandoDestino = ConstantesComandos.EMPTY;		
+		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
-		String destino = "OK";
+
 		
 		int iNumeroPreguntas = 0;
 		try {
 			iNumeroPreguntas = Integer.parseInt((String)request.getParameter("NumeroPreguntas"));	
-		} catch (NumberFormatException e) {
-			
-		}
-		
-		try {
+
 			datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 			
 			if (!OpRespuestasEncuesta.hayEncuestasRespondidasEnPeriodo(datosRealizacionEncuesta)) {
@@ -58,29 +55,29 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 					}
 	    
 					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
-//	    			request.getSession().setAttribute("datosRealizacionEncuestaActionForm", form);
+					comandoDestino = ConstantesComandos.OK;
 				} else {
 					
 				}
 			} else {
-				destino = "ALREADY_EVAL";
+				comandoDestino = ConstantesComandos.ALREADY_EVAL;
 				errors.add("errorValidacion", new ActionMessage("error.periodo.ya.evaluado.para.vivienda"));
 			}
+		} catch (NumberFormatException e) {
+			comandoDestino = ConstantesComandos.ERROR;
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
-		    errors.add("name", new ActionError("id"));
+			comandoDestino = ConstantesComandos.ERROR;
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
 	
 		if (!errors.isEmpty()) {
-		    //saveErrors(request, errors);
-		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    forward = mapping.findForward(destino);
+		    saveErrors(request, errors);
+		    
 		} else {
-		    // Forward control to the appropriate 'success' URI (change name as desired)
-		    forward = mapping.findForward(destino);
 		}
 	
-		// Finish with
+		forward = mapping.findForward(comandoDestino);
 		return forward;
     }
 }
