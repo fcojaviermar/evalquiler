@@ -126,13 +126,6 @@
             <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
         </action>
 	
-        <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
-                name="criteriosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.RealizarBusquedaViviendaAction">
-            <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
-            <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
-            <forward name="NO_RESULT"             path="/IrBusquedaDireccionAction.do"></forward>
-        </action>
-
         <action input="/jsp/vivienda/ListadoDireccionesEncontradas.jsp" path="/IrHacerEncuestaAction"
                 name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.RecuperarEncuestaAction">
             <forward name="THERE_IS_POLL"     path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>
@@ -166,6 +159,14 @@
             <forward name="OK"     path="/IrHacerEncuestaAction.do"></forward>
             <forward name="ERROR"  path="/jsp/vivienda/AltaNuevaDireccion.jsp"></forward>
         </action>
+
+        <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
+                name="criteriosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.RealizarBusquedaViviendaAction">
+            <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
+            <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
+            <forward name="NO_RESULT"             path="/IrBusquedaDireccionAction.do"></forward>
+        </action>
+
 
         
         <!-- =========================== Modulo de solicitud de informes =========================== -->

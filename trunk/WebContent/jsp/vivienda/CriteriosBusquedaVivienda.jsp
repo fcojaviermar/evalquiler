@@ -10,17 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
-        <logic:messagesPresent>
-            <div id="errores" class="fondoAmarilloOscuro col90 alto200">
-                <html:errors/>
-                dd
-                <html:messages id="mensajes"/>
-            </div>
-        </logic:messagesPresent>
-        <logic:messagesNotPresent>
-            <div>
-            </div>
-        </logic:messagesNotPresent>     
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
     
         <html:form action="/IrBuscarViviendaAction.do" method="post">    
 			<fieldset>
