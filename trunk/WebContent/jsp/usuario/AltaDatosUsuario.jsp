@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
-        <html:errors/>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro ancho85 alto75P">
 			<html:form action="/IrConfirmarDatosUsuarioAction.do" method="post">
 				<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2 alto100P">

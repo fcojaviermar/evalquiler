@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <div id="titulo">
             <H3 class="alineacionCentrada">Últimas encuestas respondidas</H3>
 

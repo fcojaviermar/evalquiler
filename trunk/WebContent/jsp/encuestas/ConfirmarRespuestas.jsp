@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>    
         <html:form action="/IrGuardarRespuestasEncuestaAction.do" method="post">            
             <fieldset>
                 <legend>Datos del usuario</legend>            

@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
     	<div>
 			<html:form action="/IrAceptarDatosViviendaAction.do" method="post">    	
 		        <fieldset>

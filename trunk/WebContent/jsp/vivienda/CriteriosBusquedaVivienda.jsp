@@ -11,7 +11,6 @@
     </head>
     <body>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-    
         <html:form action="/IrBuscarViviendaAction.do" method="post">    
 			<fieldset>
 			    <legend>Datos del usuario</legend>

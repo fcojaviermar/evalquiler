@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <table>
             <thead>
                 <th>Solicitud de informes guardada</th>
