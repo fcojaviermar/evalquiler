@@ -2,27 +2,16 @@ package com.evalquiler.actionforms.vivienda;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
+
+import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.utilidades.Validaciones;
 
 
 public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 
-	private int idTipoVia		   = 0;
-	private String nombreVia	   = null;
-	private int numeroVia	  	   = 0;
-	private String bloque		   = null;
-	private int portal			   = 0;
-	private String escalera		   = null;
-	private int planta			   = 0;
-	private String puerta		   = null;
-	private int codigoPostal	   = 0;
-	private int municipio		   = 0;
-	private int provincia		   = 0;
-	private int pais			   = 0;
-	private String nifPropietario  = null;
-	private String esElPropietario = null;
-	
 	public int getIdTipoVia() {
 		return idTipoVia;
 	}
@@ -83,12 +72,12 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	}
 
 
-	public int getPlanta() {
+	public String getPlanta() {
 		return planta;
 	}
 
 
-	public void setPlanta(int planta) {
+	public void setPlanta(String planta) {
 		this.planta = planta;
 	}
 
@@ -162,20 +151,118 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 		this.esElPropietario = esElPropietario;
 	}
 
+	private int idTipoVia		   = 0;
+	private String nombreVia	   = null;
+	private int numeroVia	  	   = 0;
+	private String bloque		   = null;
+	private int portal			   = 0;
+	private String escalera		   = null;
+	private String planta		   = null;
+	private String puerta		   = null;
+	private int codigoPostal	   = 0;
+	private int municipio		   = 0;
+	private int provincia		   = 0;
+	private int pais			   = 0;
+	private String nifPropietario  = null;
+	private String esElPropietario = null;	
+	
 	/*
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosUsuarioActionForm.validate()");
-    	ActionErrors errors = null;
+    	ActionErrors errors = new ActionErrors();
     	
-    	errors = new ActionErrors();
-//        if ( (null == this.getTipoVia()) ||  ("".equals(this.getTipoVia()))) {
-//        	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipovia"));
-//        } 
+    	
+        if (this.getIdTipoVia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.tipovia"));
+        } else if (this.getIdTipoVia() > Constantes.MAXIMO_TIPO_VIA) {
+        	errors.add("errorValidacion", new ActionError("error.tipovia.no.valido"));
+        }
         
+		if ( (null == this.getNombreVia()) || ("".equals(this.getNombreVia())) ) {
+			errors.add("errorValidacion", new ActionError("error.obligatorio.nombrevia"));
+		} else if (this.getNombreVia().length() > Constantes.LONGITUD_MAXIMA_NOMBREVIA) {
+			errors.add("errorValidacion", new ActionError("error.nombrevia.no.valido"));
+		}
+
+		if ( (null != this.getBloque()) && (!"".equals(this.getBloque())) ) {
+			if (this.getBloque().length() > Constantes.LONGITUD_MAXIMA_BLOQUE) {
+				errors.add("errorValidacion", new ActionError("error.bloque.no.valido"));
+			}
+		}
+
+		if ( (this.getNumeroVia() < Constantes.SIN_NUMERICO_EN_VIA) && 
+			 (this.getPortal() < Constantes.SIN_NUMERICO_EN_VIA) ) {
+			errors.add("errorValidacion", new ActionError("error.obligatorio.numerovia.o.portal"));
+		} else {
+			if (this.getNumeroVia() < Constantes.SIN_NUMERICO_EN_VIA) {
+			    if (this.getPortal() < Constantes.SIN_NUMERICO_EN_VIA) {
+		        	errors.add("errorValidacion", new ActionError("error.obligatorio.portal"));
+		        } else if (this.getPortal() > Constantes.MAXIMO_PORTAL) {
+		        	errors.add("errorValidacion", new ActionError("error.portal.no.valido"));
+		        }
+			} else if (this.getPortal() < Constantes.SIN_NUMERICO_EN_VIA) {
+		        if (this.getNumeroVia() < Constantes.SIN_NUMERICO_EN_VIA) {
+		        	errors.add("errorValidacion", new ActionError("error.obligatorio.numerovia"));
+		        } else if (this.getNumeroVia() > Constantes.MAXIMO_NUMERO_VIA) {
+		        	errors.add("errorValidacion", new ActionError("error.numerovia.no.valido"));
+		        }
+			}			
+		}
+		
+		if ( (null != this.getEscalera()) && (!"".equals(this.getEscalera())) ) {
+			if (this.getEscalera().length() > Constantes.LONGITUD_MAXIMA_ESCALERA) {
+				errors.add("errorValidacion", new ActionError("error.escalera.no.valido"));
+			}
+		}
+
+		if ( (null == this.getPlanta()) || ("".equals(this.getPlanta())) ) {
+			errors.add("errorValidacion", new ActionError("error.obligatorio.planta"));
+		} else if (this.getPlanta().length() > Constantes.LONGITUD_MAXIMA_PLANTA) {
+			errors.add("errorValidacion", new ActionError("error.planta.no.valido"));
+		}
+
+		if ( (null == this.getPuerta()) || ("".equals(this.getPuerta())) ) {
+			errors.add("errorValidacion", new ActionError("error.obligatorio.puerta"));
+		} else if (this.getPlanta().length() > Constantes.LONGITUD_MAXIMA_PUERTA) {
+			errors.add("errorValidacion", new ActionError("error.puerta.no.valido"));
+		}
+
+        if (this.getCodigoPostal() < Constantes.SIN_NUMERICO_EN_VIA) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.codigopostal"));
+        } else if (this.getCodigoPostal() > Constantes.MAXIMO_CODIGOPOTAL) {
+        	errors.add("errorValidacion", new ActionError("error.codigopostal.no.valido"));
+        }
+
+        if (this.getMunicipio() < Constantes.ELEMENTO_NO_SELECCIONADO) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.municipio"));
+        } else if (this.getMunicipio() > Constantes.MAXIMO_CODIGOPOTAL) {
+        	errors.add("errorValidacion", new ActionError("error.municipio.no.valido"));
+        }
+
+        if (this.getProvincia() < Constantes.ELEMENTO_NO_SELECCIONADO) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
+        } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
+        	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
+        }
+
+        if (this.getPais() < Constantes.ELEMENTO_NO_SELECCIONADO) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
+        } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
+        	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
+        }
+
+        if (Constantes.CHECK_SELECCIONADO.equals(esElPropietario)) {
+    		if ( (null == this.getNifPropietario()) || ("".equals(this.getNifPropietario())) ) {
+    			errors.add("errorValidacion", new ActionError("error.obligatorio.nifpropietario"));
+    		} else if (Validaciones.nifValido(this.getNifPropietario())) {
+    			errors.add("errorValidacion", new ActionError("error.nifpropietario.no.valido"));
+//    			errors.add("errorValidacion", new ActionError("error.CIFpropietario.no.valido"));
+//    			errors.add("errorValidacion", new ActionError("error.NIEpropietario.no.valido"));
+    		}
+        }
         return errors;
     }
     
-
 }

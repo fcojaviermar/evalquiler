@@ -29,7 +29,7 @@ public class InicioSesionClienteAction extends ActionBase {
 
     public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	System.out.println("InicioSesionClienteAction.action()");
-    	String comandoDestino = ConstantesComandos.NO_CLIENT;
+    	String comandoDestino = ConstantesComandos.EMPTY;
     	DatosInicioSesionActionForm cliente = null;    	
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
@@ -57,7 +57,6 @@ public class InicioSesionClienteAction extends ActionBase {
     						if (pwd.equals(cliente.getPassword())) {
     							comandoDestino = ConstantesComandos.VALID_CLIENT;
     						} else {
-    							System.out.println("La password NO es igual 1.");
     				        	comandoDestino = ConstantesComandos.NO_EQUAL_PSW;
     							errors.add("errorValidacion", new ActionError("error.distinta.password"));
     						}
@@ -76,19 +75,17 @@ public class InicioSesionClienteAction extends ActionBase {
 			}
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;
-		    // Report the error using the appropriate name and ID.
-		    //errors.add("name", new ActionMessage("id"));
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
 
-		forward = mapping.findForward(comandoDestino);
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
-			System.out.println("Hay errores.");
 		    saveErrors(request, errors);
 		} else {
 
 		}
-	
+		forward = mapping.findForward(comandoDestino);
+		
 		return forward;
     }
 }

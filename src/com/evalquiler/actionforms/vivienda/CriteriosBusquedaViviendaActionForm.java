@@ -6,8 +6,10 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.comun.constantes.Constantes;
 
-public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
+
+public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	private int idTipoVia		   = 0;
 	private String nombreVia	   = null;
@@ -24,140 +26,254 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	private String nifPropietario  = null;
 
 	
-	public int getIdTipoVia() {
+	public final int getIdTipoVia() {
 		return idTipoVia;
 	}
 
 
-	public void setIdTipoVia(int idTipoVia) {
+	public final void setIdTipoVia(int idTipoVia) {
 		this.idTipoVia = idTipoVia;
 	}
 
+	public final boolean tieneIdTipoVia() {
+		boolean tieneInfo = false;
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getIdTipoVia()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 	
-	public String getNombreVia() {
+	public final String getNombreVia() {
 		return nombreVia;
 	}
 
-
-	public void setNombreVia(String nombreVia) {
+	public final String getNombreViaLike() {
+		return "%".concat(nombreVia.concat("%")) ;
+	}
+	
+	public final boolean tieneInfoNombreVia() {
+		boolean tieneInfo = false;
+		if ( (null != this.getNombreVia()) && (!"".equals(this.getNombreVia())) ) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
+	
+	public final void setNombreVia(String nombreVia) {
 		this.nombreVia = nombreVia;
 	}
 
 
-	public int getNumeroVia() {
+	public final int getNumeroVia() {
 		return numeroVia;
 	}
 
+	public final boolean tieneNumeroVia() {
+		boolean tieneInfo = false;
+		if (Constantes.SIN_NUMERICO_EN_VIA <= this.getNumeroVia()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setNumeroVia(int numeroVia) {
+
+	public final void setNumeroVia(int numeroVia) {
 		this.numeroVia = numeroVia;
 	}
 
 
-	public String getBloque() {
+	public final String getBloque() {
 		return bloque;
 	}
 
+	public final String getBloqueLike() {
+		return "%".concat(bloque.concat("%")) ;
+	}
 
-	public void setBloque(String bloque) {
+	public final boolean tieneBloque() {
+		boolean tieneInfo = false;
+		if ( (null != this.getBloque()) && (!"".equals(this.getBloque())) ) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}	
+
+	public final void setBloque(String bloque) {
 		this.bloque = bloque;
 	}
 
 
-	public int getPortal() {
+	public final int getPortal() {
 		return portal;
 	}
 
-
-	public void setPortal(int portal) {
+	public final boolean tienePortal() {
+		boolean tieneInfo = false;
+		if (Constantes.SIN_NUMERICO_EN_VIA <= this.getPortal()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
+	
+	public final void setPortal(int portal) {
 		this.portal = portal;
 	}
 
 
-	public String getEscalera() {
+	public final String getEscalera() {
 		return escalera;
 	}
+	
+	public final String getEscaleraLike() {
+		return "%".concat(escalera.concat("%")) ;
+	}
+	
+	
+	public final boolean tieneEscalera() {
+		boolean tieneInfo = false;
+		if ( (null != this.getEscalera()) && (!"".equals(this.getEscalera())) ) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-
-	public void setEscalera(String escalera) {
+	public final void setEscalera(String escalera) {
 		this.escalera = escalera;
 	}
 
 
-	public int getPlanta() {
+	public final int getPlanta() {
 		return planta;
 	}
 
+	public final boolean tienePlanta() {
+		boolean tieneInfo = false;
+		if (Constantes.SIN_NUMERICO_EN_VIA <= this.getPlanta()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setPlanta(int planta) {
+	public final void setPlanta(int planta) {
 		this.planta = planta;
 	}
 
 
-	public String getPuerta() {
+	public final String getPuerta() {
 		return puerta;
 	}
 
+	public final String getPuertaLike() {
+		return "%".concat(puerta.concat("%")) ;
+	}
+	
+	public final boolean tienePuerta() {
+		boolean tieneInfo = false;
+		if ( (null != this.getPuerta()) && (!"".equals(this.getPuerta())) ) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setPuerta(String puerta) {
+	public final void setPuerta(String puerta) {
 		this.puerta = puerta;
 	}
 
 
-	public int getCodigoPostal() {
+	public final int getCodigoPostal() {
 		return codigoPostal;
 	}
 
+	public final boolean tieneCodigoPostal() {
+		boolean tieneInfo = false;
+		if (Constantes.SIN_NUMERICO_EN_VIA < this.getCodigoPostal()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setCodigoPostal(int codigoPostal) {
+	public final void setCodigoPostal(int codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 
 
-	public int getMunicipio() {
+	public final int getMunicipio() {
 		return municipio;
 	}
 
+	public final boolean tieneMunicipio() {
+		boolean tieneInfo = false;
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getMunicipio()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setMunicipio(int municipio) {
+	public final void setMunicipio(int municipio) {
 		this.municipio = municipio;
 	}
 
 
-	public int getProvincia() {
+	public final int getProvincia() {
 		return provincia;
 	}
 
+	public final boolean tieneProvincia() {
+		boolean tieneInfo = false;
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getProvincia()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setProvincia(int provincia) {
+	public final void setProvincia(int provincia) {
 		this.provincia = provincia;
 	}
 
 
-	public int getPais() {
+	public final int getPais() {
 		return pais;
 	}
 
+	public final boolean tienePais() {
+		boolean tieneInfo = false;
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getPais()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setPais(int pais) {
+	public final void setPais(int pais) {
 		this.pais = pais;
 	}
 
 
-	public String getNifPropietario() {
+	public final String getNifPropietario() {
 		return nifPropietario;
 	}
 
+	public final String getNifPropietarioLike() {
+		return "%".concat(nifPropietario.concat("%")) ;
+	}
+	
+	public final boolean tieneNifPropietario() {
+		boolean tieneInfo = false;
+		if ( (null != this.getNifPropietario()) && (!"".equals(this.getNifPropietario())) ) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 
-	public void setNifPropietario(String nifPropietario) {
+	public final void setNifPropietario(String nifPropietario) {
 		this.nifPropietario = nifPropietario;
 	}
 
+	
 
 	/*
      * Validamamos los datos introducidos por el usuario
      */
-    public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+    public final ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosUsuarioActionForm.validate()");
     	ActionErrors errors = null;
     	
