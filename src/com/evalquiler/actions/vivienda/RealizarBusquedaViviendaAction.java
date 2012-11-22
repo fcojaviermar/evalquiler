@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -26,8 +27,8 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 	
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("ResultadosBusquedaViviendaAction.action()");
-		String comandoDestino = ConstantesComandos.EXIT;
-		ActionMessages errors = new ActionMessages();
+		String comandoDestino = ConstantesComandos.EMPTY;
+		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		Collection<DatosViviendaActionForm> listaViviendas = null;
 		
@@ -48,17 +49,14 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		    errors.add("name", new ActionMessage("id"));
 		}
 	
-		forward = mapping.findForward(comandoDestino);	
-//		if (!errors.isEmpty()) {
-//		    //saveErrors(request, errors);
-//		    // Forward control to the appropriate 'failure' URI (change name as desired)
-//		    forward = mapping.findForward(comandoDestino);
-//		} else {
-//		    // Forward control to the appropriate 'success' URI (change name as desired)
-//		    forward = mapping.findForward(comandoDestino);
-//		}
+
+		if (!errors.isEmpty()) {
+		    saveErrors(request, errors);
+		} else {
+		}
 	
-		// Finish with
+		forward = mapping.findForward(comandoDestino);	
+		
 		return forward;
     }
     

@@ -3,6 +3,8 @@ package com.evalquiler.actions.usuario;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -13,7 +15,6 @@ import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.operaciones.OpUsuario;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.constructorParameterOrderType;
 
 /**
  * @version 	1.0
@@ -27,7 +28,7 @@ public class GuardarDatosUsuarioAction extends ActionBase
     	System.out.println("GuardarDatosUsuarioAction.action()");
     	DatosUsuarioActionForm datosUsuario = null;
     	String comandoDestino = ConstantesComandos.ERROR;
-		ActionMessages errors = new ActionMessages();
+    	ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		
 		try {
@@ -36,10 +37,11 @@ public class GuardarDatosUsuarioAction extends ActionBase
 			datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
 			OpUsuario.insertar(datosUsuario);
 			comandoDestino = ConstantesComandos.OK;
+			//Se elimina de la sesión porque el usuario se ha dado de alta correctamente y se finaliza este servicio.
+			request.getSession().setAttribute("datosUsuarioActionForm", null);
 		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
-		    errors.add("name", new ActionMessage("id"));
-		    comandoDestino = ConstantesComandos.ERROR;
+			comandoDestino = ConstantesComandos.ERROR;
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
 	
 		// If a message is required, save the specified key(s)
@@ -47,14 +49,12 @@ public class GuardarDatosUsuarioAction extends ActionBase
 	
 		forward = mapping.findForward(comandoDestino);
 		if (!errors.isEmpty()) {
-		    //saveErrors(request, errors);
-		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    
+		    saveErrors(request, errors);
 		} else {
-			request.getSession().setAttribute("datosUsuarioActionForm", null);
+			
 		}
 	
-		// Finish with
+		forward = mapping.findForward(comandoDestino);
 		return (forward);
     }
 }

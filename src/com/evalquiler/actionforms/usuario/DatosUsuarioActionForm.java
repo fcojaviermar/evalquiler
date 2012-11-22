@@ -9,32 +9,19 @@ import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.combo.ComboTipoUsuario;
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.utilidades.Validaciones;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 
 public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 
-	private String email  			 = null;
-	private String email2  			 = null;
-	public String getEmail2() {
-		return email2;
-	}
-
-
-	public void setEmail2(String email2) {
-		this.email2 = email2;
-	}
-
-	private String nifcif 			 = null;
-	private String password2 		 = null;
-	private String descTipoDocumento = null;
-	private int idTipoDocumento 	 = 0;
 	private int idTipoUsuario 	 	 = 0;
 	private String fechaAlta		 = null;
 	
 	
-
 	public String getFechaAlta() {
 		return fechaAlta;
 	}
@@ -52,55 +39,6 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 
 	public void setIdTipoUsuario(int idTipoUsuario) {
 		this.idTipoUsuario = idTipoUsuario;
-	}
-
-
-	public int getIdTipoDocumento() {
-		return idTipoDocumento;
-	}
-
-
-	public void setIdTipoDocumento(int idTipoDocumento) {
-		this.idTipoDocumento = idTipoDocumento;
-	}
-
-
-	public String getPassword2() {
-		return password2;
-	}
-
-
-	public void setPassword2(String password2) {
-		this.password2 = password2;
-	}
-
-
-	public String getDescTipoDocumento() {
-		return descTipoDocumento;
-	}
-
-
-	public void setDescTipoDocumento(String descTipoDocumento) {
-		this.descTipoDocumento = descTipoDocumento;
-	}
-
-
-	public String getNifcif() {
-		return nifcif;
-	}
-
-
-	public void setNifcif(String nifcif) {
-		this.nifcif = nifcif;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 
@@ -128,7 +66,7 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             	errors.add("errorValidacion", new ActionError("error.email2.novalido"));
             }            
             
-            if (0 == this.getIdTipoDocumento()) {        	
+            if (Constantes.ELEMENTO_NO_SELECCIONADO == this.getIdTipoDocumento()) {        	
             	errors.add("errorValidacion", new ActionError("error.obligatorio.tipodocumento"));
             } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
             	errors.add("errorValidacion", new ActionError("error.tipodocumento.novalido"));
@@ -136,6 +74,16 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             	ComboTipoDocumento combo = new ComboTipoDocumento();
             	ElementoComboTipoDocumento elCombo = combo.get(this.getIdTipoDocumento());
             	this.setDescTipoDocumento(elCombo.getDescripcion());
+            }
+            
+            if (Constantes.ELEMENTO_NO_SELECCIONADO == this.getIdTipoUsuario()) {
+            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipousuario"));
+            } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
+            	errors.add("errorValidacion", new ActionMessage("error.tipousuario.novalido"));            	
+            } else {
+            	ComboTipoUsuario combo = new ComboTipoUsuario();
+            	ElementoComboTipoUsuario elCombo = combo.get(this.getIdTipoUsuario());
+            	this.setDescTipoUsuario(elCombo.getDescripcion());
             }
             
             if ( (null == this.getNifcif()) ||  ("".equals(this.getNifcif()))) {
@@ -155,7 +103,11 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             }
             if (!this.getEmail().equals(this.getEmail2())) {
             	errors.add("errorValidacion", new ActionMessage("error.emails.distintos"));
-            }            
+            }   
+            
+            if (!Constantes.LOPD_ACEPTADA.equals(this.getAceptarLOPD())) {
+            	errors.add("errorValidacion", new ActionMessage("error.LOPD.no.aceptada"));
+            }
     	} else {
     		
     	}
@@ -176,4 +128,5 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
     	}
     	return esValido;
     }
+    
 }

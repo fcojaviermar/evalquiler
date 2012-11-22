@@ -36,7 +36,7 @@ public class InicioSesionUsuarioAction extends ActionBase
     public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	System.out.println("InicioSesionUsuarioAction.action()");
     	Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = null;
-    	String comandoDestino = ConstantesComandos.NO_USER;
+    	String comandoDestino = ConstantesComandos.EMPTY;
     	DatosUsuarioActionForm datosUsuario = null;
     	DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
     	ActionErrors errors = new ActionErrors();
@@ -100,15 +100,14 @@ public class InicioSesionUsuarioAction extends ActionBase
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
 
-		forward = mapping.findForward(comandoDestino);
-		
 		// Si se han producido errores se almacenan en la request para que se puedan mostrar por pantalla.
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
 		} else {
 
 		}
-	
+
+		forward = mapping.findForward(comandoDestino);
 		return forward;
     }
 }

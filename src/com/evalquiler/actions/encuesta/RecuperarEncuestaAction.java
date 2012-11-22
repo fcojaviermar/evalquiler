@@ -5,11 +5,11 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
@@ -31,7 +31,7 @@ public class RecuperarEncuestaAction extends ActionBase {
 		System.out.println("RecuperarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EXIT;
 	
-		ActionMessages errors = new ActionMessages();
+		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		String botonPulsado   = null;
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
@@ -67,27 +67,18 @@ public class RecuperarEncuestaAction extends ActionBase {
 					
 				}
 			}
-
-	
 		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
 			comandoDestino = ConstantesComandos.ERROR;
-		    errors.add("name", new ActionMessage("id"));
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));		
 		}
 
-	    forward = mapping.findForward(comandoDestino);
-		
-	    // If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
 		if (!errors.isEmpty()) {
-		    //saveErrors(request, errors);
-		    // Forward control to the appropriate 'failure' URI (change name as desired)
-
+		    saveErrors(request, errors);
 		} else {
-		    // Forward control to the appropriate 'success' URI (change name as desired)
-
 		}
-	
+
+		forward = mapping.findForward(comandoDestino);
+
 		// Finish with
 		return forward;
     }
