@@ -13,11 +13,11 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	private int idTipoVia		   = 0;
 	private String nombreVia	   = null;
-	private int numeroVia	  	   = 0;
+	private int numeroVia	  	   = Constantes.SIN_NUMERO_O_PORTAL;
 	private String bloque		   = null;
-	private int portal			   = 0;
+	private int portal			   = Constantes.SIN_NUMERO_O_PORTAL;
 	private String escalera		   = null;
-	private int planta			   = 0;
+	private int planta			   = Constantes.SIN_NUMERO_O_PORTAL;
 	private String puerta		   = null;
 	private int codigoPostal	   = 0;
 	private int municipio		   = 0;
@@ -70,7 +70,7 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tieneNumeroVia() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERICO_EN_VIA <= this.getNumeroVia()) {
+		if (Constantes.SIN_NUMERO_O_PORTAL < this.getNumeroVia()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -109,7 +109,7 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tienePortal() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERICO_EN_VIA <= this.getPortal()) {
+		if (Constantes.SIN_NUMERO_O_PORTAL < this.getPortal()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -148,7 +148,7 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tienePlanta() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERICO_EN_VIA <= this.getPlanta()) {
+		if (Constantes.SIN_NUMERO_O_PORTAL < this.getPlanta()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
