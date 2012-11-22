@@ -19,7 +19,7 @@
 			               <legend>Datos vivienda</legend>
 	                       <p>
 	                           <label for="tipoVia" title=""><strong>Tipo vía:&nbsp;</strong>
-	                               <html:text property="tipoVia" size="20" maxlength="20" title="Tipo de vía donde está la vivienda"></html:text>                  
+	                               <html:text property="idTipoVia" size="20" maxlength="20" title="Tipo de vía donde está la vivienda"></html:text>                  
 	                           </label>
 	                           <label for="nombreVia" title=""><strong >Nombre vía:&nbsp;</strong>
 	                               <html:text property="nombreVia" size="100" maxlength="100" title="Nombre de vía donde está la vivienda"></html:text>                  

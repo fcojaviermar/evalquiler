@@ -19,15 +19,26 @@ logger.info("Logging Log4 Info Statement...");
     </head>
 
     <body class="fondoBlanco">
-    	<logic:messagesPresent>
-	    	<div id="errores" class="fondoAmarilloOscuro col90 alto100">
-	        	<html:errors/>
-	        </div>
-    	</logic:messagesPresent>
-    	<logic:messagesNotPresent>
-	    	<div class="fondoBlanco col90 alto100">
-	        </div>
-    	</logic:messagesNotPresent>    	
+        <logic:messagesPresent>
+            <div id="errores" class="fondoAmarilloOscuro col90 alto100">
+                <html:errors/>
+            </div>
+        </logic:messagesPresent>
+        <logic:messagesNotPresent>
+            <div id="errores" class="alto100">
+            </div>
+        </logic:messagesNotPresent>        
+        <logic:messagesPresent message="true">
+            <div id="mensajes" class="fondoAmarilloOscuro col90 alto50">
+                <html:messages id="message" message="true">
+                    <bean:write name="message"/><br/>
+                </html:messages>
+            </div>
+        </logic:messagesPresent>
+        <logic:messagesNotPresent message="true">
+            <div id="mensajes" class="alto50">
+            </div>
+        </logic:messagesNotPresent>
 
 		<div class="col40 alto350 rellenoIzq12 rellenoDer12">
 			<fieldset class="fondoAzulOscuro bordeGrisOscuro borde1 alto300">
