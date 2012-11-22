@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
-        <html:messages id="mensajes"></html:messages>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <html:form action="/IrConfirmarRespuestasAction.do" method="post">
             <div>
                 <%int iNumeroPreguntas = 0; %>

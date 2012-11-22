@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />
     </head>
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<html:form action="/IrHacerEncuestaAction.do" method="post">
 	        <div id="titulo">
 	            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>

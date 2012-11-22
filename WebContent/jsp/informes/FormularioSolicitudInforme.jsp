@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <table>
             <thead>
                 <th>Formulario solicitud de informes</th>

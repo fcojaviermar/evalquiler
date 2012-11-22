@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+        <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro ancho85 alto75P">
             <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2 alto100P">
                 <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
