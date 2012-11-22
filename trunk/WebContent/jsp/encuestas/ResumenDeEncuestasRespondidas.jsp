@@ -22,10 +22,10 @@
 			            <table class="ancho100">
 			                <thead>
 			                    <tr class="alineacionIzquierda">
-			                        <th class="fondoVerdeMedio texto100">Descripción encuesta</th>
-		                            <th class="fondoVerdeMedio texto100">Dirección vivienda</th>	                        
-			                        <th class="fondoVerdeMedio texto100">Fecha realización</th>
-			                        <th class="fondoVerdeMedio texto100">Periodo evaluación</th>
+			                        <th class="fondoVerdeMedio texto100" title="Breve descripción de la encuesta">Descripción encuesta</th>
+		                            <th class="fondoVerdeMedio texto100" title="Dirección de la vivienda evaluada en la encuesta">Dirección vivienda</th>	                        
+			                        <th class="fondoVerdeMedio texto100" title="Fecha de realización de la encuesta">Fecha realización</th>
+			                        <th class="fondoVerdeMedio texto100" title="Periodo que evalua la encuesta">Periodo evaluación</th>
 			                    </tr>
 			                </thead>
 			                <tbody>

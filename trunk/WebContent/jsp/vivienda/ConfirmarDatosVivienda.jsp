@@ -9,91 +9,74 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
-         <table>
-             <thead>
-                 <tr>
-                     <td>
-                        <th>Alta nueva vivienda</th>
-                 </tr>
-             </thead>
-             <tbody>
-                 <tr>
-                    <td>
-                        <div id="capaPrincipal">
-                            <fieldset>
-                                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
-                         
-                                <fieldset>
-                                    <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
-                                        <legend>Datos vivienda</legend>
-                                           <p>
-                                               <label for="tipoVia" title=""><strong >Tipo vía:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="tipoVia"/>
-                                                    <html:hidden name="datosVivienda" property="tipoVia"/>
-                                               </label>
-                                               <label for="nombreVia" title=""><strong >Nombre vía:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="nombreVia"/>
-                                                    <html:hidden name="datosVivienda" property="nombreVia"/>
-                                               </label>
-                                               <label for="numeroVia" title=""><strong >Número vía:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="numeroVia"/>
-                                                    <html:hidden name="datosVivienda" property="numeroVia"/>
-                                               </label>
-                                           </p>
-                                           <p>
-                                               <label for="bloque" title=""><strong >Bloque:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="bloque"/>
-                                                    <html:hidden name="datosVivienda" property="bloque"/>
-                                               </label>
-                                               <label for="portal" title=""><strong >Portal:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="portal"/>
-                                                    <html:hidden name="datosVivienda" property="portal"/>
-                                               </label>
-                                               <label for="escalera" title=""><strong >Escalera:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="escalera"/>
-                                                    <html:hidden name="datosVivienda" property="escalera"/>
-                                               </label>
-                                               <label for="planta" title=""><strong >Planta:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="planta"/>
-                                                    <html:hidden name="datosVivienda" property="planta"/>
-                                               </label>
-                                               <label for="puerta" title=""><strong >Puerta:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="puerta"/>
-                                                    <html:hidden name="datosVivienda" property="puerta"/>
-                                               </label>
-                                           </p>
-                                           <p>
-                                               <label for="codigoPostal" title=""><strong >Código Postal:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="codigoPostal"/>
-                                                    <html:hidden name="datosVivienda" property="codigoPostal"/>
-                                               </label>
-                                               <label for="municipio" title=""><strong >Municipio:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="municipio"/>
-                                                    <html:hidden name="datosVivienda" property="municipio"/>
-                                               </label>
-                                               <label for="provinvia" title=""><strong >Provincia:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="provincia"/>
-                                                    <html:hidden name="datosVivienda" property="provincia"/>
-                                               </label>
-                                               <label for="pais" title=""><strong >pais:&nbsp;</strong>
-                                                    <bean:write name="datosVivienda" property="pais"/>
-                                                    <html:hidden name="datosVivienda" property="pais"/>
-                                               </label>
-                                           </p>
-                                           <p>
-                                               <label for="esElPropietario" title="">Eres el propietario de esta vivienda
-                                                   <html:checkbox property="esElPropietario" />                                                
-                                               </label>
-                                           </p>                                            
-                                           <html:submit property="BOTON_PULSADO" value="Guardar"/>
-                                           <html:submit property="BOTON_PULSADO" value="Cancelar"/>
-                                       </html:form>
-                                    </fieldset>                         
-                             </fieldset>
-                         </div>
-                     </td>
-                 </tr>
-             </tbody>
-        </table>
+        <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro ancho85 alto75P">
+            <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2 alto100P">
+                <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
+                    Confirmar datos de alta de la vivienda
+                </legend>
+                <div id="div-vacio" class="alto50"></div>
+                <div id="div-vacio" class="alto50">
+					<label for="tipoVia"><strong >Tipo vía:&nbsp;</strong></label>
+					<bean:write name="datosVivienda" property="tipoVia"/>
+                </div>
+                <div id="" class="alto50">          
+					<label for="nombreVia"><strong >Nombre vía:&nbsp;</strong></label>
+					<bean:write name="datosVivienda" property="nombreVia"/>
+                </div>
+				<div id="numerovia-div" class="alto50">
+					<label for="numeroVia"><strong >Número vía:&nbsp;</strong>
+                    <bean:write name="datosVivienda" property="numeroVia"/>				
+                </div>
+                <div id="" class="alto50">
+					<label for="bloque"><strong >Bloque:&nbsp;</strong></label>
+                    <bean:write name="datosVivienda" property="bloque"/>                
+                </div>
+                <div id="" class="alto50">
+					<label for="portal"><strong >Portal:&nbsp;</strong></label>
+                    <bean:write name="datosVivienda" property="portal"/>                
+                </div>
+				<div id="escalera-div" class="alto50">
+					<label for="escalera"><strong >Escalera:&nbsp;</strong></label>
+					<bean:write name="datosVivienda" property="escalera"/>                                
+                </div>
+				<div id="planta-div" class="alto50">
+                	<label for="planta"><strong >Planta:&nbsp;</strong></label>
+					<bean:write name="datosVivienda" property="planta"/>                                
+                </div>
+				<div id="puerta-div" class="alto50">
+					<label for="puerta"><strong >Puerta:&nbsp;</strong></label>
+                    <bean:write name="datosVivienda" property="puerta"/>                                
+                </div>
+               	<div id="codigoposta-div" class="alto50">
+					<label for="codigoPostal"><strong >Código Postal:&nbsp;</strong></label>
+                	<bean:write name="datosVivienda" property="codigoPostal"/>
+               	</div>
+               	<div id="municipio-div" class="alto50">
+					<label for="municipio"><strong >Municipio:&nbsp;</strong></label>
+					<bean:write name="datosVivienda" property="municipio"/>
+                </div>                                              
+                <div id="provincia-div" class="alto50">
+	                <label for="provinvia"><strong >Provincia:&nbsp;</strong></label>
+	                <bean:write name="datosVivienda" property="provincia"/>
+                </div>                            
+                <div id=""pais-div" class="alto50">
+					<label for="pais"><strong >País:&nbsp;</strong></label>
+                    <bean:write name="datosVivienda" property="pais"/>
+                </div>
+                <div id="check-propietario-div" class="alto50">
+					<label for="esElPropietario">Eres el propietario de esta vivienda</label>
+                	<html:checkbox property="esElPropietario" />                                                
+				</div>     
+             </fieldset>
+             <div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
+                <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
+					<html:submit property="BOTON_PULSADO" value="Guardar"/>
+                    <html:submit property="BOTON_PULSADO" value="Cancelar"/>                            
+                </html:form>
+             </div>
+        </div>
+        <%@include file="../comun/Salir.jsp"%>        
+        
+        
     </body>
 </html:html>
