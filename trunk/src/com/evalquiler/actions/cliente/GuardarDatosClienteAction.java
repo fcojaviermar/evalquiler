@@ -3,14 +3,15 @@ package com.evalquiler.actions.cliente;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.operaciones.OpCliente;
 
 /**
@@ -23,7 +24,8 @@ public class GuardarDatosClienteAction extends ActionBase
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	System.out.println("GuardarDatosClienteAction.action()");
-		ActionMessages errors = new ActionMessages();
+    	String comandoDestino = ConstantesComandos.EMPTY;
+		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 		
 		try {
@@ -31,26 +33,20 @@ public class GuardarDatosClienteAction extends ActionBase
 			//Guardar los datos del Cliente en base de datos y enviar mail.
 			DatosClienteActionForm datosCliente = (DatosClienteActionForm)request.getSession().getAttribute("datosClienteActionForm");
 			OpCliente.insertar(datosCliente);
+			comandoDestino = ConstantesComandos.OK;
+			request.getSession().setAttribute("datosClienteActionForm", (DatosClienteActionForm)form);
 		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
-		    errors.add("name", new ActionMessage("id"));
+			comandoDestino = ConstantesComandos.ERROR;
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
-	
-		// If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
 	
 		if (!errors.isEmpty()) {
-		    //saveErrors(request, errors);
-		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    forward = mapping.findForward("ERROR");
+		    saveErrors(request, errors);
 		} else {
-		    // Forward control to the appropriate 'success' URI (change name as desired)
-			request.getSession().setAttribute("datosClienteActionForm", (DatosClienteActionForm)form);
-			//request.setAttribute("datosClienteActionForm", (InformacionDatosClienteActionForm)form);
-		    forward = mapping.findForward("OK");
 		}
 	
-		// Finish with
-		return (forward);
+		forward = mapping.findForward(comandoDestino);
+		
+		return forward;
     }
 }

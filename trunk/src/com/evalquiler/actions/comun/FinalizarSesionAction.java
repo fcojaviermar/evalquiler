@@ -18,19 +18,22 @@ public class FinalizarSesionAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("FinalizarSesionAction.action()");
-
+		
+		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionForward forward = new ActionForward(); // return value
 
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		
 		if (ConstantesBotones.SALIR.equals(botonPulsado)) {
 			//Destruimos la sesion.
-			forward = mapping.findForward(ConstantesComandos.END);
+			comandoDestino = ConstantesComandos.END;
 			request.getSession().invalidate();			
 		} else {
-			forward = mapping.findForward(ConstantesComandos.ERROR);
+			comandoDestino = ConstantesComandos.ERROR;
 		}
 
+		forward = mapping.findForward(comandoDestino);
+		
 		return forward;
     }
 }
