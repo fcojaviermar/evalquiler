@@ -1,8 +1,15 @@
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
 <%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+<%
+Logger logger = Logger.getLogger(getClass().getName());
+System.out.println ("Pagina register.jsp");
 
-<html:html>
+logger.debug("Logging Log4 Debug Statement...");
+logger.info("Logging Log4 Info Statement...");
+ %>
+
+<%@page import="org.apache.log4j.Logger"%><html:html>
     <head>
         <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
         <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
