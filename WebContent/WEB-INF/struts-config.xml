@@ -143,14 +143,14 @@
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
                 name="datosRealizacionEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction">
-            <forward name="OK"     path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
-            <forward name="ERROR"  path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="OK"           path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
+            <forward name="ALREADY_EVAL" path="/IrHacerEncuestaAction.do"></forward>
         </action>
 
         <action input="/jsp/encuestas/ConfirmarRespuestas.jsp" path="/IrGuardarRespuestasEncuestaAction"
                 name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.GuardarEncuestaAction">
-            <forward name="OK"     path="/IrInicioSesionUsuarioAction.do"></forward>
-            <forward name="ERROR"  path="/IrHacerEncuestaAction.do"></forward>
+            <forward name="OK"         path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="ERROR_SAVE" path="/IrHacerEncuestaAction.do"></forward>
         </action>
 
         
