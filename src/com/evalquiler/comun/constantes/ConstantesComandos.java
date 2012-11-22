@@ -1,7 +1,7 @@
 package com.evalquiler.comun.constantes;
 
 public abstract class ConstantesComandos {
-	
+	public final static String EMPTY 				= "EMPTY";
 	public final static String ERROR 	 			= "ERROR";
 	public final static String EXIT 	 			= "EXIT";
 	public final static String ONE_RESULT 			= "ONE_RESULT";
@@ -24,6 +24,9 @@ public abstract class ConstantesComandos {
 	public final static String THERE_IS_NOT_POLL 	= "THERE_IS_NOT_POLL";
 	public final static String NEW_HOUSE 			= "NEW_HOUSE";
 	public final static String POOL_RECOVERY 		= "POOL_RECOVERY";
+	public final static String ALREADY_EVAL 		= "ALREADY_EVAL";
+	public final static String ERROR_SAVE 			= "ERROR_SAVE";
 	public final static String ERROR_2_EQUAL_CLIENTS = "ERROR_2_EQUAL_CLIENTS";
+	
 	
 }
