@@ -13,12 +13,12 @@
 
     <body class="fondoBlanco">
     	<logic:messagesPresent>
-	    	<div id="errores" class="fondoAmarilloOscuro col90 alto200">
+	    	<div id="errores" class="fondoAmarilloOscuro col90 alto100">
 	        	<html:errors/>
 	        </div>
     	</logic:messagesPresent>
     	<logic:messagesNotPresent>
-	    	<div class="fondoBlanco col90 alto200">
+	    	<div class="fondoBlanco col90 alto100">
 	        </div>
     	</logic:messagesNotPresent>    	
 
