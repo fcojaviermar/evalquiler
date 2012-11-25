@@ -5,12 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.utilidades.Validaciones;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
@@ -18,7 +18,8 @@ import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 
-	private int idTipoUsuario 	 	 = 0;
+	private int    idTipoUsuario 	 = 0;
+	private String descTipoUsuario 	 = null;
 	private String fechaAlta		 = null;
 	
 	
@@ -42,15 +43,25 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 	}
 
 
+    public String getDescTipoUsuario() {
+		return descTipoUsuario;
+	}
+
+	public void setDescTipoUsuario(String descTipoUsuario) {
+		this.descTipoUsuario = descTipoUsuario;
+	}
+
 	/*
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosUsuarioActionForm.validate()");
     	ActionErrors errors = null;
-    	DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
+//    	DatosUsuarioActionForm datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
     	
-    	if (null == datosUsuario) {
+    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+    	if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
+        (!ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
         	super.validate(mapping, request);
         	
         	errors = new ActionErrors();
@@ -77,9 +88,9 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             }
             
             if (Constantes.ELEMENTO_NO_SELECCIONADO == this.getIdTipoUsuario()) {
-            	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipousuario"));
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.tipousuario"));
             } else if (!ComboTipoDocumento.elementoValido(this.getIdTipoDocumento())) {
-            	errors.add("errorValidacion", new ActionMessage("error.tipousuario.novalido"));            	
+            	errors.add("errorValidacion", new ActionError("error.tipousuario.novalido"));            	
             } else {
             	ComboTipoUsuario combo = new ComboTipoUsuario();
             	ElementoComboTipoUsuario elCombo = combo.get(this.getIdTipoUsuario());
@@ -99,14 +110,14 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             }
             
             if (!this.getPassword().equals(this.getPassword2())) {
-            	errors.add("errorValidacion", new ActionMessage("error.passwords.distintas"));
+            	errors.add("errorValidacion", new ActionError("error.passwords.distintas"));
             }
             if (!this.getEmail().equals(this.getEmail2())) {
-            	errors.add("errorValidacion", new ActionMessage("error.emails.distintos"));
+            	errors.add("errorValidacion", new ActionError("error.emails.distintos"));
             }   
             
-            if (!Constantes.LOPD_ACEPTADA.equals(this.getAceptarLOPD())) {
-            	errors.add("errorValidacion", new ActionMessage("error.LOPD.no.aceptada"));
+            if (!this.getAceptarLOPD()) {
+            	errors.add("errorValidacion", new ActionError("error.LOPD.no.aceptada"));
             }
     	} else {
     		

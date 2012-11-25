@@ -45,7 +45,12 @@ public class RecuperarEncuestaAction extends ActionBase {
 				comandoDestino = ConstantesComandos.THERE_IS_POLL;
 			} else {
 				DatosViviendaActionForm viviendaSeleccionada = new DatosViviendaActionForm();
-				viviendaSeleccionada.setIdVivienda(Integer.parseInt((String)request.getParameter("idVivienda")));
+				String idVivienda = (String)request.getParameter("idVivienda");
+				if (null == idVivienda) {
+					//En este caso se viene cuando se ha dado de alta una vivienda de forma correcta.
+					idVivienda = (String)request.getAttribute("idVivienda");
+				}
+				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
 				Collection<DatosViviendaActionForm> vivienda = OpVivienda.consultarPorPk(viviendaSeleccionada);
 
 				if (!vivienda.isEmpty()) {
