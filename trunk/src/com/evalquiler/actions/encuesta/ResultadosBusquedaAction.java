@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 
 /**
@@ -28,7 +29,16 @@ public class ResultadosBusquedaAction extends ActionBase
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			comandoDestino = ConstantesComandos.ONE_RESULT;
+			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {			
+				comandoDestino = ConstantesComandos.CANCEL;
+			} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.ONE_RESULT;
+			} else {
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;    			
+			}
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));

@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 
 
@@ -108,6 +109,8 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
     	System.out.println("RespuestasEncuestaActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
 
+		String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
+		if (!ConstantesBotones.CANCELAR.equals(botonPulsado)) {
     		if (null == this.getFechaInicioEvaluacionAlquiler()) {
     			errors.add("errorValidacion", new ActionError("error.fecha.inicio.evaluacion.obligatoria"));
     		}  else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicioEvaluacionAlquiler(), UtilidadesFechas.FORMATO_FECHA)) {
@@ -127,7 +130,10 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
     																		UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
         		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
         	}
-    	
+		} else {
+			
+		}
+		
         return errors;
     }
     
