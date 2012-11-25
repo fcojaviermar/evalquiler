@@ -8,10 +8,15 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.operaciones.OpUsuario;
 
 /**
@@ -27,32 +32,51 @@ public class GuardarDatosUsuarioAction extends ActionBase
     	DatosUsuarioActionForm datosUsuario = null;
     	String comandoDestino = ConstantesComandos.ERROR;
     	ActionErrors errors = new ActionErrors();
+    	ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 		
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			//Guardar los datos del usuario en base de datos y enviar mail.
-			datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
-			OpUsuario.insertar(datosUsuario);
-			comandoDestino = ConstantesComandos.OK;
-			//Se elimina de la sesión porque el usuario se ha dado de alta correctamente y se finaliza este servicio.
-			request.getSession().setAttribute("datosUsuarioActionForm", null);
+			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.CANCEL;
+				datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
+				datosUsuario.setPassword(null);
+				datosUsuario.setPassword2(null);
+
+				request.setAttribute("tipoDocumentoSeleccionado", 
+									 new ElementoComboTipoDocumento(String.valueOf(datosUsuario.getIdTipoDocumento()), "") );
+				request.setAttribute("tipoUsuarioSeleccionado", 
+									 new ElementoComboTipoUsuario(String.valueOf(datosUsuario.getIdTipoUsuario()), "") );
+				request.setAttribute("datosUsuarioActionForm", datosUsuario);
+				
+			} else if (ConstantesBotones.GUARDAR.equals(botonPulsado)) {
+				// Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+				datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
+				OpUsuario.insertar(datosUsuario);
+				messages.add("message", new ActionMessage("msg.cliente.guardado"));
+				this.vaciarSession(request.getSession());
+				comandoDestino = ConstantesComandos.OK;
+        	} else {
+    			comandoDestino = ConstantesComandos.ERROR;
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+//    			request.getSession().setAttribute("datosUsuarioActionForm", null);
+    		}
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+//			request.getSession().setAttribute("datosUsuarioActionForm", null);
 		}
 	
-		// If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
-	
-		forward = mapping.findForward(comandoDestino);
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
 		} else {
-			
+			if (!messages.isEmpty()) {
+				saveMessages(request, messages);
+			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);
-		return (forward);
+		return forward;
     }
 }

@@ -1,7 +1,10 @@
 package com.evalquiler.actions.comun;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -33,5 +36,14 @@ public abstract class ActionBase extends Action {
 
 	protected abstract ActionForward action(ActionMapping mapping, ActionForm form,
             								HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	
+    public void vaciarSession(HttpSession session) {
+    	Enumeration<String> enume = session.getAttributeNames(); 
+
+    	while (enume.hasMoreElements()) { 
+    	    session.removeAttribute(enume.nextElement().toString()); 
+    	} 
+    }
 
 }

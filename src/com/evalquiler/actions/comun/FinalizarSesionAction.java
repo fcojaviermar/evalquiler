@@ -3,6 +3,8 @@ package com.evalquiler.actions.comun;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -21,17 +23,30 @@ public class FinalizarSesionAction extends ActionBase {
 		
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionForward forward = new ActionForward(); // return value
-
-		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+		ActionErrors errors = new ActionErrors();
 		
-		if (ConstantesBotones.SALIR.equals(botonPulsado)) {
-			//Destruimos la sesion.
-			comandoDestino = ConstantesComandos.END;
-			request.getSession().invalidate();			
-		} else {
+		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+		try {
+    		if (ConstantesBotones.SALIR.equals(botonPulsado)) {
+    			//Destruimos la sesion.
+    			this.vaciarSession(request.getSession());
+    			request.getSession().invalidate();
+    			comandoDestino = ConstantesComandos.END;
+    		} else {
+    			comandoDestino = ConstantesComandos.ERROR;
+    		}
+		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 		}
 
+		if (!errors.isEmpty()) {
+		    saveErrors(request, errors);
+		} else {
+
+		}
+
+		
 		forward = mapping.findForward(comandoDestino);
 		
 		return forward;

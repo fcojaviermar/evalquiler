@@ -11,7 +11,9 @@ import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 /**
  * @version 	1.0
@@ -27,8 +29,12 @@ public class ConfirmarDatosClienteAction extends ActionBase {
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+			ComboTipoDocumento combo1 = (ComboTipoDocumento)request.getSession().getAttribute("tipoDocumento");
+        	ElementoComboTipoDocumento elCombo1 = combo1.get(((DatosClienteActionForm)form).getIdTipoDocumento());
+        	((DatosClienteActionForm)form).setDescTipoDocumento(elCombo1.getDescripcion());
+        	request.getSession().setAttribute("datosClienteActionForm", (DatosClienteActionForm)form);
+        	
 			comandoDestino = ConstantesComandos.OK;
-			request.getSession().setAttribute("datosClienteActionForm", (DatosClienteActionForm)form);			
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));

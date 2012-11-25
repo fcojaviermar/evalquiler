@@ -23,22 +23,14 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 	private String password2 		 = null;
 	private int idTipoDocumento 	 = 0;
 	private String descTipoDocumento = null;
-	private String aceptarLOPD		 = null;
-	private String descTipoUsuario 	 = null;
+	private boolean aceptarLOPD		 = false;
 	
-    public String getDescTipoUsuario() {
-		return descTipoUsuario;
-	}
-
-	public void setDescTipoUsuario(String descTipoUsuario) {
-		this.descTipoUsuario = descTipoUsuario;
-	}
-
-	public String getAceptarLOPD() {
+	
+	public boolean getAceptarLOPD() {
 		return aceptarLOPD;
 	}
 
-	public void setAceptarLOPD(String aceptarLOPD) {
+	public void setAceptarLOPD(boolean aceptarLOPD) {
 		this.aceptarLOPD = aceptarLOPD;
 	}
 

@@ -11,7 +11,11 @@ import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 /**
  * @version 	1.0
@@ -26,8 +30,15 @@ public class ConfirmarDatosUsuarioAction extends ActionBase {
 		ActionForward forward = new ActionForward(); // return value
 
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			request.getSession().setAttribute("datosUsuarioActionForm", (DatosUsuarioActionForm)form);
+			ComboTipoDocumento combo1 = (ComboTipoDocumento)request.getSession().getAttribute("tipoDocumento");
+        	ElementoComboTipoDocumento elCombo1 = combo1.get(((DatosUsuarioActionForm)form).getIdTipoDocumento());
+        	((DatosUsuarioActionForm)form).setDescTipoDocumento(elCombo1.getDescripcion());
+
+			ComboTipoUsuario combo2 = (ComboTipoUsuario)request.getSession().getAttribute("tipoUsuario");
+        	ElementoComboTipoUsuario elCombo2 = combo2.get(((DatosUsuarioActionForm)form).getIdTipoUsuario());
+        	((DatosUsuarioActionForm)form).setDescTipoUsuario(elCombo2.getDescripcion());
+
+        	request.getSession().setAttribute("datosUsuarioActionForm", (DatosUsuarioActionForm)form);			
 			comandoDestino = ConstantesComandos.OK;
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;

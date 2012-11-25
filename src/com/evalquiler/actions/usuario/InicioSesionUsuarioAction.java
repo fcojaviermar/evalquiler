@@ -50,9 +50,10 @@ public class InicioSesionUsuarioAction extends ActionBase
 				comandoDestino = ConstantesComandos.REGISTER_USER;
 				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
 				request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
-				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario("0", "") );
+				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento() );
+				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario() );
+
 			} else if (ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) {
 				comandoDestino = ConstantesComandos.POOL_RECOVERY;				
 				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");

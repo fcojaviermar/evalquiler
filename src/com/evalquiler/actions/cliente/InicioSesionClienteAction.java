@@ -41,7 +41,7 @@ public class InicioSesionClienteAction extends ActionBase {
 			if (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) {
 				//Cargar las combos necesarias para dar de alta un usuario
 				request.getSession().setAttribute("tipoDocumento", new ComboTipoDocumento());
-				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento("0", "") );				
+				request.getSession().setAttribute("tipoDocumentoSeleccionado", new ElementoComboTipoDocumento() );				
 				comandoDestino = ConstantesComandos.REGISTER_CLIENT;
 			} else {
     			Collection<DatosClienteActionForm> listaCliente = OpCliente.consultarPorPk(form);
