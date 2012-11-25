@@ -1,9 +1,16 @@
 package com.evalquiler.entidad;
 
-public class ElementoComboTipoDocumento {
+import java.io.Serializable;
+
+public class ElementoComboTipoDocumento implements Serializable {
 	private String idTipoDocumento = null;
 	private String descripcion = null;
-	
+
+	public ElementoComboTipoDocumento() {
+		this.idTipoDocumento = "0";
+		this.descripcion = "";
+	}
+
 	public ElementoComboTipoDocumento(final String idTipoDocumento, final String desc) {
 		this.idTipoDocumento = idTipoDocumento;
 		this.descripcion = desc;

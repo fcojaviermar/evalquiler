@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMessages;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.operaciones.OpVivienda;
 
@@ -34,16 +35,25 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		Collection<DatosViviendaActionForm> listaViviendas = null;
 		
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			listaViviendas = OpVivienda.consultar(form);
-			if (hayVivienda(listaViviendas)) {
-				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
-			} else {
-				comandoDestino = ConstantesComandos.NO_RESULT;
-				messages.add("message", new ActionMessage("msg.no.viviendas.criterios.introducidos"));
-			}
-			
-			request.setAttribute("datosViviendaActionForm", listaViviendas);
+	    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+	    	if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
+    			// Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+    			listaViviendas = OpVivienda.consultar(form);
+    			if (hayVivienda(listaViviendas)) {
+    				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
+    			} else {
+    				comandoDestino = ConstantesComandos.NO_RESULT;
+    				messages.add("message", new ActionMessage("msg.no.viviendas.criterios.introducidos"));
+    			}
+    			
+    			request.setAttribute("datosViviendaActionForm", listaViviendas);
+	    	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+	    			comandoDestino = ConstantesComandos.CANCEL;
+	    	} else {
+    			comandoDestino = ConstantesComandos.ERROR;
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+	    	}
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 			comandoDestino = ConstantesComandos.ERROR;

@@ -30,12 +30,11 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			long lSecuencial = OpVivienda.contar();
+			long lSecuencial = OpVivienda.ultimoIdVivienda();
 			((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
 			
-			comandoDestino = ConstantesComandos.OK;
-			
 			request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
+			comandoDestino = ConstantesComandos.OK;			
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 			comandoDestino = ConstantesComandos.EXIT;

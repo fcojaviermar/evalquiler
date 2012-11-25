@@ -4,6 +4,12 @@ public class ElementoComboTipoUsuario {
 	private String idTipoUsuario = null;
 	private String descripcion = null;
 	
+	
+	public ElementoComboTipoUsuario() {
+		this.idTipoUsuario = "0";
+		this.descripcion = "";
+	}
+
 	public ElementoComboTipoUsuario(final String idTipoUsuario, final String desc) {
 		this.idTipoUsuario = idTipoUsuario;
 		this.descripcion = desc;
