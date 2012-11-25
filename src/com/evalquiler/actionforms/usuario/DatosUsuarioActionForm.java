@@ -61,7 +61,7 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
     	
     	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
     	if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
-        (!ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
+        	 (!ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
         	super.validate(mapping, request);
         	
         	errors = new ActionErrors();

@@ -118,7 +118,8 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.REGISTRARSE.equals(botonPulsado)) && 
-			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) ) {
+			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) &&
+			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) ) {
             if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
             } else if (this.getUser().length() > Constantes.LONGITUD_USUARIO) {

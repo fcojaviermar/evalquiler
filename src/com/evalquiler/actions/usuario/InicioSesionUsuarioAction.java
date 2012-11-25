@@ -55,11 +55,18 @@ public class InicioSesionUsuarioAction extends ActionBase
 				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario() );
 
 			} else if (ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) {
-				comandoDestino = ConstantesComandos.POOL_RECOVERY;				
 				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 				encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosRealizacionEncuesta.getDatosUsuario());
 				request.setAttribute("encuestasRespondidas", encuestasRespondidas);
-			} else {
+				comandoDestino = ConstantesComandos.POOL_RECOVERY;
+				
+			} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+				encuestasRespondidas = OpRespuestasEncuesta.consultarEncuestasRespondidas(datosRealizacionEncuesta.getDatosUsuario());
+				request.setAttribute("encuestasRespondidas", encuestasRespondidas);
+				comandoDestino = ConstantesComandos.POOL_RECOVERY;
+				
+			} else if (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) {
     			Collection<DatosUsuarioActionForm> listaUsuario = OpUsuario.consultarPorPk(form);
     			if (!listaUsuario.isEmpty()) {
     
@@ -95,6 +102,10 @@ public class InicioSesionUsuarioAction extends ActionBase
     				comandoDestino = ConstantesComandos.NO_USER;
     				errors.add("errorValidacion", new ActionError("error.no.existe.usuario"));    				
     			}
+			} else {
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;    			
 			}
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;

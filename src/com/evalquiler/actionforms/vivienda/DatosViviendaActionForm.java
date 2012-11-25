@@ -15,6 +15,7 @@ import com.evalquiler.comun.utilidades.Validaciones;
 public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 
 	private int idTipoVia		   = 0;
+	private String descTipoVia		   = null;
 	private String nombreVia	   = null;
 	private int numeroVia	  	   = 0;
 	private String bloque		   = null;
@@ -28,6 +29,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	private int pais			   = 0;
 	private String nifPropietario  = null;
 	private boolean esElPropietario = false;
+
 	
 	public int getIdTipoVia() {
 		return idTipoVia;
@@ -36,6 +38,16 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 
 	public void setIdTipoVia(int idTipoVia) {
 		this.idTipoVia = idTipoVia;
+	}
+
+	
+	public String getDescTipoVia() {
+		return descTipoVia;
+	}
+
+
+	public void setDescTipoVia(String descTipoVia) {
+		this.descTipoVia = descTipoVia;
 	}
 
 	

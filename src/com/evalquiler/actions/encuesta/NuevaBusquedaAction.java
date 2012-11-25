@@ -10,7 +10,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboTipoVia;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboTipoVia;
 
 /**
  * @version 	1.0
@@ -26,14 +29,24 @@ public class NuevaBusquedaAction extends ActionBase {
 
 		try {
 		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			comandoDestino = ConstantesComandos.SEARCH;
+			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.CANCEL;
+				
+			} else if (ConstantesBotones.BUSCAR_VIVIENDA.equals(botonPulsado)) {
+				request.getSession().setAttribute("tipoVia", new ComboTipoVia());
+				request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+				comandoDestino = ConstantesComandos.SEARCH;
+				
+			} else {
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;    			
+    		}    			
 		} catch (Exception e) {
-			comandoDestino = ConstantesComandos.ERROR;
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+			comandoDestino = ConstantesComandos.ERROR;
 		}
-	
-		// If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
