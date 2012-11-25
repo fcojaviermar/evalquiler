@@ -34,8 +34,9 @@ public final class OpVivienda {
 	}
 	
 
-	public static final long contar() {
-		long lNumeroViviendas = DaoVivienda.contar();
+	public static final long ultimoIdVivienda() {
+		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultar(null, DaoVivienda.ULTIMO_ID_VIVIENDA);
+		long lNumeroViviendas = listaViviendas.iterator().next().getIdVivienda();
 		return lNumeroViviendas; 
 	}
 	

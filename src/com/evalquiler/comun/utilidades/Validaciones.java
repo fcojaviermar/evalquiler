@@ -11,8 +11,6 @@ public final class Validaciones {
 	public final static boolean emailValido(final String email) {         
 		boolean esCorrecto = false;
 		if (email.length() <= Constantes.LONGITUD_EMAIL) {
-			esCorrecto = false;
-		} else {
 			final Pattern p = Pattern.compile(Constantes.PATRON_EMAIL); 
 			final Matcher m = p.matcher(email);
 			esCorrecto = m.matches();

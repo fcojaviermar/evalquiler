@@ -24,8 +24,12 @@ import com.evalquiler.comun.bbdd.ConexionBD;
 public class DaoVivienda {
 
 	public final static int CONSULTA_VIVIENDA 		 = 1;
+	public final static int CONTAR_VIVIENDAS 		 = 2;
+	public final static int ULTIMO_ID_VIVIENDA		 = 3;
 	
-	private final static String CONTAR_VIVIENDAS = "SELECT COUNT(*) AS NUMEROVIVIENDAS FROM VIVIENDA";
+	private final static String SELECT_CONTAR_VIVIENDAS = "SELECT COUNT(*) AS NUMEROVIVIENDAS FROM VIVIENDA";
+		
+	private final static String SELECCIONAR_ULTIMO_IDVIVIENDA = "SELECT MAX(IDVIVIENDA) AS MAX_ID_VIVIENDA FROM VIVIENDA";
 	
 	private final static String CONSULTAR_VIVIENDA_POR_PK = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, PUERTA, " +
 															"CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
@@ -210,26 +214,56 @@ public class DaoVivienda {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(sentenciaEjecutar);
 				if (null != pstmt) {
-					pstmt = prepararWhere((CriteriosBusquedaViviendaActionForm)vivienda, pstmt, sentencia);
-					rs = pstmt.executeQuery() ; 
-					while(rs.next()) {
-						viviendaAux = new DatosViviendaActionForm();
-						viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
-						viviendaAux.setIdTipoVia(rs.getInt("IDTIPOVIA"));
-						viviendaAux.setNombreVia(rs.getString("NOMBREVIA"));
-						viviendaAux.setNumeroVia(rs.getInt("NUMEROVIA"));
-						viviendaAux.setBloque(rs.getString("BLOQUE"));
-						viviendaAux.setPortal(rs.getInt("PORTAL"));
-						viviendaAux.setEscalera(rs.getString("ESCALERA"));
-						viviendaAux.setPlanta(rs.getString("PLANTA"));
-						viviendaAux.setPuerta(rs.getString("PUERTA"));
-						viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
-						viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
-						viviendaAux.setProvincia(rs.getInt("PROVINCIA"));
-						viviendaAux.setPais(rs.getInt("PAIS"));
-						viviendaAux.setNifPropietario(rs.getString("NIFPROPIETARIO"));
-						listaVivienda.add(viviendaAux);
+					if (sentencia == CONSULTA_VIVIENDA) {
+    					pstmt = prepararWhere((CriteriosBusquedaViviendaActionForm)vivienda, pstmt, sentencia);
+    					rs = pstmt.executeQuery() ; 
+    					while(rs.next()) {
+    						viviendaAux = new DatosViviendaActionForm();
+    						viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
+    						viviendaAux.setIdTipoVia(rs.getInt("IDTIPOVIA"));
+    						viviendaAux.setNombreVia(rs.getString("NOMBREVIA"));
+    						viviendaAux.setNumeroVia(rs.getInt("NUMEROVIA"));
+    						viviendaAux.setBloque(rs.getString("BLOQUE"));
+    						viviendaAux.setPortal(rs.getInt("PORTAL"));
+    						viviendaAux.setEscalera(rs.getString("ESCALERA"));
+    						viviendaAux.setPlanta(rs.getString("PLANTA"));
+    						viviendaAux.setPuerta(rs.getString("PUERTA"));
+    						viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
+    						viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
+    						viviendaAux.setProvincia(rs.getInt("PROVINCIA"));
+    						viviendaAux.setPais(rs.getInt("PAIS"));
+    						viviendaAux.setNifPropietario(rs.getString("NIFPROPIETARIO"));
+    						listaVivienda.add(viviendaAux);
+    					}
+					} else if (sentencia == CONTAR_VIVIENDAS) {
+						pstmt = conn.prepareStatement(SELECCIONAR_ULTIMO_IDVIVIENDA);
+						if (null != pstmt) {
+							rs = pstmt.executeQuery() ; 
+							while(rs.next()) {
+								viviendaAux = new DatosViviendaActionForm();
+								viviendaAux.setIdVivienda(rs.getLong("NUMEROVIVIENDAS"));
+								listaVivienda.add(viviendaAux);
+							}
+						} else {
+							System.out.println("No se ha podido obtener un pstmt valido.") ;
+						}
+					} else if (sentencia == ULTIMO_ID_VIVIENDA) {
+						pstmt = conn.prepareStatement(SELECCIONAR_ULTIMO_IDVIVIENDA);
+						if (null != pstmt) {
+							rs = pstmt.executeQuery() ; 
+							while(rs.next()) {
+								viviendaAux = new DatosViviendaActionForm();
+								viviendaAux.setIdVivienda(rs.getLong("MAX_ID_VIVIENDA"));
+								listaVivienda.add(viviendaAux);
+							}
+						} else {
+							System.out.println("No se ha podido obtener un pstmt valido.") ;
+						}
+
+					} else {
+						//Error
 					}
+
 				} else {
 					System.out.println("No se ha podido obtener un pstmt valido.") ;
 				}
@@ -268,58 +302,6 @@ public class DaoVivienda {
 		}
 	}
 	
-
-	public static final long contar() {
-		long numeroViviendas = 0;
-		PreparedStatement pstmt = null;
-		ResultSet 		  rs 	= null;
-		Connection conn = ConexionBD.getConnection();
-		try {
-			if (null != conn) {
-				pstmt = conn.prepareStatement(CONTAR_VIVIENDAS);
-				if (null != pstmt) {
-					rs = pstmt.executeQuery() ; 
-					while(rs.next()) {
-						numeroViviendas = rs.getLong("NUMEROVIVIENDAS");
-					}
-				} else {
-					System.out.println("No se ha podido obtener un pstmt valido.") ;
-				}
-			} else {
-				//Se debería lanzar una excepción para saber que no se ha obtenido una conexión válida.
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return numeroViviendas;
-		}
-	}
-
 
 	private final static PreparedStatement prepararWhere(final CriteriosBusquedaViviendaActionForm vivienda, PreparedStatement pstmt, 
 														 final int sentencia) throws SQLException {
@@ -381,7 +363,7 @@ public class DaoVivienda {
 	private final static String obtenerSentencia(final int sentencia, final CriteriosBusquedaViviendaActionForm vivienda) {
 		String sentenciaEjecutar ="";
 		switch (sentencia) {
-			case 1: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
+			case CONSULTA_VIVIENDA: sentenciaEjecutar = CONSULTAR_VIVIENDA_POR_NIF_PROPIETARIO;
 					if (vivienda.tieneInfoNombreVia()) 
 						sentenciaEjecutar = sentenciaEjecutar.concat(AND_NOMBREVIA);
 					if (vivienda.tieneIdTipoVia()) 
@@ -404,6 +386,10 @@ public class DaoVivienda {
 						sentenciaEjecutar = sentenciaEjecutar.concat(AND_MUNICIPIO);
 					if (vivienda.tieneNifPropietario()) 
 						sentenciaEjecutar = sentenciaEjecutar.concat(AND_NIFPROPIETARIO);
+					break;
+			case CONTAR_VIVIENDAS: sentenciaEjecutar = SELECT_CONTAR_VIVIENDAS;
+					break;
+			case ULTIMO_ID_VIVIENDA: sentenciaEjecutar = SELECCIONAR_ULTIMO_IDVIVIENDA;
 					break;
 			default:break; 
 		}

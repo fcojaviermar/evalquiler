@@ -9,4 +9,9 @@ public abstract class ConstantesBotones {
 	public final static String SALIR  			 = "Salir";
 	public final static String NUEVA_VIVIENDA	 = "Nueva vivienda";
 	public final static String RESPONDER		 = "Responder";
+	public final static String CANCELAR		 	 = "Cancelar";
+	public final static String ACEPTAR		 	 = "Aceptar";
+	public final static String GUARDAR  		 = "Guardar";
+	public final static String BUSCAR  		 	 = "Buscar";
+
 }
