@@ -24,19 +24,19 @@
                     <label for="tipo_nifcif" class="texto100 col20"><strong>Tipo documento:&nbsp;</strong></label>
                     <bean:write name="datosClienteActionForm" property="descTipoDocumento"/>
                     <bean:define id="idTipoDocumento" name="datosClienteActionForm" property="idTipoDocumento"/>
-                 </div>                                              
-                 <div id="nifcif-div" class="alto50">
+                </div>                                              
+                <div id="nifcif-div" class="alto50">
                     <label for="nifcif" class="texto100 col20"><strong>N.I.F./C.I.F:&nbsp;</strong></label>
                     <bean:write name="datosClienteActionForm" property="nifcif"/>
-                 </div>                            
-                 <div id="email-div" class="alto50">
+                </div>                            
+                <div id="email-div" class="alto50">
                     <label for="email" class="texto100 col20"><strong>Correo electrónico:&nbsp;</strong></label>
-                 <bean:write name="datosClienteActionForm" property="email"/>
-              </div>
+                    <bean:write name="datosClienteActionForm" property="email"/>
+                </div>
              </fieldset>
              <div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
                 <html:form action="/IrAceptarDatosClienteAction.do" method="post">
-                    <html:submit property="BOTON_PULSADO" value="Aceptar"/>                            
+                    <html:submit property="BOTON_PULSADO" value="Guardar"/>                            
                     <html:submit property="BOTON_PULSADO" value="Cancelar"/>                            
                 </html:form>
              </div>
