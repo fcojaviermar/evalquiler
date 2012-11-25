@@ -15,7 +15,7 @@
 		        <legend>Datos del usuario</legend>
 		        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
 	            <fieldset>
-	                <legend>Datos vivienda</legend>
+	                <legend>Datos nueva vivienda</legend>
 	                    <div id="datosVivienda" >
                             <div id="User-div" class="alto50">
 	                            <label for="idTipoVia" class="texto90"><strong >Tipo vía:&nbsp;</strong>
@@ -62,16 +62,16 @@
 	                            </label>
 	                        </div>
 	                        <div id="User-div" class="alto50">
-	                            <label for="nifPropietario" class="texto90"><strong >N.I.F/C.I.F:&nbsp;</strong>
-	                                <html:text property="nifPropietario" size="9" maxlength="10"  styleClass="fondoBlanco" title="NIF del propietario de la vivienda"></html:text>                  
-	                            </label>
+                                <label for="codigoPostal" title="">Eres el propietario de esta vivienda
+                                   <html:checkbox property="esElPropietario" value="true" title="Marcar si eres el propietario de la vivienda"/>                                                
+                                </label>	                        
 	                        </div>  
 	                    </div>			                      
-				    	<div id="botonera" class="alineacionCentrada alineacionVerticalInferior">                                               
-				            <html:submit property="BOTON_PULSADO" value="Aceptar" title="Aceptar los datos de la vivienda introducidos"/>
-							<html:submit property="BOTON_PULSADO" value="Cancelar" title="Cancelar la operación actual"/>
-						</div>
-                   </fieldset>					
+                   </fieldset>
+                   <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">                                               
+                       <html:submit property="BOTON_PULSADO" value="Aceptar" title="Aceptar los datos de la vivienda introducidos"/>
+                       <html:submit property="BOTON_PULSADO" value="Cancelar" title="Cancelar la operación actual"/>
+                   </div>
 			</fieldset>
 	    </html:form>
 		<%@include file="../comun/Salir.jsp"%>		                             

@@ -57,13 +57,13 @@
 					     </label>
 				     </div>     
 	            </div>
-	            <div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
-	                <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
-						<html:submit property="BOTON_PULSADO" value="Guardar" title="Guardar los datos de la nueva vivienda"/>
-	                    <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
-	                </html:form>
-	            </div>
 	         </fieldset>
+             <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
+                 <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
+                     <html:submit property="BOTON_PULSADO" value="Guardar" title="Guardar los datos de la nueva vivienda"/>
+                     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
+                 </html:form>
+             </div>
          </fieldset>
          <%@include file="../comun/Salir.jsp"%>        
     </body>

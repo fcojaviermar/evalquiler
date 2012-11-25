@@ -128,7 +128,7 @@
             <forward name="THERE_IS_POLL"     path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>
             <forward name="THERE_IS_NO_POLL"  path="/IrInicioSesionUsuarioAction.do"></forward>
             <forward name="NEW_HOUSE"         path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
-            <forward name="ERROR"             path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="CANCEL"            path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
         </action>
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
@@ -139,8 +139,8 @@
 
         <action input="/jsp/encuestas/ConfirmarRespuestas.jsp" path="/IrGuardarRespuestasEncuestaAction"
                 name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.GuardarEncuestaAction">
-            <forward name="OK"         path="/IrInicioSesionUsuarioAction.do"></forward>
-            <forward name="ERROR_SAVE" path="/IrHacerEncuestaAction.do"></forward>
+            <forward name="OK"     path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="CANCEL" path="/IrHacerEncuestaAction.do"></forward>
         </action>
 
         
@@ -148,13 +148,13 @@
         <action input="/jsp/vivienda/AltaNuevaVivienda.jsp" path="/IrAceptarDatosViviendaAction"
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.ConfirmarDatosViviendaAction">
             <forward name="OK"     path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
-            <forward name="ERROR"  path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+            <forward name="CANCEL"  path="/IrHacerEncuestaAction.do"></forward>
         </action>
 
         <action input="/jsp/vivienda/ConfirmarDatosVivienda.jsp" path="/IrGuardarDatosViviendaAction"
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.GuardarDatosViviendaAction">
             <forward name="OK"     path="/IrHacerEncuestaAction.do"></forward>
-            <forward name="CANCEL"  path="/jsp/vivienda/AltaNuevaDireccion.jsp"></forward>
+            <forward name="CANCEL"  path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
         </action>
 
         <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
