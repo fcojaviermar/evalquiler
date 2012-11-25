@@ -20,7 +20,7 @@ public abstract class ConstantesComandos {
 	public final static String NO_CLIENT 			= "NO_CLIENT";
 	public final static String VALID_CLIENT 		= "VALID_CLIENT";
 	public final static String THERE_IS_POLL 		= "THERE_IS_POLL";
-	public final static String THERE_IS_NOT_POLL 	= "THERE_IS_NOT_POLL";
+	public final static String THERE_IS_NO_POLL 	= "THERE_IS_NO_POLL";
 	public final static String NEW_HOUSE 			= "NEW_HOUSE";
 	public final static String POOL_RECOVERY 		= "POOL_RECOVERY";
 	public final static String ALREADY_EVAL 		= "ALREADY_EVAL";

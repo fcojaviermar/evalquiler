@@ -1,6 +1,7 @@
 package com.evalquiler.entidad;
 
 public class ElementoComboTipoUsuario {
+	
 	private String idTipoUsuario = null;
 	private String descripcion = null;
 	
