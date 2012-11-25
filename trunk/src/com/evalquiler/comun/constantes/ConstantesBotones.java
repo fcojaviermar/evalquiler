@@ -13,5 +13,7 @@ public abstract class ConstantesBotones {
 	public final static String ACEPTAR		 	 = "Aceptar";
 	public final static String GUARDAR  		 = "Guardar";
 	public final static String BUSCAR  		 	 = "Buscar";
+	public final static String BUSCAR_VIVIENDA   = "Buscar vivienda";
+	public final static String INICIAR_SESION    = "Iniciar sesión";
 
 }
