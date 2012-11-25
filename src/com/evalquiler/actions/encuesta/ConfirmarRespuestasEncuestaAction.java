@@ -16,6 +16,7 @@ import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
@@ -35,33 +36,42 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		
 		int iNumeroPreguntas = 0;
 		try {
-			iNumeroPreguntas = Integer.parseInt((String)request.getParameter("NumeroPreguntas"));	
-
-			datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
-			
-			if (!OpRespuestasEncuesta.hayEncuestasRespondidasEnPeriodo(datosRealizacionEncuesta)) {
-
-				datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaInicioEvaluacionAlquiler());
-				datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaFinEvaluacionAlquiler());
-				DatosEncuestaActionForm datosEncuesta = datosRealizacionEncuesta.getDatosEncuesta();
-
-				if (null != datosEncuesta) {
-					Iterator<PreguntasEncuestaActionForm> oIter = datosEncuesta.getPreguntas().iterator();
-					int i=0;
-					while ( (oIter.hasNext()) && (i<iNumeroPreguntas) ) {
-						PreguntasEncuestaActionForm pregunta = oIter.next();
-						pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
-						i = i +1;
-					}
-	    
-					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
-					comandoDestino = ConstantesComandos.OK;
-				} else {
-					
-				}
+			String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
+			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.CANCEL;
+				
+			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
+    			iNumeroPreguntas = Integer.parseInt((String)request.getParameter("NumeroPreguntas"));	
+    			datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+    			
+    			if (!OpRespuestasEncuesta.hayEncuestasRespondidasEnPeriodo(datosRealizacionEncuesta)) {
+    
+    				datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaInicioEvaluacionAlquiler());
+    				datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaFinEvaluacionAlquiler());
+    				DatosEncuestaActionForm datosEncuesta = datosRealizacionEncuesta.getDatosEncuesta();
+    
+    				if (null != datosEncuesta) {
+    					Iterator<PreguntasEncuestaActionForm> oIter = datosEncuesta.getPreguntas().iterator();
+    					int i=0;
+    					while ( (oIter.hasNext()) && (i<iNumeroPreguntas) ) {
+    						PreguntasEncuestaActionForm pregunta = oIter.next();
+    						pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
+    						i = i +1;
+    					}
+    	    
+    					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
+    					comandoDestino = ConstantesComandos.OK;
+    				} else {
+    					
+    				}
+    			} else {
+    				comandoDestino = ConstantesComandos.ALREADY_EVAL;
+    				errors.add("errorValidacion", new ActionMessage("error.periodo.ya.evaluado.para.vivienda"));
+    			}
 			} else {
-				comandoDestino = ConstantesComandos.ALREADY_EVAL;
-				errors.add("errorValidacion", new ActionMessage("error.periodo.ya.evaluado.para.vivienda"));
+				errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+				errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+				comandoDestino = ConstantesComandos.ERROR;    			
 			}
 		} catch (NumberFormatException e) {
 			comandoDestino = ConstantesComandos.ERROR;

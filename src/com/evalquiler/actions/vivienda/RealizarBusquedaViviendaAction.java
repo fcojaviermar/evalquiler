@@ -40,24 +40,24 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
     			// Aqui va toda la logica del negocio y todas las llamadas a otras clases.
     			listaViviendas = OpVivienda.consultar(form);
     			if (hayVivienda(listaViviendas)) {
+    				request.setAttribute("datosViviendaActionForm", listaViviendas);
     				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
     			} else {
     				comandoDestino = ConstantesComandos.NO_RESULT;
     				messages.add("message", new ActionMessage("msg.no.viviendas.criterios.introducidos"));
     			}
     			
-    			request.setAttribute("datosViviendaActionForm", listaViviendas);
 	    	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-	    			comandoDestino = ConstantesComandos.CANCEL;
+	    		comandoDestino = ConstantesComandos.CANCEL;
+	    			
 	    	} else {
-    			comandoDestino = ConstantesComandos.ERROR;
     			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
     			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;
 	    	}
 		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
-			comandoDestino = ConstantesComandos.ERROR;
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+			comandoDestino = ConstantesComandos.ERROR;
 		}
 	
 		if (!errors.isEmpty()) {

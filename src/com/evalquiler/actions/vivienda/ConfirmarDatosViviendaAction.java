@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoVia;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboTipoVia;
 import com.evalquiler.operaciones.OpVivienda;
@@ -31,20 +32,26 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 		ActionForward forward = new ActionForward(); // return value
 
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-//			ComboTipoVia combo1 = (ComboTipoVia)request.getSession().getAttribute("tipoVia"); 
-//        	ElementoComboTipoVia elCombo1 = combo1.get(((DatosViviendaActionForm)form).getIdTipoVia());
-//        	((DatosViviendaActionForm)form).setDescTipoVia(elCombo1.getDescripcion());
-			
-        	ComboTipoVia combo1 = (ComboTipoVia)request.getSession().getAttribute("tipoVia");
-        	ElementoComboTipoVia elemCombo1 = combo1.get(((DatosViviendaActionForm)form).getIdTipoVia());
-        	((DatosViviendaActionForm)form).setDescTipoVia(elemCombo1.getDescripcion());
-        	
-			long lSecuencial = OpVivienda.ultimoIdVivienda();
-			((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
-			
-			request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
-			comandoDestino = ConstantesComandos.OK;			
+	    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+	    	if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+	    		comandoDestino = ConstantesComandos.CANCEL;
+	    		
+	    	} else if (ConstantesBotones.ACEPTAR.equals(botonPulsado)) {
+	        	ComboTipoVia combo1 = (ComboTipoVia)request.getSession().getAttribute("tipoVia");
+	        	ElementoComboTipoVia elemCombo1 = combo1.get(((DatosViviendaActionForm)form).getIdTipoVia());
+	        	((DatosViviendaActionForm)form).setDescTipoVia(elemCombo1.getDescripcion());
+	        	
+				long lSecuencial = OpVivienda.ultimoIdVivienda();
+				((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
+				
+				request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
+				comandoDestino = ConstantesComandos.OK;			
+	    		
+	    	} else {
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;
+	    	}
 		} catch (Exception e) {
 		    // Report the error using the appropriate name and ID.
 			comandoDestino = ConstantesComandos.EXIT;

@@ -37,7 +37,12 @@ public class NuevaBusquedaAction extends ActionBase {
 				request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 				request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
 				comandoDestino = ConstantesComandos.SEARCH;
-				
+
+			} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
+				request.getSession().setAttribute("tipoVia", new ComboTipoVia());
+				request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+				comandoDestino = ConstantesComandos.SEARCH;
+
 			} else {
     			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
     			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));

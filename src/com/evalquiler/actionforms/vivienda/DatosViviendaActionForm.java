@@ -8,7 +8,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
-import com.evalquiler.comun.utilidades.Validaciones;
 
 
 
@@ -258,27 +257,27 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
             	errors.add("errorValidacion", new ActionError("error.municipio.no.valido"));
             }
     
-            if (this.getProvincia() < Constantes.ELEMENTO_NO_SELECCIONADO) {
+            if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
             } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
             }
     
-            if (this.getPais() < Constantes.ELEMENTO_NO_SELECCIONADO) {
+            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
             } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
             	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
             }
     
-            if (this.getEsElPropietario()) {
-        		if ( (null == this.getNifPropietario()) || ("".equals(this.getNifPropietario())) ) {
-        			errors.add("errorValidacion", new ActionError("error.obligatorio.nifpropietario"));
-        		} else if (Validaciones.nifValido(this.getNifPropietario())) {
-        			errors.add("errorValidacion", new ActionError("error.nifpropietario.no.valido"));
-    //    			errors.add("errorValidacion", new ActionError("error.CIFpropietario.no.valido"));
-    //    			errors.add("errorValidacion", new ActionError("error.NIEpropietario.no.valido"));
-        		}
-            }
+//            if (this.getEsElPropietario()) {
+//        		if ( (null == this.getNifPropietario()) || ("".equals(this.getNifPropietario())) ) {
+//        			errors.add("errorValidacion", new ActionError("error.obligatorio.nifpropietario"));
+//        		} else if (Validaciones.nifValido(this.getNifPropietario())) {
+//        			errors.add("errorValidacion", new ActionError("error.nifpropietario.no.valido"));
+//    //    			errors.add("errorValidacion", new ActionError("error.CIFpropietario.no.valido"));
+//    //    			errors.add("errorValidacion", new ActionError("error.NIEpropietario.no.valido"));
+//        		}
+//            }
 		}
         
 		return errors;
