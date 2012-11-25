@@ -61,7 +61,7 @@
 			    </div>
 		        <div id="botonera">
 	               <html:form action="/IrBusquedaDireccionAction.do" method="post">
-	                   <html:submit title="Buscar una dirección">Buscar dirección</html:submit>
+	                   <html:submit property="BOTON_PULSADO" value="Buscar vivienda" title="Buscar una vivienda por su dirección"/>
 	               </html:form>
 	            </div>
 		    </fieldset>
