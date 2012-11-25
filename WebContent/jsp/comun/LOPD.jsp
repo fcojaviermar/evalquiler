@@ -16,5 +16,5 @@
 			</p>
 		</div>
 	</fieldset>
-	<html:checkbox property="aceptarLOPD" value="S" title="He leido y acepto las normas de protección de datos">He leido y acepto</html:checkbox>
+	<html:checkbox property="aceptarLOPD" value="true" title="He leido y acepto las normas de protección de datos">He leido y acepto</html:checkbox>
 </div>

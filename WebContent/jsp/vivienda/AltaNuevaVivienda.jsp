@@ -10,70 +10,68 @@
     </head>
     <body>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-    	<div>
-			<html:form action="/IrAceptarDatosViviendaAction.do" method="post">    	
-		        <fieldset>
-			        <legend>Datos del usuario</legend>
-			        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
-	               	<div>
-			            <fieldset>
-			               <legend>Datos vivienda</legend>
-	                       <p>
-	                           <label for="tipoVia" title=""><strong>Tipo vía:&nbsp;</strong>
-	                               <html:text property="idTipoVia" size="20" maxlength="20" title="Tipo de vía donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="nombreVia" title=""><strong >Nombre vía:&nbsp;</strong>
-	                               <html:text property="nombreVia" size="100" maxlength="100" title="Nombre de vía donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="numeroVia" title=""><strong >Número vía:&nbsp;</strong>
-	                               <html:text property="numeroVia" size="3" maxlength="5" title="Numero de vía donde está la vivienda"></html:text>                  
-	                           </label>
-	                       </p>
-	                       <p>
-	                           <label for="bloque" title=""><strong >Bloque:&nbsp;</strong>
-	                               <html:text property="bloque" size="10" maxlength="2" title="Bloque donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="portal" title=""><strong >Portal:&nbsp;</strong>
-	                               <html:text property="portal" size="3" maxlength="2" title="Portal donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="escalera" title=""><strong >Escalera:&nbsp;</strong>
-	                               <html:text property="escalera" size="3" maxlength="10" title="Escalera donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="planta" title=""><strong >Planta:&nbsp;</strong>
-	                               <html:text property="planta" size="3" maxlength="4" title="Planta donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="puerta" title=""><strong >Puerta:&nbsp;</strong>
-	                               <html:text property="puerta" size="3" maxlength="2" title="Puerta donde está la vivienda"></html:text>                  
-	                           </label>
-	                       </p>
-	                       <p>
-	                           <label for="codigoPostal" title=""><strong >Código Postal:&nbsp;</strong>
-	                               <html:text property="codigoPostal" size="10" maxlength="10" title="Código postal donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="municipio" title=""><strong >Municipio:&nbsp;</strong>
-	                               <html:text property="municipio" size="10" maxlength="11" title="Municipio donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="provinvia" title=""><strong >Provincia:&nbsp;</strong>
-	                               <html:text property="provincia" size="10" maxlength="2" title="Provincia donde está la vivienda"></html:text>                  
-	                           </label>
-	                           <label for="pais" title=""><strong >Pais:&nbsp;</strong>
-	                               <html:text property="pais" size="10" maxlength="3" title="País donde está la vivienda"></html:text>                  
-	                           </label>
-	                       </p>
-	                       <p>
-	                           <label for="codigoPostal" title="">Eres el propietario de esta vivienda
-	                               <html:checkbox property="esElPropietario" title="Marcar si eres el propietario de la vivienda"/>                                                
-	                           </label>
-	                       </p>
-	                   </fieldset>
-					</div>			                      
-			    	<div id="botonera">                                                             
-			            <html:submit property="BOTON_PULSADO" value="Aceptar"/>
-						<html:submit property="BOTON_PULSADO" value="Cancelar"/>
-					</div>
-				</fieldset>
-			</html:form>
-		</div>
+		<html:form action="/IrAceptarDatosViviendaAction.do" method="post">    	
+	        <fieldset>
+		        <legend>Datos del usuario</legend>
+		        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
+	            <fieldset>
+	                <legend>Datos vivienda</legend>
+	                    <div id="datosVivienda" >
+                            <div id="User-div" class="alto50">
+	                            <label for="idTipoVia" class="texto90"><strong >Tipo vía:&nbsp;</strong>
+	                                <html:text property="idTipoVia" size="20" maxlength="20" styleClass="fondoBlanco" title="Seleccionar tipo de vía"></html:text>                  
+	                            </label>
+	                            <label for="nombreVia" class="texto90 alineacionIzquierda"><strong >Nombre vía:&nbsp;</strong>
+	                                <html:text property="nombreVia" size="100" maxlength="100" styleClass="fondoBlanco" title="Nombre de la vía"></html:text>                  
+	                            </label>
+	                            <label for="numeroVia" class="texto90" ><strong >Número vía:&nbsp;</strong>
+	                                <html:text property="numeroVia" size="3" maxlength="5" styleClass="fondoBlanco" title="Número de la vía"></html:text>                  
+	                            </label>
+	                        </div>
+	                        <div id="User-div" class="alto50">
+	                            <label for="bloque" class="texto90"><strong >Bloque:&nbsp;</strong>
+	                                <html:text property="bloque" size="10" maxlength="10" styleClass="fondoBlanco" title="Bloque en le que está situada la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="portal" class="texto90"><strong >Portal:&nbsp;</strong>
+	                                <html:text property="portal" size="3" maxlength="5" styleClass="fondoBlanco" title="Portal de la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="escalera" class="texto90"><strong >Escalera:&nbsp;</strong>
+	                                <html:text property="escalera" size="3" maxlength="5" styleClass="fondoBlanco" title="Escalera de la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="planta" class="texto90"><strong >Planta:&nbsp;</strong>
+	                                <html:text property="planta" size="3" maxlength="5" styleClass="fondoBlanco" title="Planta de la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="puerta" class="texto90"><strong >Puerta:&nbsp;</strong>
+	                                <html:text property="puerta" size="3" maxlength="5" styleClass="fondoBlanco" title="Puerta de la vivienda"></html:text>                  
+	                            </label>
+	                        </div>
+	                        <div id="User-div" class="alto50">
+	                            <label for="codigoPostal" class="texto90"><strong >Código Postal:&nbsp;</strong>
+	                                <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="municipio" class="texto90"><strong >Municipio:&nbsp;</strong>
+	                                <html:text property="municipio" size="10" maxlength="10" styleClass="fondoBlanco" title="Municipio de la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="provinvia" class="texto90"><strong >Provincia:&nbsp;</strong>
+	                                <html:text property="provincia" size="10" maxlength="10" styleClass="fondoBlanco" title="Provincia de la vivienda"></html:text>                  
+	                            </label>
+	                            <label for="pais" class="texto90"><strong >País:&nbsp;</strong>
+	                                <html:text property="pais" size="10" maxlength="10" styleClass="fondoBlanco" title="País de la vivienda"></html:text>                  
+	                            </label>
+	                        </div>
+	                        <div id="User-div" class="alto50">
+	                            <label for="nifPropietario" class="texto90"><strong >N.I.F/C.I.F:&nbsp;</strong>
+	                                <html:text property="nifPropietario" size="9" maxlength="10"  styleClass="fondoBlanco" title="NIF del propietario de la vivienda"></html:text>                  
+	                            </label>
+	                        </div>  
+	                    </div>			                      
+				    	<div id="botonera" class="alineacionCentrada alineacionVerticalInferior">                                               
+				            <html:submit property="BOTON_PULSADO" value="Aceptar" title="Aceptar los datos de la vivienda introducidos"/>
+							<html:submit property="BOTON_PULSADO" value="Cancelar" title="Cancelar la operación actual"/>
+						</div>
+                   </fieldset>					
+			</fieldset>
+	    </html:form>
 		<%@include file="../comun/Salir.jsp"%>		                             
     </body>
 </html:html>

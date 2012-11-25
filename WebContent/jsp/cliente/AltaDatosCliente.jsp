@@ -47,10 +47,10 @@
 	                   <label for="email2" class="texto90 col20"><strong>Correo electrónico:&nbsp;</strong></label>
 	                   <html:text property="email2" size="100" maxlength="30" styleClass="fondoBlanco" title="Repetir dirección de correo electrónico"></html:text>
 	                </div>
+                    <%@include file="../comun/LOPD.jsp"%>
                  	<div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
-                 		<html:submit title="Aceptar los datos introducidos">Aceptar</html:submit>
+                        <html:submit property="BOTON_PULSADO" value="Aceptar" title="Aceptar los datos introducidos"/>
                  	</div>
-					<%@include file="../comun/LOPD.jsp"%>                 	
         		</fieldset>
 			</html:form>
         </div>

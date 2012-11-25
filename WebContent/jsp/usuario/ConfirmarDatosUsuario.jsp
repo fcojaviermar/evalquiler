@@ -16,14 +16,14 @@
                     Confirmar datos de alta del usuario
                 </legend>
                 <div id="div-vacio" class="alto50"></div>
-               <div id="User-div" class="alto50">
-                   <label for="user" class="texto100 col20"><strong>Usuario:&nbsp;</strong></label>
-                   <bean:write name="datosUsuarioActionForm" property="user"/>
-               </div>
-               <div id="tipo_nifcif-div" class="alto50">
-                   <label for="tipo_nifcif" class="texto100 col20"><strong>Tipo documento:&nbsp;</strong></label>
-                   <bean:write name="datosUsuarioActionForm" property="descTipoDocumento"/>
-                   <bean:define id="idTipoDocumento" name="datosUsuarioActionForm" property="idTipoDocumento"/>
+                <div id="User-div" class="alto50">
+                    <label for="user" class="texto100 col20"><strong>Usuario:&nbsp;</strong></label>
+                    <bean:write name="datosUsuarioActionForm" property="user"/>
+                </div>
+                <div id="tipo_nifcif-div" class="alto50">
+                    <label for="tipo_nifcif" class="texto100 col20"><strong>Tipo documento:&nbsp;</strong></label>
+                    <bean:write name="datosUsuarioActionForm" property="descTipoDocumento"/>
+                    <bean:define id="idTipoDocumento" name="datosUsuarioActionForm" property="idTipoDocumento"/>
                 </div>                                              
                 <div id="nifcif-div" class="alto50">
                    <label for="nifcif" class="texto100 col20"><strong>N.I.F./C.I.F:&nbsp;</strong></label>
@@ -34,13 +34,13 @@
                    <bean:write name="datosUsuarioActionForm" property="email"/>
                 </div>
                 <div id="tipo_usuario-div" class="alto50">
-                    <label for="tipo_usuario" class="texto100 col20"><strong>Tipo usuario:&nbsp;</strong></label>
-                   <bean:define id="idTipoUsuario" name="datosUsuarioActionForm" property="idTipoUsuario"/>
+                    <label for="descTipoUsuario" class="texto100 col20"><strong>Tipo usuario:&nbsp;</strong></label>
+                    <bean:write name="datosUsuarioActionForm" property="descTipoUsuario"/>
                 </div>     
              </fieldset>
              <div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
                 <html:form action="/IrAceptarDatosUsuarioAction.do" method="post">
-                    <html:submit property="BOTON_PULSADO" value="Aceptar"/>                            
+                    <html:submit property="BOTON_PULSADO" value="Guardar"/>                            
                     <html:submit property="BOTON_PULSADO" value="Cancelar"/>                            
                 </html:form>
              </div>
