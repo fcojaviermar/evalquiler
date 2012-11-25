@@ -55,10 +55,10 @@
 			                <label for="municipio" class="texto90"><strong >Municipio:&nbsp;</strong>
 			                    <html:text property="municipio" size="10" maxlength="10" styleClass="fondoBlanco" title="Municipio de la vivienda"></html:text>                  
 			                </label>
-			                <label for="provinvia" class="texto90"><strong >Provincia:&nbsp;</strong>
+			                <label for="provinvia" class="texto90"><strong >(*)Provincia:&nbsp;</strong>
 			                    <html:text property="provincia" size="10" maxlength="10" styleClass="fondoBlanco" title="Provincia de la vivienda"></html:text>                  
 			                </label>
-			                <label for="pais" class="texto90"><strong >País:&nbsp;</strong>
+			                <label for="pais" class="texto90"><strong >(*)País:&nbsp;</strong>
 			                    <html:text property="pais" size="10" maxlength="10" styleClass="fondoBlanco" title="País de la vivienda"></html:text>                  
 			                </label>
 			            </div>
