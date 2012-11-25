@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
@@ -26,6 +27,7 @@ public class GuardarDatosViviendaAction extends ActionBase
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("GuardarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
+		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
@@ -34,11 +36,17 @@ public class GuardarDatosViviendaAction extends ActionBase
 			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 			if (ConstantesBotones.GUARDAR.equals(botonPulsado)) {
 				DatosViviendaActionForm datosVivienda = (DatosViviendaActionForm)request.getSession().getAttribute("datosViviendaActionForm");
+				if (datosVivienda.getEsElPropietario()) {
+					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm"); 
+					datosVivienda.setNifPropietario(datosRealizacionEncuesta.getDatosUsuario().getNifcif());
+				}
 				OpVivienda.insertar(datosVivienda);
 				request.setAttribute("idVivienda", String.valueOf(datosVivienda.getIdVivienda()));
 				comandoDestino = ConstantesComandos.OK;
+				
 			} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 				comandoDestino = ConstantesComandos.CANCEL;
+				
 			} else {
     			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
     			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));

@@ -44,17 +44,22 @@ public class RecuperarEncuestaAction extends ActionBase {
 				request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 				request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
 				comandoDestino = ConstantesComandos.NEW_HOUSE;
+				
 			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
-				//Entra por aquí si se produce una redireccion del tipo ALREADY_EVAL
 				comandoDestino = ConstantesComandos.THERE_IS_POLL;
-			} else {
+				
+			} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.CANCEL;
+				
+			} else if ( (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) || 
+						(ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
 				DatosViviendaActionForm viviendaSeleccionada = new DatosViviendaActionForm();
 				String idVivienda = (String)request.getParameter("idVivienda");
 				if (null == idVivienda) {
 					//En este caso se viene cuando se ha dado de alta una vivienda de forma correcta.
 					idVivienda = (String)request.getAttribute("idVivienda");
 				}
-				if (null == idVivienda) {
+				if (null != idVivienda) {
     				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
     				Collection<DatosViviendaActionForm> vivienda = OpVivienda.consultarPorPk(viviendaSeleccionada);
     
@@ -79,7 +84,10 @@ public class RecuperarEncuestaAction extends ActionBase {
 				} else {
 					
 				}
-    				
+			} else {
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;    			
 			}
 		} catch (Exception e) {
 			comandoDestino = ConstantesComandos.ERROR;

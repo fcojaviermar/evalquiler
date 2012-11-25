@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
@@ -19,9 +19,8 @@ import com.evalquiler.operaciones.OpRespuestasEncuesta;
  * @version 	1.0
  * @author
  */
-public class GuardarEncuestaAction extends ActionBase
+public class GuardarEncuestaAction extends ActionBase {
 //CAMBIAR NOMBRE POR GuardarRespuestasEncuestaAction
-{
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("GuardarEncuestaAction.action()");
@@ -30,25 +29,29 @@ public class GuardarEncuestaAction extends ActionBase
 		ActionForward forward = new ActionForward(); // return value
 
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = 
-												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
-			if (Constantes.RESULTADO_NOOK == OpRespuestasEncuesta.insertar(datosRealizacionEncuesta)) {
-				errors.add("errorExcepcion", new ActionError("error.no.guardar.encuesta"));
-				comandoDestino = ConstantesComandos.ERROR_SAVE;
+			String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
+			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				comandoDestino = ConstantesComandos.CANCEL;
+				
+			} else if (!ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+    		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+    			DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = 
+    												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+    			OpRespuestasEncuesta.insertar(datosRealizacionEncuesta); 
+    			comandoDestino = ConstantesComandos.OK;
+    			
 			} else {
-				//La operación se ha realizado correctamente.
-				comandoDestino = ConstantesComandos.OK;
+    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+    			comandoDestino = ConstantesComandos.ERROR;    			
 			}
-	
 		} catch (Exception e) {
-			comandoDestino = ConstantesComandos.ERROR;
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+			comandoDestino = ConstantesComandos.ERROR;
 		}
 	
 		if (!errors.isEmpty()) {
-		    // Forward control to the appropriate 'failure' URI (change name as desired)
-		    
+			saveErrors(request, errors);
 		} else {
 
 		}

@@ -2,6 +2,7 @@ package com.evalquiler.actionforms.vivienda;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -274,13 +275,21 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
      * Validamamos los datos introducidos por el usuario
      */
     public final ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("DatosUsuarioActionForm.validate()");
+    	System.out.println("CriteriosBusquedaViviendaActionForm.validate()");
     	ActionErrors errors = null;
     	
     	errors = new ActionErrors();
-//        if ( (null == this.getTipoVia()) ||  ("".equals(this.getTipoVia()))) {
-//        	errors.add("errorValidacion", new ActionMessage("error.obligatorio.tipovia"));
-//        } 
+        if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
+        } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
+        	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
+        }
+
+        if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+        	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
+        } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
+        	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
+        }
         
         return errors;
     }
