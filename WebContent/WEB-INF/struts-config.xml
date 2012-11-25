@@ -36,7 +36,7 @@
 <!-- =================================== Global Forward Definitions -->
     <global-forwards>
         <forward name="ERROR" path="/jsp/comun/Error.jsp"/>
-        <forward name="EXIT"  path="/IrInicioSesionUsuarioAction.do"></forward>
+        <forward name="EXIT"  path="/Inicio.do"></forward>
         <forward name="END"   path="/Inicio.do"></forward>        
     </global-forwards>
 
@@ -67,7 +67,6 @@
             <forward name="REGISTER_USER"        path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
             <forward name="NO_USER"    		 	 path="/Inicio.do"></forward>
             <forward name="VALID_USER" 		 	 path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
-            <forward name="FORGET_USER_DATA"     path="/IrFogotYourUserDataAction.do"></forward>
             <forward name="NO_EQUAL_PSW" 		 path="/Inicio.do"></forward>
             <forward name="TWO_EQUAL_USERS"  	 path="/Inicio.do"></forward>
             <forward name="POOL_RECOVERY"        path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
@@ -76,14 +75,13 @@
 
         <action input="/jsp/usuario/AltaDatosUsuario.jsp" path="/IrConfirmarDatosUsuarioAction"
                 name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.ConfirmarDatosUsuarioAction">
-            <forward name="OK"    path="/jsp/usuario/ConfirmarDatosUsuario.jsp"></forward>
-            <forward name="ERROR" path="/Inicio.do"></forward>
+            <forward name="OK"     path="/jsp/usuario/ConfirmarDatosUsuario.jsp"></forward>
         </action>
 
         <action input="/jsp/usuario/ConfirmarDatosUsuario.jsp" path="/IrAceptarDatosUsuarioAction" 
                 name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.GuardarDatosUsuarioAction">
-			<forward name="OK"    path="/Inicio.do"></forward>
-            <forward name="ERROR" path="/Inicio.do"></forward>
+			<forward name="OK"     path="/Inicio.do"></forward>
+            <forward name="CANCEL" path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
         </action>                                                      
         
         <action path="/IrFogotYourUserDataAction"    forward="/jsp/usuario/OlvidarDatosAcceso.jsp"
@@ -92,25 +90,23 @@
         <!-- =========================== Modulo Registro Clientes =========================== -->
         <action input="/register.jsp" path="/IrInicioSesionClienteAction" name="datosInicioSesionActionForm" 
                                             scope="request" type="com.evalquiler.actions.cliente.InicioSesionClienteAction">
-            <forward name="REGISTER_CLIENT"  path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
-            <forward name="NO_CLIENT"        path="/Inicio.do"></forward>
-            <forward name="VALID_CLIENT"     path="/jsp/informes/FormularioSolicitudInforme.jsp"></forward>
-            <forward name="ERROR_PSW_NO_IGUALES" path="/Inicio.do"></forward>
+            <forward name="REGISTER_CLIENT"        path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
+            <forward name="NO_CLIENT"              path="/Inicio.do"></forward>
+            <forward name="VALID_CLIENT"           path="/jsp/informes/FormularioSolicitudInforme.jsp"></forward>
+            <forward name="ERROR_PSW_NO_IGUALES"   path="/Inicio.do"></forward>
             <forward name="ERROR_2_EQUAL_CLIENTS"  path="/Inicio.do"></forward>
-            <forward name="ERROR" path="/IrFogotYourClientDataAction.do"></forward>
         </action>
     
 
         <action input="/jsp/cliente/AltaDatosCliente.jsp" path="/IrConfirmarDatosClienteAction"
                 name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.ConfirmarDatosClienteAction">
             <forward name="OK"    path="/jsp/cliente/ConfirmarDatosCliente.jsp"></forward>
-            <forward name="ERROR" path="/IrFogotYourClientDataAction.do"></forward>
         </action>
 
         <action input="/jsp/cliente/ConfirmarDatosCliente.jsp" path="/IrAceptarDatosClienteAction" 
                 name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.GuardarDatosClienteAction">
-            <forward name="OK"    path="/Inicio.do"></forward>
-            <forward name="ERROR" path="/Inicio.do"></forward>
+            <forward name="OK"     path="/Inicio.do"></forward>
+            <forward name="CANCEL" path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
         </action>                                                      
         
         <action path="/IrFogotYourClientDataAction"    forward="/jsp/cliente/OlvidarDatosAcceso.jsp"
@@ -118,8 +114,8 @@
 
 
         <!-- =========================== Modulo de encuestas =========================== -->
-        <action path="/IrBusquedaDireccionAction"    forward="/jsp/encuestas/CriteriosBusquedaVivienda.jsp"
-                                                      validate="false"/>
+<!--         <action path="/IrBusquedaDireccionAction"    forward="/jsp/encuestas/CriteriosBusquedaVivienda.jsp"
+                                                      validate="false"/>-->
          
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
                 name="datosVacioActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
@@ -157,7 +153,7 @@
         <action input="/jsp/vivienda/ConfirmarDatosVivienda.jsp" path="/IrGuardarDatosViviendaAction"
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.GuardarDatosViviendaAction">
             <forward name="OK"     path="/IrHacerEncuestaAction.do"></forward>
-            <forward name="ERROR"  path="/jsp/vivienda/AltaNuevaDireccion.jsp"></forward>
+            <forward name="CANCEL"  path="/jsp/vivienda/AltaNuevaDireccion.jsp"></forward>
         </action>
 
         <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
@@ -165,6 +161,7 @@
             <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
             <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
             <forward name="NO_RESULT"             path="/IrBusquedaDireccionAction.do"></forward>
+            <forward name="CANCEL"                path="/IrBusquedaDireccionAction.do"></forward>
         </action>
 
 
