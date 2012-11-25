@@ -9,12 +9,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesComandos;
-import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.entidad.ElementoComboTipoVia;
 import com.evalquiler.operaciones.OpVivienda;
 
