@@ -120,12 +120,13 @@
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
                 name="datosVacioActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
             <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="CANCEL" path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>
 	
         <action input="/jsp/vivienda/ListadoDireccionesEncontradas.jsp" path="/IrHacerEncuestaAction"
                 name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.RecuperarEncuestaAction">
             <forward name="THERE_IS_POLL"     path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>
-            <forward name="THERE_IS_NOT_POLL" path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="THERE_IS_NO_POLL"  path="/IrInicioSesionUsuarioAction.do"></forward>
             <forward name="NEW_HOUSE"         path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
             <forward name="ERROR"             path="/IrInicioSesionUsuarioAction.do"></forward>
         </action>

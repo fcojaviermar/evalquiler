@@ -19,7 +19,9 @@
 	                    <div id="datosVivienda" >
                             <div id="User-div" class="alto50">
 	                            <label for="idTipoVia" class="texto90"><strong >Tipo vía:&nbsp;</strong>
-	                                <html:text property="idTipoVia" size="20" maxlength="20" styleClass="fondoBlanco" title="Seleccionar tipo de vía"></html:text>                  
+	                                <html:select name="tipoViaSeleccionado" property="idTipoVia" styleClass="fondoBlanco" title="Seleccionar tipo de vía">
+                                        <html:optionsCollection name="tipoVia" value="idTipoVia" label="descripcion"/>
+                                    </html:select>
 	                            </label>
 	                            <label for="nombreVia" class="texto90 alineacionIzquierda"><strong >Nombre vía:&nbsp;</strong>
 	                                <html:text property="nombreVia" size="100" maxlength="100" styleClass="fondoBlanco" title="Nombre de la vía"></html:text>                  
