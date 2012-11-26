@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesBotones;
 
 
 public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
@@ -278,19 +279,22 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
     	System.out.println("CriteriosBusquedaViviendaActionForm.validate()");
     	ActionErrors errors = null;
     	
-    	errors = new ActionErrors();
-        if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
-        	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
-        } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
-        	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
-        }
-
-        if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
-        	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
-        } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
-        	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
-        }
-        
+		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+		if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
+			 (!ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) ) {
+        	errors = new ActionErrors();
+            if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
+            } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
+            	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
+            }
+    
+            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
+            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
+            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
+            }
+		}        
         return errors;
     }
     
