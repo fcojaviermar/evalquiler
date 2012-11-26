@@ -29,7 +29,6 @@
                                 <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
                                     <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
                                         <span>Pregunta <%=String.valueOf(indicePregunta+1)%></span> 
-                                        <bean:write name="indicePregunta"/>
                                     </legend>       
                                     <p class="p1 rellenoIzq12 margenSup0 rellenoSup0 textoAmarilloMedio">
                                         <bean:write name="preguntasEnc" property="descripcion"/>

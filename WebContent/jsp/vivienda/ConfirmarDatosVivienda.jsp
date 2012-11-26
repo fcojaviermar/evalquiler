@@ -17,8 +17,8 @@
                  <legend>Datos vivienda</legend>
                  <div id="datosVivienda" >
                      <div id="User-div" class="alto50">
-                         <label for="idTipoVia" class="texto90"><strong >Tipo vía:&nbsp;</strong></label>
-                         <bean:write name="datosViviendaActionForm" property="idTipoVia"/>
+                         <label for="descTipoVia" class="texto90"><strong >Tipo vía:&nbsp;</strong></label>
+                         <bean:write name="datosViviendaActionForm" property="descTipoVia"/>
                          <label for="nombreVia" class="texto90 alineacionIzquierda"><strong >Nombre vía:&nbsp;</strong></label>
                          <bean:write name="datosViviendaActionForm" property="nombreVia"/>            
                          <label for="numeroVia" class="texto90" ><strong >Número vía:&nbsp;</strong></label>
