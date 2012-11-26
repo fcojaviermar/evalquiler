@@ -19,6 +19,7 @@ import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 
 
@@ -59,7 +60,7 @@ public class DaoRespuestasEncuesta {
 	
 	public static final int insertar(DatosRealizacionEncuestaActionForm encuestaRealizada) {
 		PreparedStatement pstmt 	 = null;
-		int 			  iResultado = 1;
+		int 			  iResultado = Constantes.RESULTADO_NOOK;
 		Connection conn = ConexionBD.getConnection();
 		try {		
 			if (null != conn) {
@@ -93,9 +94,10 @@ public class DaoRespuestasEncuesta {
 					}
 					if (error) {
 						conn.rollback();
-						iResultado = 0;
+						iResultado = Constantes.RESULTADO_NOOK;
 					} else {
 						conn.commit();
+						iResultado = Constantes.RESULTADO_OK;
 					}
 				} else {
 
