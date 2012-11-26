@@ -9,7 +9,11 @@ import org.apache.struts.action.ActionForm;
 
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
 import com.evalquiler.dao.DaoRespuestasEncuesta;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.encuesta.EncuestaRespondidaEnPeriodoEvaluacionExcepcion;
+import com.evalquiler.excepciones.encuesta.RespuestasEncuestaNoGuardadasExcepcion;
 
 /**
  * @author cachorro
@@ -17,13 +21,14 @@ import com.evalquiler.dao.DaoRespuestasEncuesta;
  */
 public final class OpRespuestasEncuesta {
 	
-	public static final int insertar(final ActionForm datosEncuestaIn) {
+	public static final int insertar(final ActionForm datosEncuestaIn) 
+		throws RespuestasEncuestaNoGuardadasExcepcion {
 		int iResultado = DaoRespuestasEncuesta.insertar((DatosRealizacionEncuestaActionForm)datosEncuestaIn);
-		if (iResultado != 0) {
-			iResultado = Constantes.RESULTADO_OK;
-		} else {
-			iResultado = Constantes.RESULTADO_NOOK;
+		
+		if (iResultado == Constantes.RESULTADO_NOOK) {
+			throw new RespuestasEncuestaNoGuardadasExcepcion("");
 		}
+
 		return iResultado;
 	}
 
@@ -36,16 +41,24 @@ public final class OpRespuestasEncuesta {
 	}
 
 	
-	public static final boolean hayEncuestasRespondidasEnPeriodo (DatosRealizacionEncuestaActionForm datosRealizacionEncuestaIn) {
-		boolean hayEncuestas = true;
+	public static final Collection<DatosRealizacionEncuestaActionForm> getEncuestasRespondidasEnPeriodo (DatosRealizacionEncuestaActionForm datosRealizacionEncuestaIn) 
+		throws EncuestaRespondidaEnPeriodoEvaluacionExcepcion, ExcepcionEjecutarSentancia {
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = 
 														DaoRespuestasEncuesta.consultar(datosRealizacionEncuestaIn, 
 														DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS);
-		
-		if ( ((null != encuestasRespondidas) && encuestasRespondidas.isEmpty()) || (null == encuestasRespondidas) ) {
-			hayEncuestas = false;
+		if (null != encuestasRespondidas) {
+			if (!encuestasRespondidas.isEmpty())  {
+				throw new EncuestaRespondidaEnPeriodoEvaluacionExcepcion(datosRealizacionEncuestaIn);
+			}
+		} else {
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+		 											ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+		 												ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+		 										"error.ejecutar.sentencia", 
+		 										"Se ha obtenido un resultado nulo al ejecutar la sentencia del DaoRespuestasEncuetas " + DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS);
+			
 		}
-		return hayEncuestas;
+		return encuestasRespondidas;
 	}
 	
 }
