@@ -27,31 +27,25 @@ public class NuevaBusquedaAction extends ActionBase {
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
-		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
-			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-				comandoDestino = ConstantesComandos.CANCEL;
-				
-			} else if (ConstantesBotones.BUSCAR_VIVIENDA.equals(botonPulsado)) {
-				request.getSession().setAttribute("tipoVia", new ComboTipoVia());
-				request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
-				comandoDestino = ConstantesComandos.SEARCH;
+		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+		if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+			comandoDestino = ConstantesComandos.CANCEL;
+			
+		} else if (ConstantesBotones.BUSCAR_VIVIENDA.equals(botonPulsado)) {
+			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
+			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+			comandoDestino = ConstantesComandos.SEARCH;
 
-			} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
-				request.getSession().setAttribute("tipoVia", new ComboTipoVia());
-				request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
-				comandoDestino = ConstantesComandos.SEARCH;
+		} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
+			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
+			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+			comandoDestino = ConstantesComandos.SEARCH;
 
-			} else {
-    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
-    			comandoDestino = ConstantesComandos.ERROR;    			
-    		}    			
-		} catch (Exception e) {
+		} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-			comandoDestino = ConstantesComandos.ERROR;
-		}
+			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+			comandoDestino = ConstantesComandos.ERROR;    			
+		}    			
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
