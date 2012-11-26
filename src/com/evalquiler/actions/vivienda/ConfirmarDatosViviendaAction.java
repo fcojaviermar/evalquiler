@@ -15,6 +15,7 @@ import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboTipoVia;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.operaciones.OpVivienda;
 
 /**
@@ -25,13 +26,12 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 	
 
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("ConfirmarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
-		try {
 	    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 	    	if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 	    		comandoDestino = ConstantesComandos.CANCEL;
@@ -41,22 +41,29 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 	        	ElementoComboTipoVia elemCombo1 = combo1.get(((DatosViviendaActionForm)form).getIdTipoVia());
 	        	((DatosViviendaActionForm)form).setDescTipoVia(elemCombo1.getDescripcion());
 	        	
-				long lSecuencial = OpVivienda.ultimoIdVivienda();
-				((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
-				
-				request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
-				comandoDestino = ConstantesComandos.OK;			
+				long lSecuencial = 0;
+				try {
+					lSecuencial = OpVivienda.ultimoIdVivienda();
+					((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
+					
+					request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
+					comandoDestino = ConstantesComandos.OK;			
+				} catch (ExcepcionEjecutarSentancia e) {
+	    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+	    			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
+	    			comandoDestino = ConstantesComandos.ERROR;
+				}
 	    		
 	    	} else {
     			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
     			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
     			comandoDestino = ConstantesComandos.ERROR;
 	    	}
-		} catch (Exception e) {
-		    // Report the error using the appropriate name and ID.
-			comandoDestino = ConstantesComandos.EXIT;
-			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-		}
+//		} catch (Exception e) {
+//		    // Report the error using the appropriate name and ID.
+//			comandoDestino = ConstantesComandos.EXIT;
+//			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+//		}
 
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
