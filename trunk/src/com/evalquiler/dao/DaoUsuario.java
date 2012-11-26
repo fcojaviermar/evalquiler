@@ -12,6 +12,7 @@ import java.util.Collection;
 
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
+import com.evalquiler.comun.constantes.Constantes;
 
 
 /**
@@ -115,10 +116,10 @@ public class DaoUsuario {
 					if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
 						System.out.println("Se han insertado registros.");
 						conn.commit();
-						iResultado = 0;
+						iResultado = Constantes.RESULTADO_OK;
 					} else {
 						System.out.println("No se han insertado registros.");
-						iResultado = 1;
+						iResultado = Constantes.RESULTADO_NOOK;
 					}
 				} else {
 

@@ -12,6 +12,7 @@ import java.util.Collection;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
+import com.evalquiler.comun.constantes.Constantes;
 
 
 /**
@@ -50,10 +51,6 @@ public class DaoCliente {
 						
 						listaCliente.add(cliente);
 					}
-
-					System.out.println("Datos obtenidos");
-					System.out.println("Usuario: " + cliente.getUser());
-					System.out.println("Psw: " + cliente.getPassword());
 				} else {
 					System.out.println("No se ha podido obtener un pstmt valido.") ;
 				}
@@ -113,10 +110,10 @@ public class DaoCliente {
 					if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
 						System.out.println("Se ha insertado el cliente.");
 						conn.commit();
-						iResultado = 0;
+						iResultado = Constantes.RESULTADO_OK;
 					} else {
 						System.out.println("No se ha insertado el cliente.");
-						iResultado = 1;
+						iResultado = Constantes.RESULTADO_NOOK;
 					}
 				} else {
 

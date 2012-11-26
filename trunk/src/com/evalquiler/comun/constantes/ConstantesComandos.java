@@ -4,6 +4,8 @@ public abstract class ConstantesComandos {
 	public final static String EMPTY 				= "EMPTY";
 	public final static String ERROR 	 			= "ERROR";
 	public final static String EXIT 	 			= "EXIT";
+	public final static String OK 					= "OK";
+	public final static String NOOK 				= "NOOK";
 	public final static String ONE_RESULT 			= "ONE_RESULT";
 	public final static String NO_RESULT 			= "NO_RESULT";
 	public final static String MORE_THAN_ONE_RESULT = "MORE_THAN_ONE_RESULT";
@@ -15,7 +17,6 @@ public abstract class ConstantesComandos {
 	public final static String VALID_USER 			= "VALID_USER";
 	public final static String NO_EQUAL_PSW 		= "NO_EQUAL_PSW";
 	public final static String TWO_EQUAL_USERS 		= "TWO_EQUAL_USERS";
-	public final static String OK 					= "OK";
 	public final static String REGISTER_CLIENT 		= "REGISTER_CLIENT";
 	public final static String NO_CLIENT 			= "NO_CLIENT";
 	public final static String VALID_CLIENT 		= "VALID_CLIENT";

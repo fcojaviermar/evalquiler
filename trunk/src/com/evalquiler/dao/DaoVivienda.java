@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForm;
 import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
+import com.evalquiler.comun.constantes.Constantes;
 
 
 /**
@@ -165,10 +166,10 @@ public class DaoVivienda {
 					if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
 						System.out.println("Se ha insertado el cliente.");
 						conn.commit();
-						iResultado = 0;
+						iResultado = Constantes.RESULTADO_OK;
 					} else {
 						System.out.println("No se ha insertado el cliente.");
-						iResultado = 1;
+						iResultado = Constantes.RESULTADO_NOOK;
 					}
 				} else {
 
@@ -203,7 +204,7 @@ public class DaoVivienda {
 	
 
 	public static final Collection<DatosViviendaActionForm> consultar(final ActionForm vivienda, final int sentencia) {
-		Collection<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
+		Collection<DatosViviendaActionForm> listaVivienda = null;
 		DatosViviendaActionForm viviendaAux = null;
 		
 		PreparedStatement pstmt = null;
@@ -217,6 +218,8 @@ public class DaoVivienda {
 					if (sentencia == CONSULTA_VIVIENDA) {
     					pstmt = prepararWhere((CriteriosBusquedaViviendaActionForm)vivienda, pstmt, sentencia);
     					rs = pstmt.executeQuery() ; 
+    					listaVivienda = new ArrayList<DatosViviendaActionForm>();
+    					
     					while(rs.next()) {
     						viviendaAux = new DatosViviendaActionForm();
     						viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
@@ -238,7 +241,8 @@ public class DaoVivienda {
 					} else if (sentencia == CONTAR_VIVIENDAS) {
 						pstmt = conn.prepareStatement(SELECCIONAR_ULTIMO_IDVIVIENDA);
 						if (null != pstmt) {
-							rs = pstmt.executeQuery() ; 
+							rs = pstmt.executeQuery() ;
+							listaVivienda = new ArrayList<DatosViviendaActionForm>();
 							while(rs.next()) {
 								viviendaAux = new DatosViviendaActionForm();
 								viviendaAux.setIdVivienda(rs.getLong("NUMEROVIVIENDAS"));
@@ -252,6 +256,7 @@ public class DaoVivienda {
 						if (null != pstmt) {
 							rs = pstmt.executeQuery() ; 
 							while(rs.next()) {
+								listaVivienda = new ArrayList<DatosViviendaActionForm>();
 								viviendaAux = new DatosViviendaActionForm();
 								viviendaAux.setIdVivienda(rs.getLong("MAX_ID_VIVIENDA"));
 								listaVivienda.add(viviendaAux);
