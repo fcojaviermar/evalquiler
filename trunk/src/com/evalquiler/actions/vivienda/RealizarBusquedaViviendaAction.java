@@ -15,9 +15,9 @@ import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.excepciones.vivienda.NoEncontradaViviendaConCriteriosExcepcion;
 import com.evalquiler.operaciones.OpVivienda;
 
 /**
@@ -26,7 +26,7 @@ import com.evalquiler.operaciones.OpVivienda;
  */
 public class RealizarBusquedaViviendaAction extends ActionBase {
 	
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("ResultadosBusquedaViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
@@ -34,19 +34,17 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		ActionForward forward = new ActionForward(); // return value
 		Collection<DatosViviendaActionForm> listaViviendas = null;
 		
-		try {
 	    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 	    	if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
     			// Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-    			listaViviendas = OpVivienda.consultar(form);
-    			if (hayVivienda(listaViviendas)) {
+    			try {
+					listaViviendas = OpVivienda.buscarVivienda(form);
     				request.setAttribute("datosViviendaActionForm", listaViviendas);
     				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
-    			} else {
+				} catch (NoEncontradaViviendaConCriteriosExcepcion e) {
     				comandoDestino = ConstantesComandos.NO_RESULT;
     				messages.add("message", new ActionMessage("msg.no.viviendas.criterios.introducidos"));
-    			}
-    			
+				}
 	    	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 	    		comandoDestino = ConstantesComandos.CANCEL;
 	    			
@@ -55,10 +53,10 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
     			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
     			comandoDestino = ConstantesComandos.ERROR;
 	    	}
-		} catch (Exception e) {
-			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-			comandoDestino = ConstantesComandos.ERROR;
-		}
+//		} catch (Exception e) {
+//			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+//			comandoDestino = ConstantesComandos.ERROR;
+//		}
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
@@ -72,16 +70,5 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		
 		return forward;
     }
-    
-    
-    private final boolean hayVivienda(final Collection<DatosViviendaActionForm> listaViviendas) {
-    	boolean hayViviendas = false;
-    	if (listaViviendas.size() > Constantes.SIN_REGISTROS) {
-    		hayViviendas = true;
-    	}
-    	
-    	return hayViviendas;
-    }
-    
     
 }

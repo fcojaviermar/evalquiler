@@ -3,7 +3,6 @@ package com.evalquiler.actions.cliente;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -27,21 +26,13 @@ public class ConfirmarDatosClienteAction extends ActionBase {
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
-		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			ComboTipoDocumento combo1 = (ComboTipoDocumento)request.getSession().getAttribute("tipoDocumento");
-        	ElementoComboTipoDocumento elCombo1 = combo1.get(((DatosClienteActionForm)form).getIdTipoDocumento());
-        	((DatosClienteActionForm)form).setDescTipoDocumento(elCombo1.getDescripcion());
-        	request.getSession().setAttribute("datosClienteActionForm", (DatosClienteActionForm)form);
-        	
-			comandoDestino = ConstantesComandos.OK;
-		} catch (Exception e) {
-			comandoDestino = ConstantesComandos.ERROR;
-			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-		}
+	    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
+		ComboTipoDocumento combo1 = (ComboTipoDocumento)request.getSession().getAttribute("tipoDocumento");
+    	ElementoComboTipoDocumento elCombo1 = combo1.get(((DatosClienteActionForm)form).getIdTipoDocumento());
+    	((DatosClienteActionForm)form).setDescTipoDocumento(elCombo1.getDescripcion());
+    	request.getSession().setAttribute("datosClienteActionForm", (DatosClienteActionForm)form);
+		comandoDestino = ConstantesComandos.OK;
 	
-		// If a message is required, save the specified key(s)
-		// into the request for use by the <struts:errors> tag.
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
