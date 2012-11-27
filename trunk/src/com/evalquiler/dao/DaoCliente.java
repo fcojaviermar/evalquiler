@@ -13,6 +13,8 @@ import java.util.Collection;
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
 /**
@@ -26,14 +28,13 @@ public class DaoCliente {
 	private final static String INSERTAR_CLIENTE = "INSERT INTO CLIENTE (IDCLIENTE, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, SYSDATE())";
 	
-	public static final Collection<DatosClienteActionForm> consultarPorPk(final String idCliente) {
-		Collection<DatosClienteActionForm> listaCliente = new ArrayList<DatosClienteActionForm>();
-		DatosClienteActionForm cliente = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet 		  rs 	= null;
-		
+	public static final Collection<DatosClienteActionForm> consultarPorPk(final String idCliente) throws ExcepcionEjecutarSentancia {
+		Collection<DatosClienteActionForm> listaCliente = null;
+		DatosClienteActionForm cliente  = null;
+		PreparedStatement 	   pstmt 	= null;
+		ResultSet 		  	   rs 		= null;
 		Connection conn = ConexionBD.getConnection();
+		
 		try {
 			if (null != conn) {
 				System.out.println("Obtenida conexion");
@@ -41,6 +42,7 @@ public class DaoCliente {
 				if (null != pstmt) {
 					pstmt.setString(1, idCliente);
 					rs = pstmt.executeQuery() ; 
+					listaCliente = new ArrayList<DatosClienteActionForm>();
 					while(rs.next()) {
 						cliente = new DatosClienteActionForm();
 						cliente.setUser(rs.getString("IDCLIENTE"));
@@ -52,53 +54,41 @@ public class DaoCliente {
 						listaCliente.add(cliente);
 					}
 				} else {
-					System.out.println("No se ha podido obtener un pstmt valido.") ;
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+						 		"error.global.mesage", 
+						 		"No se ha obtenido un preparedStatement en DaoCliente.consultarPorPk.");
 				}
 			} else {
-				listaCliente = null;
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoCliente.consultarPorPk.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return listaCliente;
-		}
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 		"error.global.mesage", "DaoCliente.consultarPorPk\n" + e.getMessage());
+		} 
+
+		ConexionBD.cerrarConexiones(conn, pstmt, rs, "DaoCliente.consultarPorPk");
+		return listaCliente;
 	}
 	
 	
-	public static final int insertar(DatosClienteActionForm cliente) {
+	public static final int insertar(DatosClienteActionForm cliente) throws ExcepcionEjecutarSentancia {
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();
-		try {		
+
+		try {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(INSERTAR_CLIENTE);
 
-				if (null != cliente) {
+				if (null != pstmt) {
 					pstmt.setString(1, cliente.getUser());
 					pstmt.setString(2, cliente.getPassword());
 					pstmt.setInt(3, cliente.getIdTipoDocumento());
@@ -106,44 +96,36 @@ public class DaoCliente {
 					pstmt.setString(5, cliente.getEmail());
 
 					iResultado = pstmt.executeUpdate();
-
 					if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
-						System.out.println("Se ha insertado el cliente.");
 						conn.commit();
 						iResultado = Constantes.RESULTADO_OK;
 					} else {
-						System.out.println("No se ha insertado el cliente.");
+						conn.rollback();
 						iResultado = Constantes.RESULTADO_NOOK;
 					}
 				} else {
-
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+						 		"error.global.mesage", 
+						 		"No se ha obtenido un preparedStatement en DaoCliente.insertar.");
 				}
 			} else {
-
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoCliente.insertar.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return iResultado;
-		}
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 		"error.global.mesage", "DaoCliente.insertar\n" + e.getMessage());
+		} 
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, "DaoCliente.insertar");
+		return iResultado;
 	}
 
 }

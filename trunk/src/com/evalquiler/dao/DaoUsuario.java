@@ -13,6 +13,8 @@ import java.util.Collection;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
 /**
@@ -26,8 +28,8 @@ public class DaoUsuario {
 	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, ?, SYSDATE())";
 	
-	public static final Collection<DatosUsuarioActionForm> consutarPorPk(final String idUsuario) {
-		Collection<DatosUsuarioActionForm> listaUsuario = new ArrayList<DatosUsuarioActionForm>();
+	public static final Collection<DatosUsuarioActionForm> consutarPorPk(final String idUsuario) throws ExcepcionEjecutarSentancia {
+		Collection<DatosUsuarioActionForm> listaUsuario = null;
 		DatosUsuarioActionForm usuario = null;
 		
 		PreparedStatement pstmt = null;
@@ -41,6 +43,7 @@ public class DaoUsuario {
 				if (null != pstmt) {
 					pstmt.setString(1, idUsuario);
 					rs = pstmt.executeQuery() ; 
+					listaUsuario = new ArrayList<DatosUsuarioActionForm>();
 					while(rs.next()) {
 						usuario = new DatosUsuarioActionForm();
 						usuario.setUser(rs.getString("IDUSUARIO"));
@@ -52,50 +55,35 @@ public class DaoUsuario {
 						
 						listaUsuario.add(usuario);
 					}
-
-					System.out.println("Datos obtenidos");
-					System.out.println("Usuario: " + usuario.getUser());
-					System.out.println("Psw: " + usuario.getPassword());
 				} else {
-					System.out.println("No se ha podido obtener una conexion valida. pstmt") ;
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+						 		"error.global.mesage", 
+						 		"No se ha obtenido un preparedStatement en DaoUsuario.consultarPorPk.");
 				}
 			} else {
-				listaUsuario = null;
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoUsuario.consultarPorPk.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return listaUsuario;
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 "error.global.mesage", 
+				 "DaoUsuario.consultarPorPk\n" + e.getMessage());
 		}
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, rs, "DaoUsuario.consultarPorPk");
+		return listaUsuario;
+
 	}
 	
 	
-	public static final int insertar(DatosUsuarioActionForm usuario) {
+	public static final int insertar(DatosUsuarioActionForm usuario) throws ExcepcionEjecutarSentancia {
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();
@@ -122,34 +110,30 @@ public class DaoUsuario {
 						iResultado = Constantes.RESULTADO_NOOK;
 					}
 				} else {
-
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+						 		"error.global.mesage", 
+						 		"No se ha obtenido un preparedStatement en DaoUsuario.insertar.");
 				}
 			} else {
-
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoUsuario.insertar.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return iResultado;
-		}
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 "error.global.mesage", 
+				 "DaoUsuario.insertar\n" + e.getMessage());
+		} 
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, "DaoUsuario.insertar");
+		return iResultado;
+
 	}
 
 }

@@ -17,6 +17,10 @@ import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
+import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.encuesta.NoRecuperadaEncuestaExcepcion;
+import com.evalquiler.excepciones.encuesta.NoRecuperadasPreguntasParaEncuestaExcepcion;
 
 
 /**
@@ -25,13 +29,7 @@ import com.evalquiler.comun.bbdd.ConexionBD;
  */
 public class DaoEncuesta {
 	
-	private final static String CONSULTAR_ENCUESTA_COMPLETA_POR_PK = "SELECT A.IDENCUESTA, A.TITULO, C.IDPREGUNTA, C.DESCRIPCION AS DESC_PREG, E.IDRESPUESTA, " +
-																	 "E.DESCRIPCION AS DESC_RESP " + 
-																	 "FROM ENCUESTA A, PREGUNTAS_ENCUESTA B, PREGUNTA C, RESPUESTAS_PREGUNTA D, RESPUESTA E " +
-																	 "WHERE A.IDENCUESTA = ? AND A.IDENCUESTA = B.IDENCUESTA AND B.IDPREGUNTA = C.IDPREGUNTA " +
-																	 "AND C.IDPREGUNTA = D.IDPREGUNTA AND D.IDRESPUESTA = E.IDRESPUESTA";
-	
-	private final static String CONSULTAR_ENCUESTA_POR_PARA_QUIEN_ES = "SELECT A.IDENCUESTA, A.TITULO, B.IDPREGUNTA, B.DESCRIPCION AS DESC_PREG, C.IDRESPUESTA, " +
+		private final static String CONSULTAR_ENCUESTA_POR_PARA_QUIEN_ES = "SELECT A.IDENCUESTA, A.TITULO, B.IDPREGUNTA, B.DESCRIPCION AS DESC_PREG, C.IDRESPUESTA, " +
 																	   "C.DESCRIPCION AS DESC_RESP " +
 																	   "FROM ENCUESTA A, PREGUNTA B, RESPUESTA C, PREGUNTAS_ENCUESTA D " +
 																	   "WHERE A.IDTIPOUSUARIO = ? AND A.IDENCUESTA = D.IDENCUESTA AND B.IDPREGUNTA = D.IDPREGUNTA " +
@@ -40,19 +38,20 @@ public class DaoEncuesta {
 	public final static String CONSULTAR_PARA_QUIEN_ES_ENCUESTA = "1";
 	
 	
-	public static final Collection<DatosEncuestaActionForm> consultar(ActionForm objetoIn, final String tipoConsulta) {
-		Collection<DatosEncuestaActionForm> datosEncuesta = new ArrayList<DatosEncuestaActionForm>();
-		DatosEncuestaActionForm encuesta = null;
-		RespuestasPreguntaActionForm respuesta = null;
-		PreguntasEncuestaActionForm  pregunta  = null;
-		int idPregunta 	  = 0;
-		int idEncuestaAux = 0;
-		int idEncuesta    = 0;
-			
+	public static final Collection<DatosEncuestaActionForm> consultar(ActionForm objetoIn, final String tipoConsulta) 
+		throws ExcepcionEjecutarSentancia, NoRecuperadaEncuestaExcepcion, NoRecuperadasPreguntasParaEncuestaExcepcion {
 		
+		Collection<DatosEncuestaActionForm> datosEncuesta	= null;
+		DatosEncuestaActionForm 			encuesta 		= null;
+		RespuestasPreguntaActionForm 		respuesta 		= null;
+		PreguntasEncuestaActionForm  		pregunta  		= null;
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
 		Connection 		  conn  = null;
+		int idPregunta 	  = 0;
+		int idEncuestaAux = 0;
+		int idEncuesta    = 0;
+		
 		try {
 			if (tipoConsulta.equals(CONSULTAR_PARA_QUIEN_ES_ENCUESTA)) {
 				conn = ConexionBD.getConnection();
@@ -61,6 +60,7 @@ public class DaoEncuesta {
     				if (null != pstmt) {
     					pstmt.setInt(1, ((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario());
     					rs = pstmt.executeQuery() ; 
+    					datosEncuesta = new ArrayList<DatosEncuestaActionForm>();
     					while(rs.next()) {
     						respuesta = new RespuestasPreguntaActionForm();
     						respuesta.setIdRespuesta(rs.getInt("IDRESPUESTA"));
@@ -103,50 +103,40 @@ public class DaoEncuesta {
         					if (null != encuesta) {
         						datosEncuesta.add(encuesta);
         					} else {
-        						
+        						throw new NoRecuperadaEncuestaExcepcion(String.valueOf(((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario()));
         					}
     					} else {
-    						
+    						throw new NoRecuperadasPreguntasParaEncuestaExcepcion(String.valueOf(((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario()), 
+    																			  String.valueOf(encuesta.getIdEncuesta()));
     					}
     				} else {
-    					System.out.println("No se ha podido obtener un pstmt valido.") ;
+    					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+    						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+    						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+    						 		"error.global.mesage", 
+    						 		"No se ha obtenido un preparedStatement en DaoEncuesta.consultar.");
     				}
     			} else {
-    				
+    				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+    					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+    					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+    					 		"error.global.mesage", 
+    					 		"No se ha obtenido una conexión en DaoEncuesta.consultar.");
     			}
 			} else {
 				
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return datosEncuesta;
-		}
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+												 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+												 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+												 "error.global.mesage", 
+												 "DaoEncuesta.consultarPorPk\n" + e.getMessage());
+		} 
+
+		ConexionBD.cerrarConexiones(conn, pstmt, rs, "DaoEncuesta.consultar");
+		return datosEncuesta;
+
 	}
 	
 	
