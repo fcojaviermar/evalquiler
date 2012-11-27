@@ -175,20 +175,21 @@
         <!-- =========================== Modulo de solicitud de informes =========================== -->
 		<action input="/jsp/informes/BusquedaDeViviendaParaInforme.jsp" path="/IrSolicitarInformeAction"
                 name="criteriosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.informes.RealizarBusquedaViviendaAction">
-            <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
-            <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
+            <forward name="ONE_RESULT"            path="/jsp/informes/ListadoDireccionesEncontradas.jsp"></forward>
+            <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/informes/ListadoDireccionesEncontradas.jsp"></forward>
             <forward name="NO_RESULT"  			  path="/IrInicioSesionClienteAction.do"></forward>
         </action>        
         
         
-        <action input="/jsp/informes/ListadoDireccionesEncontradas.jsp" path="/IrConfirmarSolicitudInformeAction" 
-        		name="datosSolicitudInformeActionForm" scope="request" type="com.evalquiler.actions.informes.ConfirmarSolicitudAction">
+        <action input="/jsp/informes/ListadoDireccionesEncontradas.jsp" path="/IrAceptarSolicitudInformeAction" 
+        		name="datosSolicitudInformeActionForm" scope="request" type="com.evalquiler.actions.informes.ConfirmarSolicitudInformeAction">
             <forward name="OK"        path="/IrInicioSesionClienteAction.do"></forward>
-            <forward name="NOOK"        path="/IrSolicitarInformeAction.do"></forward>
+            <forward name="NOOK"      path="/IrSolicitarInformeAction.do"></forward>
 			<forward name="CANCEL"    path="/IrInicioSesionClienteAction.do"></forward>
 			            
         </action>                
 
+<!-- Esta action se puede quitar, no se usa -->
         <action input="/jsp/informes/ConfirmarDatosSolicitud.jsp" path="/IrGuardarSolicitudInformeAction" 
         		name="datosSolicitudInformeActionForm" scope="request" type="com.evalquiler.actions.informes.GuardarSolicitudAction">
             <forward name="OK"        path="/IrInicioSesionClienteAction.do"></forward>
