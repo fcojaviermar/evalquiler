@@ -14,6 +14,7 @@ import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.vivienda.ViviendaNoGuardadaExcepcion;
 import com.evalquiler.operaciones.OpVivienda;
 
@@ -25,41 +26,36 @@ public class GuardarDatosViviendaAction extends ActionBase
 
 {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
 		System.out.println("GuardarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-			String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
-			if (ConstantesBotones.GUARDAR.equals(botonPulsado)) {
-				DatosViviendaActionForm datosVivienda = (DatosViviendaActionForm)request.getSession().getAttribute("datosViviendaActionForm");
-				if (datosVivienda.getEsElPropietario()) {
-					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm"); 
-					datosVivienda.setNifPropietario(datosRealizacionEncuesta.getDatosUsuario().getNifcif());
-				}
-				try {
-					OpVivienda.insertar(datosVivienda);
-					request.setAttribute("idVivienda", String.valueOf(datosVivienda.getIdVivienda()));
-					comandoDestino = ConstantesComandos.OK;
-				} catch (ViviendaNoGuardadaExcepcion e) {
-					errors.add("errorExcepcion", new ActionError(e.getMensaje()));
-					comandoDestino = ConstantesComandos.NOOK;
-				}
-			} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-				comandoDestino = ConstantesComandos.CANCEL;
-				
-			} else {
-    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
-    			comandoDestino = ConstantesComandos.ERROR;    			
+		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+		if (ConstantesBotones.GUARDAR.equals(botonPulsado)) {
+			DatosViviendaActionForm datosVivienda = (DatosViviendaActionForm)request.getSession().getAttribute("datosViviendaActionForm");
+			if (datosVivienda.getEsElPropietario()) {
+				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm"); 
+				datosVivienda.setNifPropietario(datosRealizacionEncuesta.getDatosUsuario().getNifcif());
 			}
-//		} catch (Exception e) {
-//			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-//			comandoDestino = ConstantesComandos.ERROR;			
-//		}
+			try {
+				OpVivienda.insertar(datosVivienda);
+				request.setAttribute("idVivienda", String.valueOf(datosVivienda.getIdVivienda()));
+				comandoDestino = ConstantesComandos.OK;
+			} catch (ViviendaNoGuardadaExcepcion e) {
+				errors.add("errorExcepcion", new ActionError(e.getMensaje()));
+				comandoDestino = ConstantesComandos.NOOK;
+			}
+		} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+			comandoDestino = ConstantesComandos.CANCEL;
+			
+		} else {
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+			comandoDestino = ConstantesComandos.ERROR;    			
+		}
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);

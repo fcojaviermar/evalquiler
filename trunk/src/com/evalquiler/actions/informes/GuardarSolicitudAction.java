@@ -8,9 +8,14 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.informe.SolicitudinformeNoGuardadaExcepcion;
+import com.evalquiler.operaciones.OpSolicitudInforme;
 
 /**
  * @version 	1.0
@@ -18,27 +23,35 @@ import com.evalquiler.comun.constantes.ConstantesComandos;
  */
 public class GuardarSolicitudAction extends ActionBase {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia {
+    	
 		System.out.println("GuardarSolicitudAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
+		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 
+		long idSolicitud = OpSolicitudInforme.ultimoIdSolicitudInforme();
+
 		try {
-		    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
-	
-		} catch (Exception e) {
-			comandoDestino = ConstantesComandos.ERROR;
-			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+			OpSolicitudInforme.insertar(form);
+			comandoDestino = ConstantesComandos.OK;
+			messages.add("messages", new ActionMessage("msg.solicitud.informe.guardado", idSolicitud));
+		} catch (SolicitudinformeNoGuardadaExcepcion e) {
+			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
+			comandoDestino = ConstantesComandos.NOOK;
 		}
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
 		} else {
+			if (!messages.isEmpty()) {
+			    saveMessages(request, messages);	
+			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);
-		
 		return (forward);
     }
 }
