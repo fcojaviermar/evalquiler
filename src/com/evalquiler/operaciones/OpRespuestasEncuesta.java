@@ -22,7 +22,7 @@ import com.evalquiler.excepciones.encuesta.RespuestasEncuestaNoGuardadasExcepcio
 public final class OpRespuestasEncuesta {
 	
 	public static final int insertar(final ActionForm datosEncuestaIn) 
-		throws RespuestasEncuestaNoGuardadasExcepcion {
+		throws RespuestasEncuestaNoGuardadasExcepcion, ExcepcionEjecutarSentancia {
 		int iResultado = DaoRespuestasEncuesta.insertar((DatosRealizacionEncuestaActionForm)datosEncuestaIn);
 		
 		if (iResultado == Constantes.RESULTADO_NOOK) {
@@ -33,7 +33,7 @@ public final class OpRespuestasEncuesta {
 	}
 
 	
-	public static final Collection<DatosRealizacionEncuestaActionForm> consultarEncuestasRespondidas(final ActionForm datosUsuarioIn) {
+	public static final Collection<DatosRealizacionEncuestaActionForm> consultarEncuestasRespondidas(final ActionForm datosUsuarioIn) throws ExcepcionEjecutarSentancia {
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = 
 														DaoRespuestasEncuesta.consultar(datosUsuarioIn, 
 														DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS);

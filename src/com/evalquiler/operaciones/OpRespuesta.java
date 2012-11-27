@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm;
 import com.evalquiler.dao.DaoRespuesta;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 /**
  * @author cachorro
@@ -17,7 +18,7 @@ import com.evalquiler.dao.DaoRespuesta;
  */
 public final class OpRespuesta {
 	
-	public static final Collection<RespuestasPreguntaActionForm> consultarPorPk(ActionForm respuestaIn) {
+	public static final Collection<RespuestasPreguntaActionForm> consultarPorPk(ActionForm respuestaIn) throws ExcepcionEjecutarSentancia {
 		Collection<RespuestasPreguntaActionForm> listaRespuestas = 
 												 DaoRespuesta.consultarPorPk( ((RespuestasPreguntaActionForm)respuestaIn).getIdRespuesta() );
 		return listaRespuestas; 
