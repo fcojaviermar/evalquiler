@@ -119,9 +119,16 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
             if (!this.getAceptarLOPD()) {
             	errors.add("errorValidacion", new ActionError("error.LOPD.no.aceptada"));
             }
+
+            if (!errors.isEmpty()) {
+        		this.setPassword(null);
+        		this.setPassword2(null);
+        	}
+            
     	} else {
     		
     	}
+    	
         
         return errors;
     }

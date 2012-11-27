@@ -11,7 +11,7 @@ import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 
 
-public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
+public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	private int idTipoVia		   = 0;
 	private String nombreVia	   = null;
@@ -26,7 +26,6 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	private int provincia		   = 0;
 	private int pais			   = 0;
 	private String nifPropietario  = null;
-
 	
 	public final int getIdTipoVia() {
 		return idTipoVia;
@@ -275,13 +274,14 @@ public final class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	/*
      * Validamamos los datos introducidos por el usuario
      */
-    public final ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+    public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("CriteriosBusquedaViviendaActionForm.validate()");
     	ActionErrors errors = null;
     	
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
-			 (!ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) ) {
+			 (!ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) &&
+			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado))) {
         	errors = new ActionErrors();
             if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));

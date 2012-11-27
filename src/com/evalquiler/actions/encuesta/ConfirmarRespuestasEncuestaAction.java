@@ -27,7 +27,7 @@ import com.evalquiler.operaciones.OpRespuestasEncuesta;
  */
 public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
 		System.out.println("ConfirmarRespuestasEncuestaAction.action()");
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		String comandoDestino = ConstantesComandos.EMPTY;		
@@ -38,6 +38,9 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		int iNumeroPreguntas = 0;
 			String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
 			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+				request.setAttribute("nuevoDestino", ConstantesBotones.REALIZAR_ENCUESTA);
+				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdTipoVia()));
 				comandoDestino = ConstantesComandos.CANCEL;
 				
 			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
@@ -47,7 +50,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 	    			datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 	    			
 	    			try {
-							OpRespuestasEncuesta.getEncuestasRespondidasEnPeriodo(datosRealizacionEncuesta);
+						OpRespuestasEncuesta.getEncuestasRespondidasEnPeriodo(datosRealizacionEncuesta);
 	    				datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaInicioEvaluacionAlquiler());
 	    				datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(((DatosRealizacionEncuestaActionForm)form).getFechaFinEvaluacionAlquiler());
 	    				DatosEncuestaActionForm datosEncuesta = datosRealizacionEncuesta.getDatosEncuesta();
@@ -69,10 +72,6 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 					} catch (EncuestaRespondidaEnPeriodoEvaluacionExcepcion e) {
 	    				errors.add("errorValidacion", new ActionError("error.periodo.ya.evaluado.para.vivienda"));
 	    				comandoDestino = ConstantesComandos.ALREADY_EVAL;	    				
-					} catch (ExcepcionEjecutarSentancia e) {
-		    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-		    			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
-		    			comandoDestino = ConstantesComandos.ERROR;
 					}
 				} catch (NumberFormatException e) {
 					comandoDestino = ConstantesComandos.ERROR;

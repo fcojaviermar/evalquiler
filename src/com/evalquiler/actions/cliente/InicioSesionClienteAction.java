@@ -19,6 +19,7 @@ import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.cliente.ClienteNoExisteExcepcion;
 import com.evalquiler.excepciones.cliente.ClienteRepetidoExcepcion;
 import com.evalquiler.operaciones.OpCliente;
@@ -30,12 +31,13 @@ import com.evalquiler.operaciones.OpCliente;
 public class InicioSesionClienteAction extends ActionBase {
 
 //    public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {    	
+    public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {    	
     	System.out.println("InicioSesionClienteAction.action()");
     	String comandoDestino = ConstantesComandos.EMPTY;
     	DatosInicioSesionActionForm cliente = null;    	
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
+		Collection<DatosClienteActionForm> listaCliente = null;
 		
 		//Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
@@ -48,19 +50,20 @@ public class InicioSesionClienteAction extends ActionBase {
 			
 		} else if (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) {
 			try { 
-    			Collection<DatosClienteActionForm> listaCliente;
 				listaCliente = OpCliente.consultarPorPk(form);
     			
  				Iterator<DatosClienteActionForm> iterUsuario = listaCliente.iterator();
 				cliente = (DatosClienteActionForm)iterUsuario.next();					
-				final String pwd = ((DatosClienteActionForm)form).getPassword(); 
+				final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
 				
 				if (pwd.equals(cliente.getPassword())) {
+					request.getSession().setAttribute("datosClienteActionForm", cliente);
 					comandoDestino = ConstantesComandos.VALID_CLIENT;
 				} else {
 					errors.add("errorValidacion", new ActionError("error.distinta.password"));
 		        	comandoDestino = ConstantesComandos.NO_EQUAL_PSW;
 		        }
+				
 			} catch (ClienteNoExisteExcepcion e) {
 				errors.add("errorValidacion", new ActionError(e.getMensaje()));
 				comandoDestino = ConstantesComandos.NO_CLIENT;    						

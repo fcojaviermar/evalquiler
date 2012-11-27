@@ -16,6 +16,7 @@ import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.cliente.ClienteNoGuardadoExcepcion;
 import com.evalquiler.operaciones.OpCliente;
 
@@ -27,7 +28,7 @@ public class GuardarDatosClienteAction extends ActionBase
 
 {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
     	System.out.println("GuardarDatosClienteAction.action()");
     	String comandoDestino = ConstantesComandos.EMPTY;
     	DatosClienteActionForm datosCliente = null;

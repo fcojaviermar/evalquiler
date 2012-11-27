@@ -22,7 +22,6 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosClienteActionForm.validate()");
     	ActionErrors errors = null;
-//    	DatosClienteActionForm datosCliente = (DatosClienteActionForm)request.getSession().getAttribute("datosClienteActionForm");
     	
     	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
     	if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
@@ -71,6 +70,11 @@ public class DatosClienteActionForm extends DatosInicioSesionActionForm  {
             if (!this.getEmail().equals(this.getEmail2())) {
             	errors.add("errorValidacion", new ActionError("error.emails.distintos"));
             }
+
+            if (!errors.isEmpty()) {
+        		this.setPassword(null);
+        		this.setPassword2(null);
+        	}
     	} else {
     		
     	}

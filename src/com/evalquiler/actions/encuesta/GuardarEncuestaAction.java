@@ -15,6 +15,7 @@ import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.encuesta.RespuestasEncuestaNoGuardadasExcepcion;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
 
@@ -25,7 +26,7 @@ import com.evalquiler.operaciones.OpRespuestasEncuesta;
 public class GuardarEncuestaAction extends ActionBase {
 //CAMBIAR NOMBRE POR GuardarRespuestasEncuestaAction
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
 		System.out.println("GuardarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;		
 		ActionErrors errors = new ActionErrors();
@@ -41,8 +42,13 @@ public class GuardarEncuestaAction extends ActionBase {
 												(DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 			try {
 				OpRespuestasEncuesta.insertar(datosRealizacionEncuesta);
+				datosRealizacionEncuesta.setDatosVivienda(null);
+				datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(null);
+				datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(null);
+				datosRealizacionEncuesta.setDatosEncuesta(null);
 				messages.add("message", new ActionMessage("msg.encuesta.realizada"));
     			comandoDestino = ConstantesComandos.OK;
+    			
 			} catch (RespuestasEncuestaNoGuardadasExcepcion e) {
 				errors.add("errorExcepcion", new ActionError(e.getMensaje()));
 				comandoDestino = ConstantesComandos.NOOK;
