@@ -12,6 +12,7 @@ import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
 import com.evalquiler.dao.DaoVivienda;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.vivienda.EncontradasMuchasViviendasExcepcion;
 import com.evalquiler.excepciones.vivienda.NoEncontradaViviendaConCriteriosExcepcion;
 import com.evalquiler.excepciones.vivienda.NoExisteViviendaExcepcion;
 import com.evalquiler.excepciones.vivienda.ViviendaNoGuardadaExcepcion;
@@ -23,7 +24,7 @@ import com.evalquiler.excepciones.vivienda.ViviendaNoGuardadaExcepcion;
 public final class OpVivienda {
 	
 	public static final Collection<DatosViviendaActionForm> consultarVivienda(ActionForm viviendaIn) 
-		throws NoExisteViviendaExcepcion {
+		throws NoExisteViviendaExcepcion, ExcepcionEjecutarSentancia {
 		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultarPorPk( ((DatosViviendaActionForm)viviendaIn).getIdVivienda());
 		
 		if ( (null == listaViviendas) || (listaViviendas.isEmpty()) ) {
@@ -35,18 +36,21 @@ public final class OpVivienda {
 
 	
 	public static final Collection<DatosViviendaActionForm> buscarVivienda(ActionForm viviendaIn) 
-		throws NoEncontradaViviendaConCriteriosExcepcion {
+		throws NoEncontradaViviendaConCriteriosExcepcion, ExcepcionEjecutarSentancia, EncontradasMuchasViviendasExcepcion {
 		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultar(viviendaIn, DaoVivienda.CONSULTA_VIVIENDA);
 		
 		if ( (null == listaViviendas) || (listaViviendas.isEmpty()) ) {
 			throw new NoEncontradaViviendaConCriteriosExcepcion(viviendaIn);
 		}
-
+		
+		if (listaViviendas.size() > Constantes.NUMERO_REGISTROS_MAXIMO) {
+			throw new EncontradasMuchasViviendasExcepcion(listaViviendas.size());
+		}
 		return listaViviendas; 
 	}
 
 	
-	public static final int insertar(ActionForm viviendaIn) throws ViviendaNoGuardadaExcepcion {
+	public static final int insertar(ActionForm viviendaIn) throws ViviendaNoGuardadaExcepcion, ExcepcionEjecutarSentancia {
 		int iResultado = DaoVivienda.insertar((DatosViviendaActionForm)viviendaIn);
 		
 		if (iResultado == Constantes.RESULTADO_NOOK) {
@@ -72,7 +76,7 @@ public final class OpVivienda {
 												 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 												 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 												 "error.ejecutar.sentencia", 
-												 "Se ha obtenido un resultado nulo al ejecutar la sentencia del DaoVivienda " + DaoVivienda.ULTIMO_ID_VIVIENDA);
+												 "Se ha obtenido un resultado nulo al ejecutar la sentencia "+ DaoVivienda.ULTIMO_ID_VIVIENDA + " del DaoVivienda desde OpVivienda");
 		}
 		
 		return lNumeroViviendas; 
