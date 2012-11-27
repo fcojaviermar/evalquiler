@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+					"http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+<!-- ======================================== Form Bean Definitions -->
+    <form-beans>
+        <form-bean name="datosInicioSesionActionForm"   		type="com.evalquiler.actionforms.comun.DatosInicioSesionActionForm"/>
+        <form-bean name="datosVacioActionForm"   				type="com.evalquiler.actionforms.comun.DatosVacioActionForm"/>
+         
+        <form-bean name="datosUsuarioActionForm"               	type="com.evalquiler.actionforms.usuario.DatosUsuarioActionForm"/>
+<!-- Revisar si se usa -->       <form-bean name="datosUsuarioParaEncuestasActionForm"  	type="com.evalquiler.actionforms.usuario.DatosUsuarioParaEncuestasActionForm"/>
+         
+        <form-bean name="datosClienteActionForm"               	type="com.evalquiler.actionforms.cliente.DatosClienteActionForm"/>
+         
+<!-- Revisar si se usa -->        <form-bean name="respuestasPreguntaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm"/>
+<!-- Revisar si se usa -->        <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
+        <form-bean name="datosEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm"/>
+        <form-bean name="datosRealizacionEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm"/>
+         
+<!-- Revisar si se usa --> <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
+        <form-bean name="criteriosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
+		<form-bean name="datosViviendaActionForm"    			type="com.evalquiler.actionforms.vivienda.DatosViviendaActionForm"/>
+        <form-bean name="datosBasicosViviendaActionForm"        type="com.evalquiler.actionforms.vivienda.DatosBasicosViviendaActionForm"/>
+    
+        <form-bean name="datosSolicitudInformeActionForm"       type="com.evalquiler.actionforms.informe.DatosSolicitudInformeActionForm"/>
+    </form-beans>
+    
+
+<!-- ================================= Global Exception Definitions -->
+    <global-exceptions>
+        <exception key="error.global.mesage" type="java.lang.Exception" path="/jsp/comun/Error.jsp" />
+    </global-exceptions>
+
+<!-- =================================== Global Forward Definitions -->
+    <global-forwards>
+        <forward name="ERROR" path="/jsp/comun/Error.jsp"/>
+        <forward name="EXIT"  path="/Inicio.do"></forward>
+        <forward name="END"   path="/Inicio.do"></forward>        
+    </global-forwards>
+
+<!-- =================================== Action Mapping Definitions -->
+    <action-mappings>
+    	<action path="/Inicio" type="org.apache.struts.actions.ForwardAction" parameter="/register.jsp"/>
+
+        <!-- =========================== Acciones comunes =========================== -->
+		<action input="/register.jsp" path="/IrFinSesionAction" name="datosVacioActionForm" 
+                                            scope="request" type="com.evalquiler.actions.comun.FinalizarSesionAction" validate="false" >
+            <forward name="NEW" path="/IrSolicitarInformeAction.do"></forward>
+		</action>
+        
+		<!-- =========================== Modulo Registro Usuarios =========================== -->
+        <!--input 	-> Indica cual es el jsp de que se viene y que se va a mostrar cuando se produce un error de validacion en los datos 
+                       de entrada que están en el bean identificado por name.
+            path  	-> Nombre de la acción que se puede invocar desde otras action o desde otros jsp.
+            name  	-> Objeto que va a contener los datos (hidden, text, textarea...) que están en el jsp que ha ejecutado esta acción
+            scope   -> 
+            type    -> Clase accion que se va a ejecutar si la validacion del bean, identificado por name ha sido correcta.
+            forward -> si no se produce error en la validación de los datos identificados por name, pagina de destino en funcion del 
+            		   name devuelto por type.
+            name(forward) -> este valor lo devuelte la accion identificada por type.
+            path(forward) -> Página o acción se que ejecuta cuando llega un determinado name(forward) 
+         -->
+        <action input="/register.jsp" path="/IrInicioSesionUsuarioAction" name="datosInicioSesionActionForm" 
+                                            scope="request" type="com.evalquiler.actions.usuario.InicioSesionUsuarioAction">
+            <forward name="REGISTER_USER"        path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
+            <forward name="NO_USER"    		 	 path="/Inicio.do"></forward>
+            <forward name="VALID_USER" 		 	 path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
+            <forward name="NO_EQUAL_PSW" 		 path="/Inicio.do"></forward>
+            <forward name="TWO_EQUAL_USERS"  	 path="/Inicio.do"></forward>
+            <forward name="POOL_RECOVERY"        path="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp"></forward>
+        </action>
+    
+
+        <action input="/jsp/usuario/AltaDatosUsuario.jsp" path="/IrConfirmarDatosUsuarioAction"
+                name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.ConfirmarDatosUsuarioAction">
+            <forward name="OK"     path="/jsp/usuario/ConfirmarDatosUsuario.jsp"></forward>
+        </action>
+
+        <action input="/jsp/usuario/ConfirmarDatosUsuario.jsp" path="/IrAceptarDatosUsuarioAction" 
+                name="datosUsuarioActionForm" scope="request" type="com.evalquiler.actions.usuario.GuardarDatosUsuarioAction">
+			<forward name="OK"     path="/Inicio.do"></forward>
+			<forward name="NOOK"   path="/Inicio.do"></forward>
+            <forward name="CANCEL" path="/jsp/usuario/AltaDatosUsuario.jsp"></forward>
+        </action>                                                      
+        
+        <action path="/IrFogotYourUserDataAction"    forward="/jsp/usuario/OlvidarDatosAcceso.jsp"
+                                                      name="informacionUsuarioActionForm"      validate="false"/>
+
+        <!-- =========================== Modulo Registro Clientes =========================== -->
+        <action input="/register.jsp" path="/IrInicioSesionClienteAction" name="datosInicioSesionActionForm" 
+                                            scope="request" type="com.evalquiler.actions.cliente.InicioSesionClienteAction">
+            <forward name="REGISTER_CLIENT"        path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
+            <forward name="NO_CLIENT"              path="/Inicio.do"></forward>
+            <forward name="VALID_CLIENT"           path="/jsp/informes/FormularioSolicitudInforme.jsp"></forward>
+            <forward name="ERROR_PSW_NO_IGUALES"   path="/Inicio.do"></forward>
+            <forward name="ERROR_2_EQUAL_CLIENTS"  path="/Inicio.do"></forward>
+        </action>
+    
+
+        <action input="/jsp/cliente/AltaDatosCliente.jsp" path="/IrConfirmarDatosClienteAction"
+                name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.ConfirmarDatosClienteAction">
+            <forward name="OK"    path="/jsp/cliente/ConfirmarDatosCliente.jsp"></forward>
+        </action>
+
+        <action input="/jsp/cliente/ConfirmarDatosCliente.jsp" path="/IrAceptarDatosClienteAction" 
+                name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.GuardarDatosClienteAction">
+            <forward name="OK"     path="/Inicio.do"></forward>
+			<forward name="NOOK"   path="/Inicio.do"></forward>            
+            <forward name="CANCEL" path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
+        </action>                                                      
+        
+        <action path="/IrFogotYourClientDataAction"    forward="/jsp/cliente/OlvidarDatosAcceso.jsp"
+                                                      name="informacionClienteActionForm"      validate="false"/>
+
+
+        <!-- =========================== Modulo de encuestas =========================== -->
+<!--         <action path="/IrBusquedaDireccionAction"    forward="/jsp/encuestas/CriteriosBusquedaVivienda.jsp"
+                                                      validate="false"/>-->
+         
+        <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
+                name="datosVacioActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
+            <forward name="SEARCH" path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="CANCEL" path="/IrInicioSesionUsuarioAction.do"></forward>
+        </action>
+	
+        <action input="/jsp/vivienda/ListadoDireccionesEncontradas.jsp" path="/IrHacerEncuestaAction"
+                name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.RecuperarEncuestaAction">
+            <forward name="THERE_IS_POLL"     path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>
+            <forward name="THERE_IS_NO_POLL"  path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="NEW_HOUSE"         path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
+            <forward name="CANCEL"            path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="NO_SELECTION"      path="/IrBuscarViviendaAction.do"></forward>
+        </action>
+
+        <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
+                name="datosRealizacionEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction">
+            <forward name="OK"           path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
+            <forward name="NOOK"           path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
+            <forward name="ALREADY_EVAL" path="/IrHacerEncuestaAction.do"></forward>
+        </action>
+
+        <action input="/jsp/encuestas/ConfirmarRespuestas.jsp" path="/IrGuardarRespuestasEncuestaAction"
+                name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.GuardarEncuestaAction">
+            <forward name="OK"     path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="NOOK"     path="/IrInicioSesionUsuarioAction.do"></forward>
+            <forward name="CANCEL" path="/IrHacerEncuestaAction.do"></forward>
+        </action>
+
+        
+        <!-- =========================== Modulo de viviendas =========================== -->
+        <action input="/jsp/vivienda/AltaNuevaVivienda.jsp" path="/IrAceptarDatosViviendaAction"
+                name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.ConfirmarDatosViviendaAction">
+            <forward name="OK"     path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
+            <forward name="CANCEL"  path="/IrHacerEncuestaAction.do"></forward>
+        </action>
+
+        <action input="/jsp/vivienda/ConfirmarDatosVivienda.jsp" path="/IrGuardarDatosViviendaAction"
+                name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.GuardarDatosViviendaAction">
+            <forward name="OK"     path="/IrHacerEncuestaAction.do"></forward>
+            <forward name="NOOK"   path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+            <forward name="CANCEL" path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+        </action>
+
+        <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"
+                name="criteriosBusquedaViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.RealizarBusquedaViviendaAction">   
+            <forward name="ONE_RESULT"            path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
+            <forward name="MORE_THAN_ONE_RESULT"  path="/jsp/vivienda/ListadoDireccionesEncontradas.jsp"></forward>
+            <forward name="NO_RESULT"             path="/IrBusquedaDireccionAction.do"></forward>
+            <forward name="CANCEL"                path="/IrBusquedaDireccionAction.do"></forward>
+        </action>
+
+
+        
+        <!-- =========================== Modulo de solicitud de informes =========================== -->
+        <action input="/jsp/informes/FormularioSolicitudInforme.jsp" path="/IrSolicitarInformeAction"
+                name="datosSolicitudInformeActionForm" scope="request" type="com.evalquiler.actions.informes.SolicitudInformeAction">
+            <forward name="OK" path="/jsp/informes/ConfirmarSolicitudInforme.jsp"></forward>
+            <forward name="ERROR"  path="/IrSolicitarInformeAction.do"></forward>
+        </action>
+        <action input="/jsp/informes/ConfirmarSolicitudInforme.jsp" path="/IrConfirmarSolicitudInformeAction" name="datosSolicitudInformeActionForm" 
+                                            scope="request" type="com.evalquiler.actions.informes.GuardarSolicitudAction">
+            <forward name="OK"        path="/jsp/informes/SolicitudGuardada.jsp"></forward>
+            <forward name="ERROR"     path="/IrSolicitarInformeAction.do"></forward>
+        </action>                
+
+
+
+    </action-mappings>
+<!-- ===================================== Controller Configuration -->
+<!--     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+-->
+<!-- ================================ Message Resources Definitions -->
+    <message-resources parameter="com.evalquiler.comun.resources.ApplicationResources"/>
+
+<!-- ======================================= Plug Ins Configuration -->
+  <!-- ========== Tiles plugin ===================  -->
+ 
+  <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+    <set-property property="definitions-config"
+	                 value="/WEB-INF/tiles-defs.xml" />
+    <set-property property="moduleAware" value="true" />
+    <set-property property="definitions-parser-validate" value="true" />
+  </plug-in>
+
+<!-- 
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property
+        property="pathnames"
+        value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+  </plug-in>
+-->
+</struts-config>
+
