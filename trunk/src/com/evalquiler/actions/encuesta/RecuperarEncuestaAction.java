@@ -22,7 +22,10 @@ import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.dao.DaoEncuesta;
 import com.evalquiler.entidad.ElementoComboTipoVia;
-import com.evalquiler.excepciones.encuesta.NoExistenEncuestaExcepcion;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.encuesta.NoExistenEncuestasExcepcion;
+import com.evalquiler.excepciones.encuesta.NoRecuperadaEncuestaExcepcion;
+import com.evalquiler.excepciones.encuesta.NoRecuperadasPreguntasParaEncuestaExcepcion;
 import com.evalquiler.excepciones.vivienda.NoExisteViviendaExcepcion;
 import com.evalquiler.excepciones.vivienda.ViviendaNoSeleccionadaExcepcion;
 import com.evalquiler.operaciones.OpEncuesta;
@@ -34,10 +37,11 @@ import com.evalquiler.operaciones.OpVivienda;
  */
 public class RecuperarEncuestaAction extends ActionBase {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
 		System.out.println("RecuperarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EXIT;
 		Collection<DatosEncuestaActionForm> datosEncuesta = null;
+		DatosViviendaActionForm viviendaSeleccionada = null;
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
@@ -54,11 +58,11 @@ public class RecuperarEncuestaAction extends ActionBase {
 			comandoDestino = ConstantesComandos.THERE_IS_POLL;
 			
 		} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-			comandoDestino = ConstantesComandos.CANCEL;
-			
-		} else if ( (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) || 
-					(ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
-			DatosViviendaActionForm viviendaSeleccionada = new DatosViviendaActionForm();
+			String nuevoDestino = (String)request.getAttribute("nuevoDestino");
+			if (null == nuevoDestino) {
+				comandoDestino = ConstantesComandos.CANCEL;
+			}
+			viviendaSeleccionada = new DatosViviendaActionForm();
 			
 			String idVivienda = null;
 			try {
@@ -77,14 +81,56 @@ public class RecuperarEncuestaAction extends ActionBase {
     					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
 
     					comandoDestino = ConstantesComandos.THERE_IS_POLL;
-					} catch (NoExistenEncuestaExcepcion e) {
+					} catch (NoExistenEncuestasExcepcion e) {
+						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
+					} catch (NoRecuperadaEncuestaExcepcion e) {
+						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;					
+					} catch (NoRecuperadasPreguntasParaEncuestaExcepcion e) {
 						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
 					}
 				} catch (NoExisteViviendaExcepcion e1) {
-
+					messages.add("message", new ActionMessage(e1.getMensaje()));
+					comandoDestino = ConstantesComandos.ERROR;
 				}
 			} catch (ViviendaNoSeleccionadaExcepcion e2) {
-				messages.add("message", new ActionMessage("msg.vivienda.no.seleccionada"));
+				messages.add("message", new ActionMessage(e2.getMensaje()));
+				comandoDestino = ConstantesComandos.NO_SELECTION;
+			}
+			
+		} else if ( (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) || 
+					(ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
+			viviendaSeleccionada = new DatosViviendaActionForm();
+			
+			String idVivienda = null;
+			try {
+				idVivienda = this.getViviendaSeleccionada(request);
+				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
+				Collection<DatosViviendaActionForm> vivienda = null;
+				try {
+					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada);
+					viviendaSeleccionada = vivienda.iterator().next();
+					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+					
+    				try {
+						datosEncuesta = OpEncuesta.consultarParaTipoUsuario(datosRealizacionEncuesta.getDatosUsuario(), 
+																			DaoEncuesta.CONSULTAR_PARA_QUIEN_ES_ENCUESTA);
+    					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
+    					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
+
+    					comandoDestino = ConstantesComandos.THERE_IS_POLL;
+					} catch (NoExistenEncuestasExcepcion e) {
+						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
+					} catch (NoRecuperadaEncuestaExcepcion e) {
+						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;					
+					} catch (NoRecuperadasPreguntasParaEncuestaExcepcion e) {
+						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
+					}
+				} catch (NoExisteViviendaExcepcion e1) {
+					messages.add("message", new ActionMessage(e1.getMensaje()));
+					comandoDestino = ConstantesComandos.ERROR;
+				}
+			} catch (ViviendaNoSeleccionadaExcepcion e2) {
+				messages.add("message", new ActionMessage(e2.getMensaje()));
 				comandoDestino = ConstantesComandos.NO_SELECTION;
 			}
 		} else {

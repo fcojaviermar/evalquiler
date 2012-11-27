@@ -241,7 +241,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
     
     		if ( (null == this.getPuerta()) || ("".equals(this.getPuerta())) ) {
     			errors.add("errorValidacion", new ActionError("error.obligatorio.puerta"));
-    		} else if (this.getPlanta().length() > Constantes.LONGITUD_MAXIMA_PUERTA) {
+    		} else if (this.getPuerta().length() > Constantes.LONGITUD_MAXIMA_PUERTA) {
     			errors.add("errorValidacion", new ActionError("error.puerta.no.valido"));
     		}
     
