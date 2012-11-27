@@ -55,9 +55,9 @@
 				        </fieldset>
 				    </div>
 			        <div id="botonera">
-	                    <html:submit property="BOTON_PULSADO" value="Realizar encuesta"/>
-	                    <html:submit property="BOTON_PULSADO" value="Nueva vivienda"/>
-	                    <html:submit property="BOTON_PULSADO" value="Cancelar"/>
+	                    <html:submit property="BOTON_PULSADO" value="Realizar encuesta" title = "Realizar la encuesta para la vivienda seleccionada"/>
+	                    <html:submit property="BOTON_PULSADO" value="Nueva vivienda" title = "Dar de alta una vivienda"/>
+	                    <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
 	                </div>
 			    </fieldset>
 			</div>

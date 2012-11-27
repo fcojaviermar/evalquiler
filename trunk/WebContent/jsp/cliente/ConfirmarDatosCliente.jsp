@@ -36,8 +36,8 @@
              </fieldset>
              <div id="botonera" class="alineacionCentrada alineacionVerticalInferior">
                 <html:form action="/IrAceptarDatosClienteAction.do" method="post">
-                    <html:submit property="BOTON_PULSADO" value="Guardar"/>                            
-                    <html:submit property="BOTON_PULSADO" value="Cancelar"/>                            
+                    <html:submit property="BOTON_PULSADO" value="Guardar" title = "Guardar datos de cliente"/>                            
+                    <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
                 </html:form>
              </div>
         </div>

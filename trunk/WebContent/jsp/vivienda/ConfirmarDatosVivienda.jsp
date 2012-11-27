@@ -16,7 +16,7 @@
              <fieldset>
                  <legend>Datos vivienda</legend>
                  <div id="datosVivienda" >
-                     <div id="User-div" class="alto50">
+                     <div id="via1-div" class="alto50">
                          <label for="descTipoVia" class="texto90"><strong >Tipo vía:&nbsp;</strong></label>
                          <bean:write name="datosViviendaActionForm" property="descTipoVia"/>
                          <label for="nombreVia" class="texto90 alineacionIzquierda"><strong >Nombre vía:&nbsp;</strong></label>
@@ -24,7 +24,7 @@
                          <label for="numeroVia" class="texto90" ><strong >Número vía:&nbsp;</strong></label>
                          <bean:write name="datosViviendaActionForm" property="numeroVia"/>
                      </div>
-                     <div id="" class="alto50">
+                     <div id="via2-div" class="alto50">
                          <label for="bloque"><strong >Bloque:&nbsp;</strong></label>
                          <bean:write name="datosViviendaActionForm" property="bloque"/>                
 		                 <label for="portal"><strong >Portal:&nbsp;</strong></label>
@@ -36,7 +36,7 @@
 					     <label for="puerta"><strong >Puerta:&nbsp;</strong></label>
                          <bean:write name="datosViviendaActionForm" property="puerta"/>                                
                      </div>
-            	     <div id="codigoposta-div" class="alto50">
+            	     <div id="via3-div" class="alto50">
 		                 <label for="codigoPostal"><strong >Código Postal:&nbsp;</strong></label>
              	         <bean:write name="datosViviendaActionForm" property="codigoPostal"/>
 					     <label for="municipio"><strong >Municipio:&nbsp;</strong></label>

@@ -71,6 +71,7 @@
 	            </fieldset>
                 <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
                     <html:submit property="BOTON_PULSADO" value="Buscar" title="Buscar una vivienda"/>
+                    <html:submit property="BOTON_PULSADO" value="Nueva vivienda" title = "Dar de alta una vivienda"/>
                     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
                 </div>
 	        </fieldset>
