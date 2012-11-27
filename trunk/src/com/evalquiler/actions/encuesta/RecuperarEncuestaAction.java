@@ -70,11 +70,11 @@ public class RecuperarEncuestaAction extends ActionBase {
 				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
 				Collection<DatosViviendaActionForm> vivienda = null;
 				try {
-					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada);
-					viviendaSeleccionada = vivienda.iterator().next();
 					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
-					
-    				try {
+					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada, datosRealizacionEncuesta.getDatosUsuario().getNifcif());
+					viviendaSeleccionada = vivienda.iterator().next();
+
+					try {
 						datosEncuesta = OpEncuesta.consultarParaTipoUsuario(datosRealizacionEncuesta.getDatosUsuario(), 
 																			DaoEncuesta.CONSULTAR_PARA_QUIEN_ES_ENCUESTA);
     					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
@@ -107,9 +107,9 @@ public class RecuperarEncuestaAction extends ActionBase {
 				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
 				Collection<DatosViviendaActionForm> vivienda = null;
 				try {
-					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada);
-					viviendaSeleccionada = vivienda.iterator().next();
 					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
+					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada, datosRealizacionEncuesta.getDatosUsuario().getNifcif());
+					viviendaSeleccionada = vivienda.iterator().next();
 					
     				try {
 						datosEncuesta = OpEncuesta.consultarParaTipoUsuario(datosRealizacionEncuesta.getDatosUsuario(), 

@@ -16,8 +16,10 @@ import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.informe.DatosSolicitudInformeActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboTipoInforme;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboTipoInforme;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.informe.SolicitudinformeNoGuardadaExcepcion;
 import com.evalquiler.excepciones.vivienda.NoExisteViviendaExcepcion;
@@ -29,23 +31,24 @@ import com.evalquiler.operaciones.OpVivienda;
  * @version 	1.0
  * @author
  */
-public class ConfirmarSolicitudInformeAction extends ActionBase {
+public class RealizarSolicitudInformeAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
-		System.out.println("ConfirmarSolicitudInformeAction.action()");
+		System.out.println("RealizarSolicitudInformeAction.action()");
 		String comandoDestino   = ConstantesComandos.EMPTY;
 		ActionErrors  errors    = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
 		ActionForward forward   = new ActionForward(); 
 		DatosViviendaActionForm viviendaSeleccionada = null;
-		DatosClienteActionForm  datosCliente		 = null;
+		DatosClienteActionForm  datosCliente 		 = null;
 		String idVivienda = null;
 		
 	    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 		String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
-//		request.getSession().setAttribute("tipoInforme", new ComboTipoInforme());
-//		request.getSession().setAttribute("tipoInformeSeleccionado", new ElementoComboTipoInforme() );				
+		request.getSession().setAttribute("tipoInforme", new ComboTipoInforme());
+		request.getSession().setAttribute("tipoInformeSeleccionado", new ElementoComboTipoInforme() );				
 
+		botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {			
 			comandoDestino = ConstantesComandos.CANCEL;
 			
@@ -57,18 +60,17 @@ public class ConfirmarSolicitudInformeAction extends ActionBase {
 				Collection<DatosViviendaActionForm> vivienda = null;
 
 					try {
-						datosCliente = (DatosClienteActionForm)request.getSession().getAttribute("datosClienteActionForm");
+						datosCliente = (DatosClienteActionForm)request.getSession().getAttribute("datosClienteActionForm");					
 						vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada, datosCliente.getNifcif());
 						viviendaSeleccionada = vivienda.iterator().next();	
 						
 						((DatosSolicitudInformeActionForm)form).setDatosVivienda(viviendaSeleccionada);
+						
 						((DatosSolicitudInformeActionForm)form).setDatosCliente(datosCliente);
 						
 						try {
 							OpSolicitudInforme.insertar(form);
-							//LAST_INSERT_ID()
-							messages.add("message", new ActionMessage("msg.solicitud.informe.guardado"));
-							comandoDestino = ConstantesComandos.OK;
+							request.getSession().setAttribute("datosSolicitudInformeActionForm", ((DatosSolicitudInformeActionForm)form));
 						} catch (SolicitudinformeNoGuardadaExcepcion e) {
 							messages.add("message", new ActionMessage(e.getMensaje()));
 							comandoDestino = ConstantesComandos.NOOK;

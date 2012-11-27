@@ -16,8 +16,10 @@ import org.apache.struts.action.ActionMessages;
 import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboTipoInforme;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboTipoInforme;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.vivienda.EncontradasMuchasViviendasExcepcion;
 import com.evalquiler.excepciones.vivienda.NoEncontradaViviendaConCriteriosExcepcion;
@@ -45,6 +47,9 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				listaViviendas = OpVivienda.buscarVivienda(form);
 				request.setAttribute("datosViviendaActionForm", listaViviendas);
 				request.getSession().setAttribute("criteriosBusquedaViviendaActionForm", form);
+				request.getSession().setAttribute("tipoInforme", new ComboTipoInforme());
+				request.getSession().setAttribute("tipoInformeSeleccionado", new ElementoComboTipoInforme() );				
+
 				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
 				
 			} catch (NoEncontradaViviendaConCriteriosExcepcion e) {

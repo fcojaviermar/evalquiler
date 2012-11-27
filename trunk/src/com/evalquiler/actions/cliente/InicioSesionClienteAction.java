@@ -16,9 +16,11 @@ import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoDocumento;
+import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
+import com.evalquiler.entidad.ElementoComboTipoVia;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.cliente.ClienteNoExisteExcepcion;
 import com.evalquiler.excepciones.cliente.ClienteRepetidoExcepcion;
@@ -58,6 +60,9 @@ public class InicioSesionClienteAction extends ActionBase {
 				
 				if (pwd.equals(cliente.getPassword())) {
 					request.getSession().setAttribute("datosClienteActionForm", cliente);
+					request.getSession().setAttribute("tipoVia", new ComboTipoVia());
+					request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+					
 					comandoDestino = ConstantesComandos.VALID_CLIENT;
 				} else {
 					errors.add("errorValidacion", new ActionError("error.distinta.password"));
@@ -71,6 +76,9 @@ public class InicioSesionClienteAction extends ActionBase {
 				errors.add("errorValidacion", new ActionError(e.getMensaje()));
 				comandoDestino = ConstantesComandos.ERROR_2_EQUAL_CLIENTS;    					
 			}
+		} else if (ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) {
+			comandoDestino = ConstantesComandos.VALID_CLIENT;
+			
 		} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));

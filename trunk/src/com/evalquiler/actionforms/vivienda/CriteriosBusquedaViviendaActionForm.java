@@ -281,7 +281,8 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
 			 (!ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) &&
-			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado))) {
+			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) &&
+			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
         	errors = new ActionErrors();
             if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
