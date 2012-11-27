@@ -30,12 +30,12 @@ public class DaoSolicitudInformes {
 	public final static int ULTIMO_ID_SOLICITUD		= 2;
 	
 	private final static String CONSULTAR_SOLICITUD_PENDIENTES = "SELECT IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAALTA " +
-														   		 "FROM SOLICITUD WHERE ENVIADO = 0";
+														   		 "FROM SOLICITUD WHERE PROCESADO = 0";
 	
 	private final static String SELECCIONAR_ULTIMA_SOLICITUD = "SELECT MAX(IDSOLICITUS) AS MAX_ID_SOLICITUD FROM SOLICITUD";	
 	
-	private final static String INSERTAR_SOLICITUD = "INSERT INTO SOLICITUD (IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAALTA, ENVIADO) " +
-												     "VALUES (?, ?, ?, ?, SYSDATE(), 0)";
+	private final static String INSERTAR_SOLICITUD = "INSERT INTO SOLICITUD (IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAALTA) " +
+												     "VALUES (?, ?, ?, ?, SYSDATE())";
 	
 	public static final Collection<DatosSolicitudInformeActionForm> consultar(final String idInforme, final int tipoConsulta) 
 		throws ExcepcionEjecutarSentancia {
@@ -106,7 +106,7 @@ public class DaoSolicitudInformes {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoSolicitudInformes.consultar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoSolicitudInformes.consultar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -156,7 +156,7 @@ public class DaoSolicitudInformes {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_INFORMES.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoSolicitudInformes.insertar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoSolicitudInformes.insertar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(

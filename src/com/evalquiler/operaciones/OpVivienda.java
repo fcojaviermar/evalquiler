@@ -23,7 +23,7 @@ import com.evalquiler.excepciones.vivienda.ViviendaNoGuardadaExcepcion;
  */
 public final class OpVivienda {
 	
-	public static final Collection<DatosViviendaActionForm> consultarVivienda(ActionForm viviendaIn) 
+	public static final Collection<DatosViviendaActionForm> consultarVivienda(final ActionForm viviendaIn, final String nifNavegante) 
 		throws NoExisteViviendaExcepcion, ExcepcionEjecutarSentancia {
 		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultarPorPk( ((DatosViviendaActionForm)viviendaIn).getIdVivienda());
 		
@@ -31,11 +31,15 @@ public final class OpVivienda {
 			throw new NoExisteViviendaExcepcion(String.valueOf(((DatosViviendaActionForm)viviendaIn).getIdVivienda()));
 		}
 
+		if (nifNavegante.equals(listaViviendas.iterator().next().getNifPropietario())) {
+			listaViviendas.iterator().next().setEsElPropietario(true);
+		}
+		
 		return listaViviendas; 
 	}
 
 	
-	public static final Collection<DatosViviendaActionForm> buscarVivienda(ActionForm viviendaIn) 
+	public static final Collection<DatosViviendaActionForm> buscarVivienda(final ActionForm viviendaIn) 
 		throws NoEncontradaViviendaConCriteriosExcepcion, ExcepcionEjecutarSentancia, EncontradasMuchasViviendasExcepcion {
 		Collection<DatosViviendaActionForm> listaViviendas = DaoVivienda.consultar(viviendaIn, DaoVivienda.CONSULTA_VIVIENDA);
 		
@@ -50,7 +54,7 @@ public final class OpVivienda {
 	}
 
 	
-	public static final int insertar(ActionForm viviendaIn) throws ViviendaNoGuardadaExcepcion, ExcepcionEjecutarSentancia {
+	public static final int insertar(final ActionForm viviendaIn) throws ViviendaNoGuardadaExcepcion, ExcepcionEjecutarSentancia {
 		int iResultado = DaoVivienda.insertar((DatosViviendaActionForm)viviendaIn);
 		
 		if (iResultado == Constantes.RESULTADO_NOOK) {
