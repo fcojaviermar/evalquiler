@@ -11,17 +11,17 @@ public class ElementoComboTipoInforme {
 		this.descripcion = "";
 	}
 
-	public ElementoComboTipoInforme(final String idTipoUsuario, final String desc) {
-		this.idTipoInforme = idTipoUsuario;
+	public ElementoComboTipoInforme(final String idTipoInforme, final String desc) {
+		this.idTipoInforme = idTipoInforme;
 		this.descripcion = desc;
 	}
 	
-	public String getIdTipoUsuario() {
+	public String getIdTipoInforme() {
 		return idTipoInforme;
 	}
 	
-	public void setIdTipoDocumento(String idTipoUsuario) {
-		this.idTipoInforme = idTipoUsuario;
+	public void setIdTipoDocumento(String idTipoInforme) {
+		this.idTipoInforme = idTipoInforme;
 	}
 	
 	public String getDescripcion() {
