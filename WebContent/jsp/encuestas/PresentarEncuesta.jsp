@@ -50,8 +50,8 @@
 	                        </div>                    
 		                    <div>
 				                 <input type="hidden" name="NumeroPreguntas" value="<%=String.valueOf(iNumeroPreguntas)%>"/>
-		                  	     <html:submit property="BOTON_PULSADO" value="Responder"/>
-		                  	     <html:submit property="BOTON_PULSADO" value="Cancelar"/>
+		                  	     <html:submit property="BOTON_PULSADO" value="Responder" title = "Responder encuesta"/>
+		                  	     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
 		                    </div>                  	
 				    	</fieldset>
 				    </div>

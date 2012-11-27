@@ -11,7 +11,7 @@
     </head>
     <body>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>    
-        <html:form action="/IrGuardarRespuestasEncuestaAction.do" method="post">            
+        
             <fieldset>
                 <legend>Datos del usuario</legend>            
                 <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
@@ -55,12 +55,14 @@
                             </div>                                  
                         </logic:iterate>
                 </fieldset>
-                <div id="botonera">
-                    <html:submit property="BOTON_PULSADO" value="Guardar encuesta"/>
-                    <html:submit property="BOTON_PULSADO" value="Cancelar"/>
-                </div>
+                <html:form action="/IrGuardarRespuestasEncuestaAction.do" method="post">            
+                	<div id="botonera">
+                    	<html:submit property="BOTON_PULSADO" value="Guardar encuesta" title = "Guardar respuestas de la encuesta"/>
+                    	<html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
+                	</div>
+				</html:form>                	
 		    </fieldset>
-        </html:form>		
+        		
         <%@include file="../comun/Salir.jsp"%>
     </body>
 </html:html>
