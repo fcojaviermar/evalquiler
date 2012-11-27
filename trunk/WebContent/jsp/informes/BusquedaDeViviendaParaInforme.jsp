@@ -14,7 +14,7 @@
         <html:form action="/IrSolicitarInformeAction.do" method="post">    
 			<fieldset>
 			    <legend>Datos del usuario</legend>
-                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>			
+                <%@include file="../comun/DatosCliente.jsp"%>			
 			    <fieldset>
 			        <legend>Buscar una vivienda</legend>
                     <div id="criteriosBusqueda" >
