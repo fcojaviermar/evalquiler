@@ -26,53 +26,40 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 	
 
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
 		System.out.println("ConfirmarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
-		ActionForward forward = new ActionForward(); // return value
+		ActionForward forward = new ActionForward(); 
 
-	    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
-	    	if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-	    		comandoDestino = ConstantesComandos.CANCEL;
-	    		
-	    	} else if (ConstantesBotones.ACEPTAR.equals(botonPulsado)) {
-	        	ComboTipoVia combo1 = (ComboTipoVia)request.getSession().getAttribute("tipoVia");
-	        	ElementoComboTipoVia elemCombo1 = combo1.get(((DatosViviendaActionForm)form).getIdTipoVia());
-	        	((DatosViviendaActionForm)form).setDescTipoVia(elemCombo1.getDescripcion());
-	        	
-				long lSecuencial = 0;
-				try {
-					lSecuencial = OpVivienda.ultimoIdVivienda();
-					((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
-					
-					request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
-					comandoDestino = ConstantesComandos.OK;			
-				} catch (ExcepcionEjecutarSentancia e) {
-	    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-	    			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
-	    			comandoDestino = ConstantesComandos.ERROR;
-				}
-	    		
-	    	} else {
-    			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-    			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
-    			comandoDestino = ConstantesComandos.ERROR;
-	    	}
-//		} catch (Exception e) {
-//		    // Report the error using the appropriate name and ID.
-//			comandoDestino = ConstantesComandos.EXIT;
-//			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
-//		}
+    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+    	if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+    		comandoDestino = ConstantesComandos.CANCEL;
+    		
+    	} else if (ConstantesBotones.ACEPTAR.equals(botonPulsado)) {
+        	ComboTipoVia combo1 = (ComboTipoVia)request.getSession().getAttribute("tipoVia");
+        	ElementoComboTipoVia elemCombo1 = combo1.get(((DatosViviendaActionForm)form).getIdTipoVia());
+        	((DatosViviendaActionForm)form).setDescTipoVia(elemCombo1.getDescripcion());
+        	
+			long lSecuencial = 0;
+			lSecuencial = OpVivienda.ultimoIdVivienda();
+			((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
+				
+			request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
+			comandoDestino = ConstantesComandos.OK;			
+    		
+    	} else {
+			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
+			comandoDestino = ConstantesComandos.ERROR;
+    	}
 
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
 		} else {
-			// Forward control to the appropriate 'success' URI (change name as desired)
 		}
 
 		forward = mapping.findForward(comandoDestino);
-		// Finish with
 		return forward;
     }
 }

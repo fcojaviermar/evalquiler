@@ -1,4 +1,4 @@
-package com.evalquiler.actions.vivienda;
+package com.evalquiler.actions.informes;
 
 import java.util.Collection;
 
@@ -13,12 +13,11 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
+import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
-import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
-import com.evalquiler.entidad.ElementoComboTipoVia;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.vivienda.EncontradasMuchasViviendasExcepcion;
 import com.evalquiler.excepciones.vivienda.NoEncontradaViviendaConCriteriosExcepcion;
@@ -37,6 +36,7 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); 
 		Collection<DatosViviendaActionForm> listaViviendas = null;
+		CriteriosBusquedaViviendaActionForm criteriosBusqueda = null;
 		
     	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
     	if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
@@ -56,11 +56,21 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 			}
     	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
     		comandoDestino = ConstantesComandos.CANCEL;
-
-		} else if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
-			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
-			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
-			comandoDestino = ConstantesComandos.NEW_HOUSE;
+    			
+    	} else if (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) {
+    		criteriosBusqueda = (CriteriosBusquedaViviendaActionForm)request.getSession().getAttribute("criteriosBusquedaViviendaActionForm");
+			try {
+				listaViviendas = OpVivienda.buscarVivienda(criteriosBusqueda);
+				request.setAttribute("datosViviendaActionForm", listaViviendas);
+				request.getSession().setAttribute("criteriosBusquedaViviendaActionForm", form);
+				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
+			} catch (NoEncontradaViviendaConCriteriosExcepcion e) {
+				comandoDestino = ConstantesComandos.NO_RESULT;
+				messages.add("message", new ActionMessage(e.getMensaje()));
+			} catch (EncontradasMuchasViviendasExcepcion e) {
+				comandoDestino = ConstantesComandos.NO_RESULT;
+				messages.add("message", new ActionMessage(e.getMensaje()));
+			}
     		
     	} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));

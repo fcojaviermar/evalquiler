@@ -2,12 +2,11 @@ package com.evalquiler.comun.constantes;
 
 public abstract class Constantes {
 
-	public final static int LONGITUD_NIF_CIF 		 = 9;
-	
 	public final static int RESULTADO_OK   	 		 = 0;
 	public final static int RESULTADO_NOOK 	 		 = 1;
 	
 	public final static int SIN_REGISTROS    		 = 0;
+	public final static int NUMERO_REGISTROS_MAXIMO  = 10;
 	
 	public final static int ELEMENTO_NO_SELECCIONADO = 0;
 	public final static int SIN_NUMERICO_EN_VIA		 = 0;
@@ -19,6 +18,7 @@ public abstract class Constantes {
 	public final static int MAXIMO_CODIGOPOTAL	= 99999;
 	public final static int MAXIMA_PROVINCIA	= 54;	
 	public final static int MAXIMO_PAIS			= 54;
+	public final static int MAXIMO_TIPO_INFORME = 3;
 	
 	public final static int LONGITUD_MAXIMA_NOMBREVIA 	= 100;
 	public final static int LONGITUD_MAXIMA_BLOQUE 		= 2;
@@ -28,6 +28,7 @@ public abstract class Constantes {
 	public final static int LONGITUD_PASSWORD			= 50;
 	public final static int LONGITUD_USUARIO			= 20;
 	public final static int LONGITUD_EMAIL				= 100;
+	public final static int LONGITUD_NIF_CIF 		 	= 9;
 	
 	public final static String CHECK_SELECCIONADO = "S";
 	
