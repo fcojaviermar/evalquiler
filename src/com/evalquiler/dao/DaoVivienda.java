@@ -16,6 +16,8 @@ import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
 /**
@@ -59,17 +61,8 @@ public class DaoVivienda {
 	private final static String AND_MUNICIPIO = "AND MUNICIPIO = ? ";
 	private final static String AND_NIFPROPIETARIO = "AND NIFPROPIETARIO = ?";
 
-	
-
-	private final static String CONSULTAR_VIVIENDA 		  = "SELECT IDVIVIENDA, IDTIPOVIA, NOMBREVIA, NUMEROVIA, BLOQUE, PORTAL, ESCALERA, PLANTA, " +
-															"PUERTA, CODIGOPOSTAL, MUNICIPIO, PROVINCIA, PAIS, NIFPROPIETARIO " +
-															"FROM VIVIENDA " +
-															"WHERE IDTIPOVIA = ? AND NOMBREVIA = ? AND NUMEROVIA = ? AND BLOQUE = ? " +
-															"AND PORTAL = ? AND ESCALERA = ? AND PLANTA = ? AND PUERTA = ? AND CODIGOPOSTAL = ? " +
-															"AND MUNICIPIO = ? AND PROVINCIA = ? AND PAIS = ? AND NIFPROPIETARIO = ?";	
-	
-	public static final Collection<DatosViviendaActionForm> consultarPorPk(final long idVivienda) {
-		Collection<DatosViviendaActionForm> listaVivienda = new ArrayList<DatosViviendaActionForm>();
+	public static final Collection<DatosViviendaActionForm> consultarPorPk(final long idVivienda) throws ExcepcionEjecutarSentancia {
+		Collection<DatosViviendaActionForm> listaVivienda = null;
 		DatosViviendaActionForm vivienda = null;
 		
 		PreparedStatement pstmt = null;
@@ -81,6 +74,7 @@ public class DaoVivienda {
 				if (null != pstmt) {
 					pstmt.setLong(1, idVivienda);
 					rs = pstmt.executeQuery() ; 
+					listaVivienda = new ArrayList<DatosViviendaActionForm>();
 					while(rs.next()) {
 						vivienda = new DatosViviendaActionForm();
 						vivienda.setIdVivienda(rs.getLong("IDVIVIENDA"));
@@ -100,45 +94,33 @@ public class DaoVivienda {
 						listaVivienda.add(vivienda);
 					}
 				} else {
-					System.out.println("No se ha podido obtener un pstmt valido.") ;
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+						 		"error.global.mesage", 
+						 		"No se ha obtenido un preparedStatement en DaoVivienda.consultarPorPk.");
 				}
 			} else {
-				
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoVivienda.consultarPorPk.");				
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return listaVivienda;
-		}
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 "error.global.mesage", 
+				 "DaoVivienda.consultarPorPk\n" + e.getMessage());
+		} 
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, rs, "DaoVivienda.consultarPorPk");
+		return listaVivienda;
 	}
 	
 	
-	public static final int insertar(DatosViviendaActionForm vivienda) {
+	public static final int insertar(DatosViviendaActionForm vivienda) throws ExcepcionEjecutarSentancia {
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();
@@ -164,147 +146,145 @@ public class DaoVivienda {
 					
 					iResultado = pstmt.executeUpdate();
 					if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
-						System.out.println("Se ha insertado el cliente.");
 						conn.commit();
 						iResultado = Constantes.RESULTADO_OK;
 					} else {
-						System.out.println("No se ha insertado el cliente.");
+						conn.rollback();
 						iResultado = Constantes.RESULTADO_NOOK;
 					}
 				} else {
-
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+						 		"error.global.mesage", 
+						 		"No se ha obtenido un preparedStatement en DaoVivienda.insertar.");
 				}
 			} else {
-
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoVivienda.insertar.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return iResultado;
-		}
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 "error.global.mesage", 
+				 "DaoVivienda.insertar\n" + e.getMessage());
+		} 
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, "DaoVivienda.insertar");
+		return iResultado;
 	}
 	
 
-	public static final Collection<DatosViviendaActionForm> consultar(final ActionForm vivienda, final int sentencia) {
+	
+	public static final Collection<DatosViviendaActionForm> consultar(final ActionForm vivienda, final int tipoConsulta) 
+		throws ExcepcionEjecutarSentancia {
 		Collection<DatosViviendaActionForm> listaVivienda = null;
 		DatosViviendaActionForm viviendaAux = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
-		final String sentenciaEjecutar = obtenerSentencia(sentencia, (CriteriosBusquedaViviendaActionForm)vivienda);
+		final String sentenciaEjecutar = obtenerSentencia(tipoConsulta, (CriteriosBusquedaViviendaActionForm)vivienda);
 		Connection conn = ConexionBD.getConnection();
+		
 		try {
 			if (null != conn) {
-				pstmt = conn.prepareStatement(sentenciaEjecutar);
-				if (null != pstmt) {
-					if (sentencia == CONSULTA_VIVIENDA) {
-    					pstmt = prepararWhere((CriteriosBusquedaViviendaActionForm)vivienda, pstmt, sentencia);
-    					rs = pstmt.executeQuery() ; 
-    					listaVivienda = new ArrayList<DatosViviendaActionForm>();
-    					
-    					while(rs.next()) {
-    						viviendaAux = new DatosViviendaActionForm();
-    						viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
-    						viviendaAux.setIdTipoVia(rs.getInt("IDTIPOVIA"));
-    						viviendaAux.setNombreVia(rs.getString("NOMBREVIA"));
-    						viviendaAux.setNumeroVia(rs.getInt("NUMEROVIA"));
-    						viviendaAux.setBloque(rs.getString("BLOQUE"));
-    						viviendaAux.setPortal(rs.getInt("PORTAL"));
-    						viviendaAux.setEscalera(rs.getString("ESCALERA"));
-    						viviendaAux.setPlanta(rs.getString("PLANTA"));
-    						viviendaAux.setPuerta(rs.getString("PUERTA"));
-    						viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
-    						viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
-    						viviendaAux.setProvincia(rs.getInt("PROVINCIA"));
-    						viviendaAux.setPais(rs.getInt("PAIS"));
-    						viviendaAux.setNifPropietario(rs.getString("NIFPROPIETARIO"));
-    						listaVivienda.add(viviendaAux);
-    					}
-					} else if (sentencia == CONTAR_VIVIENDAS) {
-						pstmt = conn.prepareStatement(SELECCIONAR_ULTIMO_IDVIVIENDA);
-						if (null != pstmt) {
-							rs = pstmt.executeQuery() ;
-							listaVivienda = new ArrayList<DatosViviendaActionForm>();
-							while(rs.next()) {
-								viviendaAux = new DatosViviendaActionForm();
-								viviendaAux.setIdVivienda(rs.getLong("NUMEROVIVIENDAS"));
-								listaVivienda.add(viviendaAux);
-							}
-						} else {
-							System.out.println("No se ha podido obtener un pstmt valido.") ;
+				if (tipoConsulta == CONSULTA_VIVIENDA) {
+					pstmt = conn.prepareStatement(sentenciaEjecutar);
+					pstmt = prepararWhere((CriteriosBusquedaViviendaActionForm)vivienda, pstmt, tipoConsulta);
+					if (null != pstmt) {
+						rs = pstmt.executeQuery() ; 
+						listaVivienda = new ArrayList<DatosViviendaActionForm>();
+						
+						while(rs.next()) {
+							viviendaAux = new DatosViviendaActionForm();
+							viviendaAux.setIdVivienda(rs.getLong("IDVIVIENDA"));
+							viviendaAux.setIdTipoVia(rs.getInt("IDTIPOVIA"));
+							viviendaAux.setNombreVia(rs.getString("NOMBREVIA"));
+							viviendaAux.setNumeroVia(rs.getInt("NUMEROVIA"));
+							viviendaAux.setBloque(rs.getString("BLOQUE"));
+							viviendaAux.setPortal(rs.getInt("PORTAL"));
+							viviendaAux.setEscalera(rs.getString("ESCALERA"));
+							viviendaAux.setPlanta(rs.getString("PLANTA"));
+							viviendaAux.setPuerta(rs.getString("PUERTA"));
+							viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
+							viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
+							viviendaAux.setProvincia(rs.getInt("PROVINCIA"));
+							viviendaAux.setPais(rs.getInt("PAIS"));
+							viviendaAux.setNifPropietario(rs.getString("NIFPROPIETARIO"));
+							listaVivienda.add(viviendaAux);
 						}
-					} else if (sentencia == ULTIMO_ID_VIVIENDA) {
-						pstmt = conn.prepareStatement(SELECCIONAR_ULTIMO_IDVIVIENDA);
-						if (null != pstmt) {
-							rs = pstmt.executeQuery() ; 
-							while(rs.next()) {
-								listaVivienda = new ArrayList<DatosViviendaActionForm>();
-								viviendaAux = new DatosViviendaActionForm();
-								viviendaAux.setIdVivienda(rs.getLong("MAX_ID_VIVIENDA"));
-								listaVivienda.add(viviendaAux);
-							}
-						} else {
-							System.out.println("No se ha podido obtener un pstmt valido.") ;
-						}
-
 					} else {
-						//Error
+						throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+							 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+							 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+							 		"error.global.mesage", 
+							 		"No se ha obtenido un preparedStatement en DaoVivienda.consultar para la sentencia solicitada con identificador: " + tipoConsulta + " .");
 					}
-
+					
+				} else if (tipoConsulta == CONTAR_VIVIENDAS) {
+					pstmt = conn.prepareStatement(sentenciaEjecutar);
+					if (null != pstmt) {
+						rs = pstmt.executeQuery() ;
+						listaVivienda = new ArrayList<DatosViviendaActionForm>();
+						while(rs.next()) {
+							viviendaAux = new DatosViviendaActionForm();
+							viviendaAux.setIdVivienda(rs.getLong("NUMEROVIVIENDAS"));
+							listaVivienda.add(viviendaAux);
+						}
+					} else {
+						throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+							 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+							 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+							 		"error.global.mesage", 
+							 		"No se ha obtenido un preparedStatement en DaoVivienda.consultar para la sentencia solicitada con identificador: " + tipoConsulta + " .");
+					}
+					
+				} else if (tipoConsulta == ULTIMO_ID_VIVIENDA) {
+					pstmt = conn.prepareStatement(sentenciaEjecutar);
+					if (null != pstmt) {
+						rs = pstmt.executeQuery() ; 
+						while(rs.next()) {
+							listaVivienda = new ArrayList<DatosViviendaActionForm>();
+							viviendaAux = new DatosViviendaActionForm();
+							viviendaAux.setIdVivienda(rs.getLong("MAX_ID_VIVIENDA"));
+							listaVivienda.add(viviendaAux);
+						}
+					} else {
+						throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+							 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+							 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+							 		"error.global.mesage", 
+							 		"No se ha obtenido un preparedStatement en DaoVivienda.consultar para la sentencia solicitada con identificador: " + tipoConsulta + " .");
+					}
+					
 				} else {
-					System.out.println("No se ha podido obtener un pstmt valido.") ;
+					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_SENTENCIA_SOLICITADA_NO_EXISTE)), 
+						 		"error.global.mesage", 
+						 		"DaoVivienda.consultar. No existe la sentencia solicitada con identificador: " + tipoConsulta + " .");
 				}
 			} else {
-				
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoVivienda.consultar.");			
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return listaVivienda;
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 "error.global.mesage", 
+				 "DaoVivienda.consultar\n" + e.getMessage());
 		}
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, rs, "DaoVivienda.consultar");		
+		return listaVivienda;
 	}
 	
 

@@ -20,7 +20,9 @@ import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
+import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
 /**
@@ -58,80 +60,72 @@ public class DaoRespuestasEncuesta {
 															    "VALUES (?, ?, ?, ?, ?, ?, SYSDATE(), ?, ?)";
 
 	
-	public static final int insertar(DatosRealizacionEncuestaActionForm encuestaRealizada) {
+	public static final int insertar(DatosRealizacionEncuestaActionForm encuestaRealizada) throws ExcepcionEjecutarSentancia {
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = Constantes.RESULTADO_NOOK;
 		Connection conn = ConexionBD.getConnection();
 		try {		
 			if (null != conn) {
-				if (null != encuestaRealizada) {
-					boolean error = false;
-					int i=0;
-					Iterator<PreguntasEncuestaActionForm> iterPreguntas = encuestaRealizada.getDatosEncuesta().getPreguntas().iterator(); 
-					while (!error && (iterPreguntas.hasNext())) {
-						pstmt = conn.prepareStatement(INSERTAR_RESPUESTAS_ENCUESTA);	
-						if (null != pstmt) {
-							PreguntasEncuestaActionForm pregunta = iterPreguntas.next();
-							pstmt.setInt(1, encuestaRealizada.getDatosEncuesta().getIdEncuesta());
-							pstmt.setInt(2, pregunta.getIdPregunta());
-							pstmt.setInt(3, pregunta.getIdRespuestaDada());
-							pstmt.setString(4, encuestaRealizada.getDatosUsuario().getUser());
-							pstmt.setDate(5, UtilidadesFechas.getDateForSql(encuestaRealizada.getFechaInicioEvaluacionAlquiler()));
-							pstmt.setDate(6, UtilidadesFechas.getDateForSql(encuestaRealizada.getFechaFinEvaluacionAlquiler()));
-							pstmt.setInt(7, encuestaRealizada.getDatosEncuesta().getIdTipoUsuario());
-							pstmt.setLong(8, encuestaRealizada.getDatosVivienda().getIdVivienda());
-							
-							iResultado = pstmt.executeUpdate();
-							if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
-								i = i + 1;
-								pstmt.close();
-							} else {
-								error = true;
-							}
+				boolean error = false;
+				int i=0;
+				Iterator<PreguntasEncuestaActionForm> iterPreguntas = encuestaRealizada.getDatosEncuesta().getPreguntas().iterator(); 
+				while (!error && (iterPreguntas.hasNext())) {
+					pstmt = conn.prepareStatement(INSERTAR_RESPUESTAS_ENCUESTA);	
+					if (null != pstmt) {
+						PreguntasEncuestaActionForm pregunta = iterPreguntas.next();
+						pstmt.setInt(1, encuestaRealizada.getDatosEncuesta().getIdEncuesta());
+						pstmt.setInt(2, pregunta.getIdPregunta());
+						pstmt.setInt(3, pregunta.getIdRespuestaDada());
+						pstmt.setString(4, encuestaRealizada.getDatosUsuario().getUser());
+						pstmt.setDate(5, UtilidadesFechas.getDateForSql(encuestaRealizada.getFechaInicioEvaluacionAlquiler()));
+						pstmt.setDate(6, UtilidadesFechas.getDateForSql(encuestaRealizada.getFechaFinEvaluacionAlquiler()));
+						pstmt.setInt(7, encuestaRealizada.getDatosEncuesta().getIdTipoUsuario());
+						pstmt.setLong(8, encuestaRealizada.getDatosVivienda().getIdVivienda());
+						
+						iResultado = pstmt.executeUpdate();
+						if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd
+							i = i + 1;
+							pstmt.close();
 						} else {
-							
+							error = true;
 						}
-					}
-					if (error) {
-						conn.rollback();
-						iResultado = Constantes.RESULTADO_NOOK;
 					} else {
-						conn.commit();
-						iResultado = Constantes.RESULTADO_OK;
+						throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+							 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+							 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+							 		"error.global.mesage", 
+							 		"No se ha obtenido un preparedStatement en DaoRespuestasEncuesta.insertar.");
 					}
+				}
+				if (error) {
+					conn.rollback();
+					iResultado = Constantes.RESULTADO_NOOK;
 				} else {
-
+					conn.commit();
+					iResultado = Constantes.RESULTADO_OK;
 				}
 			} else {
-
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoRespuesta.consultar.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return iResultado;
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 								 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+				 										 ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 								 "error.global.mesage", 
+				 								 "DaoRespuestasEncuesta.insertar\n" + e.getMessage());
 		}
+		
+		ConexionBD.cerrarConexiones(conn, pstmt, "DaoRespuestasEncuesta.insertar");
+		return iResultado;
+
 	}	
 
-	public static final Collection<DatosRealizacionEncuestaActionForm> consultar(ActionForm objetoIn, final int tipoConsulta) {
-		Collection<DatosRealizacionEncuestaActionForm> listaEncuestasRespondidas = new ArrayList<DatosRealizacionEncuestaActionForm>();
+	public static final Collection<DatosRealizacionEncuestaActionForm> consultar(ActionForm objetoIn, final int tipoConsulta) throws ExcepcionEjecutarSentancia {
+		Collection<DatosRealizacionEncuestaActionForm> listaEncuestasRespondidas = null;
 		DatosRealizacionEncuestaActionForm encuestaRespondida = null;		
 		DatosEncuestaActionForm datosEncuesta = null;
 		DatosViviendaActionForm datosVivienda = null;
@@ -146,7 +140,7 @@ public class DaoRespuestasEncuesta {
     				if (null != pstmt) {
     					pstmt.setString(1, ((DatosUsuarioActionForm)objetoIn).getUser());
     					rs = pstmt.executeQuery() ;
-    					
+    					listaEncuestasRespondidas = new ArrayList<DatosRealizacionEncuestaActionForm>();
     					while(rs.next()) {
     						encuestaRespondida = new DatosRealizacionEncuestaActionForm();
     						encuestaRespondida.setFechaRealizacion(
@@ -166,7 +160,12 @@ public class DaoRespuestasEncuesta {
     						listaEncuestasRespondidas.add(encuestaRespondida);
     					}
     				} else {
-    					System.out.println("No se ha podido obtener un pstmt valido.") ;
+    					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+							 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+							 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+							 		"error.global.mesage", 
+							 		"No se ha obtenido un preparedStatement en DaoRespuestasEncuesta.consultar " + 
+							 		SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS + ".");
     				}
 				} else if (tipoConsulta == SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS) {
     				pstmt = conn.prepareStatement(CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS);
@@ -179,6 +178,7 @@ public class DaoRespuestasEncuesta {
     					pstmt.setDate(5, UtilidadesFechas.getDateForSql(
     												((DatosRealizacionEncuestaActionForm)objetoIn).getFechaInicioEvaluacionAlquiler()));
     					rs = pstmt.executeQuery() ;
+    					listaEncuestasRespondidas = new ArrayList<DatosRealizacionEncuestaActionForm>();
     					while(rs.next()) {
     						encuestaRespondida = new DatosRealizacionEncuestaActionForm();
     						datosEncuesta = new DatosEncuestaActionForm();
@@ -187,44 +187,37 @@ public class DaoRespuestasEncuesta {
     						listaEncuestasRespondidas.add(encuestaRespondida);    						
     					}
     				} else {
-    					//pstm nulo
+    					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+							 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+							 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+							 		"error.global.mesage", 
+							 		"No se ha obtenido un preparedStatement en DaoRespuestasEncuesta.consultar " 
+							 		+ SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS + " .");
     				}
     			} else {
-    				//Tipo de consulta no vï¿½lido.
+    				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+						 		ConstantesCodigosExcepciones.CODIGO_SENTENCIA_SOLICITADA_NO_EXISTE)), 
+						 		"error.global.mesage", 
+						 		"DaoRespuestasEncuesta.consultar. No existe la sentencia solicitada con identificador: " + tipoConsulta + " .");
     			}
 			} else {
-				//No se ha obtenido una conexiï¿½n
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
+					 		"error.global.mesage", 
+					 		"No se ha obtenido una conexión en DaoRespuestasEncuesta.consultar.");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()) ;
-		} catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-		} finally {
-			try {
-				if (null != rs) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("Se ha producido un error cerrando rs: ".concat(e.getMessage())) ;
-			}
-			try {
-				if (null != pstmt) {
-					pstmt.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando pstmt: ".concat(e.getMessage())) ;
-			}
-			
-			try {
-				if (null != conn) {
-					conn.close() ;
-				}
-			} catch(final SQLException e) {
-				System.out.println("Se ha producido un error cerrando conn: ".concat(e.getMessage())) ;
-			}			
-			
-			return listaEncuestasRespondidas;
+			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
+				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+				 "error.global.mesage", 
+				 "DaoRespuestasEncuesta.consultar\n" + e.getMessage());
 		}
+			
+		ConexionBD.cerrarConexiones(conn, pstmt, rs, "DaoRespuestasEncuesta.consultar");
+		return listaEncuestasRespondidas;
 	}
 	
 }
