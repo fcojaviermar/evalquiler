@@ -11,13 +11,13 @@
     </head>
     <body>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-		<html:form action="/IrHacerEncuestaAction.do" method="post">
+		<html:form action="/IrAceptarSolicitudInformeAction.do" method="post">
 	        <div id="titulo">
 	            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>
 		   
 		        <fieldset>
 		            <legend>Datos del usuario</legend>
-	                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
+	                <%@include file="../comun/DatosCliente.jsp"%>
 	                 <div id="tipo-informe-div" class="alto50">
 						<label for="idTipoInforme" class="texto90"><strong >Tipo informe:&nbsp;</strong>
                             <html:select name="tipoInformeSeleccionado" property="idTipoInforme" styleClass="fondoBlanco" title="Seleccionar el tipo de informe a solicitar">

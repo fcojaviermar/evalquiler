@@ -14,7 +14,7 @@
 
             <fieldset>
                 <legend>Datos del usuario</legend>            
-                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
+                <%@include file="../comun/DatosCliente.jsp"%>
                 <fieldset>
                     <legend><bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/></legend>     
                         <div>
