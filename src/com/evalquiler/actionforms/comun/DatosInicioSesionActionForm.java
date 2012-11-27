@@ -13,8 +13,6 @@ import com.evalquiler.comun.constantes.ConstantesBotones;
 
 public class DatosInicioSesionActionForm extends ActionForm  {
 
-	//static Logger logger = Logger.getLogger(DatosInicioSesionActionForm.class);
-	
 	private String user 	 		 = null;
 	private String password  		 = null;
 	private String email  	 		 = null;
@@ -110,16 +108,14 @@ public class DatosInicioSesionActionForm extends ActionForm  {
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("InformacionUsuarioActionForm.validate()");
+    	System.out.println("DatosInicioSesionActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
-//    	DOMConfigurator.configure("log4j.xml");
-//        logger.info("Test Log");
-//    	logger.debug("Prueba de log");
 
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.REGISTRARSE.equals(botonPulsado)) && 
 			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) &&
-			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) ) {
+			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) && 
+			 (!ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) ) {
             if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
             } else if (this.getUser().length() > Constantes.LONGITUD_USUARIO) {
