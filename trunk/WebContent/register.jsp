@@ -42,7 +42,7 @@ logger.info("Logging Log4 Info Statement...");
 
         <div class="col40 alto350 rellenoIzq12 rellenoDer12">
             <fieldset class="fondoAzulOscuro bordeGrisOscuro borde1 alto300">
-                <html:form action="/IrInicioSesionUsuarioAction.do" method="post">
+                <html:form action="/IrInicioSesionAction.do" method="post">
                     <div class="alto75" id="label-title-u">
                         <h2 class="alineacionCentrada alto50">Iniciar sesión usuario<strong></strong></h2>
                     </div>
@@ -58,6 +58,14 @@ logger.info("Logging Log4 Info Statement...");
                     <div class="alto50" id="label-psw-u2">                      
                         <html:password property="password" size="50" maxlength="20" styleClass="fondoBlanco"></html:password>
                     </div>
+                    <div id="User-div" class="alto50">
+                        <label for="user">Usuario
+							<html:radio property="tipoRol" value="U" title="Marcar si quiere registrarse como usuario"/>                              	
+                        </label>
+                       	<label for="client">Cliente
+                       		<html:radio property="tipoRol" value="C" title="Marcar si quiere registrarse como cliente"/>
+                       	</label>
+                    </div>  
                     <div class="alto50 alineacionCentrada" id="botones-u">
                         <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
                         <html:submit property="BOTON_PULSADO" value="Registrarse"/>
@@ -68,35 +76,6 @@ logger.info("Logging Log4 Info Statement...");
                 </html:form>
                 
             </fieldset>                         
-        </div>
-
-        <div class="col40 alto350 rellenoIzq12 rellenoDer12">
-            <fieldset class="fondoAzulOscuro bordeGrisOscuro borde1 alto300">
-                <html:form action="/IrInicioSesionClienteAction.do" method="post">
-                    <div class="alto75" id="label-title-c">
-                        <h2 class="alineacionCentrada alto50">Iniciar sesión cliente<strong></strong></h2>
-                    </div>              
-                    <div class="ancho75" id="label-client1">
-                        <label for="user"><strong class="alineacionIzquierda">Nombre de cliente:&nbsp;</strong></label>
-                    </div>
-                    <div class="alto50 alineacionIzquierda" id="label-client2">                     
-                        <html:text property="user" size="50" maxlength="20" styleClass="fondoBlanco"></html:text>
-                    </div>
-                    <div class="ancho75" id="label-psw-u1">                     
-                        <label for="Password"><strong class="ancho25">Contraseña:&nbsp;</strong></label>
-                    </div>
-                    <div class="alto50" id="label-psw-u2">                      
-                        <html:password property="password" size="50" maxlength="20" styleClass="fondoBlanco"></html:password>
-                    </div>
-                    <div class="alto50 alineacionCentrada" id="botones-c">
-                        <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
-                        <html:submit property="BOTON_PULSADO" value="Registrarse"/>
-                    </div>
-                    <div>
-                        <html:link styleClass="alto25" href="IrFogotYourClientDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de cliente?</html:link>                    
-                    </div>
-                </html:form>
-            </fieldset>
         </div>
     </body>
 </html:html>

@@ -24,6 +24,10 @@
                                 <html:optionsCollection name="tipoInforme" value="idTipoInforme" label="descripcion"/>
                             </html:select>
                     	</label>
+                        <label for="fechaInicio"><strong class="user-label">Fecha inicio (dd-mm-aaaa):&nbsp;</strong></label>
+                        <html:text property="fechaInicio" size="15" maxlength="10" title="Fecha en la que el inquilino inicio el alquiler a buscar"></html:text>
+                        <label for="fechaFin"><strong class="user-label">Fecha fin (dd-mm-aaaa):&nbsp;</strong></label>
+                        <html:text property="fechaFin" size="15" maxlength="10" title="Fecha en la que el inquilino finalizó el alquiler a buscar"></html:text>
                     </div>
          
                     <div id="tabla" class="fondoRojoMedio">         

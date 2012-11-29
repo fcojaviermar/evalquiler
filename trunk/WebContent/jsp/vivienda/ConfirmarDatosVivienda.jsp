@@ -46,16 +46,6 @@
 					     <label for="pais"><strong >País:&nbsp;</strong></label>
                          <bean:write name="datosViviendaActionForm" property="pais"/>
                      </div>
-                     <div id="check-propietario-div" class="alto50">
-					     <label for="esElPropietario">Eres el propietario de esta vivienda: 
-					         <logic:equal name="datosViviendaActionForm" property="esElPropietario" value="true">
-                                Si
-                             </logic:equal>
-                             <logic:notEqual name="datosViviendaActionForm" property="esElPropietario" value="true">
-                                No
-                             </logic:notEqual>
-					     </label>
-				     </div>     
 	            </div>
 	         </fieldset>
              <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
