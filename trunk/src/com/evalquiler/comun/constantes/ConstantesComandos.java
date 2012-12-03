@@ -27,6 +27,8 @@ public abstract class ConstantesComandos {
 	public final static String ALREADY_EVAL 		= "ALREADY_EVAL";
 	public final static String ERROR_SAVE 			= "ERROR_SAVE";
 	public final static String CANCEL 				= "CANCEL";
+	public final static String CANCEL_INICIO		= "CANCEL_INICIO";
+	public final static String CANCEL_NO_INICIO 	= "CANCEL_NO_INICIO";
 	public final static String NO_SELECTION 		= "NO_SELECTION";
 	public final static String ERROR_2_EQUAL_CLIENTS = "ERROR_2_EQUAL_CLIENTS";
 	

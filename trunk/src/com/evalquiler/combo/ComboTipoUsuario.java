@@ -6,6 +6,7 @@ package com.evalquiler.combo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 /**
@@ -15,16 +16,17 @@ import com.evalquiler.entidad.ElementoComboTipoUsuario;
 public final class ComboTipoUsuario extends ArrayList<ElementoComboTipoUsuario> implements Serializable {
 	
 	public ComboTipoUsuario() {
-		add(new ElementoComboTipoUsuario("0", "--- Seleccione un elemento... ---" ));
-		add(new ElementoComboTipoUsuario("1", "Inquilino" ));
-		add(new ElementoComboTipoUsuario("2", "Arrendador"));
-		add(new ElementoComboTipoUsuario("3", "Ambos"));
+		add(new ElementoComboTipoUsuario(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione un elemento... ---" ));
+		add(new ElementoComboTipoUsuario(Constantes.INQUILINO,  "Inquilino" ));
+		add(new ElementoComboTipoUsuario(Constantes.ARRENDADOR, "Arrendador"));
+//		add(new ElementoComboTipoUsuario("3", "Ambos"));
 	}
 
 	
 	public final static boolean elementoValido(String id) {
 		boolean esValido = false;
-		if ( ("1".equals(id)) || ("2".equals(id)) || ("3".equals(id)) ) {
+//		if ( ("1".equals(id)) || ("2".equals(id)) || ("3".equals(id)) ) {
+		if ( (Constantes.INQUILINO.equals(id)) || (Constantes.ARRENDADOR.equals(id)) ) {			
 			esValido = true;
 		}
 		

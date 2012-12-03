@@ -1,5 +1,8 @@
 package com.evalquiler.comun.excepcion;
 
+import com.evalquiler.comun.utilidades.UtilidadesFechas;
+import com.evalquiler.comun.utilidades.UtilidadesFicheros;
+
 public class ExcepcionComun extends Exception {
 	private String codigo 		    = null;
 	private String mensaje 		    = null;
@@ -10,6 +13,7 @@ public class ExcepcionComun extends Exception {
 		this.codigo  		  = codigo;
 		this.mensaje 		  = mensaje;
 		this.mensajeExtendido = mensajeExtendido;
+		print();
 	}
 
 
@@ -44,5 +48,13 @@ public class ExcepcionComun extends Exception {
 		return esInfo;
 	}
 
+	private final void print() {
+		String cadena = UtilidadesFechas.getAhora();
+		cadena = cadena.concat("Código: " + this.getCodigo() + "\n");
+		cadena = cadena.concat("Mensaje: " + this.getMensaje() + "\n");
+		cadena = cadena.concat("Mensaje ampliado: " + this.getMensajeExtendido() + "\n");
+		UtilidadesFicheros.escribir(cadena);
+		
+	}
 	
 }

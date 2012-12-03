@@ -6,6 +6,7 @@ package com.evalquiler.combo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 /**
@@ -15,7 +16,7 @@ import com.evalquiler.entidad.ElementoComboTipoDocumento;
 public final class ComboTipoDocumento extends ArrayList<ElementoComboTipoDocumento> implements Serializable {
 	
 	public ComboTipoDocumento() {
-		add(new ElementoComboTipoDocumento("0", "--- Seleccione un elemento... ---" ));
+		add(new ElementoComboTipoDocumento(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione un elemento... ---" ));
 		add(new ElementoComboTipoDocumento("1", "N.I.F." ));
 		add(new ElementoComboTipoDocumento("2", "N.I.E."));
 		add(new ElementoComboTipoDocumento("3", "C.I.F."));

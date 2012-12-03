@@ -6,6 +6,7 @@ package com.evalquiler.combo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.entidad.ElementoComboTipoVia;
 
 /**
@@ -18,7 +19,7 @@ public final class ComboTipoVia extends ArrayList<ElementoComboTipoVia> implemen
 	private final static int ULTIMA_VIA  = 2;
 	
 	public ComboTipoVia() {
-		add(new ElementoComboTipoVia("0", "--- Seleccione una vía... ---" ));
+		add(new ElementoComboTipoVia(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione una vía... ---" ));
 		add(new ElementoComboTipoVia("1", "Calle" ));
 		add(new ElementoComboTipoVia("2", "Plaza"));
 		add(new ElementoComboTipoVia("3", "Avenida"));

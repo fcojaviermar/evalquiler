@@ -5,6 +5,9 @@ public abstract class Constantes {
 	public final static int RESULTADO_OK   	 		 = 0;
 	public final static int RESULTADO_NOOK 	 		 = 1;
 	
+	public final static String USUARIO				 = "U";
+	public final static String CLIENTE				 = "C";
+	
 	public final static int SIN_REGISTROS    		 = 0;
 	public final static int NUMERO_REGISTROS_MAXIMO  = 10;
 	
@@ -42,4 +45,10 @@ public abstract class Constantes {
 	public final static String[] LETRAS_NIF = {"T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E","T"};
 	public final static String[] LISTA_LETRAS_ULTIMO_DIGITO_CIF = {"J","A","B","C","D","E","F","G","H","I"};
 	public final static String[] LISTA_NUMEROS_ULTIMO_DIGITO_CIF = {"0","2","4","6","8","1","3","5","7","9"};	
+
+	
+	public final static String INQUILINO			 = "1";
+	public final static String ARRENDADOR			 = "2";
+
+
 }
