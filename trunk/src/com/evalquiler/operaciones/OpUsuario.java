@@ -34,7 +34,6 @@ public final class OpUsuario {
 			throw new UsuarioRepetidoExcepcion(((DatosInicioSesionActionForm)usuarioIn).getUser());
 		}
 		
-		
 		return listaUsuarios; 
 	}
 	

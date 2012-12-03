@@ -29,13 +29,13 @@ public class DaoSolicitudInformes {
 	public final static int SOLICITUDES_PENDIENTES 	= 1;
 	public final static int ULTIMO_ID_SOLICITUD		= 2;
 	
-	private final static String CONSULTAR_SOLICITUD_PENDIENTES = "SELECT IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAALTA " +
+	private final static String CONSULTAR_SOLICITUD_PENDIENTES = "SELECT IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAINICIO, FECHAFIN, FECHAALTA " +
 														   		 "FROM SOLICITUD WHERE PROCESADO = 0";
 	
 	private final static String SELECCIONAR_ULTIMA_SOLICITUD = "SELECT MAX(IDSOLICITUS) AS MAX_ID_SOLICITUD FROM SOLICITUD";	
 	
-	private final static String INSERTAR_SOLICITUD = "INSERT INTO SOLICITUD (IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAALTA) " +
-												     "VALUES (?, ?, ?, ?, SYSDATE())";
+	private final static String INSERTAR_SOLICITUD = "INSERT INTO SOLICITUD (IDSOLICITUD, IDCLIENTE, IDVIVIENDA, IDTIPOINFORME, FECHAINICIO, FECHAFIN, FECHAALTA) " +
+												     "VALUES (?, ?, ?, ?, ?, ?, SYSDATE())";
 	
 	public static final Collection<DatosSolicitudInformeActionForm> consultar(final String idInforme, final int tipoConsulta) 
 		throws ExcepcionEjecutarSentancia {
@@ -58,6 +58,8 @@ public class DaoSolicitudInformes {
 						while(rs.next()) {
 							solicitud = new DatosSolicitudInformeActionForm();
 							solicitud.setIdSolicitudInforme(rs.getLong("IDSOLICITUD"));
+							solicitud.setFechaInicio(UtilidadesFechas.getStringFromDate(rs.getDate("FECHAINICIO")));
+							solicitud.setFechaFin(UtilidadesFechas.getStringFromDate(rs.getDate("FECHAFIN")));
 							datosCliente = new DatosClienteActionForm();
 							datosCliente.setUser(rs.getString("IDCLIENTE"));
 							solicitud.setDatosCliente(datosCliente);
@@ -135,6 +137,8 @@ public class DaoSolicitudInformes {
 					pstmt.setString(2, datosSolicitudInforme.getDatosCliente().getUser());
 					pstmt.setLong(3, datosSolicitudInforme.getDatosVivienda().getIdVivienda());
 					pstmt.setInt(4, datosSolicitudInforme.getIdTipoInforme());
+					pstmt.setDate(5, UtilidadesFechas.getDateForSql(datosSolicitudInforme.getFechaInicio()));
+					pstmt.setDate(6, UtilidadesFechas.getDateForSql(datosSolicitudInforme.getFechaFin()));
 
 					iResultado = pstmt.executeUpdate();
 					if (0 != iResultado ) { //Si se ha insertado el registro en la bbdd

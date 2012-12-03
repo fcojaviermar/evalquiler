@@ -38,7 +38,6 @@ public class DaoUsuario {
 		Connection conn = ConexionBD.getConnection();
 		try {
 			if (null != conn) {
-				System.out.println("Obtenida conexion");
 				pstmt = conn.prepareStatement(CONSULTAR_USUARIO_POR_PK);
 				if (null != pstmt) {
 					pstmt.setString(1, idUsuario);
