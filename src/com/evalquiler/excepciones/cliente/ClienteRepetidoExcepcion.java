@@ -10,6 +10,6 @@ public class ClienteRepetidoExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_REPETIDO)), 
 			  "error.mas.de.un.cliente", 
-			  "Existen dos clientes con el mismo identificador: " + idCliente );
+			  "ClienteRepetidoExcepcion: Existen dos clientes con el mismo identificador: " + idCliente );
 	}
 }

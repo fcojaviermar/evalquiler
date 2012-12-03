@@ -10,6 +10,6 @@ public class UsuarioNoGuardadoExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_GUARDADO)), 
 			  "msg.usuario.no.guardado", 
-			  "Existen dos usuarios con el mismo identificador: " + id);
+			  "UsuarioNoGuardadoExcepcion: El usuario con id: " + id + " no se ha podido guardar." );
 	}
 }

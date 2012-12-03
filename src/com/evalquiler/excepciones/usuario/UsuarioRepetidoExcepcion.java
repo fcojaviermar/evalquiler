@@ -10,6 +10,6 @@ public class UsuarioRepetidoExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_REPETIDO)), 
 			  "error.mas.de.un.usuario", 
-			  "Existen dos usuarios con el mismo identificador: " + id );
+			  "UsuarioRepetidoExcepcion: Existen dos usuarios con el mismo identificador: " + id );
 	}
 }

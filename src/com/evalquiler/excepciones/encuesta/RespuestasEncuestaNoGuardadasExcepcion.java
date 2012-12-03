@@ -10,6 +10,6 @@ public class RespuestasEncuestaNoGuardadasExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_GUARDADO)), 
 			  "error.no.guardar.encuesta", 
-			  "No se han guardado las respuestas a la encuesta.");
+			  "RespuestasEncuestaNoGuardadasExcepcion: No se han guardado las respuestas a la encuesta.");
 	}
 }

@@ -10,6 +10,6 @@ public class UsuarioNoExisteExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "error.no.existe.usuairo", 
-			  "El usuario con identificador " + id + " no existe");
+			  "UsuarioNoExisteExcepcion: El usuario con identificador " + id + " no existe");
 	}
 }

@@ -12,6 +12,6 @@ public final class NoEncontradaViviendaConCriteriosExcepcion extends ExcepcionCo
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_NINGUN_REGISTRO_CON_ESOS_CRITERIOS)), 
 			  "msg.no.viviendas.criterios.introducidos", 
-			  "No existen viviendas con los criterios introducidos.");
+			  "NoEncontradaViviendaConCriteriosExcepcion: No existen viviendas con los criterios introducidos.");
 	}
 }
