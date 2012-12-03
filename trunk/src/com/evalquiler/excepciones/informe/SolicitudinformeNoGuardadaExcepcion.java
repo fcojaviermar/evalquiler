@@ -11,6 +11,6 @@ public class SolicitudinformeNoGuardadaExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_INFORMES.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_GUARDADO)), 
 			  "msg.solicitud.informe.no.guardado", 
-			  "No se ha guardado la solicitud de informe");
+			  "SolicitudinformeNoGuardadaExcepcion: No se ha guardado la solicitud de informe");
 	}
 }

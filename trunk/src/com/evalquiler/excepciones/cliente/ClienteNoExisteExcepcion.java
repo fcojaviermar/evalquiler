@@ -10,6 +10,6 @@ public class ClienteNoExisteExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "error.no.existe.cliente", 
-			  "El cliente con identificador " + idCliente + " no existe");
+			  "ClienteNoExisteExcepcion: El cliente con identificador " + idCliente + " no existe");
 	}
 }

@@ -10,6 +10,6 @@ public class ClienteNoGuardadoExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_GUARDADO)), 
 			  "msg.cliente.no.guardado", 
-			  "No se han podido guardar los datos del cliente");
+			  "ClienteNoGuardadoExcepcion: No se han podido guardar los datos del cliente");
 	}
 }

@@ -10,6 +10,6 @@ public class NoExistenEncuestaExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "error.no.existe.encuesta", 
-			  "No existen encuestas para el tipo de usuario " + id);
+			  "NoExistenEncuestaExcepcion: No existen encuestas para el tipo de usuario " + id);
 	}
 }

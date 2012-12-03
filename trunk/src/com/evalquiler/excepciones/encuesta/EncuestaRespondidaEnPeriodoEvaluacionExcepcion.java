@@ -11,7 +11,7 @@ public class EncuestaRespondidaEnPeriodoEvaluacionExcepcion extends ExcepcionCom
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_YA_EXISTE)), 
 			  "", 
-			  "La encuesta ya ha sido realizada para el periodo desde" + datosRealizacionEncuesta.getFechaInicioEvaluacionAlquiler() + 
+			  "EncuestaRespondidaEnPeriodoEvaluacionExcepcion: La encuesta ya ha sido realizada para el periodo desde" + datosRealizacionEncuesta.getFechaInicioEvaluacionAlquiler() + 
 			  " hasta " + datosRealizacionEncuesta.getFechaFinEvaluacionAlquiler() + ".");
 	}
 }

@@ -11,6 +11,6 @@ public final class EncontradasMuchasViviendasExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_ENCONTRADOS_EXCEDE_LIMITE)), 
 			  "msg.vivienda.registros.excede.limite", 
-			  "Se han encontrado " + numRegistros + " viviendas cuando el límite es " + Constantes.NUMERO_REGISTROS_MAXIMO);
+			  "EncontradasMuchasViviendasExcepcion: Se han encontrado " + numRegistros + " viviendas cuando el límite es " + Constantes.NUMERO_REGISTROS_MAXIMO);
 	}
 }

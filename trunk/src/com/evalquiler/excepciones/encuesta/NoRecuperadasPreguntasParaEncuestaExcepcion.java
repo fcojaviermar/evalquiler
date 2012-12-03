@@ -10,6 +10,6 @@ public class NoRecuperadasPreguntasParaEncuestaExcepcion extends ExcepcionComun 
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "error.no.existen.preguntas", 
-			  "No se han recuperado preguntas para la encuesta " + idEncuesta + " del tipo de usuario " + id);
+			  "NoRecuperadasPreguntasParaEncuestaExcepcion: NoRecuperadasPreguntasParaEncuestaExcepcion: No se han recuperado preguntas para la encuesta " + idEncuesta + " del tipo de usuario " + id);
 	}
 }

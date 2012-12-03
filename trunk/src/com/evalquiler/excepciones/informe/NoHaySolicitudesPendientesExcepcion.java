@@ -10,6 +10,6 @@ public class NoHaySolicitudesPendientesExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_INFORMES.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "msg.no.existen.solicitudes.informes", 
-			  "No hay solicitudes de informes pendientes.");
+			  "NoHaySolicitudesPendientesExcepcion: No hay solicitudes de informes pendientes.");
 	}
 }

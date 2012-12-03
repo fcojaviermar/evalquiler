@@ -10,6 +10,6 @@ public final class ViviendaNoSeleccionadaExcepcion extends ExcepcionComun {
 				ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 						  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_SELECCIONADO)), 
 				"msg.vivienda.no.seleccionada", 
-				"No se ha seleccionado ninguna vivienda");
+				"ViviendaNoSeleccionadaExcepcion: No se ha seleccionado ninguna vivienda");
 	}
 }
