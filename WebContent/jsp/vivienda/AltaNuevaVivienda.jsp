@@ -61,11 +61,6 @@
 	                                <html:text property="pais" size="10" maxlength="10" styleClass="fondoBlanco" title="País de la vivienda"></html:text>                  
 	                            </label>
 	                        </div>
-	                        <div id="User-div" class="alto50">
-                                <label for="codigoPostal" title="">Eres el propietario de esta vivienda
-                                   <html:checkbox property="esElPropietario" value="true" title="Marcar si eres el propietario de la vivienda"/>                                                
-                                </label>	                        
-	                        </div>  
 	                    </div>			                      
                    </fieldset>
                    <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">                                               
