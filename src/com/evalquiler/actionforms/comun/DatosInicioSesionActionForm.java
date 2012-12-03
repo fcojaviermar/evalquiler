@@ -22,8 +22,33 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 	private int idTipoDocumento 	 = 0;
 	private String descTipoDocumento = null;
 	private boolean aceptarLOPD		 = false;
+	private String tipoRol			 = null;
 	
 	
+	public boolean esUsuario() {
+		boolean esUsuario = false;
+		if (Constantes.USUARIO.equals(this.getTipoRol())) {
+			esUsuario = true;
+		}
+		return esUsuario;
+	}
+
+	public boolean esCliente() {
+		boolean esCliente = false;
+		if (Constantes.CLIENTE.equals(this.getTipoRol())) {
+			esCliente = true;
+		}
+		return esCliente;
+	}
+	
+	public String getTipoRol() {
+		return tipoRol;
+	}
+
+	public void setTipoRol(String tipoRol) {
+		this.tipoRol = tipoRol;
+	}
+
 	public boolean getAceptarLOPD() {
 		return aceptarLOPD;
 	}
@@ -127,6 +152,14 @@ public class DatosInicioSesionActionForm extends ActionForm  {
             	errors.add("errorValidacion", new ActionError("error.password.no.valida"));
             }
 		}
+		
+		if ( (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) || 
+			 (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) )
+			if (null == this.getTipoRol()) {
+				errors.add("errorValidacion", new ActionError("error.obligatorio.tiporol"));
+			} else if ( !this.esUsuario() && !this.esCliente()) {
+				errors.add("errorValidacion", new ActionError("error.tiporol.no.valido"));
+			}
 		
         return errors;
     }

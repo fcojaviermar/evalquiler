@@ -23,10 +23,27 @@ public class DatosUsuarioActionForm extends DatosInicioSesionActionForm  {
 	private String fechaAlta		 = null;
 	
 	
+	public boolean esPropietario() {
+		boolean esPropietario = false;
+		if (Constantes.ARRENDADOR.equals(this.getIdTipoUsuario())) {
+			esPropietario = true;
+		}
+		
+		return esPropietario;
+	}
+
+	public boolean esInquilino() {
+		boolean esInquilino = false;
+		if (Constantes.INQUILINO.equals(this.getIdTipoUsuario())) {
+			esInquilino = true;
+		}
+		
+		return esInquilino;
+	}
+	
 	public String getFechaAlta() {
 		return fechaAlta;
 	}
-
 
 	public void setFechaAlta(String fechaAlta) {
 		this.fechaAlta = fechaAlta;

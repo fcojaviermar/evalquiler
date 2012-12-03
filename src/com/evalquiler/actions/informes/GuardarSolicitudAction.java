@@ -32,12 +32,13 @@ public class GuardarSolicitudAction extends ActionBase {
 		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 
-		long idSolicitud = OpSolicitudInforme.ultimoIdSolicitudInforme();
+//		long idSolicitud = OpSolicitudInforme.ultimoIdSolicitudInforme();
 
 		try {
 			OpSolicitudInforme.insertar(form);
 			comandoDestino = ConstantesComandos.OK;
-			messages.add("messages", new ActionMessage("msg.solicitud.informe.guardado", idSolicitud));
+			//messages.add("messages", new ActionMessage("msg.solicitud.informe.guardado", idSolicitud));
+			messages.add("messages", new ActionMessage("msg.solicitud.informe.guardado"));			
 		} catch (SolicitudinformeNoGuardadaExcepcion e) {
 			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
 			comandoDestino = ConstantesComandos.NOOK;

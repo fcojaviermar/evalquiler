@@ -27,7 +27,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	private int provincia		   = 0;
 	private int pais			   = 0;
 	private String nifPropietario  = null;
-	private boolean esElPropietario = false;
+//	private boolean esElPropietario = false;
 
 	
 	public int getIdTipoVia() {
@@ -170,14 +170,14 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	}
 
 
-	public boolean getEsElPropietario() {
-		return esElPropietario;
-	}
-
-
-	public void setEsElPropietario(boolean esElPropietario) {
-		this.esElPropietario = esElPropietario;
-	}
+//	public boolean getEsElPropietario() {
+//		return esElPropietario;
+//	}
+//
+//
+//	public void setEsElPropietario(boolean esElPropietario) {
+//		this.esElPropietario = esElPropietario;
+//	}
 
 	
 	/*

@@ -10,11 +10,10 @@ import org.apache.struts.action.ActionMapping;
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.combo.ComboTipoInforme;
-import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.entidad.ElementoComboTipoInforme;
-import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 
 public class DatosSolicitudInformeActionForm extends ActionForm {
@@ -23,9 +22,28 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
 	private int  idTipoInforme 		 = 0;
 	private String descTipoInforme   = null;
 	private String fechaAlta		 = null;
+	private String fechaInicio		 = null;
+	private String fechaFin		 	 = null;
 	private DatosClienteActionForm  datosCliente  = null;
 	private DatosViviendaActionForm datosVivienda = null;
+
 	
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public String getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
 	
 	public String getFechaAlta() {
 		return fechaAlta;
@@ -95,6 +113,14 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
             	ElementoComboTipoInforme elCombo = combo.get(this.getIdTipoInforme());
             	this.setDescTipoInforme(elCombo.getDescripcion());
             }
+            
+            if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicio(), UtilidadesFechas.FORMATO_FECHA)) {
+    			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
+    		}
+            
+            if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFin(), UtilidadesFechas.FORMATO_FECHA)) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
+        	}
         }
 
     	
