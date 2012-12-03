@@ -31,9 +31,9 @@ public final class OpVivienda {
 			throw new NoExisteViviendaExcepcion(String.valueOf(((DatosViviendaActionForm)viviendaIn).getIdVivienda()));
 		}
 
-		if (nifNavegante.equals(listaViviendas.iterator().next().getNifPropietario())) {
-			listaViviendas.iterator().next().setEsElPropietario(true);
-		}
+//		if (nifNavegante.equals(listaViviendas.iterator().next().getNifPropietario())) {
+//			listaViviendas.iterator().next().setEsElPropietario(true);
+//		}
 		
 		return listaViviendas; 
 	}

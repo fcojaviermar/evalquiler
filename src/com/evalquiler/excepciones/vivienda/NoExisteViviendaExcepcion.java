@@ -10,6 +10,6 @@ public final class NoExisteViviendaExcepcion extends ExcepcionComun {
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "msg.vivienda.no.existe", 
-			  "No existen encuestas para el tipo de usuario " + id);
+			  "No existe la vivienda seleccionada, cuyo código es " + id);
 	}
 }
