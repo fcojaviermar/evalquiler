@@ -6,6 +6,7 @@ package com.evalquiler.combo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.entidad.ElementoComboTipoInforme;
 
 /**
@@ -15,16 +16,17 @@ import com.evalquiler.entidad.ElementoComboTipoInforme;
 public final class ComboTipoInforme extends ArrayList<ElementoComboTipoInforme> implements Serializable {
 	
 	public ComboTipoInforme() {
-		add(new ElementoComboTipoInforme("0", "--- Seleccione un elemento... ---" ));
-		add(new ElementoComboTipoInforme("1", "Completo" ));
-		add(new ElementoComboTipoInforme("2", "Sobre inquilinos"));
-		add(new ElementoComboTipoInforme("3", "Sobre propietarios"));
+		add(new ElementoComboTipoInforme(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione un elemento... ---" ));
+//		add(new ElementoComboTipoInforme("3", "Completo" ));
+		add(new ElementoComboTipoInforme("1", "Sobre inquilinos"));
+		add(new ElementoComboTipoInforme("2", "Sobre propietarios"));
 	}
 
 	
 	public final static boolean elementoValido(String id) {
 		boolean esValido = false;
-		if ( ("1".equals(id)) || ("2".equals(id)) || ("3".equals(id)) ) {
+//		if ( ("1".equals(id)) || ("2".equals(id)) || ("3".equals(id)) ) {
+		if ( ("1".equals(id)) || ("2".equals(id)) ) {			
 			esValido = true;
 		}
 		

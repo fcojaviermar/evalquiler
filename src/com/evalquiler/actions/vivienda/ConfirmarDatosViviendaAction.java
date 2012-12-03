@@ -34,7 +34,7 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 
     	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
     	if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-    		comandoDestino = ConstantesComandos.CANCEL;
+    		comandoDestino = ConstantesComandos.CANCEL_NO_INICIO;
     		
     	} else if (ConstantesBotones.ACEPTAR.equals(botonPulsado)) {
         	ComboTipoVia combo1 = (ComboTipoVia)request.getSession().getAttribute("tipoVia");

@@ -6,6 +6,7 @@ package com.evalquiler.combo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 /**
@@ -18,7 +19,7 @@ public final class ComboProvincia extends ArrayList<ElementoComboTipoUsuario> im
 	private final static int MELILLA = 52;
 	
 	public ComboProvincia() {
-		add(new ElementoComboTipoUsuario("0", "--- Seleccione una provincia... ---" ));
+		add(new ElementoComboTipoUsuario(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione una provincia... ---" ));
 		add(new ElementoComboTipoUsuario("08", "Barcelona" ));
 		add(new ElementoComboTipoUsuario("18", "Granada"));
 		add(new ElementoComboTipoUsuario("28", "Madrid"));
