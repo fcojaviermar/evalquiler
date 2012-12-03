@@ -12,24 +12,31 @@ import java.io.PrintWriter;
  */
 public final class UtilidadesFicheros {
 
+	private static boolean bEscribir = true; 
+	
 	public static void escribir(final String cadena) {
 		FileWriter fichero = null;
         PrintWriter pw = null;
-        try {
-            fichero = new FileWriter("c:/prueba.txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(cadena);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (bEscribir) {
+	        try {
+	        	
+	            fichero = new FileWriter("c:/logs/prueba_" + UtilidadesFechas.getAhoraSoloDia() +".txt", true);
+	            if (null == fichero) {
+	            	fichero = new FileWriter("c:/logs/prueba_" + UtilidadesFechas.getAhoraSoloDia() +".txt");
+	            }
+	            pw = new PrintWriter(fichero);
+	            pw.println(cadena);
+	
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } 
+	        try {
+	        	if (null != fichero)
+	        		fichero.close();
+	        } catch (Exception e2) {
+	          e2.printStackTrace();
+	        } 
         } 
-        try {
-        	if (null != fichero)
-        		fichero.close();
-        } catch (Exception e2) {
-          e2.printStackTrace();
-        } 
-
 	}
 
 }

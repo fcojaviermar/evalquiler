@@ -40,7 +40,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 				request.setAttribute("nuevoDestino", ConstantesBotones.REALIZAR_ENCUESTA);
-				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdVivienda()));
+				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdTipoVia()));
 				comandoDestino = ConstantesComandos.CANCEL;
 				
 			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
@@ -62,7 +62,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 	    						pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
 	    						i = i +1;
 	    					}
-	    	    
+	    					datosEncuesta.setIdTipoUsuario(datosRealizacionEncuesta.getDatosUsuario().getIdTipoUsuario());
 	    					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
 	    					comandoDestino = ConstantesComandos.OK;
 	    				} else {

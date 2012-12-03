@@ -24,5 +24,6 @@ public abstract class ConstantesCodigosExcepciones {
 	
 	//CODIGOS PARA IDENTIFICAR EXCEPCIONES JAVA
 	public final static String CODIGO_SQL_EXCEPTION 				 	 = "1000";
+	public final static String CODIGO_EXCEPTION 				 	 = "1001";
 
 }

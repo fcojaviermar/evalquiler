@@ -9,9 +9,9 @@ import org.apache.struts.action.ActionMapping;
 
 public class RespuestasPreguntaActionForm extends ActionForm {
 
-	private int idRespuesta = 0;
-	private String descripcion = null;
-
+	private int 	idRespuesta 		= 0;
+	private String 	descripcion 		= null;
+	
 	public int getIdRespuesta() {
 		return idRespuesta;
 	}
@@ -28,15 +28,18 @@ public class RespuestasPreguntaActionForm extends ActionForm {
 		this.descripcion = descripcion;
 	}
 
+
+
+	
 	/*
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("RespuestasEncuestaActionForm.validate()");
+    	System.out.println("RespuestasPreguntaActionForm.validate()");
     	ActionErrors errors = null;
         
         return errors;
-    }	
-    
+    }
+	
 
 }

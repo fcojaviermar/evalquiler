@@ -29,6 +29,17 @@ public final class UtilidadesFechas {
     	return fechaAlta;
 	}
     
+    public static final String getAhoraSoloDia() {
+    	Date fechaDate = new Date();
+    	String fechaAlta = null;
+    	SimpleDateFormat formateador = new SimpleDateFormat(FORMATO_FECHA);    	
+    	try {
+    		fechaAlta = formateador.format(fechaDate);
+    	} catch (Exception ex) {
+    		
+    	}
+    	return fechaAlta;
+	}
     
     public static final Date getDate(final String strfecha) {
     	SimpleDateFormat formatoDelTexto = new SimpleDateFormat(FORMATO_FECHA);
