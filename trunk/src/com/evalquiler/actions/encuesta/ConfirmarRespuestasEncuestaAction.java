@@ -40,7 +40,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 				request.setAttribute("nuevoDestino", ConstantesBotones.REALIZAR_ENCUESTA);
-				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdTipoVia()));
+				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdVivienda()));
 				comandoDestino = ConstantesComandos.CANCEL;
 				
 			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {

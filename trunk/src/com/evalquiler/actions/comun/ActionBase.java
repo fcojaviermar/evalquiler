@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 /**
@@ -36,6 +37,11 @@ public abstract class ActionBase extends Action {
 			ActionErrors errors = (ActionErrors)request.getAttribute("org.apache.struts.action.ERROR");
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 			saveErrors(request, errors);
+		} catch (ExcepcionComun e) {
+			forward = mapping.findForward(ConstantesComandos.ERROR);
+			ActionErrors errors = (ActionErrors)request.getAttribute("org.apache.struts.action.ERROR");
+			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
+			saveErrors(request, errors);			
 		} catch (Exception e) {
 			forward = mapping.findForward(ConstantesComandos.ERROR);
 			ActionErrors errors = (ActionErrors)request.getAttribute("org.apache.struts.action.ERROR");
