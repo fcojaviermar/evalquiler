@@ -49,7 +49,8 @@ public class ExcepcionComun extends Exception {
 	}
 
 	private final void print() {
-		String cadena = UtilidadesFechas.getAhora();
+		String cadena = "=====================================\n";
+		cadena = cadena.concat(UtilidadesFechas.getAhora() + "\n");;
 		cadena = cadena.concat("Código: " + this.getCodigo() + "\n");
 		cadena = cadena.concat("Mensaje: " + this.getMensaje() + "\n");
 		cadena = cadena.concat("Mensaje ampliado: " + this.getMensajeExtendido() + "\n");

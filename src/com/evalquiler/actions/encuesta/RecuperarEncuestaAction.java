@@ -112,10 +112,10 @@ public class RecuperarEncuestaAction extends ActionBase {
 					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada, datosRealizacionEncuesta.getDatosUsuario().getNifcif());
 					viviendaSeleccionada = vivienda.iterator().next();
-					
+					UtilidadesFicheros.escribir("viviendaSeleccionada: " + viviendaSeleccionada.getIdVivienda());
     				try {
-						datosEncuesta = OpEncuesta.consultarParaTipoUsuario(datosRealizacionEncuesta.getDatosUsuario(), 
-																			DaoEncuesta.CONSULTAR_PARA_QUIEN_ES_ENCUESTA);
+						datosEncuesta = OpEncuesta.consultarParaTipoUsuario(datosRealizacionEncuesta.getDatosUsuario());
+						UtilidadesFicheros.escribir("Se ha recuperado una encuesta");
     					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
     					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
 
