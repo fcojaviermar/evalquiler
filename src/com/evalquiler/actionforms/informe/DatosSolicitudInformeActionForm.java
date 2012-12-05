@@ -10,10 +10,12 @@ import org.apache.struts.action.ActionMapping;
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.combo.ComboTipoInforme;
+import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.entidad.ElementoComboTipoInforme;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 
 public class DatosSolicitudInformeActionForm extends ActionForm {
@@ -23,10 +25,10 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
 	private String descTipoInforme   = null;
 	private String fechaAlta		 = null;
 	private String fechaInicio		 = null;
-	private String fechaFin		 	 = null;
+	private String fechaFin			 = null;
 	private DatosClienteActionForm  datosCliente  = null;
 	private DatosViviendaActionForm datosVivienda = null;
-
+	
 	
 	public String getFechaInicio() {
 		return fechaInicio;
@@ -44,7 +46,6 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
 		this.fechaFin = fechaFin;
 	}
 
-	
 	public String getFechaAlta() {
 		return fechaAlta;
 	}
@@ -114,15 +115,26 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
             	this.setDescTipoInforme(elCombo.getDescripcion());
             }
             
-            if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicio(), UtilidadesFechas.FORMATO_FECHA)) {
+    		if (null == this.getFechaInicio()) {
+    			errors.add("errorValidacion", new ActionError("error.fecha.inicio.evaluacion.obligatoria"));
+    		}  else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicio(), UtilidadesFechas.FORMATO_FECHA)) {
     			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
     		}
-            
-            if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFin(), UtilidadesFechas.FORMATO_FECHA)) {
+
+        	if (null == this.getFechaFin()) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.fin.evaluacion.obligatoria"));
+        	} else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFin(), UtilidadesFechas.FORMATO_FECHA)) {
         		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
         	}
-        }
 
+        	if (UtilidadesFechas.getDate(this.getFechaInicio()).after(
+        																	UtilidadesFechas.getDate(this.getFechaFin()))) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
+        	} else if (!UtilidadesFechas.getDate(this.getFechaInicio()).before(
+    																		UtilidadesFechas.getDate(this.getFechaFin()))) {
+        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
+        	}
+        }
     	
         return errors;
     }
