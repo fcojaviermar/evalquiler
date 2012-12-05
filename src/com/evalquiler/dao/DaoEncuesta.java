@@ -36,18 +36,17 @@ public class DaoEncuesta {
 																	   "WHERE A.IDTIPOUSUARIO = ? AND A.IDENCUESTA = D.IDENCUESTA AND B.IDPREGUNTA = D.IDPREGUNTA " +
 																	   "AND C.IDRESPUESTA = D.IDRESPUESTA";
 
-		public final static int CONSULTAR_PARA_QUIEN_ES_ENCUESTA = 1;
+	public final static String CONSULTAR_PARA_QUIEN_ES_ENCUESTA = "1";
 	
 	
-	public static final Collection<DatosEncuestaActionForm> consultar(ActionForm objetoIn, final int tipoConsulta) 
+	public static final Collection<DatosEncuestaActionForm> consultar(ActionForm objetoIn, final String tipoConsulta) 
 		throws ExcepcionEjecutarSentancia, NoRecuperadaEncuestaExcepcion, NoRecuperadasPreguntasParaEncuestaExcepcion {
 		
 		UtilidadesFicheros.escribir("DaoEncuesta.consultar");
 		Collection<DatosEncuestaActionForm> datosEncuesta	= null;
 		DatosEncuestaActionForm 			encuesta 		= null;
+		RespuestasPreguntaActionForm 		respuesta 		= null;
 		PreguntasEncuestaActionForm  		pregunta  		= null;
-		RespuestasPreguntaActionForm 		respuesta 		= null;		
-		
 		PreparedStatement pstmt = null;
 		ResultSet 		  rs 	= null;
 		Connection 		  conn  = null;
@@ -56,10 +55,10 @@ public class DaoEncuesta {
 		int idEncuesta    = 0;
 		
 		try {
-			if (tipoConsulta == CONSULTAR_PARA_QUIEN_ES_ENCUESTA) {
+			if (tipoConsulta.equals(CONSULTAR_PARA_QUIEN_ES_ENCUESTA)) {
 				conn = ConexionBD.getConnection();
-    			
-				if (null != conn) {
+				
+    			if (null != conn) {
     				pstmt = conn.prepareStatement(CONSULTAR_ENCUESTA_POR_PARA_QUIEN_ES);
     				
     				if (null != pstmt) {
@@ -71,35 +70,36 @@ public class DaoEncuesta {
     						respuesta = new RespuestasPreguntaActionForm();
     						respuesta.setIdRespuesta(rs.getInt("IDRESPUESTA"));
     						respuesta.setDescripcion(rs.getString("DESC_RESP"));
+    						
     						int idPreguntaAux = rs.getInt("IDPREGUNTA");
-
     						if (idPregunta != idPreguntaAux) {
-    							//Cada vez que se cambia de pregunta, excepto la primera vez que se entra 
-    							//hay que añadir la pregunta a la encuesta.    							
+    							//Cada vez que se cambia de pregunta, excepto la primera vez que se entra hay que aÃ±adir la pregunta a la encuesta.    							
     							if (null == pregunta) {
     								pregunta = new PreguntasEncuestaActionForm();
-    							} else {
-    								encuesta.getPreguntas().add(pregunta);
-    								pregunta = new PreguntasEncuestaActionForm();
     							}
-    						} 
-    						
-    						pregunta.setIdPregunta(idPreguntaAux);
-    						pregunta.setDescripcion(rs.getString("DESC_PREG"));
+    							encuesta.getPreguntas().add(pregunta);
+    							pregunta.setIdPregunta(idPreguntaAux);
+    							pregunta.setDescripcion(rs.getString("DESC_PREG"));
     							
-    						if (null == pregunta.getRespuestas()) {
-    							pregunta.setRespuestas(new ArrayList<RespuestasPreguntaActionForm>());
+    							if (null == pregunta.getRespuestas()) {
+    								pregunta.setRespuestas(new ArrayList<RespuestasPreguntaActionForm>());
+    							}
+    							pregunta.getRespuestas().add(respuesta);
+    							idPregunta = idPreguntaAux;
+    							
+    						} else {
+    							pregunta.getRespuestas().add(respuesta);
+    							idPregunta = idPreguntaAux;
+    							encuesta.getPreguntas().add(pregunta);
     						}
-    						pregunta.getRespuestas().add(respuesta);
-    						idPregunta = idPreguntaAux;
-    						idEncuesta = rs.getInt("IDENCUESTA");
 
+    						idEncuesta = rs.getInt("IDENCUESTA");
     						if (idEncuesta != idEncuestaAux) {
     							encuesta = new DatosEncuestaActionForm();
     							encuesta.setIdEncuesta(rs.getInt("IDENCUESTA"));
     							encuesta.setTitulo(rs.getString("TITULO"));
     							idEncuestaAux = encuesta.getIdEncuesta();
-    							encuesta.setPreguntas(new ArrayList<PreguntasEncuestaActionForm>());    							
+    							UtilidadesFicheros.escribir("Hay encuesta");
     						}
     					}
     					
@@ -140,14 +140,14 @@ public class DaoEncuesta {
 												 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 												 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
 												 "error.global.mesage", 
-												 "DaoEncuesta.consultar\n" + e.getMessage());
+												 "DaoEncuesta.consultarPorPk\n" + e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
 				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 				 		ConstantesCodigosExcepciones.CODIGO_EXCEPTION)), 
 				 "error.global.mesage", 
-				 "Exception: DaoEncuesta.consultar\n" + e.getMessage() + "\n");
+				 "Exception: DaoEncuesta.consultarPorPk\n" + e.getMessage() + "\n");
 			
 		} 
 
