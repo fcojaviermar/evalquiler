@@ -155,8 +155,9 @@
         <!-- =========================== Modulo de viviendas =========================== -->
         <action input="/jsp/vivienda/AltaNuevaVivienda.jsp" path="/IrAceptarDatosViviendaAction"
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.ConfirmarDatosViviendaAction">
-            <forward name="OK"     path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
-            <forward name="CANCEL_NO_INICIO"  path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+            <forward name="OK"                    path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
+            <forward name="CANCEL_NO_INICIO"      path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+            <forward name="MUNICIPIOS_OBTEINED"   path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
 <!-- 			<forward name="CANCEL_NO_INICIO"  path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>-->            
 <!--             <forward name="CANCEL"  path="/IrHacerEncuestaAction.do"></forward>-->
         </action>
@@ -165,7 +166,7 @@
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.GuardarDatosViviendaAction">
             <forward name="OK"     			 path="/IrHacerEncuestaAction.do"></forward>
             <forward name="NOOK"   			 path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
-             <forward name="CANCEL" path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+            <forward name="CANCEL"           path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
         </action>
 
         <action input="/jsp/vivienda/CriteriosBusquedaVivienda.jsp" path="/IrBuscarViviendaAction"

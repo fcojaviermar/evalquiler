@@ -48,17 +48,19 @@
 	                            </label>
 	                        </div>
 	                        <div id="User-div" class="alto50">
-	                            <label for="codigoPostal" class="texto90"><strong >Código Postal:&nbsp;</strong>
-	                                <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
+	                            <label for="provinvia" class="texto90"><strong >(*)Provincia:&nbsp;</strong>
+	                                <html:select name="elementoProvincia" property="idProvincia" styleClass="fondoBlanco" title="Seleccionar la provincia donde está la vivienda">
+	                                    <html:optionsCollection name="comboProvincia" value="idProvincia" label="descripcion"/>
+	                                </html:select>                          
+	                                <html:submit property="BOTON_PULSADO" value="Cargar municipios" title="Obtener los municipios de la provincia seleccionada."/>
 	                            </label>
 	                            <label for="municipio" class="texto90"><strong >Municipio:&nbsp;</strong>
-	                                <html:text property="municipio" size="10" maxlength="10" styleClass="fondoBlanco" title="Municipio de la vivienda"></html:text>                  
+	                                <html:select name="elementoMunicipio" property="idMunicipio" styleClass="fondoBlanco" title="Seleccionar el municipio donde está la vivienda">
+	                                    <html:optionsCollection name="comboMunicipio" value="idMunicipio" label="descripcion"/>
+	                                </html:select>                          
 	                            </label>
-	                            <label for="provinvia" class="texto90"><strong >Provincia:&nbsp;</strong>
-	                                <html:text property="provincia" size="10" maxlength="10" styleClass="fondoBlanco" title="Provincia de la vivienda"></html:text>                  
-	                            </label>
-	                            <label for="pais" class="texto90"><strong >País:&nbsp;</strong>
-	                                <html:text property="pais" size="10" maxlength="10" styleClass="fondoBlanco" title="País de la vivienda"></html:text>                  
+	                            <label for="codigoPostal" class="texto90"><strong >Código Postal:&nbsp;</strong>
+	                                <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
 	                            </label>
 	                        </div>
 	                    </div>			                      
