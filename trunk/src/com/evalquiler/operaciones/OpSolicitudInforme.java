@@ -47,7 +47,7 @@ public final class OpSolicitudInforme {
 	}
 	
 	
-	public static final long ultimoIdSolicitudInforme() throws ExcepcionEjecutarSentancia {
+	public static final long siguienteIdSolicitudInforme() throws ExcepcionEjecutarSentancia {
 		Collection<DatosSolicitudInformeActionForm> listaSolicitudes = 
 													DaoSolicitudInformes.consultar(null, DaoSolicitudInformes.ULTIMO_ID_SOLICITUD);
 		
@@ -66,7 +66,7 @@ public final class OpSolicitudInforme {
 												 DaoSolicitudInformes.ULTIMO_ID_SOLICITUD + " del DaoSolicitudInformes desde OpSolicitudInformes");
 		}
 		
-		return lNumeroSolicitud; 
+		return lNumeroSolicitud+1; 
 	}
 	
 }
