@@ -67,52 +67,52 @@ public class DaoEncuesta {
     					datosEncuesta = new ArrayList<DatosEncuestaActionForm>();
     					
     					while(rs.next()) {
-    						respuesta = new RespuestasPreguntaActionForm();
-    						respuesta.setIdRespuesta(rs.getInt("IDRESPUESTA"));
-    						respuesta.setDescripcion(rs.getString("DESC_RESP"));
-    						
-    						int idPreguntaAux = rs.getInt("IDPREGUNTA");
-    						if (idPregunta != idPreguntaAux) {
-    							//Cada vez que se cambia de pregunta, excepto la primera vez que se entra hay que añadir la pregunta a la encuesta.    							
-    							if (null == pregunta) {
-    								pregunta = new PreguntasEncuestaActionForm();
-    							}
-    							encuesta.getPreguntas().add(pregunta);
-    							pregunta.setIdPregunta(idPreguntaAux);
-    							pregunta.setDescripcion(rs.getString("DESC_PREG"));
-    							
-    							if (null == pregunta.getRespuestas()) {
-    								pregunta.setRespuestas(new ArrayList<RespuestasPreguntaActionForm>());
-    							}
-    							pregunta.getRespuestas().add(respuesta);
-    							idPregunta = idPreguntaAux;
-    							
-    						} else {
-    							pregunta.getRespuestas().add(respuesta);
-    							idPregunta = idPreguntaAux;
-    							encuesta.getPreguntas().add(pregunta);
-    						}
-
     						idEncuesta = rs.getInt("IDENCUESTA");
     						if (idEncuesta != idEncuestaAux) {
     							encuesta = new DatosEncuestaActionForm();
     							encuesta.setIdEncuesta(rs.getInt("IDENCUESTA"));
     							encuesta.setTitulo(rs.getString("TITULO"));
     							idEncuestaAux = encuesta.getIdEncuesta();
+    							encuesta.setPreguntas(new ArrayList<PreguntasEncuestaActionForm>());
     							UtilidadesFicheros.escribir("Hay encuesta");
     						}
+
+    						int idPreguntaAux = rs.getInt("IDPREGUNTA");
+    						if (idPregunta != idPreguntaAux) {
+    							//Cada vez que se cambia de pregunta, excepto la primera vez que se entra hay que añadir la pregunta a la encuesta.
+    							if (null != pregunta) {
+    								encuesta.getPreguntas().add(pregunta);
+    							}
+    							pregunta = new PreguntasEncuestaActionForm();
+    							pregunta.setIdPregunta(idPreguntaAux);
+    							pregunta.setDescripcion(rs.getString("DESC_PREG"));
+    							
+//    							if (null == pregunta.getRespuestas()) {
+    								pregunta.setRespuestas(new ArrayList<RespuestasPreguntaActionForm>());
+//    							}
+    							idPregunta = idPreguntaAux;
+    							
+    						} 
+    						
+    						respuesta = new RespuestasPreguntaActionForm();
+    						respuesta.setIdRespuesta(rs.getInt("IDRESPUESTA"));
+    						respuesta.setDescripcion(rs.getString("DESC_RESP"));
+							pregunta.getRespuestas().add(respuesta);    						
+
     					}
-    					
-    					if (null != pregunta) {
-    						encuesta.getPreguntas().add(pregunta);
-        					if (null != encuesta) {
-        						datosEncuesta.add(encuesta);
+    					if (null != respuesta) {
+    						pregunta.getRespuestas().add(respuesta);
+        					if (null != pregunta) {
+        						encuesta.getPreguntas().add(pregunta);
+            					if (null != encuesta) {
+            						datosEncuesta.add(encuesta);
+            					} 
         					} else {
-        						throw new NoRecuperadaEncuestaExcepcion(String.valueOf(((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario()));
+        						throw new NoRecuperadasPreguntasParaEncuestaExcepcion(String.valueOf(((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario()), 
+        																			  String.valueOf(encuesta.getIdEncuesta()));
         					}
     					} else {
-    						throw new NoRecuperadasPreguntasParaEncuestaExcepcion(String.valueOf(((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario()), 
-    																			  String.valueOf(encuesta.getIdEncuesta()));
+    						//Ha habido algún problema porque la última respuesta no puede ser nula.
     					}
     				} else {
     					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -126,7 +126,7 @@ public class DaoEncuesta {
     					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
     					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
     					 		"error.global.mesage", 
-    					 		"No se ha obtenido una conexi�n en DaoEncuesta.consultar.");
+    					 		"No se ha obtenido una conexi�n en DaoEncuesta.consultar.");
     			}
 			} else {
 				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
