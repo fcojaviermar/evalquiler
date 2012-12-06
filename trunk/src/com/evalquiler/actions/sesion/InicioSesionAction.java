@@ -63,8 +63,10 @@ public class InicioSesionAction extends ActionBase {
 				request.getSession().setAttribute("tipoUsuario", new ComboTipoUsuario());
 				request.getSession().setAttribute("tipoUsuarioSeleccionado", new ElementoComboTipoUsuario() );
 				comandoDestino = ConstantesComandos.REGISTER_USER;
-			} else {
+			} else if (((DatosInicioSesionActionForm)form).esCliente() ) {
 				comandoDestino = ConstantesComandos.REGISTER_CLIENT;
+			} else {
+				
 			}
 			
 		} else if (ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) {
@@ -110,7 +112,7 @@ public class InicioSesionAction extends ActionBase {
 					errors.add("errorValidacion", new ActionError("error.mas.de.un.usuario"));
 					comandoDestino = ConstantesComandos.TWO_EQUAL_USERS;
 				}
-			} else {
+			} else if (((DatosInicioSesionActionForm)form).esCliente() ) {
 				try { 
 					listaCliente = OpCliente.consultarPorPk(form);
 	    			
@@ -136,9 +138,10 @@ public class InicioSesionAction extends ActionBase {
 					errors.add("errorValidacion", new ActionError(e.getMensaje()));
 					comandoDestino = ConstantesComandos.ERROR_2_EQUAL_CLIENTS;    					
 				}
+			} else {
+				
 			}
 		} else if (ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) {
-			messages.add("messages", new ActionMessage("msg.solicitud.operacion.previa"));
 			comandoDestino = ConstantesComandos.VALID_CLIENT;
 
 		} else {

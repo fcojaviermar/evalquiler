@@ -26,6 +26,15 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
 	private String fechaAlta		 = null;
 	private String fechaInicio		 = null;
 	private String fechaFin			 = null;
+	private String idVivienda		 = null;
+	public String getIdVivienda() {
+		return idVivienda;
+	}
+
+	public void setIdVivienda(String idVivienda) {
+		this.idVivienda = idVivienda;
+	}
+
 	private DatosClienteActionForm  datosCliente  = null;
 	private DatosViviendaActionForm datosVivienda = null;
 	
@@ -115,25 +124,32 @@ public class DatosSolicitudInformeActionForm extends ActionForm {
             	this.setDescTipoInforme(elCombo.getDescripcion());
             }
             
-    		if (null == this.getFechaInicio()) {
-    			errors.add("errorValidacion", new ActionError("error.fecha.inicio.evaluacion.obligatoria"));
-    		}  else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicio(), UtilidadesFechas.FORMATO_FECHA)) {
-    			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
-    		}
-
-        	if (null == this.getFechaFin()) {
-        		errors.add("errorValidacion", new ActionError("error.fecha.fin.evaluacion.obligatoria"));
-        	} else if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFin(), UtilidadesFechas.FORMATO_FECHA)) {
-        		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
-        	}
-
-        	if (UtilidadesFechas.getDate(this.getFechaInicio()).after(
-        																	UtilidadesFechas.getDate(this.getFechaFin()))) {
-        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
-        	} else if (!UtilidadesFechas.getDate(this.getFechaInicio()).before(
-    																		UtilidadesFechas.getDate(this.getFechaFin()))) {
-        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
-        	}
+            if ( ("".equals(this.getFechaInicio())) && ("".equals(this.getFechaFin())) ) {
+            	
+            } else if ( (!"".equals(this.getFechaInicio())) && (!"".equals(this.getFechaFin())) ) {
+                if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaInicio(), UtilidadesFechas.FORMATO_FECHA)) {
+        			errors.add("errorValidacion", new ActionError("error.fecha.inicio.formato.incorrecto"));
+        		}
+    
+            	if (!UtilidadesFechas.tieneFormatoCorrecto(this.getFechaFin(), UtilidadesFechas.FORMATO_FECHA)) {
+            		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
+            	}
+    
+            	
+            	if (UtilidadesFechas.getDate(this.getFechaInicio()).after(
+            																	UtilidadesFechas.getDate(this.getFechaFin()))) {
+            		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
+            	} else if (!UtilidadesFechas.getDate(this.getFechaInicio()).before(
+        																		UtilidadesFechas.getDate(this.getFechaFin()))) {
+            		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
+            	}
+            } else {
+            	errors.add("errorValidacion", new ActionError("error.no.informar.solo.una.fecha"));
+            }
+            
+            if (null == this.getIdVivienda()) {
+            	errors.add("errorValidacion", new ActionError("msg.vivienda.no.seleccionada"));
+            } 
         }
     	
         return errors;

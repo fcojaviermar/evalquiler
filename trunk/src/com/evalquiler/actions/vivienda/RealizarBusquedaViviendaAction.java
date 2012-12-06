@@ -31,7 +31,7 @@ import com.evalquiler.operaciones.OpVivienda;
 public class RealizarBusquedaViviendaAction extends ActionBase {
 	
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
-		System.out.println("ResultadosBusquedaViviendaAction.action()");
+		System.out.println("RealizarBusquedaViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
@@ -43,7 +43,7 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 			// Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 			try {
 				listaViviendas = OpVivienda.buscarVivienda(form);
-				request.setAttribute("datosViviendaActionForm", listaViviendas);
+				request.getSession().setAttribute("datosViviendaActionForm", listaViviendas);
 				request.getSession().setAttribute("criteriosBusquedaViviendaActionForm", form);
 				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
 				
