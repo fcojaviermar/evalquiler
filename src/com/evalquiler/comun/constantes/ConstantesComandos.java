@@ -30,6 +30,7 @@ public abstract class ConstantesComandos {
 	public final static String CANCEL_INICIO		= "CANCEL_INICIO";
 	public final static String CANCEL_NO_INICIO 	= "CANCEL_NO_INICIO";
 	public final static String NO_SELECTION 		= "NO_SELECTION";
+	public final static String MUNICIPIOS_OBTEINED  = "MUNICIPIOS_OBTEINED";
 	public final static String ERROR_2_EQUAL_CLIENTS = "ERROR_2_EQUAL_CLIENTS";
 	
 	

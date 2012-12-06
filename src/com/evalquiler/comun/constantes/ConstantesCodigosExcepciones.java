@@ -6,11 +6,13 @@ public abstract class ConstantesCodigosExcepciones {
 	public final static String AVISO 		= "W";
 	public final static String ERROR 		= "E";
 	
-	public final static String FUNCIONALIDAD_CLIENTE  = "C";
-	public final static String FUNCIONALIDAD_USUARIO  = "U";
-	public final static String FUNCIONALIDAD_ENCUESTA = "E";
-	public final static String FUNCIONALIDAD_VIVIENDA = "V";
-	public final static String FUNCIONALIDAD_INFORMES = "I";
+	public final static String FUNCIONALIDAD_CLIENTE  	= "C";
+	public final static String FUNCIONALIDAD_USUARIO  	= "U";
+	public final static String FUNCIONALIDAD_ENCUESTA 	= "E";
+	public final static String FUNCIONALIDAD_VIVIENDA 	= "V";
+	public final static String FUNCIONALIDAD_INFORMES 	= "I";
+	public final static String FUNCIONALIDAD_PROVINCIAS = "P";
+	public final static String FUNCIONALIDAD_MUNICIPIOS = "M";
 	
 	public final static String CODIGO_ERROR_NO_EJECUCION_SENTENCIA 		 = "0000";
 	public final static String CODIGO_REGISTRO_NO_EXISTE 				 = "0001";
@@ -21,6 +23,8 @@ public abstract class ConstantesCodigosExcepciones {
 	public final static String CODIGO_REGISTRO_YA_EXISTE 				 = "0006";
 	public final static String CODIGO_SENTENCIA_SOLICITADA_NO_EXISTE	 = "0007";
 	public final static String CODIGO_REGISTRO_ENCONTRADOS_EXCEDE_LIMITE = "0008";
+	public final static String CODIGO_ = "0009";
+	public final static String CODIGO_NUMERO_REGISTROS_ERRONEOS 		 = "0010";
 	
 	//CODIGOS PARA IDENTIFICAR EXCEPCIONES JAVA
 	public final static String CODIGO_SQL_EXCEPTION 				 	 = "1000";

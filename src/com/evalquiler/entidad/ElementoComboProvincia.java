@@ -13,7 +13,7 @@ public class ElementoComboProvincia {
 		return idProvincia;
 	}
 	
-	public void setIdTipoDocumento(String idProvincia) {
+	public void setIdProvincia(String idProvincia) {
 		this.idProvincia = idProvincia;
 	}
 	
