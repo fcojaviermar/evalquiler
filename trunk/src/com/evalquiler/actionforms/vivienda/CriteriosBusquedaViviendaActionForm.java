@@ -22,11 +22,33 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	private int planta			   = Constantes.SIN_NUMERO_O_PORTAL;
 	private String puerta		   = null;
 	private int codigoPostal	   = 0;
-	private int municipio		   = 0;
-	private int provincia		   = 0;
-	private int pais			   = 0;
+	private String idMunicipio	   = null;
+	private String idProvincia	   = null;
+	private int pais			   = 34;
 	private String nifPropietario  = null;
 	
+	
+	
+	public String getIdMunicipio() {
+		return idMunicipio;
+	}
+
+
+	public void setIdMunicipio(String idMunicipio) {
+		this.idMunicipio = idMunicipio;
+	}
+
+
+	public String getIdProvincia() {
+		return idProvincia;
+	}
+
+
+	public void setIdProvincia(String idProvincia) {
+		this.idProvincia = idProvincia;
+	}
+
+
 	public final int getIdTipoVia() {
 		return idTipoVia;
 	}
@@ -38,7 +60,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tieneIdTipoVia() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getIdTipoVia()) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO <= this.getIdTipoVia()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -198,37 +220,21 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	}
 
 
-	public final int getMunicipio() {
-		return municipio;
-	}
-
 	public final boolean tieneMunicipio() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getMunicipio()) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO <= Integer.valueOf(this.getIdMunicipio())) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
 	}
 
-	public final void setMunicipio(int municipio) {
-		this.municipio = municipio;
-	}
-
-
-	public final int getProvincia() {
-		return provincia;
-	}
 
 	public final boolean tieneProvincia() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getProvincia()) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO <= Integer.valueOf(this.getIdProvincia())) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
-	}
-
-	public final void setProvincia(int provincia) {
-		this.provincia = provincia;
 	}
 
 
@@ -238,7 +244,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tienePais() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getPais()) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO <= this.getPais()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -284,9 +290,9 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) &&
 			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
         	errors = new ActionErrors();
-            if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+            if (!this.tieneProvincia()) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
-            } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
+            } else if (Integer.valueOf(this.getIdProvincia()) > Constantes.MAXIMO_CODIGOPOTAL) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
             }
     

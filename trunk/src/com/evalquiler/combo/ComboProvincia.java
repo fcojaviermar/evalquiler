@@ -7,24 +7,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.evalquiler.comun.constantes.Constantes;
-import com.evalquiler.entidad.ElementoComboTipoUsuario;
+import com.evalquiler.entidad.ElementoComboProvincia;
 
 /**
  * @author cachorro
  *
  */
-public final class ComboProvincia extends ArrayList<ElementoComboTipoUsuario> implements Serializable {
+public final class ComboProvincia extends ArrayList<ElementoComboProvincia> implements Serializable {
 
-	private final static int ALAVA	  = 1;
-	private final static int MELILLA = 52;
+	private final static int ALAVA	  					= 1;
+	private final static int MELILLA 					= 52;
+	public final static int NUMERO_ELEMENTOS_PROVINCIAS	= 53;
 	
 	public ComboProvincia() {
-		add(new ElementoComboTipoUsuario(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione una provincia... ---" ));
-		add(new ElementoComboTipoUsuario("08", "Barcelona" ));
-		add(new ElementoComboTipoUsuario("18", "Granada"));
-		add(new ElementoComboTipoUsuario("28", "Madrid"));
-		add(new ElementoComboTipoUsuario("38", "Tenerife"));
-		add(new ElementoComboTipoUsuario("48", "Vizcaya"));
+		add(new ElementoComboProvincia(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione una provincia... ---" ));
 	}
 
 	

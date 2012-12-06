@@ -13,9 +13,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.combo.ComboProvincia;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.operaciones.OpProvincia;
 
 /**
  * @version 	1.0
@@ -23,12 +25,17 @@ import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
  */
 public abstract class ActionBase extends Action {
 
+	public static ComboProvincia comboProvincia = null;
+	
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 	    HttpServletRequest request, HttpServletResponse response)
 	    throws Exception {
 
 		ActionForward forward = null;
         //Aqui va el codigo comun que se ejecuta en todos los Actions antes de llamar al Action especifico.
+		if (null == comboProvincia) {
+			comboProvincia = OpProvincia.obtenerProvincias();
+		}
 
 		try {
 			forward = action(mapping, form, request, response);
