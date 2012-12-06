@@ -64,10 +64,14 @@ public class ConfirmarSolicitudInformeAction extends ActionBase {
 						((DatosSolicitudInformeActionForm)form).setDatosVivienda(viviendaSeleccionada);
 						((DatosSolicitudInformeActionForm)form).setDatosCliente(datosCliente);
 						
+						long idSolicitud = OpSolicitudInforme.siguienteIdSolicitudInforme();
+						
 						try {
+							((DatosSolicitudInformeActionForm)form).setIdSolicitudInforme(idSolicitud);
+							
 							OpSolicitudInforme.insertar(form);
 							//LAST_INSERT_ID()
-							messages.add("message", new ActionMessage("msg.solicitud.informe.guardado"));
+							messages.add("message", new ActionMessage("msg.solicitud.informe.guardado", new Long(idSolicitud)));
 							comandoDestino = ConstantesComandos.OK;
 						} catch (SolicitudinformeNoGuardadaExcepcion e) {
 							messages.add("message", new ActionMessage(e.getMensaje()));
