@@ -140,7 +140,8 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 		if ( (!ConstantesBotones.REGISTRARSE.equals(botonPulsado)) && 
 			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) &&
 			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) && 
-			 (!ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) ) {
+			 (!ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) &&
+			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
             if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
             } else if (this.getUser().length() > Constantes.LONGITUD_USUARIO) {
@@ -154,12 +155,13 @@ public class DatosInicioSesionActionForm extends ActionForm  {
 		}
 		
 		if ( (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) || 
-			 (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) )
+			 (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) ) {
 			if (null == this.getTipoRol()) {
 				errors.add("errorValidacion", new ActionError("error.obligatorio.tiporol"));
 			} else if ( !this.esUsuario() && !this.esCliente()) {
 				errors.add("errorValidacion", new ActionError("error.tiporol.no.valido"));
 			}
+		}
 		
         return errors;
     }

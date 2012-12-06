@@ -8,7 +8,12 @@ public class ElementoComboProvincia {
 		this.idProvincia = idProvincia;
 		this.descripcion = desc;
 	}
-	
+
+	public ElementoComboProvincia() {
+		this.idProvincia = "0";
+		this.descripcion = "";
+	}
+
 	public String getIdProvincia() {
 		return idProvincia;
 	}

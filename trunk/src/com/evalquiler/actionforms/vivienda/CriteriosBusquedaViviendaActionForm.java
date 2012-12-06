@@ -60,7 +60,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tieneIdTipoVia() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO <= this.getIdTipoVia()) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getIdTipoVia()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -222,7 +222,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tieneMunicipio() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO <= Integer.valueOf(this.getIdMunicipio())) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < Integer.valueOf(this.getIdMunicipio())) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -231,7 +231,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tieneProvincia() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO <= Integer.valueOf(this.getIdProvincia())) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < Integer.valueOf(this.getIdProvincia())) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -244,7 +244,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	public final boolean tienePais() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO <= this.getPais()) {
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < this.getPais()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
