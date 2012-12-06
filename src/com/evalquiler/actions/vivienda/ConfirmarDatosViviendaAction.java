@@ -11,11 +11,16 @@ import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoVia;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.municipio.NoHayMunicipiosExcepcion;
+import com.evalquiler.operaciones.OpMunicipio;
 import com.evalquiler.operaciones.OpVivienda;
 
 /**
@@ -26,7 +31,9 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 	
 
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, NoHayMunicipiosExcepcion {
+    	
 		System.out.println("ConfirmarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
@@ -34,6 +41,10 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 
     	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
     	if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+			request.getSession().setAttribute("comboProvincia", comboProvincia);
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
     		comandoDestino = ConstantesComandos.CANCEL_NO_INICIO;
     		
     	} else if (ConstantesBotones.ACEPTAR.equals(botonPulsado)) {
@@ -46,7 +57,15 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 			((DatosViviendaActionForm)form).setIdVivienda(lSecuencial+1);
 				
 			request.getSession().setAttribute("datosViviendaActionForm", (DatosViviendaActionForm)form);
-			comandoDestino = ConstantesComandos.OK;			
+			comandoDestino = ConstantesComandos.OK;
+			
+    	} else if (ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) {
+    		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(((DatosViviendaActionForm)form).getIdProvincia());
+			request.getSession().setAttribute("comboMunicipio", comboMunicipio);
+			request.setAttribute("elementoProvincia", 
+											  new ElementoComboProvincia(((DatosViviendaActionForm)form).getIdProvincia(), ""));
+			request.getSession().setAttribute("elementoMunicipio", new ElementoComboMunicipio());
+    		comandoDestino = ConstantesComandos.MUNICIPIOS_OBTEINED;
     		
     	} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
