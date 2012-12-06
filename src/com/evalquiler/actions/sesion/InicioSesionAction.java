@@ -130,8 +130,8 @@ public class InicioSesionAction extends ActionBase {
 						request.setAttribute("elementoProvincia", new ElementoComboProvincia());
 						request.setAttribute("comboMunicipio", new ComboMunicipio());
 						request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
-						
 						comandoDestino = ConstantesComandos.VALID_CLIENT;
+						
 					} else {
 						errors.add("errorValidacion", new ActionError("error.distinta.password"));
 			        	comandoDestino = ConstantesComandos.NO_EQUAL_PSW;
