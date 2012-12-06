@@ -17,11 +17,14 @@ import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
 import com.evalquiler.dao.DaoEncuesta;
+import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoVia;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.encuesta.NoExistenEncuestasExcepcion;
@@ -53,6 +56,10 @@ public class RecuperarEncuestaAction extends ActionBase {
 		if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
 			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+//			request.getSession().setAttribute("comboProvincia", comboProvincia);
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
 			comandoDestino = ConstantesComandos.NEW_HOUSE;
 			
 		} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
