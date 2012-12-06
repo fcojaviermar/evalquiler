@@ -49,18 +49,17 @@
 			                </label>
 			            </div>
 			            <div id="User-div" class="alto50">
-			                <label for="codigoPostal" class="texto90"><strong >Código Postal:&nbsp;</strong>
-			                    <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
-			                </label>
-			                <label for="municipio" class="texto90"><strong >Municipio:&nbsp;</strong>
-			                    <html:text property="municipio" size="10" maxlength="10" styleClass="fondoBlanco" title="Municipio de la vivienda"></html:text>                  
-			                </label>
-			                <label for="provinvia" class="texto90"><strong >(*)Provincia:&nbsp;</strong>
-			                    <html:text property="provincia" size="10" maxlength="10" styleClass="fondoBlanco" title="Provincia de la vivienda"></html:text>                  
-			                </label>
-			                <label for="pais" class="texto90"><strong >(*)País:&nbsp;</strong>
-			                    <html:text property="pais" size="10" maxlength="10" styleClass="fondoBlanco" title="País de la vivienda"></html:text>                  
-			                </label>
+                            <label for="provinvia" class="texto90"><strong >(*)Provincia:&nbsp;</strong>
+                                <html:select name="elementoProvincia" property="idProvincia" styleClass="fondoBlanco" title="Seleccionar tipo de vía">
+                                    <html:optionsCollection name="comboProvincia" value="idProvincia" label="descripcion"/>
+                                </html:select>                          
+                            </label>
+                            <label for="municipio" class="texto90"><strong >Municipio:&nbsp;</strong>
+                                <html:text property="idMunicipio" size="10" maxlength="10" styleClass="fondoBlanco" title="Municipio de la vivienda"></html:text>                  
+                            </label>
+                            <label for="codigoPostal" class="texto90"><strong >Código Postal:&nbsp;</strong>
+                                <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
+                            </label>
 			            </div>
 			            <div id="User-div" class="alto50">
 			                <label for="nifPropietario" class="texto90"><strong >N.I.F/C.I.F:&nbsp;</strong>
