@@ -6,8 +6,12 @@ import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.combo.ComboProvincia;
+import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.entidad.ElementoComboProvincia;
+import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 
 
@@ -23,11 +27,33 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	private String planta		   = null;
 	private String puerta		   = null;
 	private int codigoPostal	   = 0;
-	private int municipio		   = 0;
-	private int provincia		   = 0;
+	private String idMunicipio	   = null;
+	private String municipio	   = null;
+	private String idProvincia	   = null;
+	private String provincia	   = null;
 	private int pais			   = 0;
 	private String nifPropietario  = null;
 //	private boolean esElPropietario = false;
+
+	
+	public String getMunicipio() {
+		return municipio;
+	}
+
+
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
+	}
+
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
 
 	
 	public int getIdTipoVia() {
@@ -130,23 +156,23 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	}
 
 
-	public int getMunicipio() {
-		return municipio;
+	public String getIdMunicipio() {
+		return idMunicipio;
 	}
 
 
-	public void setMunicipio(int municipio) {
-		this.municipio = municipio;
+	public void setIdMunicipio(String idMunicipio) {
+		this.idMunicipio = idMunicipio;
 	}
 
 
-	public int getProvincia() {
-		return provincia;
+	public String getIdProvincia() {
+		return idProvincia;
 	}
 
 
-	public void setProvincia(int provincia) {
-		this.provincia = provincia;
+	public void setIdProvincia(String idProvincia) {
+		this.idProvincia = idProvincia;
 	}
 
 
@@ -180,16 +206,35 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 //	}
 
 	
+	public final boolean tieneMunicipio() {
+		boolean tieneInfo = false;
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < Integer.valueOf(this.getIdMunicipio())) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
+
+
+	public final boolean tieneProvincia() {
+		boolean tieneInfo = false;
+		if (Constantes.ELEMENTO_NO_SELECCIONADO < Integer.valueOf(this.getIdProvincia())) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
+	
+	
 	/*
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("DatosUsuarioActionForm.validate()");
+    	System.out.println("DatosViviendaActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
     	
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.GUARDAR.equals(botonPulsado)) &&
-			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) ) {
+			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
+			 (!ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) ) {
             if (this.getIdTipoVia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.tipovia"));
             } else if (this.getIdTipoVia() > Constantes.MAXIMO_TIPO_VIA) {
@@ -251,23 +296,28 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
             	errors.add("errorValidacion", new ActionError("error.codigopostal.no.valido"));
             }
     
-            if (this.getMunicipio() < Constantes.ELEMENTO_NO_SELECCIONADO) {
+            if (!this.tieneMunicipio()) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.municipio"));
-            } else if (this.getMunicipio() > Constantes.MAXIMO_CODIGOPOTAL) {
-            	errors.add("errorValidacion", new ActionError("error.municipio.no.valido"));
+//            } else if (this.getIdMunicipio() > Constantes.MAXIMO_CODIGOPOTAL) {
+//            	errors.add("errorValidacion", new ActionError("error.municipio.no.valido"));
             }
     
-            if (this.getProvincia() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+            if (!this.tieneProvincia()) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
-            } else if (this.getProvincia() > Constantes.MAXIMO_CODIGOPOTAL) {
+            } else if (Integer.valueOf(this.getIdProvincia()) > ComboProvincia.MELILLA) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
+            } else {
+            	ComboProvincia combo = (ComboProvincia)request.getSession().getAttribute("comboProvincia");
+            	ElementoComboProvincia elCombo = combo.get(Integer.valueOf(this.getIdProvincia()));
+            	this.setProvincia(elCombo.getDescripcion());
+            	request.setAttribute("elementoProvincia", new ElementoComboProvincia(this.getIdProvincia(), ""));
             }
     
-            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
-            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
-            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
-            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
-            }
+//            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+//            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
+//            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
+//            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
+//            }
     
 //            if (this.getEsElPropietario()) {
 //        		if ( (null == this.getNifPropietario()) || ("".equals(this.getNifPropietario())) ) {

@@ -7,6 +7,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.combo.ComboProvincia;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 
@@ -292,7 +293,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
         	errors = new ActionErrors();
             if (!this.tieneProvincia()) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
-            } else if (Integer.valueOf(this.getIdProvincia()) > Constantes.MAXIMO_CODIGOPOTAL) {
+            } else if (Integer.valueOf(this.getIdProvincia()) > ComboProvincia.MELILLA) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
             }
     
