@@ -43,8 +43,6 @@
 					     <bean:write name="datosViviendaActionForm" property="municipio"/>
 	                     <label for="provinvia"><strong >Provincia:&nbsp;</strong></label>
 	                     <bean:write name="datosViviendaActionForm" property="provincia"/>
-					     <label for="pais"><strong >País:&nbsp;</strong></label>
-                         <bean:write name="datosViviendaActionForm" property="pais"/>
                      </div>
 	            </div>
 	         </fieldset>
