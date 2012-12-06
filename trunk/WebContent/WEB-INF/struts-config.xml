@@ -175,6 +175,8 @@
             <forward name="NEW_HOUSE"             path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
             <forward name="NO_RESULT"             path="/IrBusquedaDireccionAction.do"></forward>
             <forward name="CANCEL"                path="/IrBusquedaDireccionAction.do"></forward>
+            <forward name="MUNICIPIOS_OBTEINED"   path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            
         </action>
 
 
