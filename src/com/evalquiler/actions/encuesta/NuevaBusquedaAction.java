@@ -10,9 +10,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoVia;
 
 /**
@@ -34,6 +37,10 @@ public class NuevaBusquedaAction extends ActionBase {
 		} else if (ConstantesBotones.BUSCAR_VIVIENDA.equals(botonPulsado)) {
 			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+			request.getSession().setAttribute("comboProvincia", comboProvincia);
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia("0", ""));
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
 			comandoDestino = ConstantesComandos.SEARCH;
 
 		} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
