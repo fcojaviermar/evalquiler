@@ -18,12 +18,15 @@ import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
+import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.entidad.ElementoComboTipoVia;
@@ -123,6 +126,10 @@ public class InicioSesionAction extends ActionBase {
 						request.getSession().setAttribute("datosClienteActionForm", cliente);
 						request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 						request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+						request.getSession().setAttribute("comboProvincia", comboProvincia);
+						request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+						request.setAttribute("comboMunicipio", new ComboMunicipio());
+						request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
 						
 						comandoDestino = ConstantesComandos.VALID_CLIENT;
 					} else {
@@ -143,6 +150,12 @@ public class InicioSesionAction extends ActionBase {
 		} else if (ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) {
 			comandoDestino = ConstantesComandos.VALID_CLIENT;
 
+		} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
+			comandoDestino = ConstantesComandos.VALID_CLIENT;
+			
 		} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));

@@ -21,9 +21,10 @@ import com.evalquiler.combo.ComboTipoInforme;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoInforme;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
-import com.evalquiler.excepciones.provincias.NumeroDeProvinciasErroneoExcepcion;
+import com.evalquiler.excepciones.municipio.NoHayMunicipiosExcepcion;
 import com.evalquiler.excepciones.vivienda.EncontradasMuchasViviendasExcepcion;
 import com.evalquiler.excepciones.vivienda.NoEncontradaViviendaConCriteriosExcepcion;
 import com.evalquiler.operaciones.OpMunicipio;
@@ -36,7 +37,7 @@ import com.evalquiler.operaciones.OpVivienda;
 public class RealizarBusquedaViviendaAction extends ActionBase {
 	
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
-    		throws ExcepcionEjecutarSentancia {
+    		throws ExcepcionEjecutarSentancia, NoHayMunicipiosExcepcion {
     	
 		System.out.println("RealizarBusquedaViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
@@ -58,13 +59,17 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
 				
 			} catch (NoEncontradaViviendaConCriteriosExcepcion e) {
-				comandoDestino = ConstantesComandos.NO_RESULT;
 				messages.add("message", new ActionMessage(e.getMensaje()));
+				comandoDestino = ConstantesComandos.NO_RESULT;
+
 			} catch (EncontradasMuchasViviendasExcepcion e) {
 				comandoDestino = ConstantesComandos.NO_RESULT;
 				messages.add("message", new ActionMessage(e.getMensaje()));
 			}
     	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
     		comandoDestino = ConstantesComandos.CANCEL;
     			
     	} else if (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) {
@@ -81,6 +86,14 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				comandoDestino = ConstantesComandos.NO_RESULT;
 				messages.add("message", new ActionMessage(e.getMensaje()));
 			}
+			
+    	} else if (ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) {
+    		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(form);
+			request.getSession().setAttribute("comboMunicipio", comboMunicipio);
+			request.setAttribute("elementoProvincia", 
+											  new ElementoComboProvincia(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia(), ""));
+			request.getSession().setAttribute("elementoMunicipio", new ElementoComboMunicipio());
+    		comandoDestino = ConstantesComandos.MUNICIPIOS_OBTEINED;
     		
     	} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
