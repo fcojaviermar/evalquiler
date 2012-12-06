@@ -20,7 +20,7 @@ public class ElementoComboTipoUsuario {
 		return idTipoUsuario;
 	}
 	
-	public void setIdTipoDocumento(String idTipoUsuario) {
+	public void setIdTipoUsuario(String idTipoUsuario) {
 		this.idTipoUsuario = idTipoUsuario;
 	}
 	
