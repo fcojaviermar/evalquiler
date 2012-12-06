@@ -88,7 +88,7 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 			}
 			
     	} else if (ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) {
-    		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(form);
+    		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia());
 			request.getSession().setAttribute("comboMunicipio", comboMunicipio);
 			request.setAttribute("elementoProvincia", 
 											  new ElementoComboProvincia(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia(), ""));

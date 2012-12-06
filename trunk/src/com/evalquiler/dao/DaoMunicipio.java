@@ -8,9 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.struts.action.ActionForm;
-
-import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
@@ -27,7 +24,7 @@ public class DaoMunicipio {
 	private final static String CONSULTAR_PROVINCIAS = "SELECT IDMUNICIPIO, DESCRIPCION FROM MUNICIPIO " +
 													   "WHERE IDPROVINCIA = ?";
 	
-	public static final ComboMunicipio consultar(ActionForm criterios) throws ExcepcionEjecutarSentancia {
+	public static final ComboMunicipio consultar(final String idProvinciaIn) throws ExcepcionEjecutarSentancia {
 		ElementoComboMunicipio municipio = null;
 		ComboMunicipio comboMunicipio  	 = null;
 		PreparedStatement 	   pstmt 	 = null;
@@ -38,7 +35,7 @@ public class DaoMunicipio {
 			if (null != conn) {
 				pstmt = conn.prepareStatement(CONSULTAR_PROVINCIAS);
 				if (null != pstmt) {
-					pstmt.setString(1, ((CriteriosBusquedaViviendaActionForm)criterios).getIdProvincia());
+					pstmt.setString(1, idProvinciaIn);
 					rs = pstmt.executeQuery() ; 
 					comboMunicipio = new ComboMunicipio();
 					while(rs.next()) {

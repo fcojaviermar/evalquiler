@@ -87,8 +87,8 @@ public class DaoVivienda {
 						vivienda.setPlanta(rs.getString("PLANTA"));
 						vivienda.setPuerta(rs.getString("PUERTA"));
 						vivienda.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
-						vivienda.setMunicipio(rs.getInt("MUNICIPIO"));
-						vivienda.setProvincia(rs.getInt("PROVINCIA"));
+						vivienda.setIdMunicipio(rs.getString("MUNICIPIO"));
+						vivienda.setIdProvincia(rs.getString("PROVINCIA"));
 						vivienda.setPais(rs.getInt("PAIS"));
 						vivienda.setNifPropietario(rs.getString("NIFPROPIETARIO"));
 						listaVivienda.add(vivienda);
@@ -139,8 +139,8 @@ public class DaoVivienda {
 					pstmt.setString(8, vivienda.getPlanta());
 					pstmt.setString(9, vivienda.getPuerta());
 					pstmt.setInt(10, vivienda.getCodigoPostal());
-					pstmt.setInt(11, vivienda.getMunicipio());
-					pstmt.setInt(12, vivienda.getProvincia());
+					pstmt.setString(11, vivienda.getIdMunicipio());
+					pstmt.setString(12, vivienda.getIdProvincia());
 					pstmt.setInt(13, vivienda.getPais());
 					pstmt.setString(14, vivienda.getNifPropietario());
 					
@@ -211,8 +211,8 @@ public class DaoVivienda {
 							viviendaAux.setPlanta(rs.getString("PLANTA"));
 							viviendaAux.setPuerta(rs.getString("PUERTA"));
 							viviendaAux.setCodigoPostal(rs.getInt("CODIGOPOSTAL"));
-							viviendaAux.setMunicipio(rs.getInt("MUNICIPIO"));
-							viviendaAux.setProvincia(rs.getInt("PROVINCIA"));
+							viviendaAux.setIdMunicipio(rs.getString("MUNICIPIO"));
+							viviendaAux.setIdProvincia(rs.getString("PROVINCIA"));
 							viviendaAux.setPais(rs.getInt("PAIS"));
 							viviendaAux.setNifPropietario(rs.getString("NIFPROPIETARIO"));
 							listaVivienda.add(viviendaAux);

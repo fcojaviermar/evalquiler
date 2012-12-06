@@ -68,10 +68,13 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		} else if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
 			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());			
 			comandoDestino = ConstantesComandos.NEW_HOUSE;
 
     	} else if (ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) {
-    		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(form);
+    		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia());
 			request.getSession().setAttribute("comboMunicipio", comboMunicipio);
 			request.setAttribute("elementoProvincia", 
 											  new ElementoComboProvincia(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia(), ""));

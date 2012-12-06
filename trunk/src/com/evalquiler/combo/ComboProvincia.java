@@ -15,8 +15,8 @@ import com.evalquiler.entidad.ElementoComboProvincia;
  */
 public final class ComboProvincia extends ArrayList<ElementoComboProvincia> implements Serializable {
 
-	private final static int ALAVA	  					= 1;
-	private final static int MELILLA 					= 52;
+	public final static int ALAVA	  					= 1;
+	public final static int MELILLA 					= 52;
 	public final static int NUMERO_ELEMENTOS_PROVINCIAS	= 53;
 	
 	public ComboProvincia() {

@@ -14,9 +14,12 @@ import org.apache.struts.action.ActionMessages;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
+import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.vivienda.ViviendaNoGuardadaExcepcion;
 import com.evalquiler.operaciones.OpVivienda;
@@ -49,16 +52,24 @@ public class GuardarDatosViviendaAction extends ActionBase
 			}
 			try {
 				OpVivienda.insertar(datosVivienda);
-//Recuperar la vivienda haciendo una búsqueda por los datos que se han guardado, ya que el idViviendo puede no coincidir con el que se ha guardado
+//Recuperar la vivienda haciendo una bï¿½squeda por los datos que se han guardado, ya que el idViviendo puede no coincidir con el que se ha guardado
 //ya que se autoincrementa.				
 				request.setAttribute("idVivienda", String.valueOf(datosVivienda.getIdVivienda()));
 				messages.add("messages", new ActionMessage("msg.vivienda.guardada"));
 				comandoDestino = ConstantesComandos.OK;
 			} catch (ViviendaNoGuardadaExcepcion e) {
 				errors.add("errorExcepcion", new ActionError(e.getMensaje()));
+				request.getSession().setAttribute("comboProvincia", comboProvincia);
+				request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+				request.setAttribute("comboMunicipio", new ComboMunicipio());
+				request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
 				comandoDestino = ConstantesComandos.NOOK;
 			}
 		} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
+			request.getSession().setAttribute("comboProvincia", comboProvincia);
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
 			comandoDestino = ConstantesComandos.CANCEL;
 			
 		} else {
