@@ -20,7 +20,7 @@ public class ElementoComboTipoVia {
 		return idTipoVia;
 	}
 	
-	public void setIdTipoDocumento(String idTipoVia) {
+	public void setIdTipoVia(String idTipoVia) {
 		this.idTipoVia = idTipoVia;
 	}
 	
