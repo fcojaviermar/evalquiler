@@ -17,5 +17,6 @@ public abstract class ConstantesBotones {
 	public final static String INICIAR_SESION    = "Iniciar sesión";
 	public final static String REALIZAR_ENCUESTA = "Realizar encuesta";
 	public final static String SOLICITAR_INFORME = "Solicitar informe";
+	public final static String CARGAR_MUNICIPIOS = "Cargar municipios";
 
 }

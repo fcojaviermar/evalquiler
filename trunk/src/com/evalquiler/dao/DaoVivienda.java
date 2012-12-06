@@ -105,7 +105,7 @@ public class DaoVivienda {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoVivienda.consultarPorPk.");				
+					 		"No se ha obtenido una conexiï¿½n en DaoVivienda.consultarPorPk.");				
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -164,7 +164,7 @@ public class DaoVivienda {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoVivienda.insertar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoVivienda.insertar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -273,7 +273,7 @@ public class DaoVivienda {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_VIVIENDA.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoVivienda.consultar.");			
+					 		"No se ha obtenido una conexiï¿½n en DaoVivienda.consultar.");			
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -291,7 +291,7 @@ public class DaoVivienda {
 	private final static PreparedStatement prepararWhere(final CriteriosBusquedaViviendaActionForm vivienda, PreparedStatement pstmt, 
 														 final int sentencia) throws SQLException {
 		switch (sentencia) {
-			case 1: pstmt.setInt(1, vivienda.getProvincia());
+			case 1: pstmt.setString(1, vivienda.getIdProvincia());
 					pstmt.setInt(2, vivienda.getPais());  
 					int i=3;
 					if (vivienda.tieneInfoNombreVia()) { 
@@ -331,7 +331,7 @@ public class DaoVivienda {
 						i = i + 1;
 					}
 					if (vivienda.tieneMunicipio()) { 
-						pstmt.setInt(i, vivienda.getMunicipio());
+						pstmt.setString(i, vivienda.getIdMunicipio());
 						i = i + 1;
 					}
 					if (vivienda.tieneNifPropietario()) { 
