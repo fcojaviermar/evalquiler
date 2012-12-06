@@ -192,7 +192,7 @@
         		name="datosSolicitudInformeActionForm" scope="request" type="com.evalquiler.actions.informes.ConfirmarSolicitudInformeAction">
             <forward name="OK"        path="/IrInicioSesionAction.do"></forward>
             <forward name="NOOK"      path="/IrSolicitarInformeAction.do"></forward>
-			<forward name="CANCEL"    path="/IrInicioSesionAction.do"></forward>
+			<forward name="CANCEL"    path="/IrSolicitarInformeAction.do"></forward>
 			            
         </action>                
 
