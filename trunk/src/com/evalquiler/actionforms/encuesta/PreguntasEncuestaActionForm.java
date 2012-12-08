@@ -70,7 +70,7 @@ public class PreguntasEncuestaActionForm extends ActionForm {
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("RespuestasEncuestaActionForm.validate()");
+    	System.out.println("PreguntasEncuestaActionForm.validate()");
     	ActionErrors errors = null;
         
         return errors;
