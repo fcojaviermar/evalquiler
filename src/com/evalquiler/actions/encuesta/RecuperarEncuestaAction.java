@@ -22,7 +22,6 @@ import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
-import com.evalquiler.dao.DaoEncuesta;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoVia;
@@ -68,6 +67,10 @@ public class RecuperarEncuestaAction extends ActionBase {
 		} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 //			String nuevoDestino = (String)request.getAttribute("nuevoDestino");
 //			if (null == nuevoDestino) {
+    			request.setAttribute("elementoProvincia", new ElementoComboProvincia("0", ""));
+    			request.setAttribute("comboMunicipio", new ComboMunicipio());
+    			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
+			
 				comandoDestino = ConstantesComandos.CANCEL_NO_INICIO;
 //			}
 //			viviendaSeleccionada = new DatosViviendaActionForm();

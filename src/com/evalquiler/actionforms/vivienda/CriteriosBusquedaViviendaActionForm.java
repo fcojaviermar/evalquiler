@@ -7,9 +7,12 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboProvincia;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.entidad.ElementoComboMunicipio;
+import com.evalquiler.entidad.ElementoComboProvincia;
 
 
 public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
@@ -283,26 +286,31 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("CriteriosBusquedaViviendaActionForm.validate()");
-    	ActionErrors errors = null;
+    	ActionErrors errors = new ActionErrors();
+    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
     	
-		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
 			 (!ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) &&
-			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) &&
-			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
-        	errors = new ActionErrors();
+			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) ) { 
+//			 && (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
             if (!this.tieneProvincia()) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
             } else if (Integer.valueOf(this.getIdProvincia()) > ComboProvincia.MELILLA) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
             }
     
-            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
-            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
-            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
-            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
-            }
+//            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
+//            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
+//            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
+//            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
+//            }
 		}        
+		
+//		if (!errors.isEmpty()) {
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
+//		}
         return errors;
     }
     

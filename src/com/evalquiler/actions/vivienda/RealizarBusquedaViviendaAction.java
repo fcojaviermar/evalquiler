@@ -56,11 +56,17 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
 				
 			} catch (NoEncontradaViviendaConCriteriosExcepcion e) {
-				comandoDestino = ConstantesComandos.NO_RESULT;
+				request.setAttribute("elementoProvincia", new ElementoComboProvincia("0", ""));
+				request.setAttribute("comboMunicipio", new ComboMunicipio());
+				request.setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
 				messages.add("message", new ActionMessage(e.getMensaje()));
+				comandoDestino = ConstantesComandos.NO_RESULT;				
 			} catch (EncontradasMuchasViviendasExcepcion e) {
-				comandoDestino = ConstantesComandos.NO_RESULT;
+				request.setAttribute("elementoProvincia", new ElementoComboProvincia("0", ""));
+				request.setAttribute("comboMunicipio", new ComboMunicipio());
+				request.setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
 				messages.add("message", new ActionMessage(e.getMensaje()));
+				comandoDestino = ConstantesComandos.NO_RESULT;				
 			}
     	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
     		comandoDestino = ConstantesComandos.CANCEL;
