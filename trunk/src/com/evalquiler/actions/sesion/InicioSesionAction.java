@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
@@ -130,6 +131,7 @@ public class InicioSesionAction extends ActionBase {
 						request.setAttribute("elementoProvincia", new ElementoComboProvincia());
 						request.setAttribute("comboMunicipio", new ComboMunicipio());
 						request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
+						messages.add("message", new ActionMessage("msg.solicitud.operacion.previa"));
 						comandoDestino = ConstantesComandos.VALID_CLIENT;
 						
 					} else {
@@ -148,6 +150,9 @@ public class InicioSesionAction extends ActionBase {
 				
 			}
 		} else if (ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) {
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
 			comandoDestino = ConstantesComandos.VALID_CLIENT;
 
 		} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {

@@ -12,7 +12,6 @@ import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.utilidades.Validaciones;
-import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
