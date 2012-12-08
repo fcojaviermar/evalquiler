@@ -6,10 +6,10 @@ import com.evalquiler.comun.excepcion.ExcepcionComun;
 public final class NoExisteViviendaExcepcion extends ExcepcionComun {
 
 	public NoExisteViviendaExcepcion(final String id) {
-		super(ConstantesCodigosExcepciones.INFORMACION.concat(
+		super(ConstantesCodigosExcepciones.ERROR.concat(
 						ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 								  ConstantesCodigosExcepciones.CODIGO_REGISTRO_NO_EXISTE)), 
 			  "msg.vivienda.no.existe", 
-			  "NoExisteViviendaExcepcion: No existen encuestas para el tipo de usuario " + id);
+			  "NoExisteViviendaExcepcion: No existen la vivienda con identificacador: " + id);
 	}
 }
