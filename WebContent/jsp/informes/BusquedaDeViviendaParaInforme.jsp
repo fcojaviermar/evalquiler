@@ -64,12 +64,12 @@
                                 <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
                             </label>
 			            </div>
-			            <div id="User-div" class="alto50">
+<!-- 			            <div id="User-div" class="alto50">
 			                <label for="nifPropietario" class="texto90"><strong >N.I.F/C.I.F:&nbsp;</strong>
                                 <html:text property="nifPropietario" size="9" maxlength="10"  styleClass="fondoBlanco" title="NIF del propietario de la vivienda"></html:text>                  
 			                </label>
 			            </div>  
-			        </div>               
+-->			        </div>               
 	            </fieldset>
                 <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
                     <html:submit property="BOTON_PULSADO" value="Buscar" title="Buscar una vivienda"/>

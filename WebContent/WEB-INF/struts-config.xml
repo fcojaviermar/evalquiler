@@ -125,7 +125,7 @@
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
                 name="datosVacioActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
             <forward name="SEARCH"        	 path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
-            <forward name="CANCEL" 	 path="/IrInicioSesionAction.do"></forward>
+            <forward name="CANCEL" 	         path="/IrInicioSesionAction.do"></forward>
             <forward name="CANCEL_NO_INICIO" path="/IrBusquedaDireccionAction.do"></forward>
         </action>
 	
@@ -135,6 +135,7 @@
             <forward name="THERE_IS_NO_POLL"  path="/IrInicioSesionAction.do"></forward>
             <forward name="NEW_HOUSE"         path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
             <forward name="CANCEL_NO_INICIO"  path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="NO_RESULT"         path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
 <!--             <forward name="CANCEL"            path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>-->
         </action>
 
@@ -156,7 +157,7 @@
         <action input="/jsp/vivienda/AltaNuevaVivienda.jsp" path="/IrAceptarDatosViviendaAction"
                 name="datosViviendaActionForm" scope="request" type="com.evalquiler.actions.vivienda.ConfirmarDatosViviendaAction">
             <forward name="OK"                    path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
-            <forward name="CANCEL_NO_INICIO"      path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>
+            <forward name="CANCEL_NO_INICIO"      path="/IrHacerEncuestaAction.do"></forward>
             <forward name="MUNICIPIOS_OBTEINED"   path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
 <!-- 			<forward name="CANCEL_NO_INICIO"  path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>-->            
 <!--             <forward name="CANCEL"  path="/IrHacerEncuestaAction.do"></forward>-->

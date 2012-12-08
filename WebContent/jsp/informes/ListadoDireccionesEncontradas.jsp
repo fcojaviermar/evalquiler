@@ -13,8 +13,6 @@
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<html:form action="/IrAceptarSolicitudInformeAction.do" method="post">
 	        <div id="titulo">
-	            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>
-		   
 		        <fieldset>
 		            <legend>Datos del usuario</legend>
 	                <%@include file="../comun/DatosCliente.jsp"%>
