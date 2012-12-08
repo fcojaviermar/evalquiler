@@ -21,7 +21,8 @@ import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
  */
 public class DaoMunicipio {
 	
-	private final static String CONSULTAR_PROVINCIAS = "SELECT IDMUNICIPIO, DESCRIPCION FROM MUNICIPIO " +
+	private final static String CONSULTAR_PROVINCIAS = "SELECT IDPROVINCIA, DESCRIPCION " +
+													   "FROM PROVINCIA " +
 													   "WHERE IDPROVINCIA = ?";
 	
 	public static final ComboMunicipio consultar(final String idProvinciaIn) throws ExcepcionEjecutarSentancia {
