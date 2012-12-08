@@ -106,7 +106,7 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
      * Validamamos los datos introducidos por el usuario
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-    	System.out.println("RespuestasEncuestaActionForm.validate()");
+    	System.out.println("DatosRealizacionEncuestaActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
 
 		String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
