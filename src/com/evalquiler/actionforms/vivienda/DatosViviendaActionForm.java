@@ -7,11 +7,9 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 
 import com.evalquiler.combo.ComboProvincia;
-import com.evalquiler.combo.ComboTipoDocumento;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.entidad.ElementoComboProvincia;
-import com.evalquiler.entidad.ElementoComboTipoDocumento;
 
 
 
