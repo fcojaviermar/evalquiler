@@ -107,10 +107,7 @@ public class DaoEncuesta {
             					if (null != encuesta) {
             						datosEncuesta.add(encuesta);
             					} 
-        					} else {
-        						throw new NoRecuperadasPreguntasParaEncuestaExcepcion(String.valueOf(((DatosUsuarioActionForm)objetoIn).getIdTipoUsuario()), 
-        																			  String.valueOf(encuesta.getIdEncuesta()));
-        					}
+        					} 
     					} else {
     						//Ha habido algún problema porque la última respuesta no puede ser nula.
     					}
