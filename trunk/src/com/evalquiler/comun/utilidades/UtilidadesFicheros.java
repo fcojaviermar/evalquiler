@@ -21,9 +21,9 @@ public final class UtilidadesFicheros {
 	        try {
 	        	
 	            fichero = new FileWriter("c:/logs/prueba_" + UtilidadesFechas.getAhoraSoloDia() +".txt", true);
-	            if (null == fichero) {
-	            	fichero = new FileWriter("c:/logs/prueba_" + UtilidadesFechas.getAhoraSoloDia() +".txt");
-	            }
+//	            if (null == fichero) {
+//	            	fichero = new FileWriter("c:/logs/prueba_" + UtilidadesFechas.getAhoraSoloDia() +".txt");
+//	            }
 	            pw = new PrintWriter(fichero);
 	            pw.println(cadena);
 	
