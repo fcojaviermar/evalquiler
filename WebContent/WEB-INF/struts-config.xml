@@ -199,15 +199,7 @@
             <forward name="NOOK"      path="/IrSolicitarInformeAction.do"></forward>
 			<forward name="CANCEL"    path="/IrSolicitarInformeAction.do"></forward>
         </action>                
-
-
-<!-- Esta action se puede quitar, no se usa -->
-        <action input="/jsp/informes/ConfirmarDatosSolicitud.jsp" path="/IrGuardarSolicitudInformeAction" 
-        		name="datosSolicitudInformeActionForm" scope="request" type="com.evalquiler.actions.informes.GuardarSolicitudAction">
-            <forward name="OK"        path="/IrInicioSesionAction.do"></forward>
-            <forward name="NOOK"      path="/IrSolicitarInformeAction.do"></forward>
-			<forward name="CANCEL"    path="/IrInicioSesionAction.do"></forward>            
-        </action>                
+             
 
     </action-mappings>
 <!-- ===================================== Controller Configuration -->
