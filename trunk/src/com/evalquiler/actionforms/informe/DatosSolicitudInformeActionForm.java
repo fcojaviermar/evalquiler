@@ -10,12 +10,10 @@ import org.apache.struts.action.ActionMapping;
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.combo.ComboTipoInforme;
-import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.entidad.ElementoComboTipoInforme;
-import com.evalquiler.entidad.ElementoComboTipoUsuario;
 
 
 public class DatosSolicitudInformeActionForm extends ActionForm {
