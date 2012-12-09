@@ -39,8 +39,7 @@ public class DaoSolicitudInformes {
 													 "FECHAINICIO, FECHAFIN, FECHAALTA) " +
 												     "VALUES (?, ?, ?, ?, ?, ?, SYSDATE())";
 	
-	private final static String SELECT_CONTAR_VIVIENDAS = "SELECT COUNT(*) AS NUMEROSOLICITUDES FROM SOLICITUD";
-	
+
 	public static final Collection<DatosSolicitudInformeActionForm> consultar(final String idInforme, final int tipoConsulta) 
 		throws ExcepcionEjecutarSentancia {
 		
