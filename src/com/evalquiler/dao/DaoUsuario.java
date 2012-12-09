@@ -14,6 +14,7 @@ import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
@@ -51,6 +52,7 @@ public class DaoUsuario {
 						usuario.setNifcif(rs.getString("NIFCIF"));
 						usuario.setEmail(rs.getString("EMAIL"));
 						usuario.setIdTipoUsuario(rs.getInt("IDTIPOUSUARIO"));
+						usuario.setFechaAlta(UtilidadesFechas.getStringFromDate(rs.getDate("FECHAALTA")));
 						
 						listaUsuario.add(usuario);
 					}
@@ -66,7 +68,7 @@ public class DaoUsuario {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoUsuario.consultarPorPk.");
+					 		"No se ha obtenido una conexiï¿½n en DaoUsuario.consultarPorPk.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -120,7 +122,7 @@ public class DaoUsuario {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoUsuario.insertar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoUsuario.insertar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
