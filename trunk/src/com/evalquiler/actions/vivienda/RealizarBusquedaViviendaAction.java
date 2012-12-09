@@ -81,10 +81,10 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 
     	} else if (ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) {
     		ComboMunicipio comboMunicipio = OpMunicipio.obtenerMunicipio(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia());
-			request.getSession().setAttribute("comboMunicipio", comboMunicipio);
+			request.setAttribute("comboMunicipio", comboMunicipio);
 			request.setAttribute("elementoProvincia", 
 											  new ElementoComboProvincia(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia(), ""));
-			request.getSession().setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
     		comandoDestino = ConstantesComandos.MUNICIPIOS_OBTEINED;
 
     	} else {

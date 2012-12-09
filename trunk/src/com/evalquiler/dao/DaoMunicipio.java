@@ -21,8 +21,8 @@ import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
  */
 public class DaoMunicipio {
 	
-	private final static String CONSULTAR_PROVINCIAS = "SELECT IDPROVINCIA, DESCRIPCION " +
-													   "FROM PROVINCIA " +
+	private final static String CONSULTAR_MUNICIPIOS = "SELECT IDMUNICIPIO, DESCRIPCION " +
+													   "FROM MUNICIPIO " +
 													   "WHERE IDPROVINCIA = ?";
 	
 	public static final ComboMunicipio consultar(final String idProvinciaIn) throws ExcepcionEjecutarSentancia {
@@ -34,7 +34,7 @@ public class DaoMunicipio {
 		
 		try {
 			if (null != conn) {
-				pstmt = conn.prepareStatement(CONSULTAR_PROVINCIAS);
+				pstmt = conn.prepareStatement(CONSULTAR_MUNICIPIOS);
 				if (null != pstmt) {
 					pstmt.setString(1, idProvinciaIn);
 					rs = pstmt.executeQuery() ; 
@@ -47,21 +47,21 @@ public class DaoMunicipio {
 					}
 				} else {
 					throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
-						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+						 	ConstantesCodigosExcepciones.FUNCIONALIDAD_MUNICIPIOS.concat(
 						 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 						 		"error.global.mesage", 
 						 		"No se ha obtenido un preparedStatement en DaoMunicipio.consultar.");
 				}
 			} else {
 				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
-					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_MUNICIPIOS.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
 					 		"No se ha obtenido una conexion en DaoMunicipio.consultar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
-				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_MUNICIPIOS.concat(
 				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
 				 		"error.global.mesage", "DaoMunicipio.consultar\n" + e.getMessage());
 		} 
