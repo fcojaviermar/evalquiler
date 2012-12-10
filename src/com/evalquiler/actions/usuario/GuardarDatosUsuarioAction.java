@@ -55,7 +55,7 @@ public class GuardarDatosUsuarioAction extends ActionBase
 			datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
 			try {
 				OpUsuario.insertar(datosUsuario);
-				messages.add("message", new ActionMessage("msg.cliente.guardado"));
+				messages.add("message", new ActionMessage("msg.usuario.guardado"));
 				this.vaciarSession(request.getSession());
 				comandoDestino = ConstantesComandos.OK;
 			} catch (UsuarioNoGuardadoExcepcion e) {

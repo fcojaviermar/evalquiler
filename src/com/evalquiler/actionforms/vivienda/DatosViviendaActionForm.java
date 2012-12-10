@@ -29,7 +29,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	private String municipio	   = null;
 	private String idProvincia	   = null;
 	private String provincia	   = null;
-	private int pais			   = 0;
+	private int pais			   = 34;
 	private String nifPropietario  = null;
 //	private boolean esElPropietario = false;
 
