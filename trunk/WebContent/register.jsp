@@ -2,14 +2,11 @@
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
 <%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 <%
-Logger logger = Logger.getLogger(getClass().getName());
 System.out.println ("Pagina register.jsp");
-
-logger.debug("Logging Log4 Debug Statement...");
-logger.info("Logging Log4 Info Statement...");
  %>
 
-<%@page import="org.apache.log4j.Logger"%><html:html>
+
+<html:html>
     <head>
         <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
         <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -18,51 +15,69 @@ logger.info("Logging Log4 Info Statement...");
         <link rel="stylesheet" type="text/css" href="css/Tipografia.css" media="screen" />
     </head>
 
-    <body class="fondoBlanco">
+    <body class="fondoBlanco alineacionCentrada">
         <logic:messagesPresent>
-            <div id="errores" class="fondoAmarilloOscuro col90 alto100">
+            <div id="errores" class="fondoAmarilloOscuro col90 alto100 alineacionIzquierda">
                 <html:errors/>
             </div>
         </logic:messagesPresent>
         <logic:messagesNotPresent>
-            <div id="errores" class="alto100">
+            <div id="errores" class="alto100 alineacionIzquierda">
             </div>
         </logic:messagesNotPresent>        
         <logic:messagesPresent message="true">
-            <div id="mensajes" class="fondoAmarilloOscuro col90 alto50">
+            <div id="mensajes" class="fondoAmarilloOscuro col90 alto50 alineacionIzquierda">
                 <html:messages id="message" message="true">
                     <bean:write name="message"/><br/>
                 </html:messages>
             </div>
         </logic:messagesPresent>
         <logic:messagesNotPresent message="true">
-            <div id="mensajes" class="alto50">
+            <div id="mensajes" class="alto50 ">
             </div>
         </logic:messagesNotPresent>
-
-        <div class="col40 alto350 rellenoIzq12 rellenoDer12">
+<div class="ancho100">
+        <div class="alto350 ancho40">
+        	<p>
+        		Textos a estilo gmail
+        	</p>
+        	<p>
+        		Textos a estilo gmail
+        	</p>
+        	<p>
+        		Textos a estilo gmail
+        	</p>
+			<p>
+        		Textos a estilo gmail
+        	</p>
+        </div>
+        <div class="ancho35">
             <fieldset class="fondoAzulOscuro bordeGrisOscuro borde1 alto300">
                 <html:form action="/IrInicioSesionAction.do" method="post">
                     <div class="alto75" id="label-title-u">
                         <h2 class="alineacionCentrada alto50">Iniciar sesión usuario<strong></strong></h2>
                     </div>
-                    <div class="ancho75" id="label-user1">
-                        <label for="user"><strong class="alineacionIzquierda">Nombre de usuario:&nbsp;</strong></label>
+                    <div class="ancho75 alineacionIzquierda" id="label-user">
+                        <label for="user" class="texto100">
+                        	<strong>Nombre de usuario:&nbsp;</strong>
+                        </label>
                     </div>
-                    <div class="alto50 alineacionIzquierda" id="label-user2">                       
-                        <html:text property="user" size="50" maxlength="20" styleClass="fondoBlanco"></html:text>
+                    <div class="alto50" id="label-user2">                       
+                        <html:text property="user" size="50" maxlength="20" styleClass="fondoBlanco" title="Nombre de usuario que inicia la sesión"></html:text>
                     </div>
-                    <div class="ancho75" id="label-psw-u1">
-                        <label for="Password"><strong class="ancho25">Contraseña:&nbsp;</strong></label>
+                    <div class="ancho75 alineacionIzquierda" id="label-psw">
+                        <label for="Password" class="texto100">
+                        	<strong>Contraseña:&nbsp;</strong>
+                        </label>
                     </div>
                     <div class="alto50" id="label-psw-u2">                      
-                        <html:password property="password" size="50" maxlength="20" styleClass="fondoBlanco"></html:password>
+                        <html:password property="password" size="50" maxlength="20" styleClass="fondoBlanco" title="Contraseña del usuario que inicia la sesión"></html:password>
                     </div>
-                    <div id="User-div" class="alto50">
-                        <label for="user">Usuario
+                    <div id="User-div" class="alto75 alineacionCentrada">
+                        <label for="user" class="texto100">Usuario
 							<html:radio property="tipoRol" value="U" title="Marcar si quiere registrarse como usuario"/>                              	
                         </label>
-                       	<label for="client">Cliente
+                       	<label for="client" class="texto100">Cliente
                        		<html:radio property="tipoRol" value="C" title="Marcar si quiere registrarse como cliente"/>
                        	</label>
                     </div>  
@@ -70,12 +85,13 @@ logger.info("Logging Log4 Info Statement...");
                         <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
                         <html:submit property="BOTON_PULSADO" value="Registrarse"/>
                     </div>
-                    <div>
+<!--                      <div>
                        <html:link styleClass="alto25" href="IrFogotYourUserDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de usuario?</html:link>
                     </div>
-                </html:form>
+-->                </html:form>
                 
             </fieldset>                         
         </div>
+ </div>
     </body>
 </html:html>
