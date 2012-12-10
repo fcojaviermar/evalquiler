@@ -13,14 +13,16 @@
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<html:form action="/IrHacerEncuestaAction.do" method="post">
 	        <div id="titulo">
-	            <H3 class="alineacionCentrada">Listado de viviendas encontradas</H3>
-		   
-		        <fieldset>
-		            <legend>Datos del usuario</legend>
+		        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90">
+		            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+		            	Datos del usuario
+		            </legend>
 	                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
                     <div id="tabla" class="fondoRojoMedio">         
-		                <fieldset class="bordeGrisOscuro borde1 alto200">
-		                    <legend>Resultados de la búsqueda</legend>
+		                <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">
+		                    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+		                    	Resultados de la búsqueda
+		                    </legend>
 		                    <table class="ancho100">
 		                        <thead>
 		                            <tr class="alineacionIzquierda">

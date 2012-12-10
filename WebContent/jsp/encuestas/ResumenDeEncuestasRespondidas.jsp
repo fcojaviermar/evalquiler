@@ -12,14 +12,16 @@
     <body>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <div id="titulo">
-            <H3 class="alineacionCentrada">Últimas encuestas respondidas</H3>
-
             <fieldset class="bordeGrisOscuro borde1">
-                <legend>Datos del usuario</legend>
+                <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+                	Datos del usuario
+                </legend>
                 <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
 	            <div id="tabla" class="fondoRojoMedio">
-			        <fieldset class="bordeGrisOscuro borde1 alto200 alineacionIzquierda ancho95">
-			            <legend>Resumen de últimas encuestas</legend>
+			        <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">
+			            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+			            	Resumen de últimas encuestas
+			            </legend>
 			            <table class="ancho100">
 			                <thead>
 			                    <tr class="alineacionIzquierda">

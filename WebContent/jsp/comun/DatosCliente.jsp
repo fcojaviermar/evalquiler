@@ -11,8 +11,9 @@
         </label>
     </div>
     <div id="email-div" class="alto25 alineacionIzquierda">
-        <label for="email" title="" class="texto100"><strong >Dirección de correo electrónico:&nbsp;</strong>
-            <bean:write name="datosClienteActionForm" property="email"/>
+        <label for="email" title="" class="texto100">
+            <strong >Dirección de correo electrónico:&nbsp;</strong>
         </label>
+        <bean:write name="datosClienteActionForm" property="email"/>        
     </div>
 </div>

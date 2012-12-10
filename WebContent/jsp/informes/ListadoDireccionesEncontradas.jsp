@@ -14,23 +14,32 @@
 		<html:form action="/IrAceptarSolicitudInformeAction.do" method="post">
 	        <div id="titulo">
 		        <fieldset>
-		            <legend>Datos del usuario</legend>
+		            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+		            	Datos del usuario
+		            </legend>
 	                <%@include file="../comun/DatosCliente.jsp"%>
 	                 <div id="tipo-informe-div" class="alto50">
-						<label for="idTipoInforme" class="texto90"><strong >Tipo informe:&nbsp;</strong>
-                            <html:select name="tipoInformeSeleccionado" property="idTipoInforme" styleClass="fondoBlanco" title="Seleccionar el tipo de informe a solicitar">
-                                <html:optionsCollection name="tipoInforme" value="idTipoInforme" label="descripcion"/>
-                            </html:select>
-                    	</label>
-                        <label for="fechaInicio"><strong class="user-label">Fecha inicio (dd-mm-aaaa):&nbsp;</strong></label>
+						<label for="idTipoInforme" class="texto100">
+							<strong >Tipo informe:&nbsp;</strong>
+						</label>
+                        <html:select name="tipoInformeSeleccionado" property="idTipoInforme" styleClass="fondoBlanco" title="Seleccionar el tipo de informe a solicitar">
+                            <html:optionsCollection name="tipoInforme" value="idTipoInforme" label="descripcion"/>
+                        </html:select>
+                        <label for="fechaInicio" class="texto100">
+                        	<strong>Fecha inicio (dd-mm-aaaa):&nbsp;</strong>
+                        </label>
                         <html:text property="fechaInicio" size="15" maxlength="10" title="Fecha en la que el inquilino inicio el alquiler a buscar"></html:text>
-                        <label for="fechaFin"><strong class="user-label">Fecha fin (dd-mm-aaaa):&nbsp;</strong></label>
+                        <label for="fechaFin" class="texto100">
+                        	<strong>Fecha fin (dd-mm-aaaa):&nbsp;</strong>
+                        </label>
                         <html:text property="fechaFin" size="15" maxlength="10" title="Fecha en la que el inquilino finalizó el alquiler a buscar"></html:text>
                     </div>
          
                     <div id="tabla" class="fondoRojoMedio">         
-		                <fieldset class="bordeGrisOscuro borde1 alto200">
-		                    <legend>Resultados de la búsqueda</legend>
+		                <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">
+		                    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+		                    	Resultados de la búsqueda
+		                    </legend>
 		                    <table class="ancho100">
 		                        <thead>
 		                            <tr class="alineacionIzquierda">
