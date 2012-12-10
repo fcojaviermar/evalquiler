@@ -15,24 +15,32 @@
             <div>
                 <%int iNumeroPreguntas = 0; %>
 		        <fieldset>
-			        <legend>Datos del usuario</legend>
+					<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+			        	Datos del usuario
+			        </legend>
 			        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
 	                <div>
-			            <fieldset>
-	                        <legend><bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/></legend>		
+			            <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">
+	                        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+	                        	<bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/>
+	                        </legend>		
 	                        <div class="fechas-div">
-	                            <label for="fechaInicioEvaluacionAlquiler"><strong class="user-label">Fecha inicial evaluación (dd-mm-aaaa):&nbsp;</strong></label>
+	                            <label for="fechaInicioEvaluacionAlquiler" class="texto100">
+	                            	<strong class="user-label">Fecha inicial evaluación (dd-mm-aaaa):&nbsp;</strong>
+	                            </label>
 	                            <html:text property="fechaInicioEvaluacionAlquiler" size="15" maxlength="10" ></html:text>
-	                            <label for="fechaFinEvaluacionAlquiler"><strong class="user-label">Fecha final evaluación (dd-mm-aaaa):&nbsp;</strong></label>
+	                            <label for="fechaFinEvaluacionAlquiler" class="texto100">
+	                            	<strong class="user-label">Fecha final evaluación (dd-mm-aaaa):&nbsp;</strong>
+	                            </label>
 	                            <html:text property="fechaFinEvaluacionAlquiler" size="15" maxlength="10" ></html:text>
 	                        </div>
 	                        <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
 	                            <logic:iterate name="datosRealizacionEncuestaActionForm" property="datosEncuesta.preguntas" id="preguntasEnc" indexId="indicePregunta">
 									<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
-										<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco textoRojoClaro bordeCerrado bordeGrisMedio">
+										<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 											<span>Pregunta <%=String.valueOf(iNumeroPreguntas + 1)%></span> 
 										</legend>		
-										<p class="p1 rellenoIzq12 margenSup0 rellenoSup0 textoAmarilloMedio">
+										<p class="p1 rellenoIzq12 margenSup0 rellenoSup0">
 											<bean:write name="preguntasEnc" property="descripcion"/>
 										</p>
 							    		<p class="margen0 relleno12 fondoAmarilloClaro bordeSuperior bordeAzulOscuro">

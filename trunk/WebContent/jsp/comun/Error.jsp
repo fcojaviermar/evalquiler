@@ -10,7 +10,7 @@
     <body>
 		<div class="">
 			<div id="error" class="banda alineacionVerticalInferior alineacionIzquierda">
-			    <label for="labelError"><strong>SE HA PRODUCIDO UN ERROR</strong></label>
+			    <label for="labelError" class="texto100"><strong>SE HA PRODUCIDO UN ERROR</strong></label>
 				<html:errors/>
 			 </div>
 			<%@include file="../comun/Salir.jsp"%>
