@@ -16,82 +16,91 @@ System.out.println ("Pagina register.jsp");
     </head>
 
     <body class="fondoBlanco alineacionCentrada">
+        <div class="ancho100">
+            <html:image src="./img/LogoEvalquiler2.jpg"></html:image>
+        </div>
         <logic:messagesPresent>
-            <div id="errores" class="fondoAmarilloOscuro col90 alto100 alineacionIzquierda">
+            <div id="errores" class="fondoAmarilloOscuro col90 alineacionIzquierda cajaScroll">
                 <html:errors/>
             </div>
         </logic:messagesPresent>
         <logic:messagesNotPresent>
-            <div id="errores" class="alto100 alineacionIzquierda">
+            <div id="errores" class="alto75">
             </div>
         </logic:messagesNotPresent>        
         <logic:messagesPresent message="true">
-            <div id="mensajes" class="fondoAmarilloOscuro col90 alto50 alineacionIzquierda">
+            <div id="mensajes" class="fondoAmarilloOscuro col90 alineacionIzquierda cajaScroll">
                 <html:messages id="message" message="true">
                     <bean:write name="message"/><br/>
                 </html:messages>
             </div>
         </logic:messagesPresent>
         <logic:messagesNotPresent message="true">
-            <div id="mensajes" class="alto50 ">
+            <div id="mensajes" class="alto75">
             </div>
         </logic:messagesNotPresent>
-<div class="ancho100">
-        <div class="alto350 ancho40">
-        	<p>
-        		Textos a estilo gmail
-        	</p>
-        	<p>
-        		Textos a estilo gmail
-        	</p>
-        	<p>
-        		Textos a estilo gmail
-        	</p>
-			<p>
-        		Textos a estilo gmail
-        	</p>
-        </div>
-        <div class="ancho35">
-            <fieldset class="fondoAzulOscuro bordeGrisOscuro borde1 alto300">
-                <html:form action="/IrInicioSesionAction.do" method="post">
-                    <div class="alto75" id="label-title-u">
-                        <h2 class="alineacionCentrada alto50">Iniciar sesión usuario<strong></strong></h2>
+
+        <table class="bordeNulo ancho100">
+            <tr>
+                <td class="ancho35 bordeNulo">
+			        <div>
+			            <p>
+			                Textos a estilo gmail
+			            </p>
+			            <p>
+			                Textos a estilo gmail
+			            </p>
+			            <p>
+			                Textos a estilo gmail
+			            </p>
+			            <p>
+			                Textos a estilo gmail
+			            </p>
+			        </div>
+                </td>
+                <td class="ancho30 bordeNulo">
+                    <div  class="ancho30">
+	                    <fieldset class="fondoAzulOscuro bordeGrisOscuro borde1 alto350">
+	                        <html:form action="/IrInicioSesionAction.do" method="post">
+			                    <div class="alto75" id="label-title-u">
+			                        <h2 class="alineacionCentrada alto50">Iniciar sesión usuario<strong></strong></h2>
+			                    </div>
+			                    <div class="ancho75 alineacionIzquierda" id="label-user">
+			                        <label for="user" class="texto100">
+			                            <strong>Nombre de usuario:&nbsp;</strong>
+			                        </label>
+			                    </div>
+			                    <div class="alto50" id="label-user2">                       
+			                        <html:text property="user" size="50" maxlength="20" styleClass="fondoBlanco" title="Nombre de usuario que inicia la sesión"></html:text>
+			                    </div>
+			                    <div class="ancho75 alineacionIzquierda" id="label-psw">
+			                        <label for="Password" class="texto100">
+			                            <strong>Contraseña:&nbsp;</strong>
+			                        </label>
+			                    </div>
+			                    <div class="alto50" id="label-psw-u2">                      
+			                        <html:password property="password" size="50" maxlength="20" styleClass="fondoBlanco" title="Contraseña del usuario que inicia la sesión"></html:password>
+			                    </div>
+			                    <div id="User-div" class="alto75 alineacionCentrada">
+			                        <label for="user" class="texto100">Usuario
+			                            <html:radio property="tipoRol" value="U" title="Marcar si quiere registrarse como usuario"/>                                
+			                        </label>
+			                        <label for="client" class="texto100">Cliente
+			                            <html:radio property="tipoRol" value="C" title="Marcar si quiere registrarse como cliente"/>
+			                        </label>
+			                    </div>  
+			                    <div class="alto50 alineacionCentrada" id="botones-u">
+			                        <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
+			                        <html:submit property="BOTON_PULSADO" value="Registrarse"/>
+			                    </div>
+	<!--                        <div>
+	                                <html:link styleClass="alto25" href="IrFogotYourUserDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de usuario?</html:link>
+	                            </div>
+	-->                     </html:form>
+	                    </fieldset>                         
                     </div>
-                    <div class="ancho75 alineacionIzquierda" id="label-user">
-                        <label for="user" class="texto100">
-                        	<strong>Nombre de usuario:&nbsp;</strong>
-                        </label>
-                    </div>
-                    <div class="alto50" id="label-user2">                       
-                        <html:text property="user" size="50" maxlength="20" styleClass="fondoBlanco" title="Nombre de usuario que inicia la sesión"></html:text>
-                    </div>
-                    <div class="ancho75 alineacionIzquierda" id="label-psw">
-                        <label for="Password" class="texto100">
-                        	<strong>Contraseña:&nbsp;</strong>
-                        </label>
-                    </div>
-                    <div class="alto50" id="label-psw-u2">                      
-                        <html:password property="password" size="50" maxlength="20" styleClass="fondoBlanco" title="Contraseña del usuario que inicia la sesión"></html:password>
-                    </div>
-                    <div id="User-div" class="alto75 alineacionCentrada">
-                        <label for="user" class="texto100">Usuario
-							<html:radio property="tipoRol" value="U" title="Marcar si quiere registrarse como usuario"/>                              	
-                        </label>
-                       	<label for="client" class="texto100">Cliente
-                       		<html:radio property="tipoRol" value="C" title="Marcar si quiere registrarse como cliente"/>
-                       	</label>
-                    </div>  
-                    <div class="alto50 alineacionCentrada" id="botones-u">
-                        <html:submit property="BOTON_PULSADO" value="Iniciar sesión"/>
-                        <html:submit property="BOTON_PULSADO" value="Registrarse"/>
-                    </div>
-<!--                      <div>
-                       <html:link styleClass="alto25" href="IrFogotYourUserDataAction.do" title="Olvidaste tus datos">¿No puedes acceder a tu cuenta de usuario?</html:link>
-                    </div>
--->                </html:form>
-                
-            </fieldset>                         
-        </div>
- </div>
+                </td>
+            </tr>
+        </table>
     </body>
 </html:html>
