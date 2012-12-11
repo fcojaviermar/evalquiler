@@ -9,10 +9,12 @@
         <link rel="stylesheet" type="text/css" href="./css/ColorGeneral.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
+<% String  classLine = "fondoAzulOscuro";
+   int resto = 0;%>    
     <body>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <div id="titulo">
-            <fieldset class="bordeGrisOscuro borde1">
+            <fieldset class="bordeGrisOscuro borde1 fondoGrisMedio">
                 <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
                 	Datos del usuario
                 </legend>
@@ -33,8 +35,13 @@
 			                </thead>
 			                <tbody>
 			                	<logic:notEmpty name="encuestasRespondidas">
-			                        <logic:iterate name="encuestasRespondidas" id="encuesta">
-			                            <tr>
+			                        <logic:iterate name="encuestasRespondidas" id="encuesta" indexId="indiceFila">
+<%if (indiceFila.intValue()%2 == 0) {
+	classLine = "fondoAzulOscuro";
+} else {
+	classLine = "fondoBlanco";
+}%>
+                                        <tr class="<%=classLine%>">
 			                                <td>
 			                                    <bean:write name="encuesta" property="datosEncuesta.titulo"/>
 			                                </td>
