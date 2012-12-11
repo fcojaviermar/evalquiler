@@ -17,6 +17,7 @@ import com.evalquiler.actionforms.encuesta.PreguntasEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.encuesta.EncuestaRespondidaEnPeriodoEvaluacionExcepcion;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
@@ -27,7 +28,9 @@ import com.evalquiler.operaciones.OpRespuestasEncuesta;
  */
 public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
+    	
 		System.out.println("ConfirmarRespuestasEncuestaAction.action()");
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		String comandoDestino = ConstantesComandos.EMPTY;		

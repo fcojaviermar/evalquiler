@@ -19,6 +19,7 @@ import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboTipoInforme;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboTipoInforme;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.informe.SolicitudinformeNoGuardadaExcepcion;
@@ -33,7 +34,9 @@ import com.evalquiler.operaciones.OpVivienda;
  */
 public class RealizarSolicitudInformeAction extends ActionBase {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
+    	
 		System.out.println("RealizarSolicitudInformeAction.action()");
 		String comandoDestino   = ConstantesComandos.EMPTY;
 		ActionErrors  errors    = new ActionErrors();

@@ -15,6 +15,7 @@ import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.encuesta.RespuestasEncuestaNoGuardadasExcepcion;
 import com.evalquiler.operaciones.OpRespuestasEncuesta;
@@ -26,7 +27,9 @@ import com.evalquiler.operaciones.OpRespuestasEncuesta;
 public class GuardarEncuestaAction extends ActionBase {
 //CAMBIAR NOMBRE POR GuardarRespuestasEncuestaAction
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
+    	
 		System.out.println("GuardarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;		
 		ActionErrors errors = new ActionErrors();

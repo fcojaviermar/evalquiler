@@ -15,6 +15,7 @@ import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.entidad.ElementoComboTipoVia;
@@ -32,7 +33,7 @@ public class ConfirmarDatosViviendaAction extends ActionBase {
 
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
-    		throws ExcepcionEjecutarSentancia, NoHayMunicipiosExcepcion {
+    		throws ExcepcionEjecutarSentancia, NoHayMunicipiosExcepcion, ExcepcionComun {
     	
 		System.out.println("ConfirmarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
