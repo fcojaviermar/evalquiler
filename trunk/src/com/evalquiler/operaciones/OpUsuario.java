@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.constantes.Constantes;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.dao.DaoUsuario;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.usuario.UsuarioNoExisteExcepcion;
@@ -23,7 +24,8 @@ import com.evalquiler.excepciones.usuario.UsuarioRepetidoExcepcion;
 public final class OpUsuario {
 	
 	public static final Collection<DatosUsuarioActionForm> consultarPorPk(ActionForm usuarioIn) 
-		throws UsuarioNoExisteExcepcion, UsuarioRepetidoExcepcion, ExcepcionEjecutarSentancia {
+		throws UsuarioNoExisteExcepcion, UsuarioRepetidoExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosUsuarioActionForm> listaUsuarios = DaoUsuario.consutarPorPk( ((DatosInicioSesionActionForm)usuarioIn).getUser());
 		
 		if ( (null != listaUsuarios) && (listaUsuarios.isEmpty()) ) {
@@ -37,7 +39,9 @@ public final class OpUsuario {
 		return listaUsuarios; 
 	}
 	
-	public static final int insertar(ActionForm usuarioIn) throws UsuarioNoGuardadoExcepcion, ExcepcionEjecutarSentancia {
+	public static final int insertar(ActionForm usuarioIn) 
+			throws UsuarioNoGuardadoExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		int iResultado = DaoUsuario.insertar((DatosUsuarioActionForm)usuarioIn);
 
 		if (iResultado == Constantes.RESULTADO_NOOK) {

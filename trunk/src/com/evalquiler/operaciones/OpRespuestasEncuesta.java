@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.dao.DaoRespuestasEncuesta;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.encuesta.EncuestaRespondidaEnPeriodoEvaluacionExcepcion;
@@ -22,7 +23,8 @@ import com.evalquiler.excepciones.encuesta.RespuestasEncuestaNoGuardadasExcepcio
 public final class OpRespuestasEncuesta {
 	
 	public static final int insertar(final ActionForm datosEncuestaIn) 
-		throws RespuestasEncuestaNoGuardadasExcepcion, ExcepcionEjecutarSentancia {
+		throws RespuestasEncuestaNoGuardadasExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		int iResultado = DaoRespuestasEncuesta.insertar((DatosRealizacionEncuestaActionForm)datosEncuestaIn);
 		
 		if (iResultado == Constantes.RESULTADO_NOOK) {
@@ -33,7 +35,9 @@ public final class OpRespuestasEncuesta {
 	}
 
 	
-	public static final Collection<DatosRealizacionEncuestaActionForm> consultarEncuestasRespondidas(final ActionForm datosUsuarioIn) throws ExcepcionEjecutarSentancia {
+	public static final Collection<DatosRealizacionEncuestaActionForm> consultarEncuestasRespondidas(final ActionForm datosUsuarioIn) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = 
 														DaoRespuestasEncuesta.consultar(datosUsuarioIn, 
 														DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_ENCUESTAS_RESPONDIDAS);
@@ -42,7 +46,8 @@ public final class OpRespuestasEncuesta {
 
 	
 	public static final Collection<DatosRealizacionEncuestaActionForm> getEncuestasRespondidasEnPeriodo (DatosRealizacionEncuestaActionForm datosRealizacionEncuestaIn) 
-		throws EncuestaRespondidaEnPeriodoEvaluacionExcepcion, ExcepcionEjecutarSentancia {
+		throws EncuestaRespondidaEnPeriodoEvaluacionExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = 
 														DaoRespuestasEncuesta.consultar(datosRealizacionEncuestaIn, 
 														DaoRespuestasEncuesta.SENTENCIA_CONSULTAR_PERIODO_EVALUACION_SIN_ENCUESTAS);

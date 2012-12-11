@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
@@ -25,7 +26,8 @@ public class DaoMunicipio {
 													   "FROM MUNICIPIO " +
 													   "WHERE IDPROVINCIA = ?";
 	
-	public static final ComboMunicipio consultar(final String idProvinciaIn) throws ExcepcionEjecutarSentancia {
+	public static final ComboMunicipio consultar(final String idProvinciaIn) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
 		ElementoComboMunicipio municipio = null;
 		ComboMunicipio comboMunicipio  	 = null;
 		PreparedStatement 	   pstmt 	 = null;
