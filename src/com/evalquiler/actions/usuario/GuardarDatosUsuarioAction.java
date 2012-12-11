@@ -15,6 +15,7 @@ import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
@@ -29,7 +30,9 @@ public class GuardarDatosUsuarioAction extends ActionBase
 
 {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
+    	
     	System.out.println("GuardarDatosUsuarioAction.action()");
     	DatosUsuarioActionForm datosUsuario = null;
     	String comandoDestino = ConstantesComandos.ERROR;
