@@ -17,6 +17,7 @@ import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
@@ -32,7 +33,9 @@ public class GuardarDatosViviendaAction extends ActionBase
 
 {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
+    	
 		UtilidadesFicheros.escribir("GuardarDatosViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;

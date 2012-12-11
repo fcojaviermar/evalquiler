@@ -14,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 /**
@@ -24,29 +25,32 @@ public class ConexionBD {
 	
 	private static DataSource dataSource = null;
 
-	public static final Connection getConnection() {
+	public static final Connection getConnection() throws ExcepcionComun {
 		Context initContext = null;
 		Connection conn = null;
 		try {
 			initContext = new InitialContext();
 			dataSource = (DataSource)initContext.lookup("java:comp/env/jdbc/evalquiler");
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		try {
 			conn = dataSource.getConnection();
 			if (null != conn) {
 				conn.setAutoCommit(false);
 			}
+
+		} catch (NamingException e) {
+			throw new ExcepcionComun(ConstantesCodigosExcepciones.FUNCIONALIDAD_GENERAL.concat(
+			 											ConstantesCodigosExcepciones.CODIGO_EXCEPTION), 
+			 						"error.global.mesage", 
+			 						"No se ha obtenido un origen de datos válido. Revise la configuración del servidor.");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ExcepcionComun(ConstantesCodigosExcepciones.FUNCIONALIDAD_GENERAL.concat(
+						ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION), 
+						"error.global.mesage", 
+						"No se ha obtenido un conexión. Revise la configuración del servidor y si existe la base de datos.");			
 		}
-		finally {
-			return conn;
-		}
+		
+		return conn;
+
 	}
 
 	public static final void cerrarConexiones(Connection conn, PreparedStatement pstmt, ResultSet rs, final String lugarProcedencia) throws ExcepcionEjecutarSentancia {

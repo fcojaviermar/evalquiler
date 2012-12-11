@@ -21,6 +21,7 @@ import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
@@ -40,7 +41,9 @@ import com.evalquiler.operaciones.OpVivienda;
  */
 public class RecuperarEncuestaAction extends ActionBase {
 
-    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ExcepcionEjecutarSentancia {
+    public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
+    	
     	UtilidadesFicheros.escribir("RecuperarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EXIT;
 		Collection<DatosEncuestaActionForm> datosEncuesta = null;

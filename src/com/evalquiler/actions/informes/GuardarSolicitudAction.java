@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.informe.SolicitudinformeNoGuardadaExcepcion;
 import com.evalquiler.operaciones.OpSolicitudInforme;
@@ -24,7 +25,7 @@ import com.evalquiler.operaciones.OpSolicitudInforme;
 public class GuardarSolicitudAction extends ActionBase {
 
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
-    		throws ExcepcionEjecutarSentancia {
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
     	
 		System.out.println("GuardarSolicitudAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;

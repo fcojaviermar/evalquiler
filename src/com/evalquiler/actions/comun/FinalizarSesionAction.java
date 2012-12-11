@@ -31,6 +31,7 @@ public class FinalizarSesionAction extends ActionBase {
     			//Destruimos la sesion.
     			this.vaciarSession(request.getSession());
     			request.getSession().invalidate();
+    			request.getSession(false); //11-12-2012
     			comandoDestino = ConstantesComandos.END;
     		} else {
     			comandoDestino = ConstantesComandos.ERROR;

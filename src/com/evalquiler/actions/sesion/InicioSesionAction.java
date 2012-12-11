@@ -25,6 +25,7 @@ import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.combo.ComboTipoVia;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.constantes.ConstantesComandos;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
@@ -43,7 +44,7 @@ import com.evalquiler.operaciones.OpUsuario;
 public class InicioSesionAction extends ActionBase {
 	
     public final ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
-    		throws ExcepcionEjecutarSentancia {
+    		throws ExcepcionEjecutarSentancia, ExcepcionComun {
     	
 		System.out.println("InicioSesionAction.action()");
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = null;
