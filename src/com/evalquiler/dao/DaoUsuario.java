@@ -14,6 +14,7 @@ import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
@@ -29,7 +30,9 @@ public class DaoUsuario {
 	private final static String INSERTAR_USUARIO = "INSERT INTO USUARIO (IDUSUARIO, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, IDTIPOUSUARIO, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, ?, SYSDATE())";
 	
-	public static final Collection<DatosUsuarioActionForm> consutarPorPk(final String idUsuario) throws ExcepcionEjecutarSentancia {
+	public static final Collection<DatosUsuarioActionForm> consutarPorPk(final String idUsuario) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosUsuarioActionForm> listaUsuario = null;
 		DatosUsuarioActionForm usuario = null;
 		
@@ -84,7 +87,9 @@ public class DaoUsuario {
 	}
 	
 	
-	public static final int insertar(DatosUsuarioActionForm usuario) throws ExcepcionEjecutarSentancia {
+	public static final int insertar(DatosUsuarioActionForm usuario) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();

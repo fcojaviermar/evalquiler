@@ -17,6 +17,7 @@ import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
@@ -61,7 +62,9 @@ public class DaoVivienda {
 	private final static String AND_MUNICIPIO = "AND MUNICIPIO = ? ";
 	private final static String AND_NIFPROPIETARIO = "AND NIFPROPIETARIO = ?";
 
-	public static final Collection<DatosViviendaActionForm> consultarPorPk(final long idVivienda) throws ExcepcionEjecutarSentancia {
+	public static final Collection<DatosViviendaActionForm> consultarPorPk(final long idVivienda) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosViviendaActionForm> listaVivienda = null;
 		DatosViviendaActionForm vivienda = null;
 		
@@ -120,7 +123,9 @@ public class DaoVivienda {
 	}
 	
 	
-	public static final int insertar(DatosViviendaActionForm vivienda) throws ExcepcionEjecutarSentancia {
+	public static final int insertar(DatosViviendaActionForm vivienda) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();
@@ -181,7 +186,8 @@ public class DaoVivienda {
 
 	
 	public static final Collection<DatosViviendaActionForm> consultar(final ActionForm vivienda, final int tipoConsulta) 
-		throws ExcepcionEjecutarSentancia {
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosViviendaActionForm> listaVivienda = null;
 		DatosViviendaActionForm viviendaAux = null;
 		

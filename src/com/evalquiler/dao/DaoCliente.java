@@ -14,6 +14,7 @@ import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
@@ -28,7 +29,9 @@ public class DaoCliente {
 	private final static String INSERTAR_CLIENTE = "INSERT INTO CLIENTE (IDCLIENTE, PASSWORD, IDTIPODOCUMENTO, NIFCIF, EMAIL, FECHAALTA) " +
 												   "VALUES (?, ?, ?, ?, ?, SYSDATE())";
 	
-	public static final Collection<DatosClienteActionForm> consultarPorPk(final String idCliente) throws ExcepcionEjecutarSentancia {
+	public static final Collection<DatosClienteActionForm> consultarPorPk(final String idCliente) 
+			throws ExcepcionComun, ExcepcionEjecutarSentancia {
+		
 		Collection<DatosClienteActionForm> listaCliente = null;
 		DatosClienteActionForm cliente  = null;
 		PreparedStatement 	   pstmt 	= null;
@@ -79,7 +82,7 @@ public class DaoCliente {
 	}
 	
 	
-	public static final int insertar(DatosClienteActionForm cliente) throws ExcepcionEjecutarSentancia {
+	public static final int insertar(DatosClienteActionForm cliente) throws ExcepcionEjecutarSentancia, ExcepcionComun {
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();

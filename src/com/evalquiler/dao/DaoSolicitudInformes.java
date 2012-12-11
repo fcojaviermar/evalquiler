@@ -16,6 +16,7 @@ import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
@@ -41,7 +42,7 @@ public class DaoSolicitudInformes {
 	
 
 	public static final Collection<DatosSolicitudInformeActionForm> consultar(final String idInforme, final int tipoConsulta) 
-		throws ExcepcionEjecutarSentancia {
+		throws ExcepcionEjecutarSentancia, ExcepcionComun {
 		
 		Collection<DatosSolicitudInformeActionForm> listaSolicitudes = null;
 		DatosSolicitudInformeActionForm solicitud  	  = null;
@@ -127,7 +128,9 @@ public class DaoSolicitudInformes {
 	
 	
 	
-	public static final int insertar(DatosSolicitudInformeActionForm datosSolicitudInforme) throws ExcepcionEjecutarSentancia {
+	public static final int insertar(DatosSolicitudInformeActionForm datosSolicitudInforme) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();

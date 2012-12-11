@@ -4,6 +4,7 @@
 package com.evalquiler.operaciones;
 
 import com.evalquiler.combo.ComboMunicipio;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.dao.DaoMunicipio;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.municipio.NoHayMunicipiosExcepcion;
@@ -15,7 +16,7 @@ import com.evalquiler.excepciones.municipio.NoHayMunicipiosExcepcion;
 public final class OpMunicipio {
 	
 	public static final ComboMunicipio obtenerMunicipio(final String idProvinciaIn) 
-			throws ExcepcionEjecutarSentancia, NoHayMunicipiosExcepcion {
+			throws ExcepcionEjecutarSentancia, NoHayMunicipiosExcepcion, ExcepcionComun {
 		
 		ComboMunicipio comboMunicipio = DaoMunicipio.consultar(idProvinciaIn);
 		if (comboMunicipio.isEmpty()) {

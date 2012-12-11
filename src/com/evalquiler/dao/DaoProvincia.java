@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import com.evalquiler.combo.ComboProvincia;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboProvincia;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
@@ -23,7 +24,7 @@ public class DaoProvincia {
 	
 	private final static String CONSULTAR_PROVINCIAS = "SELECT IDPROVINCIA, DESCRIPCION FROM PROVINCIA";
 	
-	public static final ComboProvincia consultar() throws ExcepcionEjecutarSentancia {
+	public static final ComboProvincia consultar() throws ExcepcionEjecutarSentancia, ExcepcionComun {
 		ElementoComboProvincia provincia = null;
 		ComboProvincia comboProvinca  	 = null;
 		PreparedStatement 	   pstmt 	 = null;

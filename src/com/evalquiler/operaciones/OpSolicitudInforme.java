@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import com.evalquiler.actionforms.informe.DatosSolicitudInformeActionForm;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.dao.DaoSolicitudInformes;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.informe.NoHaySolicitudesPendientesExcepcion;
@@ -22,7 +23,7 @@ import com.evalquiler.excepciones.informe.SolicitudinformeNoGuardadaExcepcion;
 public final class OpSolicitudInforme {
 	
 	public static final Collection<DatosSolicitudInformeActionForm> consultarSolicitudesPendientes(ActionForm ClienteIn) 
-		throws ExcepcionEjecutarSentancia, NoHaySolicitudesPendientesExcepcion {
+		throws ExcepcionEjecutarSentancia, NoHaySolicitudesPendientesExcepcion, ExcepcionComun {
 		
 		Collection<DatosSolicitudInformeActionForm> listaInformes = DaoSolicitudInformes.consultar(null, DaoSolicitudInformes.SOLICITUDES_PENDIENTES);
 		
@@ -35,7 +36,7 @@ public final class OpSolicitudInforme {
 	
 	
 	public static final int insertar(ActionForm solicitudInformeIn) 
-		throws SolicitudinformeNoGuardadaExcepcion, ExcepcionEjecutarSentancia {
+		throws SolicitudinformeNoGuardadaExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
 		
 		int iResultado = DaoSolicitudInformes.insertar((DatosSolicitudInformeActionForm) solicitudInformeIn);
 		
@@ -47,7 +48,7 @@ public final class OpSolicitudInforme {
 	}
 	
 	
-	public static final long siguienteIdSolicitudInforme() throws ExcepcionEjecutarSentancia {
+	public static final long siguienteIdSolicitudInforme() throws ExcepcionEjecutarSentancia, ExcepcionComun {
 		Collection<DatosSolicitudInformeActionForm> listaSolicitudes = 
 													DaoSolicitudInformes.consultar(null, DaoSolicitudInformes.ULTIMO_ID_SOLICITUD);
 		

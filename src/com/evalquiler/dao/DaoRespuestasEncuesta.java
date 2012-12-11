@@ -21,6 +21,7 @@ import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
@@ -60,7 +61,9 @@ public class DaoRespuestasEncuesta {
 															    "VALUES (?, ?, ?, ?, ?, ?, SYSDATE(), ?, ?)";
 
 	
-	public static final int insertar(DatosRealizacionEncuestaActionForm encuestaRealizada) throws ExcepcionEjecutarSentancia {
+	public static final int insertar(DatosRealizacionEncuestaActionForm encuestaRealizada) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = Constantes.RESULTADO_NOOK;
 		Connection conn = ConexionBD.getConnection();
@@ -124,7 +127,9 @@ public class DaoRespuestasEncuesta {
 
 	}	
 
-	public static final Collection<DatosRealizacionEncuestaActionForm> consultar(ActionForm objetoIn, final int tipoConsulta) throws ExcepcionEjecutarSentancia {
+	public static final Collection<DatosRealizacionEncuestaActionForm> consultar(ActionForm objetoIn, final int tipoConsulta) 
+			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		Collection<DatosRealizacionEncuestaActionForm> listaEncuestasRespondidas = null;
 		DatosRealizacionEncuestaActionForm encuestaRespondida = null;		
 		DatosEncuestaActionForm datosEncuesta = null;
