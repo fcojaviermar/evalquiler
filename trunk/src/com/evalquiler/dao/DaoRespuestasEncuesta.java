@@ -21,8 +21,10 @@ import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
+import com.evalquiler.comun.constantes.ConstantesVariablesEntorno;
 import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
+import com.evalquiler.comun.utilidades.VariablesEntorno;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 
 
@@ -48,13 +50,14 @@ public class DaoRespuestasEncuesta {
 //	AND FECHA_FIN <= DATE_FORMAT('2012-12-12',GET_FORMAT(DATE,'USA'));	
 	
 	
-	private final static String CONSULTAR_ENCUESTAS_RESPONDIDAS = "SELECT DISTINCT(A.IDENCUESTA), B.DESCRIPCION, A.FECHA_ENCUESTA, C.NOMBREVIA, C.NUMEROVIA, " +
-															   "FECHA_INICIO, FECHA_FIN, FECHA_INICIO, FECHA_FIN " +
-															   "FROM RESPUESTAS_ENCUESTA A, ENCUESTA B, VIVIENDA C " +
-															   "WHERE IDUSUARIO = ? AND A.IDENCUESTA = B.IDENCUESTA AND A.IDVIVIENDA = C.IDVIVIENDA " +
-															   "GROUP BY A.IDENCUESTA, C.NOMBREVIA, C.NUMEROVIA, FECHA_INICIO, FECHA_FIN";
-	
-	
+		private final static String CONSULTAR_ENCUESTAS_RESPONDIDAS = "SELECT DISTINCT(A.IDENCUESTA), B.DESCRIPCION, A.FECHA_ENCUESTA, C.NOMBREVIA, C.NUMEROVIA, " + 
+																	  "FECHA_INICIO, FECHA_FIN, FECHA_ENCUESTA " +
+																	  "FROM RESPUESTAS_ENCUESTA A, ENCUESTA B, VIVIENDA C " +
+																	  "WHERE IDUSUARIO = ? AND A.IDENCUESTA = B.IDENCUESTA AND A.IDVIVIENDA = C.IDVIVIENDA " +
+																	  "GROUP BY A.IDENCUESTA, C.NOMBREVIA, C.NUMEROVIA, FECHA_INICIO, FECHA_FIN, FECHA_ENCUESTA " +
+																	  "ORDER BY FECHA_ENCUESTA DESC " +
+																	  "LIMIT ?";
+		
 	private final static String INSERTAR_RESPUESTAS_ENCUESTA = "INSERT INTO RESPUESTAS_ENCUESTA " +
 															    "(IDENCUESTA, IDPREGUNTA, IDRESPUESTADADA, IDUSUARIO, FECHA_INICIO, FECHA_FIN, FECHA_ENCUESTA, " +
 															    "IDTIPOUSUARIO, IDVIVIENDA) " +
@@ -112,7 +115,7 @@ public class DaoRespuestasEncuesta {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoRespuesta.consultar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoRespuesta.consultar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -144,6 +147,7 @@ public class DaoRespuestasEncuesta {
     				pstmt = conn.prepareStatement(CONSULTAR_ENCUESTAS_RESPONDIDAS);
     				if (null != pstmt) {
     					pstmt.setString(1, ((DatosUsuarioActionForm)objetoIn).getUser());
+    					pstmt.setInt(2, VariablesEntorno.getVariableEntornoEntera(ConstantesVariablesEntorno.LIMITE_LISTADOS));
     					rs = pstmt.executeQuery() ;
     					listaEncuestasRespondidas = new ArrayList<DatosRealizacionEncuestaActionForm>();
     					while(rs.next()) {
@@ -211,7 +215,7 @@ public class DaoRespuestasEncuesta {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_ENCUESTA.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoRespuestasEncuesta.consultar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoRespuestasEncuesta.consultar.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
