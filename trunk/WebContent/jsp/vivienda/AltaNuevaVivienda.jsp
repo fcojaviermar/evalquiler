@@ -9,19 +9,20 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+    	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<html:form action="/IrAceptarDatosViviendaAction.do" method="post">    	
-	        <fieldset>
+	        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio"> 	
 		        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 		        	Datos del usuario
 		        </legend>
 		        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
 		        <%@include file="../comun/Obligatorio.jsp"%>
-	            <fieldset>
+	            <fieldset class="bordeGrisOscuro fondoBlanco">
 	                <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 	                	Datos nueva vivienda
 	                </legend>
-                    <div id="datosVivienda" >
+                    <div id="datosVivienda">
                            <div id="User-div" class="alto50">
                             <label for="idTipoVia" class="texto100"><strong>(*)Tipo vía:&nbsp;</strong>
                                 <html:select name="tipoViaSeleccionado" property="idTipoVia" styleClass="fondoBlanco" title="Seleccionar tipo de vía">
@@ -59,7 +60,7 @@
                                 </html:select>                          
                                 <html:submit property="BOTON_PULSADO" value="Cargar municipios" title="Obtener los municipios de la provincia seleccionada."/>
                             </label>
-                            <label for="municipio" class="texto100"><strong>Municipio:&nbsp;</strong>
+                            <label for="municipio" class="texto100"><strong>(*)Municipio:&nbsp;</strong>
                                 <html:select name="elementoMunicipio" property="idMunicipio" styleClass="fondoBlanco" title="Seleccionar el municipio donde está la vivienda">
                                     <html:optionsCollection name="comboMunicipio" value="idMunicipio" label="descripcion"/>
                                 </html:select>                          

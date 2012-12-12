@@ -10,17 +10,19 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+    	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <html:form action="/IrConfirmarRespuestasAction.do" method="post">
             <div>
                 <%int iNumeroPreguntas = 0; %>
-		        <fieldset>
+		        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
 					<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			        	Datos del usuario
 			        </legend>
 			        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
 	                <div>
-			            <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">
+<!-- 			            <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">-->
+			            <fieldset class="bordeGrisOscuro fondoBlanco">
 	                        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 	                        	<bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/>
 	                        </legend>		
@@ -43,7 +45,7 @@
 										<p class="p1 rellenoIzq12 margenSup0 rellenoSup0">
 											<bean:write name="preguntasEnc" property="descripcion"/>
 										</p>
-							    		<p class="margen0 relleno12 fondoAmarilloClaro bordeSuperior bordeAzulOscuro">
+							    		<p class="margen0 relleno12 fondoBlanco bordeSuperior bordeAzulOscuro">
 							    			<logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
 	                                            <bean:define id="valorRespuestaAux">
 	                                                <bean:write name="respuestasEnc" property="idRespuesta"/>
