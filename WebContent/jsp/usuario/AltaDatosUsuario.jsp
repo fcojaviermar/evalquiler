@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+    	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <%@include file="../comun/Obligatorio.jsp"%>
 		<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro ancho85 alto75P">
@@ -38,15 +39,15 @@
                        <html:password property="password2" size="20" maxlength="20" styleClass="fondoBlanco" title="Repetir contraseña"></html:password>
                     </div>  	                
                     <div id="email-div" class="alto25">
-	                    <label for="email" class="texto90 col20"><strong>(*)Correo electrónico:&nbsp;</strong></label>
+	                    <label for="email" class="texto90 ancho20"><strong>(*)Correo electrónico:&nbsp;</strong></label>
 	                    <html:text property="email" size="100" maxlength="30" styleClass="fondoBlanco" title="Introducir dirección de correo electrónico"></html:text>
 	                </div>
 	                <div id="email2-div" class="alto25">
-	                    <label for="email2" class="texto90 col20"><strong>(*)Repetir correo electrónico:&nbsp;</strong></label>
+	                    <label for="email2" class="texto90 ancho20"><strong>(*)Repetir correo electrónico:&nbsp;</strong></label>
 	                    <html:text property="email2" size="100" maxlength="30" styleClass="fondoBlanco" title="Repetir dirección de correo electrónico"></html:text>
 	                </div>
 	                <div id="tipo_usuario-div" class="alto25">
-	                     <label for="tipo_usuario" class="texto90 col20"><strong>(*)Tipo usuario:&nbsp;</strong></label>
+	                     <label for="tipo_usuario" class="texto90 ancho20"><strong>(*)Tipo usuario:&nbsp;</strong></label>
 	                     <html:select name="tipoUsuarioSeleccionado" property="idTipoUsuario" styleClass="fondoBlanco" title="Seleccionar tipo de usuario">
 	                         <html:optionsCollection name="tipoUsuario" value="idTipoUsuario" label="descripcion"/>
 	                     </html:select>
