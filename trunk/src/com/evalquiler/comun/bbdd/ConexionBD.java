@@ -31,22 +31,21 @@ public class ConexionBD {
 		try {
 			initContext = new InitialContext();
 			dataSource = (DataSource)initContext.lookup("java:comp/env/jdbc/evalquiler");
-
+						
 			conn = dataSource.getConnection();
 			if (null != conn) {
 				conn.setAutoCommit(false);
 			}
-
 		} catch (NamingException e) {
 			throw new ExcepcionComun(ConstantesCodigosExcepciones.FUNCIONALIDAD_GENERAL.concat(
 			 											ConstantesCodigosExcepciones.CODIGO_EXCEPTION), 
 			 						"error.global.mesage", 
-			 						"No se ha obtenido un origen de datos válido. Revise la configuración del servidor.");
+			 						"No se ha obtenido un origen de datos vï¿½lido. Revise la configuraciï¿½n del servidor.");
 		} catch (SQLException e) {
 			throw new ExcepcionComun(ConstantesCodigosExcepciones.FUNCIONALIDAD_GENERAL.concat(
 						ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION), 
 						"error.global.mesage", 
-						"No se ha obtenido un conexión. Revise la configuración del servidor y si existe la base de datos.");			
+						"No se ha obtenido un conexiï¿½n. Revise la configuraciï¿½n del servidor y si existe la base de datos.");			
 		}
 		
 		return conn;

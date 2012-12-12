@@ -8,8 +8,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
@@ -40,13 +38,12 @@ public class GuardarDatosViviendaAction extends ActionBase
 		String comandoDestino = ConstantesComandos.EMPTY;
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		ActionErrors   errors   = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
 		ActionForward  forward  = new ActionForward(); // return value
 
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if (ConstantesBotones.GUARDAR.equals(botonPulsado)) {
 			DatosViviendaActionForm datosVivienda = (DatosViviendaActionForm)request.getSession().getAttribute("datosViviendaActionForm");			
-//			if (datosVivienda.getEsElPropietario()) {
+
 			datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 			UtilidadesFicheros.escribir("esPropietario: " + datosRealizacionEncuesta.getDatosUsuario().esPropietario());
 			if (datosRealizacionEncuesta.getDatosUsuario().esPropietario()) {
@@ -58,7 +55,7 @@ public class GuardarDatosViviendaAction extends ActionBase
 //Recuperar la vivienda haciendo una b�squeda por los datos que se han guardado, ya que el idViviendo puede no coincidir con el que se ha guardado
 //ya que se autoincrementa.				
 				request.setAttribute("idVivienda", String.valueOf(datosVivienda.getIdVivienda()));
-				messages.add("messages", new ActionMessage("msg.vivienda.guardada"));
+				errors.add("messages", new ActionError("msg.vivienda.guardada"));
 				comandoDestino = ConstantesComandos.OK;
 			} catch (ViviendaNoGuardadaExcepcion e) {
 				errors.add("errorExcepcion", new ActionError(e.getMensaje()));
@@ -83,10 +80,6 @@ public class GuardarDatosViviendaAction extends ActionBase
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-			    saveMessages(request, messages);
-			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);

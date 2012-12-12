@@ -26,6 +26,7 @@ public abstract class ConstantesCodigosExcepciones {
 	public final static String CODIGO_REGISTRO_ENCONTRADOS_EXCEDE_LIMITE = "0008";
 	public final static String CODIGO_ 									 = "0009";
 	public final static String CODIGO_NUMERO_REGISTROS_ERRONEOS 		 = "0010";
+	public final static String CODIGO_VARIABLE_ENTORNO_NO_ENCONTRADA	 = "0011";
 	
 	//CODIGOS PARA IDENTIFICAR EXCEPCIONES JAVA
 	public final static String CODIGO_SQL_EXCEPTION 				 	 = "1000";
