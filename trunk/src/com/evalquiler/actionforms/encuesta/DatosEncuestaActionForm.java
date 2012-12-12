@@ -4,9 +4,13 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
+import com.evalquiler.comun.utilidades.UtilidadesFicheros;
+import com.evalquiler.excepciones.vivienda.ViviendaNoSeleccionadaExcepcion;
 
 
 public class DatosEncuestaActionForm extends ActionForm {
@@ -63,9 +67,30 @@ public class DatosEncuestaActionForm extends ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosEncuestaActionForm.validate()");
-    	ActionErrors errors = null;
-        
+    	ActionErrors errors = new ActionErrors();
+ 
+        try {
+			getViviendaSeleccionada(request);
+		} catch (ViviendaNoSeleccionadaExcepcion e) {
+			errors.add("errorValidacion", new ActionError("error.vivienda.obligatoria"));
+		}
+    	
         return errors;
+    }
+    
+    
+    public static final String getViviendaSeleccionada(HttpServletRequest request) throws ViviendaNoSeleccionadaExcepcion {
+		String idVivienda = (String)request.getParameter("idVivienda");
+		if (null == idVivienda) {
+			//En este caso se viene cuando se ha dado de alta una vivienda de forma correcta.
+			idVivienda = (String)request.getAttribute("idVivienda");
+		}
+		if (null == idVivienda) {
+			throw new ViviendaNoSeleccionadaExcepcion();
+		}
+		
+		UtilidadesFicheros.escribir("idVivienda: " + idVivienda);
+		return idVivienda;
     }
     
 

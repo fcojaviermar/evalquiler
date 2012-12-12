@@ -297,20 +297,14 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
             } else if (Integer.valueOf(this.getIdProvincia()) > ComboProvincia.MELILLA) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
-            }
-    
-//            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
-//            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
-//            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
-//            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
-//            }
+            } 
 		}        
 		
-//		if (!errors.isEmpty()) {
-			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+		if (!errors.isEmpty()) {
+        	request.setAttribute("elementoProvincia", new ElementoComboProvincia());			
 			request.setAttribute("comboMunicipio", new ComboMunicipio());
 			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
-//		}
+		}
         return errors;
     }
     

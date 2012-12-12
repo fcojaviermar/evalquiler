@@ -8,8 +8,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.actions.comun.ActionBase;
@@ -37,7 +35,6 @@ public class GuardarDatosUsuarioAction extends ActionBase
     	DatosUsuarioActionForm datosUsuario = null;
     	String comandoDestino = ConstantesComandos.ERROR;
     	ActionErrors errors = new ActionErrors();
-    	ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
 		
 		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
@@ -58,11 +55,11 @@ public class GuardarDatosUsuarioAction extends ActionBase
 			datosUsuario = (DatosUsuarioActionForm)request.getSession().getAttribute("datosUsuarioActionForm");
 			try {
 				OpUsuario.insertar(datosUsuario);
-				messages.add("message", new ActionMessage("msg.usuario.guardado"));
+				errors.add("message", new ActionError("msg.usuario.guardado"));
 				this.vaciarSession(request.getSession());
 				comandoDestino = ConstantesComandos.OK;
 			} catch (UsuarioNoGuardadoExcepcion e) {
-    			messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
     			this.vaciarSession(request.getSession());
     			comandoDestino = ConstantesComandos.NOOK;
 			}
@@ -75,10 +72,6 @@ public class GuardarDatosUsuarioAction extends ActionBase
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-				saveMessages(request, messages);
-			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);

@@ -10,8 +10,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
@@ -46,19 +44,19 @@ public class RecuperarEncuestaAction extends ActionBase {
     	
     	UtilidadesFicheros.escribir("RecuperarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EXIT;
-		Collection<DatosEncuestaActionForm> datosEncuesta = null;
-		DatosViviendaActionForm viviendaSeleccionada = null;
-		ActionErrors errors = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
-		ActionForward forward = new ActionForward(); // return value
+		DatosRealizacionEncuestaActionForm  datosRealizacionEncuesta = null;
+		Collection<DatosEncuestaActionForm> datosEncuesta 			 = null;
+		DatosViviendaActionForm 			viviendaSeleccionada 	 = null;
+		ActionErrors  errors  = new ActionErrors();
+		ActionForward forward = new ActionForward(); 
 		String botonPulsado   = null;
-		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
+		String idVivienda 	  = null;
+		
 		
 		botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
 			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
-//			request.getSession().setAttribute("comboProvincia", comboProvincia);
 			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
 			request.setAttribute("comboMunicipio", new ComboMunicipio());
 			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
@@ -68,57 +66,17 @@ public class RecuperarEncuestaAction extends ActionBase {
 			comandoDestino = ConstantesComandos.THERE_IS_POLL;
 			
 		} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-//			String nuevoDestino = (String)request.getAttribute("nuevoDestino");
-//			if (null == nuevoDestino) {
     			request.setAttribute("elementoProvincia", new ElementoComboProvincia("0", ""));
     			request.setAttribute("comboMunicipio", new ComboMunicipio());
     			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio("0", ""));
-			
 				comandoDestino = ConstantesComandos.CANCEL_NO_INICIO;
-//			}
-//			viviendaSeleccionada = new DatosViviendaActionForm();
-//			
-//			String idVivienda = null;
-//			try {
-//				idVivienda = this.getViviendaSeleccionada(request);
-//				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
-//				Collection<DatosViviendaActionForm> vivienda = null;
-//				try {
-//					datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
-//					vivienda = OpVivienda.consultarVivienda(viviendaSeleccionada, datosRealizacionEncuesta.getDatosUsuario().getNifcif());
-//					viviendaSeleccionada = vivienda.iterator().next();
-//
-//					try {
-//						datosEncuesta = OpEncuesta.consultarParaTipoUsuario(datosRealizacionEncuesta.getDatosUsuario(), 
-//																			DaoEncuesta.CONSULTAR_PARA_QUIEN_ES_ENCUESTA);
-//    					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
-//    					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
-//
-//    					comandoDestino = ConstantesComandos.THERE_IS_POLL;
-//					} catch (NoExistenEncuestasExcepcion e) {
-//						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
-//					} catch (NoRecuperadaEncuestaExcepcion e) {
-//						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;					
-//					} catch (NoRecuperadasPreguntasParaEncuestaExcepcion e) {
-//						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
-//					}
-//				} catch (NoExisteViviendaExcepcion e1) {
-//					messages.add("message", new ActionMessage(e1.getMensaje()));
-//					comandoDestino = ConstantesComandos.ERROR;
-//				}
-//			} catch (ViviendaNoSeleccionadaExcepcion e2) {
-//				messages.add("message", new ActionMessage(e2.getMensaje()));
-//				comandoDestino = ConstantesComandos.NO_SELECTION;
-//			}
 			
 		} else if ( (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) || 
 					(ConstantesBotones.GUARDAR.equals(botonPulsado)) ) {
 			
 			viviendaSeleccionada = new DatosViviendaActionForm();
-			
-			String idVivienda = null;
 			try {
-				idVivienda = this.getViviendaSeleccionada(request);
+				idVivienda = DatosEncuestaActionForm.getViviendaSeleccionada(request);
 				viviendaSeleccionada.setIdVivienda(Integer.parseInt(idVivienda));
 				Collection<DatosViviendaActionForm> vivienda = null;
 				try {
@@ -141,11 +99,11 @@ public class RecuperarEncuestaAction extends ActionBase {
 						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
 					}
 				} catch (NoExisteViviendaExcepcion e1) {
-					messages.add("message", new ActionMessage(e1.getMensaje()));
+					errors.add("message", new ActionError(e1.getMensaje()));
 					comandoDestino = ConstantesComandos.ERROR;
 				}
 			} catch (ViviendaNoSeleccionadaExcepcion e2) {
-				messages.add("message", new ActionMessage(e2.getMensaje()));
+				errors.add("message", new ActionError(e2.getMensaje()));
 				comandoDestino = ConstantesComandos.NO_SELECTION;
 			}
 		} else {
@@ -156,30 +114,11 @@ public class RecuperarEncuestaAction extends ActionBase {
 
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-				saveMessages(request, messages);
-			}
 		}
 
 		forward = mapping.findForward(comandoDestino);
 
 		return forward;
-    }
-    
-    
-    private final String getViviendaSeleccionada(HttpServletRequest request) throws ViviendaNoSeleccionadaExcepcion {
-		String idVivienda = (String)request.getParameter("idVivienda");
-		if (null == idVivienda) {
-			//En este caso se viene cuando se ha dado de alta una vivienda de forma correcta.
-			idVivienda = (String)request.getAttribute("idVivienda");
-		}
-		if (null == idVivienda) {
-			throw new ViviendaNoSeleccionadaExcepcion();
-		}
-		
-		UtilidadesFicheros.escribir("idVivienda: " + idVivienda);
-		return idVivienda;
     }
     
 }

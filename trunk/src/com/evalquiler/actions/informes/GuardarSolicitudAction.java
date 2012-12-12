@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.comun.constantes.ConstantesComandos;
@@ -30,16 +29,13 @@ public class GuardarSolicitudAction extends ActionBase {
 		System.out.println("GuardarSolicitudAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); // return value
-
-//		long idSolicitud = OpSolicitudInforme.ultimoIdSolicitudInforme();
 
 		try {
 			OpSolicitudInforme.insertar(form);
+			errors.add("messages", new ActionMessage("msg.solicitud.informe.guardado"));
 			comandoDestino = ConstantesComandos.OK;
-			//messages.add("messages", new ActionMessage("msg.solicitud.informe.guardado", idSolicitud));
-			messages.add("messages", new ActionMessage("msg.solicitud.informe.guardado"));			
+			
 		} catch (SolicitudinformeNoGuardadaExcepcion e) {
 			errors.add("errorExcepcion", new ActionError(e.getMensaje()));
 			comandoDestino = ConstantesComandos.NOOK;
@@ -47,10 +43,6 @@ public class GuardarSolicitudAction extends ActionBase {
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-			    saveMessages(request, messages);	
-			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);

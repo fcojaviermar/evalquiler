@@ -5,12 +5,11 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.informe.DatosSolicitudInformeActionForm;
@@ -37,7 +36,6 @@ public class ConfirmarSolicitudInformeAction extends ActionBase {
 		System.out.println("ConfirmarSolicitudInformeAction.action()");
 		String comandoDestino   = ConstantesComandos.EMPTY;
 		ActionErrors  errors    = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
 		ActionForward forward   = new ActionForward(); 
 		DatosViviendaActionForm viviendaSeleccionada = null;
 		DatosClienteActionForm  datosCliente		 = null;
@@ -45,8 +43,6 @@ public class ConfirmarSolicitudInformeAction extends ActionBase {
 		
 	    // Aqui va toda la logica del negocio y todas las llamadas a otras clases.
 		String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
-//		request.getSession().setAttribute("tipoInforme", new ComboTipoInforme());
-//		request.getSession().setAttribute("tipoInformeSeleccionado", new ElementoComboTipoInforme() );				
 
 		if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {			
 			comandoDestino = ConstantesComandos.CANCEL;
@@ -73,27 +69,23 @@ public class ConfirmarSolicitudInformeAction extends ActionBase {
 							
 							OpSolicitudInforme.insertar(form);
 							//LAST_INSERT_ID()
-							messages.add("message", new ActionMessage("msg.solicitud.informe.guardado", new Long(idSolicitud)));
+							errors.add("message", new ActionError("msg.solicitud.informe.guardado", new Long(idSolicitud)));
 							comandoDestino = ConstantesComandos.OK;
 						} catch (SolicitudinformeNoGuardadaExcepcion e) {
-							messages.add("message", new ActionMessage(e.getMensaje()));
+							errors.add("message", new ActionError(e.getMensaje()));
 							comandoDestino = ConstantesComandos.NOOK;
 						}
 					} catch (NoExisteViviendaExcepcion e) {
-						messages.add("message", new ActionMessage(e.getMensaje()));
+						errors.add("message", new ActionError(e.getMensaje()));
 						comandoDestino = ConstantesComandos.ERROR;
 					}
 			} catch (ViviendaNoSeleccionadaExcepcion e) {
-				messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
 				comandoDestino = ConstantesComandos.NO_SELECTION;		
 			}
 		}
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-			    saveMessages(request, messages);
-			}	
 		}
 	
 		forward = mapping.findForward(comandoDestino);

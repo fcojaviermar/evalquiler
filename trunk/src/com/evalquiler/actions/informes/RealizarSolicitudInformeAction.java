@@ -5,12 +5,11 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.informe.DatosSolicitudInformeActionForm;
@@ -40,7 +39,6 @@ public class RealizarSolicitudInformeAction extends ActionBase {
 		System.out.println("RealizarSolicitudInformeAction.action()");
 		String comandoDestino   = ConstantesComandos.EMPTY;
 		ActionErrors  errors    = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
 		ActionForward forward   = new ActionForward(); 
 		DatosViviendaActionForm viviendaSeleccionada = null;
 		DatosClienteActionForm  datosCliente 		 = null;
@@ -75,24 +73,20 @@ public class RealizarSolicitudInformeAction extends ActionBase {
 							OpSolicitudInforme.insertar(form);
 							request.getSession().setAttribute("datosSolicitudInformeActionForm", ((DatosSolicitudInformeActionForm)form));
 						} catch (SolicitudinformeNoGuardadaExcepcion e) {
-							messages.add("message", new ActionMessage(e.getMensaje()));
+							errors.add("message", new ActionError(e.getMensaje()));
 							comandoDestino = ConstantesComandos.NOOK;
 						}
 					} catch (NoExisteViviendaExcepcion e) {
-						messages.add("message", new ActionMessage(e.getMensaje()));
+						errors.add("message", new ActionError(e.getMensaje()));
 						comandoDestino = ConstantesComandos.ERROR;
 					}
 			} catch (ViviendaNoSeleccionadaExcepcion e) {
-				messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
 				comandoDestino = ConstantesComandos.NO_SELECTION;		
 			}
 		}
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-			    saveMessages(request, messages);
-			}	
 		}
 	
 		forward = mapping.findForward(comandoDestino);

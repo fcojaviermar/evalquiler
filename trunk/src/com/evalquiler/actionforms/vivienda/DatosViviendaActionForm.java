@@ -6,9 +6,11 @@ import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboProvincia;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
+import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
 
 
@@ -298,6 +300,11 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.municipio"));
 //            } else if (this.getIdMunicipio() > Constantes.MAXIMO_CODIGOPOTAL) {
 //            	errors.add("errorValidacion", new ActionError("error.municipio.no.valido"));
+            } else {
+            	ComboMunicipio combo = (ComboMunicipio)request.getSession().getAttribute("comboMunicipio");
+            	ElementoComboMunicipio elCombo = combo.get(Integer.valueOf(this.getIdMunicipio()));
+            	this.setMunicipio(elCombo.getDescripcion());
+            	request.setAttribute("elementoMunicipio", new ElementoComboMunicipio(this.getIdMunicipio(), ""));
             }
     
             if (!this.tieneProvincia()) {
@@ -328,6 +335,12 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 //            }
 		}
         
+		if (!errors.isEmpty()) {
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia(this.getIdProvincia(), ""));
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio(this.getIdMunicipio(), ""));
+		}
+		
 		return errors;
     }
     
