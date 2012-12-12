@@ -16,45 +16,40 @@ System.out.println ("Pagina register.jsp");
     </head>
 
     <body class="fondoBlanco alineacionCentrada">
-        <div class="ancho100">
+        <div class="ancho100 bordeInferior">
             <html:image src="./img/LogoEvalquiler2.jpg"></html:image>
         </div>
         <logic:messagesPresent>
-            <div id="errores" class="fondoAmarilloOscuro col90 alineacionIzquierda cajaScroll">
+            <div id="errores" class="fondoAmarilloOscuro ancho90 alineacionIzquierda cajaScroll">
                 <html:errors/>
             </div>
         </logic:messagesPresent>
-        <logic:messagesNotPresent>
-            <div id="errores" class="alto75">
-            </div>
-        </logic:messagesNotPresent>        
-        <logic:messagesPresent message="true">
-            <div id="mensajes" class="fondoAmarilloOscuro col90 alineacionIzquierda cajaScroll">
-                <html:messages id="message" message="true">
-                    <bean:write name="message"/><br/>
-                </html:messages>
-            </div>
-        </logic:messagesPresent>
-        <logic:messagesNotPresent message="true">
-            <div id="mensajes" class="alto75">
-            </div>
-        </logic:messagesNotPresent>
+
 
         <table class="bordeNulo ancho100">
             <tr>
                 <td class="ancho35 bordeNulo">
 			        <div>
-			            <p>
-			                Textos a estilo gmail
+			        	<p class="textoRojoOscuro texto200">
+			                <strong>Evalquiler</strong>
 			            </p>
-			            <p>
-			                Textos a estilo gmail
+			        	<p class="texto150">
+			                <strong>¿Qué es esto?</strong>
 			            </p>
-			            <p>
-			                Textos a estilo gmail
+			            <p class="texto100">
+			                Evalquiler es una aplicación para evaluar la relación entre un inquilino y su arrendador y a la inversa.
 			            </p>
-			            <p>
-			                Textos a estilo gmail
+			        	<p class="texto150">
+			                <strong>¿Cómo rellenar una encuesta?</strong>
+			            </p>
+			            <p class="texto100">
+			                Para rellenar una encuesta primero debe registrarse como usuario si no lo está ya y después iniciar la sesión como usuario y seguir los pasos.
+			            </p>
+			            <p class="texto150">
+			                <strong>¿Cómo consultar la información referida a una vivienda?</strong>
+			            </p>
+			            <p class="texto100">
+			                Para consultar la información primero debe registrarse como usuario si no lo está ya y después iniciar la sesión como cliente y seguir los pasos.
 			            </p>
 			        </div>
                 </td>
