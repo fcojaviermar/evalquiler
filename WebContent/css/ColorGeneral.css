@@ -22,18 +22,18 @@
 
 
 /* Colores de Fondo */
-.fondoAmarilloOscuro{background-color:#F2F2EA; border-color:#E2E2DA !important;}
-.fondoAmarilloMedio{background-color:#FAFAF4; border-color:#EAEAE4 !important;}
-.fondoAmarilloClaro{background-color:#FFFFFA; border-color:#EFEFEA !important;}
+.fondoAmarilloOscuro{background-color:#FFFFAA; border-color:#E2E2DA !important;}
+.fondoAmarilloMedio{background-color:#FFFFCC; border-color:#EAEAE4 !important;}
+.fondoAmarilloClaro{background-color:#FFFFEE; border-color:#EFEFEA !important;}
 .fondoRojoOscuro{background-color:#F2EEEA; border-color:#E2DEDA !important;}
 .fondoRojoMedio{background-color:#FAF7F5; border-color:#EAE7E5 !important;}
 .fondoRojoClaro{background-color:#FFFCFA; border-color:#EFECEA !important;}
 .fondoVerdeOscuro{background-color:#EAF2EA; border-color:#DAE2DA !important;}
 .fondoVerdeMedio{background-color:#F3FCF3; border-color:#E3ECE3 !important;}
 .fondoVerdeClaro{background-color:#FAFFFA; border-color:#EAEFEA !important;}
-.fondoAzulOscuro{background-color:#EAF2F2; border-color:#DAE2E2 !important;}
-.fondoAzulMedio{background-color:#F4FAFA; border-color:#E4EAEA !important;}  
-.fondoAzulClaro{background-color:#FAFFFF; border-color:#EAEFEF !important;}
+.fondoAzulOscuro{background-color:#CEE3F6; border-color:#CEE3F6	 !important;}
+.fondoAzulMedio{background-color:#E0ECF8; border-color:#E0ECF8 !important;}  
+.fondoAzulClaro{background-color:#EFF5FB; border-color:#EFF5FB !important;}
 .fondoGrisOscuro{background-color:#F0F0F0; border-color:#E0E0E0 !important;}
 .fondoGrisMedio{background-color:#F7F7F7; border-color:#E7E7E7 !important;}  
 .fondoGrisClaro{background-color:#FCFCFC; border-color:#ECECEC !important;}
@@ -57,4 +57,4 @@
 .textoGrisClaro{color:#6C6C6C !important;}
 
 /* Colores tablas */
-.celdaCab, #celdaCab, TR.cabecera, TR.cabecera TH {color:#FFFFFF;}
+.celdaCab, #celdaCab, TR.cabecera, TR.cabecera TH {color:#FFFFFF; background-color:#000000; !important;}

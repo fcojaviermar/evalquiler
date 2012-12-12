@@ -204,7 +204,7 @@
 .rellenoDer10{padding-right:10px;}
 .rellenoDer12{padding-right:12px;}
 
-/* TamaÃ±o de texto */
+/* Tamaño de texto */
 .texto060{font-size:0.60em;}
 .texto065{font-size:0.65em;}
 .texto070{font-size:0.70em;}
@@ -214,6 +214,8 @@
 .texto090{font-size:0.90em;}
 .texto095{font-size:0.95em;}
 .texto100{font-size:1.00em;}
+.texto150{font-size:1.50em;}
+.texto200{font-size:2.00em;}
 
 /* Estilos de texto */
 .textoCursiva{font-style:italic;}
