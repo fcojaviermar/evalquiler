@@ -22,7 +22,7 @@
                 	Datos vivienda
                 </legend>
                 <div id="datosVivienda" >
-					<div id="User-div" class="alto50">
+					<div id="User-div" class="alto50"></div>
                     <div id="via1-div" class="alto50">
                     	<label for="descTipoVia" class="texto100"><strong >Tipo vía:&nbsp;</strong></label>
                         <bean:write name="datosViviendaActionForm" property="descTipoVia"/>
