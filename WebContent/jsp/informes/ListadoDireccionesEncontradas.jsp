@@ -9,18 +9,21 @@
         <link rel="stylesheet" type="text/css" href="./css/ColorGeneral.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />
     </head>
+<% String  classLine = "fondoAzulOscuro"; %>    
     <body>
+    	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<html:form action="/IrAceptarSolicitudInformeAction.do" method="post">
 	        <div id="titulo">
-		        <fieldset>
+		        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
 		            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 		            	Datos del usuario
 		            </legend>
 	                <%@include file="../comun/DatosCliente.jsp"%>
-	                 <div id="tipo-informe-div" class="alto50">
+	                <%@include file="../comun/Obligatorio.jsp"%>
+	                <div id="tipo-informe-div" class="alto50">
 						<label for="idTipoInforme" class="texto100">
-							<strong >Tipo informe:&nbsp;</strong>
+							<strong>(*)Tipo informe:&nbsp;</strong>
 						</label>
                         <html:select name="tipoInformeSeleccionado" property="idTipoInforme" styleClass="fondoBlanco" title="Seleccionar el tipo de informe a solicitar">
                             <html:optionsCollection name="tipoInforme" value="idTipoInforme" label="descripcion"/>
@@ -35,23 +38,28 @@
                         <html:text property="fechaFin" size="15" maxlength="10" title="Fecha en la que el inquilino finalizó el alquiler a buscar"></html:text>
                     </div>
          
-                    <div id="tabla" class="fondoRojoMedio">         
-		                <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">
+                    <div id="tabla" class="">         
+		                <fieldset class="bordeGrisOscuro borde1 alto200 ancho95 alineacionIzquierda fondoBlanco">
 		                    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 		                    	Resultados de la búsqueda
 		                    </legend>
 		                    <table class="ancho100">
 		                        <thead>
-		                            <tr class="alineacionIzquierda">
-		                                <th class="fondoVerdeMedio texto100">Selección</th>
-		                                <th class="fondoVerdeMedio texto100">Dirección</th>
-		                                <th class="fondoVerdeMedio texto100">Tipo vivienda</th>
-		                                <th class="fondoVerdeMedio texto100">Vivienda</th>
+		                            <tr class="alineacionIzquierda cabecera">
+		                                <th class="texto100">Selección</th>
+		                                <th class="texto100">Dirección</th>
+		                                <th class="texto100">Tipo vivienda</th>
+		                                <th class="texto100">Vivienda</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
-		                            <logic:iterate name="datosViviendaActionForm" id="datosViviendaActionFormEnc">
-			                            <tr>
+		                            <logic:iterate name="datosViviendaActionForm" id="datosViviendaActionFormEnc" indexId="indiceFila">
+<%if (indiceFila.intValue()%2 == 0) {
+	classLine = "fondoAzulOscuro";
+} else {
+	classLine = "fondoBlanco";
+}%>
+                                        <tr class="<%=classLine%>">
 			                                <td class="ancho10">
 		                                        <bean:define id="idViviendaAux">
 		                                            <bean:write name="datosViviendaActionFormEnc" property="idVivienda"/>

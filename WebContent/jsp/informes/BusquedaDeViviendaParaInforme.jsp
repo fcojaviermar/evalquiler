@@ -10,15 +10,16 @@
         <link rel="stylesheet" type="text/css" href="./css/Tipografia.css" media="screen" />        
     </head>
     <body>
+    	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <html:form action="/IrSolicitarInformeAction.do" method="post">    
-			<fieldset>
+			<fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
 			    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			    	Datos del usuario
 			    </legend>
                 <%@include file="../comun/DatosCliente.jsp"%>
                 <%@include file="../comun/Obligatorio.jsp"%>			
-			    <fieldset>
+			    <fieldset class="bordeGrisOscuro fondoBlanco">
 			        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			        	Buscar una vivienda
 			        </legend>

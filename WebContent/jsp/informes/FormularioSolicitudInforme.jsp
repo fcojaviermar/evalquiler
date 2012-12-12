@@ -8,6 +8,7 @@
     </head>
 
     <body>
+    	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <table>
             <thead>
