@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
 import com.evalquiler.combo.ComboMunicipio;
 import com.evalquiler.combo.ComboTipoVia;
@@ -44,6 +45,8 @@ public class NuevaBusquedaAction extends ActionBase {
 			comandoDestino = ConstantesComandos.SEARCH;
 
 		} else if (ConstantesBotones.BUSCAR.equals(botonPulsado)) {
+			request.setAttribute("elementoProvincia", 
+					 new ElementoComboProvincia(((CriteriosBusquedaViviendaActionForm)form).getIdProvincia(), ""));
 			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
 			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
 			comandoDestino = ConstantesComandos.SEARCH;

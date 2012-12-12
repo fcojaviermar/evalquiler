@@ -11,8 +11,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
@@ -54,7 +52,6 @@ public class InicioSesionAction extends ActionBase {
 		DatosUsuarioActionForm 			   datosUsuario 			= null;
 		DatosInicioSesionActionForm 	   cliente 				    = null;
 		
-		ActionMessages messages = new ActionMessages();
 		ActionErrors   errors   = new ActionErrors();
 		ActionForward  forward  = new ActionForward(); 
 		String comandoDestino   = ConstantesComandos.EMPTY;
@@ -110,10 +107,10 @@ public class InicioSesionAction extends ActionBase {
 						
 					}
 				} catch (UsuarioNoExisteExcepcion e) {
-					errors.add("errorValidacion", new ActionError("error.no.existe.usuario"));    				
+					errors.add("message", new ActionError("error.no.existe.usuario"));    				
 					comandoDestino = ConstantesComandos.NO_USER;
 				} catch (UsuarioRepetidoExcepcion e) {
-					errors.add("errorValidacion", new ActionError("error.mas.de.un.usuario"));
+					errors.add("message", new ActionError("error.mas.de.un.usuario"));
 					comandoDestino = ConstantesComandos.TWO_EQUAL_USERS;
 				}
 			} else if (((DatosInicioSesionActionForm)form).esCliente() ) {
@@ -132,7 +129,7 @@ public class InicioSesionAction extends ActionBase {
 						request.setAttribute("elementoProvincia", new ElementoComboProvincia());
 						request.setAttribute("comboMunicipio", new ComboMunicipio());
 						request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
-						messages.add("message", new ActionMessage("msg.solicitud.operacion.previa"));
+						errors.add("message", new ActionError("msg.solicitud.operacion.previa"));
 						comandoDestino = ConstantesComandos.VALID_CLIENT;
 						
 					} else {
@@ -170,10 +167,6 @@ public class InicioSesionAction extends ActionBase {
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-			    saveMessages(request, messages);
-			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);

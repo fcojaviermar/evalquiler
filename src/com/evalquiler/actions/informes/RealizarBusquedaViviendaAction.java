@@ -10,8 +10,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm;
 import com.evalquiler.actionforms.vivienda.DatosViviendaActionForm;
@@ -43,7 +41,6 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 		System.out.println("RealizarBusquedaViviendaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;
 		ActionErrors errors = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); 
 		Collection<DatosViviendaActionForm> listaViviendas = null;
 		CriteriosBusquedaViviendaActionForm criteriosBusqueda = null;
@@ -60,12 +57,11 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				comandoDestino = ConstantesComandos.MORE_THAN_ONE_RESULT;
 				
 			} catch (NoEncontradaViviendaConCriteriosExcepcion e) {
-				messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
 				comandoDestino = ConstantesComandos.NO_RESULT;
-
 			} catch (EncontradasMuchasViviendasExcepcion e) {
-				comandoDestino = ConstantesComandos.NO_RESULT;
-				messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
+				comandoDestino = ConstantesComandos.NO_RESULT;				
 			}
     	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 //			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
@@ -83,10 +79,10 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				
 			} catch (NoEncontradaViviendaConCriteriosExcepcion e) {
 				comandoDestino = ConstantesComandos.NO_RESULT;
-				messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
 			} catch (EncontradasMuchasViviendasExcepcion e) {
 				comandoDestino = ConstantesComandos.NO_RESULT;
-				messages.add("message", new ActionMessage(e.getMensaje()));
+				errors.add("message", new ActionError(e.getMensaje()));
 			}
 			
     	} else if (ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) {
@@ -105,10 +101,6 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 	
 		if (!errors.isEmpty()) {
 		    saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-				saveMessages(request, messages);
-			}
 		}
 	
 		forward = mapping.findForward(comandoDestino);	

@@ -8,8 +8,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actions.comun.ActionBase;
@@ -33,7 +31,6 @@ public class GuardarEncuestaAction extends ActionBase {
 		System.out.println("GuardarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EMPTY;		
 		ActionErrors errors = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
 		ActionForward forward = new ActionForward(); 
 
 		String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
@@ -49,7 +46,7 @@ public class GuardarEncuestaAction extends ActionBase {
 				datosRealizacionEncuesta.setFechaFinEvaluacionAlquiler(null);
 				datosRealizacionEncuesta.setFechaInicioEvaluacionAlquiler(null);
 				datosRealizacionEncuesta.setDatosEncuesta(null);
-				messages.add("message", new ActionMessage("msg.encuesta.realizada"));
+				errors.add("message", new ActionError("msg.encuesta.realizada"));
     			comandoDestino = ConstantesComandos.OK;
     			
 			} catch (RespuestasEncuestaNoGuardadasExcepcion e) {
@@ -65,10 +62,6 @@ public class GuardarEncuestaAction extends ActionBase {
 	
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-		} else {
-			if (!messages.isEmpty()) {
-				saveMessages(request, messages);
-			}
 		}
 		
 		forward = mapping.findForward(comandoDestino);	
