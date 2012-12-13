@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.comun.utilidades.UtilidadesFicheros;
 import com.evalquiler.excepciones.vivienda.ViviendaNoSeleccionadaExcepcion;
 
@@ -68,9 +69,14 @@ public class DatosEncuestaActionForm extends ActionForm {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
     	System.out.println("DatosEncuestaActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
- 
+
         try {
-			getViviendaSeleccionada(request);
+        	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+        	if ( (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) &&
+        		 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) && 
+        		 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) ){
+        		getViviendaSeleccionada(request);
+        	}
 		} catch (ViviendaNoSeleccionadaExcepcion e) {
 			errors.add("errorValidacion", new ActionError("error.vivienda.obligatoria"));
 		}

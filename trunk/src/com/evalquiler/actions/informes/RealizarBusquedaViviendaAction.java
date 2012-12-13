@@ -64,9 +64,9 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
 				comandoDestino = ConstantesComandos.NO_RESULT;				
 			}
     	} else if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
-//			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
-//			request.setAttribute("comboMunicipio", new ComboMunicipio());
-//			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
+			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
     		comandoDestino = ConstantesComandos.CANCEL;
     			
     	} else if (ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) {
