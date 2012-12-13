@@ -223,6 +223,9 @@
 .textoTachado{text-decoration:line-through;}
 
 
+
+#logo{width:100px; height:25px; background-image:url(../img/LogoEvalquilerPeq.jpg) no-repeat 0 0;}
+
 /* GENERICOS */
 #pieFoto{font-size:60%; line-height:3em; float:right;}
 .p0{font-size:0.75em; letter-spacing:0.12em; font-weight:bold; margin:3px 0px;}
@@ -243,7 +246,7 @@
 .anotaciones{font-size:0.60em; padding:1em;}
 .comentario{margin:8px 0px 10px 0px; padding:4px 4px 4px 8px; overflow:auto; overflow-x:hidden; border:1px solid; height:150px; font-size:0.7em; font-family:"Courier New", Courier, monospace;}
 .clear{clear:both;}
-.pdf{width:17px; height:17px; background:url(../../img/ParqPDF.gif) no-repeat 0 0;}
+.pdf{width:17px; height:17px; background:url(../img/LogoEvalquiler2.jpg) no-repeat 0 0;}
 .oculto {display:none;}
 .lista0 {padding-top:0.2em;}
 .lista0 LI {padding-left:12px;}
