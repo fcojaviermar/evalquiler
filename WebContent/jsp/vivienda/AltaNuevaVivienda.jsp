@@ -23,6 +23,7 @@
 	                	Datos nueva vivienda
 	                </legend>
                     <div id="datosVivienda">
+                        <div id="User-div" class="alto50"></div>
                            <div id="User-div" class="alto50">
                             <label for="idTipoVia" class="texto100"><strong>(*)Tipo vía:&nbsp;</strong>
                                 <html:select name="tipoViaSeleccionado" property="idTipoVia" styleClass="fondoBlanco" title="Seleccionar tipo de vía">
@@ -35,13 +36,13 @@
                         </div>
                         <div id="User-div" class="alto50">
                             <label for="numeroVia" class="texto100"><strong>(*)Número vía:&nbsp;</strong>
-                                <html:text property="numeroVia" size="3" maxlength="5" styleClass="fondoBlanco" title="Número de la vía"></html:text>                  
+                                <html:text property="numeroVia" size="3" maxlength="5" styleClass="fondoBlanco" title="Número de la vía. 0 si no tiene número"></html:text>                  
                             </label>
                             <label for="bloque" class="texto100"><strong>Bloque:&nbsp;</strong>
                                 <html:text property="bloque" size="10" maxlength="10" styleClass="fondoBlanco" title="Bloque en le que está situada la vivienda"></html:text>                  
                             </label>
                             <label for="portal" class="texto100"><strong>(*)Portal:&nbsp;</strong>
-                                <html:text property="portal" size="3" maxlength="5" styleClass="fondoBlanco" title="Portal de la vivienda"></html:text>                  
+                                <html:text property="portal" size="3" maxlength="5" styleClass="fondoBlanco" title="Portal de la vivienda. 0 si no tiene número"></html:text>                  
                             </label>
                             <label for="escalera" class="texto100"><strong>Escalera:&nbsp;</strong>
                                 <html:text property="escalera" size="3" maxlength="5" styleClass="fondoBlanco" title="Escalera de la vivienda"></html:text>                  
@@ -65,7 +66,7 @@
                                     <html:optionsCollection name="comboMunicipio" value="idMunicipio" label="descripcion"/>
                                 </html:select>                          
                             </label>
-                            <label for="codigoPostal" class="texto100"><strong>Código Postal:&nbsp;</strong>
+                            <label for="codigoPostal" class="texto100"><strong>(*)Código Postal:&nbsp;</strong>
                                 <html:text property="codigoPostal" size="10" maxlength="10" styleClass="fondoBlanco" title="Código postal de la vivienda"></html:text>                  
                             </label>
                         </div>

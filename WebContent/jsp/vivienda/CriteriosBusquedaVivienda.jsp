@@ -36,7 +36,7 @@
                                 <html:text property="nombreVia" size="100" maxlength="100" styleClass="fondoBlanco" title="Nombre de la vía"></html:text>                  
                             </label>
                             <label for="numeroVia" class="texto100" ><strong >Número vía:&nbsp;</strong>
-                                <html:text property="numeroVia" size="3" maxlength="5" styleClass="fondoBlanco" title="Número de la vía"></html:text>                  
+                                <html:text property="numeroVia" size="3" maxlength="5" styleClass="fondoBlanco" title="Número de la vía. 0 si no tiene número"></html:text>                  
                             </label>
                         </div>
                         <div id="User-div" class="alto50">
@@ -44,7 +44,7 @@
 			                    <html:text property="bloque" size="10" maxlength="10" styleClass="fondoBlanco" title="Bloque en le que está situada la vivienda"></html:text>                  
 			                </label>
 			                <label for="portal" class="texto100"><strong >Portal:&nbsp;</strong>
-			                    <html:text property="portal" size="3" maxlength="5" styleClass="fondoBlanco" title="Portal de la vivienda"></html:text>                  
+			                    <html:text property="portal" size="3" maxlength="5" styleClass="fondoBlanco" title="Portal de la vivienda. 0 si no tiene número"></html:text>                  
 			                </label>
 			                <label for="escalera" class="texto100"><strong >Escalera:&nbsp;</strong>
 			                    <html:text property="escalera" size="3" maxlength="5" styleClass="fondoBlanco" title="Escalera de la vivienda"></html:text>                  

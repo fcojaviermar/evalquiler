@@ -19,6 +19,11 @@
             <param-name>detail</param-name>
             <param-value>2</param-value>
         </init-param>
+        <init-param>
+            <!--  Esto hace que los valores que no se introduzcan sean nulo -->
+            <param-name >convertNull</param-name > 
+            <param-value >true</param-value > 
+        </init-param >         
         <load-on-startup>2</load-on-startup>
     </servlet>
 
