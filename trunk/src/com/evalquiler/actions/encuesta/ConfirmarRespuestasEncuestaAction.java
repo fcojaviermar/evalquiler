@@ -68,6 +68,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 	    					
 	    					datosEncuesta.setIdTipoUsuario(datosRealizacionEncuesta.getDatosUsuario().getIdTipoUsuario());
 	    					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
+	    					errors.add("errorValidacion", new ActionError("msg.para.guardar.pulsar.guardarencuesta"));	
 	    					comandoDestino = ConstantesComandos.OK;
 	    				} else {
 		    				errors.add("errorValidacion", new ActionError("error.no.existe.encuesta"));	    					
