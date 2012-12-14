@@ -23,9 +23,10 @@ import com.evalquiler.excepciones.cliente.ClienteRepetidoExcepcion;
  */
 public final class OpCliente {
 	
-	public static final Collection<DatosClienteActionForm> consultarPorPk(ActionForm ClienteIn) 
+	public static final DatosClienteActionForm consultarPorPk(ActionForm ClienteIn) 
 		throws ClienteNoExisteExcepcion, ClienteRepetidoExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
 		
+		DatosClienteActionForm cliente = null;
 		Collection<DatosClienteActionForm> listaClientes = DaoCliente.consultarPorPk( ((DatosInicioSesionActionForm)ClienteIn).getUser());
 		
 		if ( (null != listaClientes) && (listaClientes.isEmpty()) ) {
@@ -36,7 +37,8 @@ public final class OpCliente {
 			throw new ClienteRepetidoExcepcion(((DatosInicioSesionActionForm)ClienteIn).getUser());
 		}
 		
-		return listaClientes; 
+		cliente = listaClientes.iterator().next();
+		return cliente; 
 	}
 	
 	
