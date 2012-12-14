@@ -18,7 +18,7 @@
                 </legend>            
                 <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
 <!-- 			            <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">-->
-                <fieldset class="bordeGrisOscuro fondoBlanco">
+                <fieldset class="bordeGrisOscuro fondoBlanco ancho95">
                     <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
                     	<bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/>
                     </legend>     
