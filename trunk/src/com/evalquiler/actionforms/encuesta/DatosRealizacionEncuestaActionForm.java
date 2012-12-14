@@ -123,13 +123,16 @@ public class DatosRealizacionEncuestaActionForm extends ActionForm {
         		errors.add("errorValidacion", new ActionError("error.fecha.fin.formato.incorrecto"));
         	}
 
-        	if (UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).after(
-        																	UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
-        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
-        	} else if (!UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).before(
-    																		UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
-        		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
-        	}
+        	if (errors.isEmpty()) {
+            	if (UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).after(
+            																	UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
+            		errors.add("errorValidacion", new ActionError("error.fecha.inicio.posterior.fecha.fin"));
+            	} else if (!UtilidadesFechas.getDate(this.getFechaInicioEvaluacionAlquiler()).before(
+        																		UtilidadesFechas.getDate(this.getFechaFinEvaluacionAlquiler()))) {
+            		errors.add("errorValidacion", new ActionError("error.fecha.inicio.igual.fecha.fin"));
+            	}
+        	} 
+        	request.setAttribute("idVivienda", String.valueOf(datosVivienda.getIdVivienda()));
 		} else {
 			
 		}

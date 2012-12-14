@@ -43,7 +43,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 			if (ConstantesBotones.CANCELAR.equals(botonPulsado)) {
 				datosRealizacionEncuesta = (DatosRealizacionEncuestaActionForm)request.getSession().getAttribute("datosRealizacionEncuestaActionForm");
 				request.setAttribute("nuevoDestino", ConstantesBotones.REALIZAR_ENCUESTA);
-				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdTipoVia()));
+				request.setAttribute("idVivienda", String.valueOf(datosRealizacionEncuesta.getDatosVivienda().getIdVivienda()));
 				comandoDestino = ConstantesComandos.CANCEL;
 				
 			} else if (ConstantesBotones.RESPONDER.equals(botonPulsado)) {
@@ -65,6 +65,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 	    						pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
 	    						i = i +1;
 	    					}
+	    					
 	    					datosEncuesta.setIdTipoUsuario(datosRealizacionEncuesta.getDatosUsuario().getIdTipoUsuario());
 	    					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
 	    					comandoDestino = ConstantesComandos.OK;
@@ -77,8 +78,8 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 	    				comandoDestino = ConstantesComandos.ALREADY_EVAL;	    				
 					}
 				} catch (NumberFormatException e) {
-					comandoDestino = ConstantesComandos.ERROR;
-					errors.add("errorExcepcion", new ActionError("error.global.mesage"));
+					errors.add("errorExcepcion", new ActionError("msg.no.respondidas.todas.preguntas"));
+					comandoDestino = ConstantesComandos.OBLIGATORY_ANSWERS;					
 				} 
     			
 //			} else {
@@ -103,4 +104,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		forward = mapping.findForward(comandoDestino);
 		return forward;
     }
+    
+    
+    
 }
