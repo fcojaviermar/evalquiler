@@ -25,6 +25,7 @@
 			        </legend>
 
                     <div id="criteriosBusqueda">
+                        <div id="User-div" class="alto50"></div>
                         <div id="User-div" class="alto50">
                             <label for="idTipoVia" class="texto100"><strong >Tipo vía:&nbsp;</strong>
 	                            <html:select name="tipoViaSeleccionado" property="idTipoVia" styleClass="fondoBlanco" title="Seleccionar tipo de vía">
