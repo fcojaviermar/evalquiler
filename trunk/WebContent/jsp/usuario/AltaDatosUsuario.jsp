@@ -21,16 +21,17 @@
 		        	</legend>
 					<div id="div-vacio" class="alto25"></div>
 	                <div id="documento-div" class="alto30 alineacionIzquierda ancho100 ">
-	                    <label for="user" class="texto90 ancho20"><strong>(*)Usuario:&nbsp;</strong></label>
-	                    <html:text name="datosUsuarioActionForm" property="user" size="20" maxlength="20" styleClass="fondoBlanco" title="Introducir usuario"></html:text>
-	                </div>
-                    <div id="documento-div" class="alto30 alineacionIzquierda ancho100 ">
-                        <label for="nifcif" class="texto90 ancho50"><strong>(*)N.I.F./C.I.F:&nbsp;</strong></label>
-                        <html:text property="nifcif" size="9" maxlength="9" styleClass="fondoBlanco" title="Introducir NIF"></html:text>
-                        <label for="tipo_documento" class="texto90 ancho20 margenIzq12"><strong>(*)Tipo documento:&nbsp;</strong></label>
-                        <html:select name="tipoDocumentoSeleccionado" property="idTipoDocumento" styleClass="fondoBlanco" title="Seleccionar tipo de documento">
-                            <html:optionsCollection name="tipoDocumento" value="idTipoDocumento" label="descripcion"/>
-                        </html:select>
+	                    <label for="user" class="texto90 ancho30"><strong>(*)Usuario:&nbsp;</strong>
+	                       <html:text name="datosUsuarioActionForm" property="user" size="20" maxlength="20" styleClass="fondoBlanco" title="Introducir usuario"></html:text>
+	                    </label>
+                        <label for="nifcif" class="texto90 ancho30"><strong>(*)N.I.F./C.I.F:&nbsp;</strong>
+                            <html:text property="nifcif" size="9" maxlength="9" styleClass="fondoBlanco" title="Introducir NIF"></html:text>
+                        </label>
+                        <label for="tipo_documento" class="texto90 ancho40 margenIzq12"><strong>(*)Tipo documento:&nbsp;</strong>
+	                        <html:select name="tipoDocumentoSeleccionado" property="idTipoDocumento" styleClass="fondoBlanco" title="Seleccionar tipo de documento">
+	                            <html:optionsCollection name="tipoDocumento" value="idTipoDocumento" label="descripcion"/>
+	                        </html:select>
+	                    </label>
                     </div>	                
                     <div id="Password-div" class="alto30 alineacionIzquierda ancho100">
                        <label for="Password" class="texto90 ancho30 alineacionIzquierda"><strong>(*)Contraseña:&nbsp;</strong></label>
