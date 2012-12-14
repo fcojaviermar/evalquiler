@@ -1,7 +1,7 @@
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
 
-<div id="lopd-div" class="alineacionIzquierda fondoRojoMedio">
+<div id="lopd-div" class="alineacionIzquierda fondoAzulMedio">
 	<fieldset class="fondoGrisClaro bordeGrisOscuro relleno0 margen2 alto100P">
 		<div id="textoLOPD">
 		    <p class="alineacionCentrada">
