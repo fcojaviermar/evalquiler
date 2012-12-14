@@ -19,13 +19,13 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 
 	private int idTipoVia		   = 0;
 	private String nombreVia	   = null;
-	private int numeroVia	  	   = Constantes.SIN_NUMERO_O_PORTAL;
+	private Integer numeroVia	   = null;
 	private String bloque		   = null;
-	private int portal			   = Constantes.SIN_NUMERO_O_PORTAL;
+	private Integer portal		   = null;
 	private String escalera		   = null;
-	private int planta			   = Constantes.SIN_NUMERO_O_PORTAL;
+	private Integer planta		   = null;;
 	private String puerta		   = null;
-	private int codigoPostal	   = 0;
+	private Integer codigoPostal   = null;
 	private String idMunicipio	   = null;
 	private String idProvincia	   = null;
 	private int pais			   = 34;
@@ -91,20 +91,21 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	}
 
 
-	public final int getNumeroVia() {
+	public final Integer getNumeroVia() {
 		return numeroVia;
 	}
 
 	public final boolean tieneNumeroVia() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERO_O_PORTAL < this.getNumeroVia()) {
+		if (null != this.getNumeroVia()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
+
 	}
 
 
-	public final void setNumeroVia(int numeroVia) {
+	public final void setNumeroVia(Integer numeroVia) {
 		this.numeroVia = numeroVia;
 	}
 
@@ -130,19 +131,19 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	}
 
 
-	public final int getPortal() {
+	public final Integer getPortal() {
 		return portal;
 	}
 
 	public final boolean tienePortal() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERO_O_PORTAL < this.getPortal()) {
+		if (null != this.getPortal()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
 	}
 	
-	public final void setPortal(int portal) {
+	public final void setPortal(Integer portal) {
 		this.portal = portal;
 	}
 
@@ -169,19 +170,19 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	}
 
 
-	public final int getPlanta() {
+	public final Integer getPlanta() {
 		return planta;
 	}
 
 	public final boolean tienePlanta() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERO_O_PORTAL < this.getPlanta()) {
+		if (null != this.getPlanta()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
 	}
 
-	public final void setPlanta(int planta) {
+	public final void setPlanta(Integer planta) {
 		this.planta = planta;
 	}
 
@@ -207,19 +208,19 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	}
 
 
-	public final int getCodigoPostal() {
+	public final Integer getCodigoPostal() {
 		return codigoPostal;
 	}
 
 	public final boolean tieneCodigoPostal() {
 		boolean tieneInfo = false;
-		if (Constantes.SIN_NUMERICO_EN_VIA < this.getCodigoPostal()) {
+		if (null != this.getCodigoPostal()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
 	}
 
-	public final void setCodigoPostal(int codigoPostal) {
+	public final void setCodigoPostal(Integer codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 
@@ -297,7 +298,9 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
             } else if (Integer.valueOf(this.getIdProvincia()) > ComboProvincia.MELILLA) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
-            } 
+            }
+            
+
 		}        
 		
 		if (!errors.isEmpty()) {

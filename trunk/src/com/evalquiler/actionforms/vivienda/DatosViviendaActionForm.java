@@ -18,15 +18,15 @@ import com.evalquiler.entidad.ElementoComboProvincia;
 public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 
 	private int idTipoVia		   = 0;
-	private String descTipoVia		   = null;
+	private String descTipoVia	   = null;
 	private String nombreVia	   = null;
-	private int numeroVia	  	   = 0;
+	private Integer numeroVia	   = null;
 	private String bloque		   = null;
-	private int portal			   = 0;
+	private Integer portal		   = null;
 	private String escalera		   = null;
 	private String planta		   = null;
 	private String puerta		   = null;
-	private int codigoPostal	   = 0;
+	private Integer codigoPostal   = null;
 	private String idMunicipio	   = null;
 	private String municipio	   = null;
 	private String idProvincia	   = null;
@@ -86,12 +86,12 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	}
 
 
-	public int getNumeroVia() {
+	public Integer getNumeroVia() {
 		return numeroVia;
 	}
 
 
-	public void setNumeroVia(int numeroVia) {
+	public void setNumeroVia(Integer numeroVia) {
 		this.numeroVia = numeroVia;
 	}
 
@@ -106,12 +106,12 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	}
 
 
-	public int getPortal() {
+	public Integer getPortal() {
 		return portal;
 	}
 
 
-	public void setPortal(int portal) {
+	public void setPortal(Integer portal) {
 		this.portal = portal;
 	}
 
@@ -146,12 +146,12 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	}
 
 
-	public int getCodigoPostal() {
+	public Integer getCodigoPostal() {
 		return codigoPostal;
 	}
 
 
-	public void setCodigoPostal(int codigoPostal) {
+	public void setCodigoPostal(Integer codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 
@@ -208,7 +208,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	
 	public final boolean tieneMunicipio() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO < Integer.valueOf(this.getIdMunicipio())) {
+		if (null != this.getIdMunicipio()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -217,13 +217,19 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 
 	public final boolean tieneProvincia() {
 		boolean tieneInfo = false;
-		if (Constantes.ELEMENTO_NO_SELECCIONADO < Integer.valueOf(this.getIdProvincia())) {
+		if (null != this.getIdProvincia()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
 	}
 	
-	
+	public final boolean tieneCodigoPostal() {
+		boolean tieneInfo = false;
+		if (null != this.getCodigoPostal()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
 	/*
      * Validamamos los datos introducidos por el usuario
      */
@@ -290,9 +296,9 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
     			errors.add("errorValidacion", new ActionError("error.puerta.no.valido"));
     		}
     
-            if (this.getCodigoPostal() < Constantes.SIN_NUMERICO_EN_VIA) {
+            if (!this.tieneCodigoPostal()) {
             	errors.add("errorValidacion", new ActionError("error.obligatorio.codigopostal"));
-            } else if (this.getCodigoPostal() > Constantes.MAXIMO_CODIGOPOTAL) {
+            } else if (this.getCodigoPostal().intValue() > Constantes.MAXIMO_CODIGOPOTAL) {
             	errors.add("errorValidacion", new ActionError("error.codigopostal.no.valido"));
             }
     
