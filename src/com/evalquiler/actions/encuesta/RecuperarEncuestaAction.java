@@ -42,7 +42,7 @@ public class RecuperarEncuestaAction extends ActionBase {
     public ActionForward action(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) 
     		throws ExcepcionEjecutarSentancia, ExcepcionComun {
     	
-    	UtilidadesFicheros.escribir("RecuperarEncuestaAction.action()");
+    	System.out.println("RecuperarEncuestaAction.action()");
 		String comandoDestino = ConstantesComandos.EXIT;
 		DatosRealizacionEncuestaActionForm  datosRealizacionEncuesta = null;
 		Collection<DatosEncuestaActionForm> datosEncuesta 			 = null;

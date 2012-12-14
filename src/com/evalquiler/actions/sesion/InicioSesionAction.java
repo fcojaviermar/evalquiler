@@ -1,7 +1,6 @@
 package com.evalquiler.actions.sesion;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +11,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
@@ -46,8 +44,6 @@ public class InicioSesionAction extends ActionBase {
     	
 		System.out.println("InicioSesionAction.action()");
 		Collection<DatosRealizacionEncuestaActionForm> encuestasRespondidas = null;
-		Collection<DatosClienteActionForm> 			   listaCliente 		= null;
-		
 		DatosRealizacionEncuestaActionForm datosRealizacionEncuesta = null;
 		DatosUsuarioActionForm 			   datosUsuario 			= null;
 		DatosInicioSesionActionForm 	   cliente 				    = null;
@@ -84,11 +80,8 @@ public class InicioSesionAction extends ActionBase {
 			
 		} else if (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) {
 			if (((DatosInicioSesionActionForm)form).esUsuario() ) {
-				Collection<DatosUsuarioActionForm> listaUsuario = null;
 				try {
-					listaUsuario = OpUsuario.consultarPorPk(form);
-					Iterator<DatosUsuarioActionForm> iterUsuario = listaUsuario.iterator();
-					datosUsuario = (DatosUsuarioActionForm)iterUsuario.next();
+					datosUsuario = OpUsuario.consultarPorPk(form);
 					UtilidadesFicheros.escribir("Tipousuario: " + datosUsuario.getIdTipoUsuario());
 					final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
 				
@@ -115,10 +108,7 @@ public class InicioSesionAction extends ActionBase {
 				}
 			} else if (((DatosInicioSesionActionForm)form).esCliente() ) {
 				try { 
-					listaCliente = OpCliente.consultarPorPk(form);
-	    			
-	 				Iterator<DatosClienteActionForm> iterUsuario = listaCliente.iterator();
-					cliente = (DatosClienteActionForm)iterUsuario.next();					
+					cliente = OpCliente.consultarPorPk(form);
 					final String pwd = ((DatosInicioSesionActionForm)form).getPassword(); 
 					
 					if (pwd.equals(cliente.getPassword())) {
