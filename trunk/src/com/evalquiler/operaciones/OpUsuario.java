@@ -9,9 +9,11 @@ import org.apache.struts.action.ActionForm;
 
 import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
+import com.evalquiler.combo.ComboTipoUsuario;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.dao.DaoUsuario;
+import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.usuario.UsuarioNoExisteExcepcion;
 import com.evalquiler.excepciones.usuario.UsuarioNoGuardadoExcepcion;
@@ -23,8 +25,9 @@ import com.evalquiler.excepciones.usuario.UsuarioRepetidoExcepcion;
  */
 public final class OpUsuario {
 	
-	public static final Collection<DatosUsuarioActionForm> consultarPorPk(ActionForm usuarioIn) 
+	public static final DatosUsuarioActionForm consultarPorPk(ActionForm usuarioIn) 
 		throws UsuarioNoExisteExcepcion, UsuarioRepetidoExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
+		DatosUsuarioActionForm usuario = null;
 		
 		Collection<DatosUsuarioActionForm> listaUsuarios = DaoUsuario.consutarPorPk( ((DatosInicioSesionActionForm)usuarioIn).getUser());
 		
@@ -35,8 +38,14 @@ public final class OpUsuario {
 		if (listaUsuarios.size() > 1) {
 			throw new UsuarioRepetidoExcepcion(((DatosInicioSesionActionForm)usuarioIn).getUser());
 		}
+
+		usuario = listaUsuarios.iterator().next();
 		
-		return listaUsuarios; 
+		ComboTipoUsuario comboUsuario = new ComboTipoUsuario();
+		ElementoComboTipoUsuario tipoUsuario = comboUsuario.get(listaUsuarios.iterator().next().getIdTipoUsuario());
+		usuario.setDescTipoUsuario(tipoUsuario.getDescripcion());
+		
+		return usuario; 
 	}
 	
 	public static final int insertar(ActionForm usuarioIn) 

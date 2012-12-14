@@ -2,18 +2,20 @@
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
 
 <div id="datosPersonales" class="alineacionIzquierda fondoGrisMedio">
-    <div id="User-div" class="alto25 alineacionIzquierda">
-        <label for="usuario" title="" class="texto100 ancho30"><strong >Usuario:&nbsp;</strong>
+    <div id="User-div" class="alto25 alineacionIzquierda ancho60">
+        <label for="usuario" title="" class="texto100 col40">
+            <strong >Usuario:&nbsp;</strong>
             <bean:write name="datosClienteActionForm" property="user"/>
         </label>
-        <label for="nifcif" title="" class="texto100 ancho30"><strong >Número documento:&nbsp;</strong>
+        <label for="nifcif" title="" class="texto100 col40">
+            <strong >Número documento:&nbsp;</strong>
             <bean:write name="datosClienteActionForm" property="nifcif"/>
         </label>
     </div>
-    <div id="email-div" class="alto25 alineacionIzquierda">
-        <label for="email" title="" class="texto100">
+    <div id="email-div" class="alto25 alineacionIzquierda ancho60">
+        <label for="email" title="" class="texto100 col60">
             <strong >Dirección de correo electrónico:&nbsp;</strong>
+            <bean:write name="datosClienteActionForm" property="email"/>
         </label>
-        <bean:write name="datosClienteActionForm" property="email"/>        
     </div>
 </div>
