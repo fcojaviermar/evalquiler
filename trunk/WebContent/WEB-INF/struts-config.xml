@@ -131,11 +131,11 @@
 	
         <action input="/jsp/vivienda/ListadoDireccionesEncontradas.jsp" path="/IrHacerEncuestaAction"
                 name="datosEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.RecuperarEncuestaAction">
-            <forward name="THERE_IS_POLL"     path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>
-            <forward name="THERE_IS_NO_POLL"  path="/IrInicioSesionAction.do"></forward>
-            <forward name="NEW_HOUSE"         path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
-            <forward name="CANCEL_NO_INICIO"  path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
-            <forward name="NO_RESULT"         path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="THERE_IS_POLL"      path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>
+            <forward name="THERE_IS_NO_POLL"   path="/IrInicioSesionAction.do"></forward>
+            <forward name="NEW_HOUSE"          path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
+            <forward name="CANCEL_NO_INICIO"   path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
+            <forward name="NO_RESULT"          path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
 <!--             <forward name="CANCEL"            path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>-->
         </action>
 
@@ -143,7 +143,8 @@
                 name="datosRealizacionEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction">
             <forward name="OK"           path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
             <forward name="ALREADY_EVAL" path="/IrHacerEncuestaAction.do"></forward>
-            <forward name="CANCEL"       path="/IrHacerEncuestaAction.do"></forward>            
+            <forward name="CANCEL"       path="/IrHacerEncuestaAction.do"></forward>
+            <forward name="OBLIGATORY_ANSWERS" path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>            
         </action>
 
         <action input="/jsp/encuestas/ConfirmarRespuestas.jsp" path="/IrGuardarRespuestasEncuestaAction"
