@@ -137,13 +137,13 @@ public class DaoVivienda {
 					pstmt.setLong(1, vivienda.getIdVivienda());
 					pstmt.setInt(2, vivienda.getIdTipoVia());
 					pstmt.setString(3, vivienda.getNombreVia());
-					pstmt.setInt(4, vivienda.getNumeroVia());
+					pstmt.setInt(4, vivienda.getNumeroVia().intValue());
 					pstmt.setString(5, vivienda.getBloque());
-					pstmt.setInt(6, vivienda.getPortal());
+					pstmt.setInt(6, vivienda.getPortal().intValue());
 					pstmt.setString(7, vivienda.getEscalera());
 					pstmt.setString(8, vivienda.getPlanta());
 					pstmt.setString(9, vivienda.getPuerta());
-					pstmt.setInt(10, vivienda.getCodigoPostal());
+					pstmt.setInt(10, vivienda.getCodigoPostal().intValue());
 					pstmt.setString(11, vivienda.getIdMunicipio());
 					pstmt.setString(12, vivienda.getIdProvincia());
 					pstmt.setInt(13, vivienda.getPais());
@@ -309,7 +309,7 @@ public class DaoVivienda {
 						i = i + 1;
 					}
 					if (vivienda.tieneNumeroVia()) { 
-						pstmt.setInt(i, vivienda.getNumeroVia());
+						pstmt.setInt(i, vivienda.getNumeroVia().intValue());
 						i = i + 1;
 					}
 					if (vivienda.tieneBloque()) { 
@@ -317,7 +317,7 @@ public class DaoVivienda {
 						i = i + 1;
 					}
 					if (vivienda.tienePortal()) { 
-						pstmt.setInt(i, vivienda.getPortal());
+						pstmt.setInt(i, vivienda.getPortal().intValue());
 						i = i + 1;
 					}
 					if (vivienda.tieneEscalera()) { 
@@ -333,7 +333,7 @@ public class DaoVivienda {
 						i = i + 1;
 					}
 					if (vivienda.tieneCodigoPostal()) { 
-						pstmt.setInt(i, vivienda.getCodigoPostal());
+						pstmt.setInt(i, vivienda.getCodigoPostal().intValue());
 						i = i + 1;
 					}
 					if (vivienda.tieneMunicipio()) { 
