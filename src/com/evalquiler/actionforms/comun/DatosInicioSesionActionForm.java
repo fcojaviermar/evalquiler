@@ -136,31 +136,39 @@ public class DatosInicioSesionActionForm extends ActionForm  {
     	System.out.println("DatosInicioSesionActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
 
-		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
-		if ( (!ConstantesBotones.REGISTRARSE.equals(botonPulsado)) && 
-			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) &&
-			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) && 
-			 (!ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) &&
-			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
-            if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
-            	errors.add("errorValidacion", new ActionError("error.obligatorio.user"));
-            } else if (this.getUser().length() > Constantes.LONGITUD_USUARIO) {
-            	errors.add("errorValidacion", new ActionError("error.usuario.no.valido"));
-            }
-            if ( (null == this.getPassword()) ||  ("".equals(this.getPassword()))) {
-            	errors.add("errorValidacion", new ActionError("error.obligatorio.password"));
-            } else if (this.getPassword().length() > Constantes.LONGITUD_PASSWORD) {
-            	errors.add("errorValidacion", new ActionError("error.password.no.valida"));
-            }
-		}
-		
+    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (ConstantesBotones.REGISTRARSE.equals(botonPulsado)) || 
 			 (ConstantesBotones.INICIAR_SESION.equals(botonPulsado)) ) {
-			if (null == this.getTipoRol()) {
-				errors.add("errorValidacion", new ActionError("error.obligatorio.tiporol"));
-			} else if ( !this.esUsuario() && !this.esCliente()) {
-				errors.add("errorValidacion", new ActionError("error.tiporol.no.valido"));
-			}
+    		if (null == this.getTipoRol()) {
+    			errors.add("errorValidacion", new ActionError("error.obligatorio.tiporol"));
+    		} else if (!this.esUsuario() && !this.esCliente()) {
+    			errors.add("errorValidacion", new ActionError("error.tiporol.no.valido"));
+    		} 
+		}
+
+		if (errors.isEmpty()) {
+    		if ( (!ConstantesBotones.REGISTRARSE.equals(botonPulsado)) && 
+    			 (!ConstantesBotones.GUARDAR_ENCUESTA.equals(botonPulsado)) &&
+    			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) && 
+    			 (!ConstantesBotones.SOLICITAR_INFORME.equals(botonPulsado)) &&
+    			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
+                if ( (null == this.getUser()) ||  ("".equals(this.getUser()))) {
+                	if (this.esUsuario()) {
+                		errors.add("errorValidacion", new ActionError("error.obligatorio.nombre.user"));
+                	} else if (this.esCliente()) {
+                		errors.add("errorValidacion", new ActionError("error.obligatorio.nombre.client"));
+                	} else {
+                		//Ya se muestra error por la validación de getTipoRol
+                	}
+                } else if (this.getUser().length() > Constantes.LONGITUD_USUARIO) {
+                	errors.add("errorValidacion", new ActionError("error.usuario.no.valido"));
+                }
+                if ( (null == this.getPassword()) ||  ("".equals(this.getPassword()))) {
+                	errors.add("errorValidacion", new ActionError("error.obligatorio.password"));
+                } else if (this.getPassword().length() > Constantes.LONGITUD_PASSWORD) {
+                	errors.add("errorValidacion", new ActionError("error.password.no.valida"));
+                }
+    		}
 		}
 		
         return errors;

@@ -89,7 +89,7 @@ public class RecuperarEncuestaAction extends ActionBase {
 						UtilidadesFicheros.escribir("Se ha recuperado una encuesta");
     					datosRealizacionEncuesta.setDatosVivienda(viviendaSeleccionada);
     					datosRealizacionEncuesta.setDatosEncuesta((DatosEncuestaActionForm)datosEncuesta.iterator().next());
-
+    					errors.add("message", new ActionError("msg.preguntas.obligatorias"));
     					comandoDestino = ConstantesComandos.THERE_IS_POLL;
 					} catch (NoExistenEncuestasExcepcion e) {
 						comandoDestino = ConstantesComandos.THERE_IS_NO_POLL;
