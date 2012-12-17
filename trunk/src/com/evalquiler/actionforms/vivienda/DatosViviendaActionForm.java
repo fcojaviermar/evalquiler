@@ -206,9 +206,26 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 //	}
 
 	
+	public final boolean tieneNumeroVia() {
+		boolean tieneInfo = false;
+		if (null != this.getNumeroVia()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
+
+	public final boolean tienePortal() {
+		boolean tieneInfo = false;
+		if (null != this.getPortal()) {
+			tieneInfo = true;
+		}
+		return tieneInfo;
+	}
+
+	
 	public final boolean tieneMunicipio() {
 		boolean tieneInfo = false;
-		if (null != this.getIdMunicipio()) {
+		if (0 < Integer.valueOf(this.getIdMunicipio()).intValue()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -217,7 +234,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 
 	public final boolean tieneProvincia() {
 		boolean tieneInfo = false;
-		if (null != this.getIdProvincia()) {
+		if (0 < Integer.valueOf(this.getIdProvincia()).intValue()) {
 			tieneInfo = true;
 		}
 		return tieneInfo;
@@ -237,7 +254,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
     	System.out.println("DatosViviendaActionForm.validate()");
     	ActionErrors errors = new ActionErrors();
     	
-		String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
+    	String botonPulsado = request.getParameter(ConstantesBotones.BOTON_PULSADO);
 		if ( (!ConstantesBotones.GUARDAR.equals(botonPulsado)) &&
 			 (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
 			 (!ConstantesBotones.CARGAR_MUNICIPIOS.equals(botonPulsado)) ) {
@@ -259,8 +276,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
     			}
     		}
     
-    		if ( (this.getNumeroVia() < Constantes.SIN_NUMERICO_EN_VIA) && 
-    			 (this.getPortal() < Constantes.SIN_NUMERICO_EN_VIA) ) {
+    		if (!this.tieneNumeroVia() && !this.tienePortal())  {
     			errors.add("errorValidacion", new ActionError("error.obligatorio.numerovia.o.portal"));
     		} else {
     			if (this.getNumeroVia() < Constantes.SIN_NUMERICO_EN_VIA) {
