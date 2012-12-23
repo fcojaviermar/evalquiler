@@ -141,9 +141,9 @@
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
                 name="datosRealizacionEncuestaActionForm" scope="session" type="com.evalquiler.actions.encuesta.ConfirmarRespuestasEncuestaAction">
-            <forward name="OK"           path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
-            <forward name="ALREADY_EVAL" path="/IrHacerEncuestaAction.do"></forward>
-            <forward name="CANCEL"       path="/IrHacerEncuestaAction.do"></forward>
+            <forward name="OK"                 path="/jsp/encuestas/ConfirmarRespuestas.jsp"></forward>
+            <forward name="ALREADY_EVAL"       path="/IrHacerEncuestaAction.do"></forward>
+            <forward name="CANCEL"             path="/IrHacerEncuestaAction.do"></forward>
             <forward name="OBLIGATORY_ANSWERS" path="/jsp/encuestas/PresentarEncuesta.jsp"></forward>            
         </action>
 
