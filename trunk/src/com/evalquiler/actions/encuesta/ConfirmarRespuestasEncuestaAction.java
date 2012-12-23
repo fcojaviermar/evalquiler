@@ -37,6 +37,7 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 		ActionErrors errors = new ActionErrors();
 		ActionForward forward = new ActionForward(); // return value
 
+		boolean preguntaRespondida = true;
 		
 		int iNumeroPreguntas = 0;
 			String botonPulsado = (String)request.getParameter(ConstantesBotones.BOTON_PULSADO);
@@ -60,16 +61,26 @@ public class ConfirmarRespuestasEncuestaAction extends ActionBase {
 	       				if (null != datosEncuesta) {
 	    					Iterator<PreguntasEncuestaActionForm> oIter = datosEncuesta.getPreguntas().iterator();
 	    					int i=0;
-	    					while ( (oIter.hasNext()) && (i<iNumeroPreguntas) ) {
+	    					while ( (oIter.hasNext()) && (i<iNumeroPreguntas) && preguntaRespondida ) {
 	    						PreguntasEncuestaActionForm pregunta = oIter.next();
-	    						pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
+	    						try {
+	    							pregunta.setIdRespuestaDada(Integer.parseInt((String)request.getParameter("idRespuesta" + i)));
+	    						} catch (NullPointerException e) {
+	    							preguntaRespondida = false;
+	    						}
 	    						i = i +1;
 	    					}
 	    					
-	    					datosEncuesta.setIdTipoUsuario(datosRealizacionEncuesta.getDatosUsuario().getIdTipoUsuario());
-	    					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
-	    					errors.add("errorValidacion", new ActionError("msg.para.guardar.pulsar.guardarencuesta"));	
-	    					comandoDestino = ConstantesComandos.OK;
+	    					if (!preguntaRespondida) {
+    							errors.add("errorExcepcion", new ActionError("msg.no.respondidas.todas.preguntas"));
+    							comandoDestino = ConstantesComandos.OBLIGATORY_ANSWERS;					
+	    					} else {
+		    					datosEncuesta.setIdTipoUsuario(datosRealizacionEncuesta.getDatosUsuario().getIdTipoUsuario());
+		    					datosRealizacionEncuesta.setDatosEncuesta(datosEncuesta);
+		    					errors.add("errorValidacion", new ActionError("msg.para.guardar.pulsar.guardarencuesta"));	
+		    					comandoDestino = ConstantesComandos.OK;
+	    					}
+	    					
 	    				} else {
 		    				errors.add("errorValidacion", new ActionError("error.no.existe.encuesta"));	    					
 		    				comandoDestino = ConstantesComandos.NOOK;
