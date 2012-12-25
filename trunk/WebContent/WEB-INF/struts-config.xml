@@ -16,11 +16,11 @@
          
 <!-- Revisar si se usa -->        <form-bean name="respuestasPreguntaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm"/>
 <!-- Revisar si se usa -->        <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
-        <form-bean name="datosEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm"/>
-        <form-bean name="datosRealizacionEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm"/>
+        <form-bean name="datosEncuestaActionForm"               type="com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm"/>
+        <form-bean name="datosRealizacionEncuestaActionForm"    type="com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm"/>
          
 <!-- Revisar si se usa --> <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
-        <form-bean name="criteriosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
+        <form-bean name="criteriosBusquedaViviendaActionForm"   type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
 		<form-bean name="datosViviendaActionForm"    			type="com.evalquiler.actionforms.vivienda.DatosViviendaActionForm"/>
         <form-bean name="datosBasicosViviendaActionForm"        type="com.evalquiler.actionforms.vivienda.DatosBasicosViviendaActionForm"/>
     
@@ -55,7 +55,7 @@
                        de entrada que están en el bean identificado por name.
             path  	-> Nombre de la acción que se puede invocar desde otras action o desde otros jsp.
             name  	-> Objeto que va a contener los datos (hidden, text, textarea...) que están en el jsp que ha ejecutado esta acción
-            scope   -> 
+            scope   -> Donde se guarda el objeto.
             type    -> Clase accion que se va a ejecutar si la validacion del bean, identificado por name ha sido correcta.
             forward -> si no se produce error en la validación de los datos identificados por name, pagina de destino en funcion del 
             		   name devuelto por type.
