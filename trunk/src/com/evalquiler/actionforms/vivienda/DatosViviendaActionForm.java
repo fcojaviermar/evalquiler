@@ -12,6 +12,7 @@ import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesBotones;
 import com.evalquiler.entidad.ElementoComboMunicipio;
 import com.evalquiler.entidad.ElementoComboProvincia;
+import com.evalquiler.entidad.ElementoComboTipoVia;
 
 
 
@@ -340,23 +341,10 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
             	request.setAttribute("elementoProvincia", new ElementoComboProvincia(this.getIdProvincia(), ""));
             }
     
-//            if (this.getPais() <= Constantes.ELEMENTO_NO_SELECCIONADO) {
-//            	errors.add("errorValidacion", new ActionError("error.obligatorio.pais"));
-//            } else if (this.getPais() > Constantes.MAXIMO_PAIS) {
-//            	errors.add("errorValidacion", new ActionError("error.pais.no.valido"));
-//            }
-    
-//            if (this.getEsElPropietario()) {
-//        		if ( (null == this.getNifPropietario()) || ("".equals(this.getNifPropietario())) ) {
-//        			errors.add("errorValidacion", new ActionError("error.obligatorio.nifpropietario"));
-//        		} else if (Validaciones.nifValido(this.getNifPropietario())) {
-//        			errors.add("errorValidacion", new ActionError("error.nifpropietario.no.valido"));
-//    //    			errors.add("errorValidacion", new ActionError("error.CIFpropietario.no.valido"));
-//    //    			errors.add("errorValidacion", new ActionError("error.NIEpropietario.no.valido"));
-//        		}
-//            }
 		}
         
+		request.setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia(String.valueOf(this.getIdTipoVia()), ""));
+		
 		if (!errors.isEmpty()) {
 			request.setAttribute("elementoProvincia", new ElementoComboProvincia(this.getIdProvincia(), ""));
 			request.setAttribute("comboMunicipio", new ComboMunicipio());
