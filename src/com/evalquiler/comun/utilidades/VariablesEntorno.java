@@ -31,6 +31,12 @@ public final class VariablesEntorno {
 		 					ConstantesCodigosExcepciones.CODIGO_VARIABLE_ENTORNO_NO_ENCONTRADA)), 
 									 "error.global.mesage", 
 									 "No se ha podido recuperar la variable de entorno VARIABLES_ENTORNO_NUMERO." + nombreVariable);	
+		} catch (Exception e) {
+			throw new ExcepcionComun(ConstantesCodigosExcepciones.ERROR.concat(
+				ConstantesCodigosExcepciones.FUNCIONALIDAD_GENERAL.concat(
+				ConstantesCodigosExcepciones.CODIGO_VARIABLE_ENTORNO_NO_ENCONTRADA)), 
+					 "error.global.mesage", 
+					 "No se ha podido recuperar la variable de entorno VARIABLES_ENTORNO_NUMERO." + nombreVariable);	
 		}
 		
 		try {
@@ -41,7 +47,6 @@ public final class VariablesEntorno {
 				ConstantesCodigosExcepciones.CODIGO_VARIABLE_ENTORNO_NO_ENCONTRADA)), 
 					 "error.global.mesage", 
 					 "El valor de la variable de entorno VARIABLES_ENTORNO_NUMERO." + nombreVariable + " no es un entero");	
-			
 		}
 		
 		return valorVariable;
