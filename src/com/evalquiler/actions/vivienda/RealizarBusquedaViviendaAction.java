@@ -70,8 +70,8 @@ public class RealizarBusquedaViviendaAction extends ActionBase {
     		comandoDestino = ConstantesComandos.CANCEL;
 
 		} else if (ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) {
-			request.getSession().setAttribute("tipoVia", new ComboTipoVia());
-			request.getSession().setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia());
+			request.setAttribute("tipoVia", new ComboTipoVia());
+			request.setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia("0", ""));
 			request.setAttribute("elementoProvincia", new ElementoComboProvincia());
 			request.setAttribute("comboMunicipio", new ComboMunicipio());
 			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());			
