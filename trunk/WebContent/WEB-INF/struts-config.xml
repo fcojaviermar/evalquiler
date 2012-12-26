@@ -82,17 +82,6 @@
                                                       name="informacionUsuarioActionForm"      validate="false"/>
 
         <!-- =========================== Modulo Registro Clientes =========================== -->
-<!-- 
-        <action input="/register.jsp" path="/IrInicioSesionClienteAction" name="datosInicioSesionActionForm" 
-                                            scope="request" type="com.evalquiler.actions.cliente.InicioSesionClienteAction">
-            <forward name="REGISTER_CLIENT"        path="/jsp/cliente/AltaDatosCliente.jsp"></forward>
-            <forward name="NO_CLIENT"              path="/Inicio.do"></forward>
-            <forward name="VALID_CLIENT"           path="/jsp/informes/BusquedaDeViviendaParaInforme.jsp"></forward>
-            <forward name="ERROR_PSW_NO_IGUALES"   path="/Inicio.do"></forward>
-            <forward name="ERROR_2_EQUAL_CLIENTS"  path="/Inicio.do"></forward>
-        </action>
--->    
-
         <action input="/jsp/cliente/AltaDatosCliente.jsp" path="/IrConfirmarDatosClienteAction"
                 name="datosClienteActionForm" scope="request" type="com.evalquiler.actions.cliente.ConfirmarDatosClienteAction">
             <forward name="OK"    path="/jsp/cliente/ConfirmarDatosCliente.jsp"></forward>
@@ -110,9 +99,6 @@
 
 
         <!-- =========================== Modulo de encuestas =========================== -->
-<!--         <action path="/IrBusquedaDireccionAction"    forward="/jsp/encuestas/CriteriosBusquedaVivienda.jsp"
-                                                      validate="false"/>-->
-         
         <action input="/jsp/encuestas/ResumenDeEncuestasRespondidas.jsp" path="/IrBusquedaDireccionAction" 
                 name="criteriosBusquedaViviendaActionForm" scope="session"  type="com.evalquiler.actions.encuesta.NuevaBusquedaAction" validate="false" >
             <forward name="SEARCH"        	 path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
@@ -127,7 +113,6 @@
             <forward name="NEW_HOUSE"          path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
             <forward name="CANCEL_NO_INICIO"   path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
             <forward name="NO_RESULT"          path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>
-<!--             <forward name="CANCEL"            path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>-->
         </action>
 
         <action input="/jsp/encuestas/PresentarEncuesta.jsp" path="/IrConfirmarRespuestasAction"
@@ -151,8 +136,6 @@
             <forward name="OK"                    path="/jsp/vivienda/ConfirmarDatosVivienda.jsp"></forward>
             <forward name="CANCEL_NO_INICIO"      path="/IrHacerEncuestaAction.do"></forward>
             <forward name="MUNICIPIOS_OBTEINED"   path="/jsp/vivienda/AltaNuevaVivienda.jsp"></forward>            
-<!-- 			<forward name="CANCEL_NO_INICIO"  path="/jsp/vivienda/CriteriosBusquedaVivienda.jsp"></forward>-->            
-<!--             <forward name="CANCEL"  path="/IrHacerEncuestaAction.do"></forward>-->
         </action>
 
         <action input="/jsp/vivienda/ConfirmarDatosVivienda.jsp" path="/IrGuardarDatosViviendaAction"
