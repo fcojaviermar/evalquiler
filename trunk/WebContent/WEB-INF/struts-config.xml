@@ -8,22 +8,13 @@
     <form-beans>
         <form-bean name="datosInicioSesionActionForm"   		type="com.evalquiler.actionforms.comun.DatosInicioSesionActionForm"/>
         <form-bean name="datosVacioActionForm"   				type="com.evalquiler.actionforms.comun.DatosVacioActionForm"/>
-         
         <form-bean name="datosUsuarioActionForm"               	type="com.evalquiler.actionforms.usuario.DatosUsuarioActionForm"/>
-<!-- Revisar si se usa -->       <form-bean name="datosUsuarioParaEncuestasActionForm"  	type="com.evalquiler.actionforms.usuario.DatosUsuarioParaEncuestasActionForm"/>
-         
         <form-bean name="datosClienteActionForm"               	type="com.evalquiler.actionforms.cliente.DatosClienteActionForm"/>
-         
-<!-- Revisar si se usa -->        <form-bean name="respuestasPreguntaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasPreguntaActionForm"/>
-<!-- Revisar si se usa -->        <form-bean name="respuestasEncuestaActionForm"          type="com.evalquiler.actionforms.encuesta.RespuestasEncuestaActionForm"/>
         <form-bean name="datosEncuestaActionForm"               type="com.evalquiler.actionforms.encuesta.DatosEncuestaActionForm"/>
         <form-bean name="datosRealizacionEncuestaActionForm"    type="com.evalquiler.actionforms.encuesta.DatosRealizacionEncuestaActionForm"/>
-         
-<!-- Revisar si se usa --> <form-bean name="resultadosBusquedaViviendaActionForm"  type="com.evalquiler.actionforms.vivienda.ResultadosBusquedaViviendaActionForm"/>
         <form-bean name="criteriosBusquedaViviendaActionForm"   type="com.evalquiler.actionforms.vivienda.CriteriosBusquedaViviendaActionForm"/>
 		<form-bean name="datosViviendaActionForm"    			type="com.evalquiler.actionforms.vivienda.DatosViviendaActionForm"/>
         <form-bean name="datosBasicosViviendaActionForm"        type="com.evalquiler.actionforms.vivienda.DatosBasicosViviendaActionForm"/>
-    
         <form-bean name="datosSolicitudInformeActionForm"       type="com.evalquiler.actionforms.informe.DatosSolicitudInformeActionForm"/>
     </form-beans>
     
