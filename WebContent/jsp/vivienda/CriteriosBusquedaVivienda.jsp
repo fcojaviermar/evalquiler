@@ -12,13 +12,14 @@
     <body>
     	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-        <html:form action="/IrBuscarViviendaAction.do" method="post">    
-			<fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
-			    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
-			    	Datos del usuario
-			    </legend>
-                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
-                <%@include file="../comun/Obligatorio.jsp"%>
+           
+		<fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
+		   <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+		    	Datos del usuario
+		   </legend>
+           <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
+           <%@include file="../comun/Obligatorio.jsp"%>
+           <html:form action="/IrBuscarViviendaAction.do" method="post">
 			    <fieldset class="bordeGrisOscuro fondoBlanco">
 			        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			        	Buscar una vivienda
@@ -84,9 +85,8 @@
                     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
                 </div>               
 	            </fieldset>
-<%@include file="../comun/Salir.jsp"%>
-	        </fieldset>
-        </html:form>          
-                      
+            </html:form>	            
+            <%@include file="../comun/Salir.jsp"%>
+	    </fieldset>
     </body>
 </html:html>
