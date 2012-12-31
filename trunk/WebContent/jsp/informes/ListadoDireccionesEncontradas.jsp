@@ -13,14 +13,14 @@
     <body>
     	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-		<html:form action="/IrAceptarSolicitudInformeAction.do" method="post">
-	        <div id="titulo">
-		        <fieldset class="bordeGrisOscuro borde1 ancho90 fondoGrisMedio">
-		            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
-		            	Datos del usuario
-		            </legend>
-	                <%@include file="../comun/DatosCliente.jsp"%>
-	                <%@include file="../comun/Obligatorio.jsp"%>
+        <div id="titulo">
+	        <fieldset class="bordeGrisOscuro borde1 ancho90 fondoGrisMedio">
+	            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+	            	Datos del usuario
+	            </legend>
+                <%@include file="../comun/DatosCliente.jsp"%>
+                <%@include file="../comun/Obligatorio.jsp"%>
+                <html:form action="/IrAceptarSolicitudInformeAction.do" method="post">	                
 	                <div id="tipo-informe-div" class="alto50">
 						<label for="idTipoInforme" class="texto100">
 							<strong>(*)Tipo informe:&nbsp;</strong>
@@ -85,10 +85,10 @@
 	                        <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
 	                    </div>
 				    </fieldset>
-                    <%@include file="../comun/Salir.jsp"%>				    
-			    </fieldset>
-			</div>
-		</html:form>   
+                </html:form>   
+                <%@include file="../comun/Salir.jsp"%>				    
+            </fieldset>
+        </div>
 		     
     </body>
 </html:html>
