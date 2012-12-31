@@ -15,16 +15,16 @@
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
 		<html:form action="/IrHacerEncuestaAction.do" method="post">
 	        <div id="titulo">
-		        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
+		        <fieldset class="bordeGrisOscuro borde1 ancho90 fondoGrisMedio">
 		            <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 		            	Datos del usuario
 		            </legend>
 	                <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
-                    <div id="tabla" class="">         
-		                <fieldset class="bordeGrisOscuro borde1 alto300 ancho95 alineacionIzquierda fondoBlanco">
+		                <fieldset class="bordeGrisOscuro borde1 alto325 ancho95 alineacionIzquierda fondoBlanco">
 		                    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 		                    	Resultados de la búsqueda
 		                    </legend>
+                            <div id="tabla" class="alto300">		                    
 		                    <table class="ancho100">
 		                        <thead>
 		                            <tr class="alineacionIzquierda cabecera">
@@ -61,16 +61,18 @@
 									</logic:iterate>                                        
 				                </tbody>
 				            </table>
-				        </fieldset>
-				    </div>
-			        <div id="botonera">
-	                    <html:submit property="BOTON_PULSADO" value="Realizar encuesta" title = "Realizar la encuesta para la vivienda seleccionada"/>
-	                    <html:submit property="BOTON_PULSADO" value="Nueva vivienda" title = "Dar de alta una vivienda"/>
-	                    <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
-	                </div>
+</div>
+				            <div id="botonera">
+	                        <html:submit property="BOTON_PULSADO" value="Realizar encuesta" title = "Realizar la encuesta para la vivienda seleccionada"/>
+	                        <html:submit property="BOTON_PULSADO" value="Nueva vivienda" title = "Dar de alta una vivienda"/>
+	                        <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
+	                    </div>
+				            
+				    </fieldset>
+                    <%@include file="../comun/Salir.jsp"%>				        
 			    </fieldset>
 			</div>
 		</html:form>   
-        <%@include file="../comun/Salir.jsp"%>		     
+        		     
     </body>
 </html:html>
