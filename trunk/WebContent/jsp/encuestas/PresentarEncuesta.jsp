@@ -14,12 +14,11 @@
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <html:form action="/IrConfirmarRespuestasAction.do" method="post">
                 <%int iNumeroPreguntas = 0; %>
-		        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
+		        <fieldset class="bordeGrisOscuro borde1 ancho90 fondoGrisMedio">
 					<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			        	Datos del usuario
 			        </legend>
 			        <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
-<!-- 			            <fieldset class="bordeGrisOscuro borde1 alto300 ancho95">-->
 			            <fieldset class="bordeGrisOscuro fondoBlanco ancho95">
 	                        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 	                        	<bean:write name="datosRealizacionEncuestaActionForm" property="datosEncuesta.titulo"/>
@@ -64,8 +63,9 @@
 			                    </div>                  	
 			                </div>
 				    	</fieldset>
+				    	<%@include file="../comun/Salir.jsp"%>
     			    </fieldset>
         </html:form>
-        <%@include file="../comun/Salir.jsp"%>
+        
     </body>
 </html:html>
