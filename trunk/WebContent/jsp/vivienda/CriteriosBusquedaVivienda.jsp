@@ -77,15 +77,16 @@
                                 <html:text property="nifPropietario" size="9" maxlength="10"  styleClass="fondoBlanco" title="NIF del propietario de la vivienda"></html:text>                  
 			                </label>
 			            </div>  
--->			        </div>               
-	            </fieldset>
+-->			        </div>
                 <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
                     <html:submit property="BOTON_PULSADO" value="Buscar" title="Buscar una vivienda"/>
                     <html:submit property="BOTON_PULSADO" value="Nueva vivienda" title = "Dar de alta una vivienda"/>
                     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
-                </div>
+                </div>               
+	            </fieldset>
+<%@include file="../comun/Salir.jsp"%>
 	        </fieldset>
         </html:form>          
-        <%@include file="../comun/Salir.jsp"%>              
+                      
     </body>
 </html:html>

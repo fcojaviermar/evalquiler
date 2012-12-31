@@ -11,13 +11,12 @@
     <body>
     	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-        <fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
+        <fieldset class="bordeGrisOscuro borde1 ancho90 fondoGrisMedio">
             <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
             	Datos del usuario
             </legend>
             <%@include file="../comun/DatosUsuarioEncuesta.jsp"%>
-<!--              <fieldset class="bordeGrisOscuro borde1 alto300 ancho95"> -->
-            <fieldset class="bordeGrisOscuro fondoBlanco alto300 ancho95">
+            <fieldset class="bordeGrisOscuro fondoBlanco alto250 ancho95">
                 <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
                 	Datos vivienda
                 </legend>
@@ -52,14 +51,14 @@
 	                    <bean:write name="datosViviendaActionForm" property="provincia"/>
                     </div>
 	            </div>
-	         </fieldset>
-             <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
-                 <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
-                     <html:submit property="BOTON_PULSADO" value="Guardar" title="Guardar los datos de la nueva vivienda"/>
-                     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
-                 </html:form>
-             </div>
-         </fieldset>
-         <%@include file="../comun/Salir.jsp"%>        
+	             <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
+	                 <html:form action="/IrGuardarDatosViviendaAction.do" method="post">
+	                     <html:submit property="BOTON_PULSADO" value="Guardar" title="Guardar los datos de la nueva vivienda"/>
+	                     <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>                            
+	                 </html:form>
+	             </div>
+	        </fieldset>
+            <%@include file="../comun/Salir.jsp"%>	         
+        </fieldset>
     </body>
 </html:html>

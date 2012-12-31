@@ -13,17 +13,17 @@
     	<%@include file="../comun/Logo.jsp"%>
         <%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
         <html:form action="/IrSolicitarInformeAction.do" method="post">    
-			<fieldset class="bordeGrisOscuro borde1 alto400 ancho90 fondoGrisMedio">
+			<fieldset class="bordeGrisOscuro borde1 ancho90 fondoGrisMedio">
 			    <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			    	Datos del usuario
 			    </legend>
                 <%@include file="../comun/DatosCliente.jsp"%>
                 <%@include file="../comun/Obligatorio.jsp"%>			
-			    <fieldset class="bordeGrisOscuro fondoBlanco">
+			    <fieldset class="bordeGrisOscuro fondoBlanco alto200">
 			        <legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
 			        	Buscar una vivienda
 			        </legend>
-                    <div id="criteriosBusqueda" >
+                    <div id="criteriosBusqueda">
                         <div id="User-div" class="alto50">
                             <label for="idTipoVia" class="texto100"><strong >Tipo vía:&nbsp;</strong>
                                     <html:select name="tipoViaSeleccionado" property="idTipoVia" styleClass="fondoBlanco" title="Seleccionar tipo de vía">
@@ -75,13 +75,13 @@
                                 <html:text property="nifPropietario" size="9" maxlength="10"  styleClass="fondoBlanco" title="NIF del propietario de la vivienda"></html:text>                  
 			                </label>
 			            </div>  
--->			        </div>               
+-->			        </div>
+                    <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
+                        <html:submit property="BOTON_PULSADO" value="Buscar" title="Buscar una vivienda"/>
+                    </div>
 	            </fieldset>
-                <div id="botonera" class="alineacionIzquierda alineacionVerticalInferior">
-                    <html:submit property="BOTON_PULSADO" value="Buscar" title="Buscar una vivienda"/>
-                </div>
+                <%@include file="../comun/Salir.jsp"%>	            
 	        </fieldset>
         </html:form>          
-        <%@include file="../comun/Salir.jsp"%>              
     </body>
 </html:html>
