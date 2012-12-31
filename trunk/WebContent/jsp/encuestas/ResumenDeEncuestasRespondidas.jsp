@@ -76,6 +76,5 @@
                 <%@include file="../comun/Salir.jsp"%>		    
             </fieldset>
 	    </div>
-	    
     </body>
 </html:html>
