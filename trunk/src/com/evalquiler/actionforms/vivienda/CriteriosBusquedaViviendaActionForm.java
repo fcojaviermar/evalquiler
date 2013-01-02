@@ -298,18 +298,17 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
     	
 		if ( (!ConstantesBotones.CANCELAR.equals(botonPulsado)) &&
 			 (!ConstantesBotones.REALIZAR_ENCUESTA.equals(botonPulsado)) &&
-			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) ) { 
-//			 && (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
+			 (!ConstantesBotones.NUEVA_VIVIENDA.equals(botonPulsado)) ) {// && 
+//			 (!ConstantesBotones.BUSCAR.equals(botonPulsado)) ) {
             if (!this.tieneProvincia()) {
-            	errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
+           		errors.add("errorValidacion", new ActionError("error.obligatorio.provincia"));
             } else if (Integer.valueOf(this.getIdProvincia()) > ComboProvincia.MELILLA) {
             	errors.add("errorValidacion", new ActionError("error.provincia.no.valido"));
-            } else {
-    			request.setAttribute("elementoProvincia", 
-    								 new ElementoComboProvincia(this.getIdProvincia(), ""));
-    			request.setAttribute("comboMunicipio", new ComboMunicipio());
-    			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
-            }
+            } 
+			request.setAttribute("elementoProvincia", 
+								 new ElementoComboProvincia(this.getIdProvincia(), ""));
+			request.setAttribute("comboMunicipio", new ComboMunicipio());
+			request.setAttribute("elementoMunicipio", new ElementoComboMunicipio());
 		}        
 		
 		request.setAttribute("tipoViaSeleccionado", new ElementoComboTipoVia(String.valueOf(this.getIdTipoVia()), ""));

@@ -101,7 +101,7 @@ public class DaoEncuesta {
 
     					}
     					if (null != respuesta) {
-    						pregunta.getRespuestas().add(respuesta);
+//    						pregunta.getRespuestas().add(respuesta);
         					if (null != pregunta) {
         						encuesta.getPreguntas().add(pregunta);
             					if (null != encuesta) {
