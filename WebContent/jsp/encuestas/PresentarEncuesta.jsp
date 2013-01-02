@@ -36,23 +36,23 @@
                       </div>
                       <div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro">
                           <logic:iterate name="datosRealizacionEncuestaActionForm" property="datosEncuesta.preguntas" id="preguntasEnc" indexId="indicePregunta">
-						<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
-							<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
-								<span>Pregunta <%=String.valueOf(iNumeroPreguntas + 1)%></span> 
-							</legend>		
-							<p class="p1 rellenoIzq12 margenSup0 rellenoSup0">
-								<bean:write name="preguntasEnc" property="descripcion"/>
-							</p>
-				    		<p class="margen0 relleno12 fondoBlanco bordeSuperior bordeAzulOscuro">
-				    			<logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
-                                          <bean:define id="valorRespuestaAux">
-                                              <bean:write name="respuestasEnc" property="idRespuesta"/>
-                                          </bean:define>
-									<input type="radio" name="idRespuesta<%=indicePregunta%>" value="<%=valorRespuestaAux%>"/>
-                             				<bean:write name="respuestasEnc" property="descripcion"/>
-  						    		</logic:iterate>
-				    		</p>
-				    	</fieldset>
+                            <fieldset class="fondoAzulMedio bordeNulo relleno0 margen2">
+								<legend class="texto080 flotarDcha margen0 rellenoSup0 rellenoInf0 rellenoIzq4 rellenoDer4 fondoBlanco bordeCerrado bordeGrisMedio">
+									<span>Pregunta <%=String.valueOf(iNumeroPreguntas + 1)%></span> 
+								</legend>		
+								<p class="p1 rellenoIzq12 margenSup0 rellenoSup0">
+									<bean:write name="preguntasEnc" property="descripcion"/>
+								</p>
+					    		<p class="margen0 relleno12 fondoBlanco bordeSuperior bordeAzulOscuro">
+					    			<logic:iterate name="preguntasEnc" id="respuestasEnc" property="respuestas">
+	                                          <bean:define id="valorRespuestaAux">
+	                                              <bean:write name="respuestasEnc" property="idRespuesta"/>
+	                                          </bean:define>
+										<input type="radio" name="idRespuesta<%=indicePregunta%>" value="<%=valorRespuestaAux%>"/>
+	                             				<bean:write name="respuestasEnc" property="descripcion"/>
+	  						    		</logic:iterate>
+					    		</p>
+					    	</fieldset>
                               <%iNumeroPreguntas = iNumeroPreguntas + 1;%>
 				    </logic:iterate>
                       </div>                    
