@@ -10,8 +10,8 @@
     </head>
     <body>
     	<%@include file="/jsp/comun/Logo.jsp"%>
-    	<%@include file="/jsp/comun/MostrarErroresMensajes.jsp"%>
-    	<%@include file="../comun/Obligatorio.jsp"%>
+        <%@include file="/jsp/comun/MostrarErroresMensajesRegistro.jsp"%>
+        <%@include file="../comun/ObligatorioRegistro.jsp"%>
 		<div class="bordeCerrado bordeGrisMedio margen10 relleno2 fondoAzulOscuro ancho85 alto75P">
     		<html:form action="/IrConfirmarDatosClienteAction.do" method="post">
 				<fieldset class="fondoAzulMedio bordeNulo relleno0 margen2 alto100P">
