@@ -17,6 +17,7 @@ import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.usuario.NifUsuarioRepetidoExcepcion;
 import com.evalquiler.excepciones.usuario.UsuarioNoGuardadoExcepcion;
 import com.evalquiler.operaciones.OpUsuario;
 
@@ -62,7 +63,12 @@ public class GuardarDatosUsuarioAction extends ActionBase
 				errors.add("message", new ActionError(e.getMensaje()));
     			this.vaciarSession(request.getSession());
     			comandoDestino = ConstantesComandos.NOOK;
+			} catch (NifUsuarioRepetidoExcepcion e) {
+				errors.add("message", new ActionError(e.getMensaje()));
+				this.vaciarSession(request.getSession());
+				comandoDestino = ConstantesComandos.NOOK;
 			}
+
     	} else {
 			errors.add("errorExcepcion", new ActionError("error.global.mesage"));
 			errors.add("errorExcepcion", new ActionError("error.comando.no.existe"));
