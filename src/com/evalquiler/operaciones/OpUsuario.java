@@ -15,6 +15,7 @@ import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.dao.DaoUsuario;
 import com.evalquiler.entidad.ElementoComboTipoUsuario;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.usuario.NifUsuarioRepetidoExcepcion;
 import com.evalquiler.excepciones.usuario.UsuarioNoExisteExcepcion;
 import com.evalquiler.excepciones.usuario.UsuarioNoGuardadoExcepcion;
 import com.evalquiler.excepciones.usuario.UsuarioRepetidoExcepcion;
