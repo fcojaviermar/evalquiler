@@ -49,8 +49,8 @@
 	                                              <bean:write name="respuestasEnc" property="idRespuesta"/>
 	                                          </bean:define>
 										<input type="radio" name="idRespuesta<%=indicePregunta%>" value="<%=valorRespuestaAux%>"/>
-	                             				<bean:write name="respuestasEnc" property="descripcion"/>
-	  						    		</logic:iterate>
+	                             		<bean:write name="respuestasEnc" property="descripcion"/>
+	  						    	</logic:iterate>
 					    		</p>
 					    	</fieldset>
                               <%iNumeroPreguntas = iNumeroPreguntas + 1;%>

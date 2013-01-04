@@ -30,8 +30,8 @@
 		                            <tr class="alineacionIzquierda cabecera">
 		                                <th class="texto100">Selección</th>
 		                                <th class="texto100">Dirección</th>
-		                                <th class="texto100">Tipo vivienda</th>
-		                                <th class="texto100">Vivienda</th>
+		                                <th class="texto100">Piso - Puerta</th>
+		                                <th class="texto100">Código postal</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
@@ -53,16 +53,18 @@
 			                                	<bean:write name="datosViviendaActionFormEnc" property="numeroVia"/>
 											</td>
 			                                <td>
-			                                	<bean:write name="datosViviendaActionFormEnc" property="planta"/>&nbsp; -- 
+			                                	<bean:write name="datosViviendaActionFormEnc" property="planta"/>&nbsp; - 
 			                                	<bean:write name="datosViviendaActionFormEnc" property="puerta"/>
 			                                </td>
-			                                <td>Vivienda</td>
+			                                <td>
+			                                    <bean:write name="datosViviendaActionFormEnc" property="codigoPostal"/>
+			                                </td>
 			                            </tr>
 									</logic:iterate>                                        
 				                </tbody>
 				            </table>
-</div>
-				            <div id="botonera">
+                        </div>
+				        <div id="botonera">
 	                        <html:submit property="BOTON_PULSADO" value="Realizar encuesta" title = "Realizar la encuesta para la vivienda seleccionada"/>
 	                        <html:submit property="BOTON_PULSADO" value="Nueva vivienda" title = "Dar de alta una vivienda"/>
 	                        <html:submit property="BOTON_PULSADO" value="Cancelar" title = "Cancelar la operación actual"/>
