@@ -33,4 +33,7 @@ public abstract class ConstantesCodigosExcepciones {
 	public final static String CODIGO_SQL_EXCEPTION 				 	 = "1000";
 	public final static String CODIGO_EXCEPTION 				 	 	 = "1001";
 
+	
+	//CODIGOS DE ERROR SQL
+	public final static int ENTRADA_DUPLICADA 							 = 1062;
 }
