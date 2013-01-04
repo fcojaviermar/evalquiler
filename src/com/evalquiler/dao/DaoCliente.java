@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.evalquiler.actionforms.cliente.DatosClienteActionForm;
+import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
 import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
 import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.cliente.NifClienteRepetidoExcepcion;
 
 
 /**
@@ -68,7 +70,7 @@ public class DaoCliente {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoCliente.consultarPorPk.");
+					 		"No se ha obtenido una conexiï¿½n en DaoCliente.consultarPorPk.");
 			}
 		} catch (SQLException e) {
 			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
@@ -82,7 +84,9 @@ public class DaoCliente {
 	}
 	
 	
-	public static final int insertar(DatosClienteActionForm cliente) throws ExcepcionEjecutarSentancia, ExcepcionComun {
+	public static final int insertar(DatosClienteActionForm cliente) 
+			throws NifClienteRepetidoExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
+		
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
 		Connection conn = ConexionBD.getConnection();
@@ -118,13 +122,17 @@ public class DaoCliente {
 					 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
 					 		ConstantesCodigosExcepciones.CODIGO_ERROR_NO_EJECUCION_SENTENCIA)), 
 					 		"error.global.mesage", 
-					 		"No se ha obtenido una conexión en DaoCliente.insertar.");
+					 		"No se ha obtenido una conexiï¿½n en DaoCliente.insertar.");
 			}
 		} catch (SQLException e) {
-			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
-				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
-				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
-				 		"error.global.mesage", "DaoCliente.insertar\n" + e.getMessage());
+			if (ConstantesCodigosExcepciones.ENTRADA_DUPLICADA == e.getErrorCode()) {
+				throw new NifClienteRepetidoExcepcion(((DatosInicioSesionActionForm)cliente).getNifcif());
+			} else {
+    			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+    				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_CLIENTE.concat(
+    				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+    				 		"error.global.mesage", "DaoCliente.insertar\n" + e.getMessage());
+			}
 		} 
 		
 		ConexionBD.cerrarConexiones(conn, pstmt, "DaoCliente.insertar");

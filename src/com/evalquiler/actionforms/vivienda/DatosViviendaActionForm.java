@@ -325,9 +325,9 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 //            	errors.add("errorValidacion", new ActionError("error.municipio.no.valido"));
             } else {
             	ComboMunicipio combo = (ComboMunicipio)request.getSession().getAttribute("comboMunicipio");
-            	ElementoComboMunicipio elCombo = combo.get(Integer.valueOf(this.getIdMunicipio()));
+            	ElementoComboMunicipio elCombo = combo.getId(this.getIdMunicipio());
             	this.setMunicipio(elCombo.getDescripcion());
-            	request.setAttribute("elementoMunicipio", new ElementoComboMunicipio(this.getIdMunicipio(), ""));
+            	request.setAttribute("elementoMunicipio", elCombo);
             }
     
             if (!this.tieneProvincia()) {
