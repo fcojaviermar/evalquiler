@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.evalquiler.actionforms.comun.DatosInicioSesionActionForm;
 import com.evalquiler.actionforms.usuario.DatosUsuarioActionForm;
 import com.evalquiler.comun.bbdd.ConexionBD;
 import com.evalquiler.comun.constantes.Constantes;
@@ -17,6 +18,7 @@ import com.evalquiler.comun.constantes.ConstantesCodigosExcepciones;
 import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.comun.utilidades.UtilidadesFechas;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
+import com.evalquiler.excepciones.usuario.NifUsuarioRepetidoExcepcion;
 
 
 /**
@@ -88,7 +90,7 @@ public class DaoUsuario {
 	
 	
 	public static final int insertar(DatosUsuarioActionForm usuario) 
-			throws ExcepcionEjecutarSentancia, ExcepcionComun {
+			throws NifUsuarioRepetidoExcepcion, ExcepcionEjecutarSentancia, ExcepcionComun {
 		
 		PreparedStatement pstmt 	 = null;
 		int 			  iResultado = 1;
@@ -130,11 +132,15 @@ public class DaoUsuario {
 					 		"No se ha obtenido una conexi�n en DaoUsuario.insertar.");
 			}
 		} catch (SQLException e) {
-			throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
-				 	ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
-				 		ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
-				 "error.global.mesage", 
-				 "DaoUsuario.insertar\n" + e.getMessage());
+			if (ConstantesCodigosExcepciones.ENTRADA_DUPLICADA == e.getErrorCode()) {
+				throw new NifUsuarioRepetidoExcepcion(((DatosInicioSesionActionForm)usuario).getNifcif());
+			} else {
+				throw new ExcepcionEjecutarSentancia(ConstantesCodigosExcepciones.ERROR.concat(
+													 ConstantesCodigosExcepciones.FUNCIONALIDAD_USUARIO.concat(
+													 ConstantesCodigosExcepciones.CODIGO_SQL_EXCEPTION)), 
+													 "error.global.mesage", 
+													 "DaoUsuario.insertar\n" + e.getMessage());
+			}
 		} 
 		
 		ConexionBD.cerrarConexiones(conn, pstmt, "DaoUsuario.insertar");

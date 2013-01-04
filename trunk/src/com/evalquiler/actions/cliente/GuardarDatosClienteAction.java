@@ -17,6 +17,7 @@ import com.evalquiler.comun.excepcion.ExcepcionComun;
 import com.evalquiler.entidad.ElementoComboTipoDocumento;
 import com.evalquiler.excepciones.ExcepcionEjecutarSentancia;
 import com.evalquiler.excepciones.cliente.ClienteNoGuardadoExcepcion;
+import com.evalquiler.excepciones.cliente.NifClienteRepetidoExcepcion;
 import com.evalquiler.operaciones.OpCliente;
 
 /**
@@ -54,6 +55,10 @@ public class GuardarDatosClienteAction extends ActionBase
     			this.vaciarSession(request.getSession());
     			comandoDestino = ConstantesComandos.OK;
 			} catch (ClienteNoGuardadoExcepcion e) {
+				errors.add("message", new ActionError(e.getMensaje()));
+    			this.vaciarSession(request.getSession());
+    			comandoDestino = ConstantesComandos.NOOK;
+			} catch (NifClienteRepetidoExcepcion e) {
 				errors.add("message", new ActionError(e.getMensaje()));
     			this.vaciarSession(request.getSession());
     			comandoDestino = ConstantesComandos.NOOK;
