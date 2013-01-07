@@ -34,7 +34,7 @@ public class CriteriosBusquedaViviendaActionForm extends ActionForm  {
 	private Integer codigoPostal   = null;
 	private String idMunicipio	   = null;
 	private String idProvincia	   = null;
-	private int pais			   = 34;
+	private int pais			   = 194; //Código ISO de España.
 	private String nifPropietario  = null;
 	
 	
