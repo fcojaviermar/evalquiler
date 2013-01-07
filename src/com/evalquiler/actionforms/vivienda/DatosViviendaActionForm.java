@@ -32,7 +32,7 @@ public class DatosViviendaActionForm extends DatosBasicosViviendaActionForm  {
 	private String municipio	   = null;
 	private String idProvincia	   = null;
 	private String provincia	   = null;
-	private int pais			   = 34;
+	private int pais			   = 194; //Código ISO de España
 	private String nifPropietario  = null;
 //	private boolean esElPropietario = false;
 
