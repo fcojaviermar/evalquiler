@@ -18,8 +18,8 @@ public final class ComboTipoInforme extends ArrayList<ElementoComboTipoInforme> 
 	public ComboTipoInforme() {
 		add(new ElementoComboTipoInforme(String.valueOf(Constantes.ELEMENTO_NO_SELECCIONADO), "--- Seleccione un elemento... ---" ));
 //		add(new ElementoComboTipoInforme("3", "Completo" ));
-		add(new ElementoComboTipoInforme("1", "Sobre inquilinos"));
-		add(new ElementoComboTipoInforme("2", "Sobre propietarios"));
+		add(new ElementoComboTipoInforme("1", "Respuestas de inquilinos"));
+		add(new ElementoComboTipoInforme("2", "Respuestas de arrendadores"));
 	}
 
 	
