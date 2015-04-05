@@ -1,0 +1,1 @@
+Proyecto fin de grado en la universidad San Jorge por Fco. Javier Martín Rodríguez. Proyecto web de fin de grado para evaluar la relación entre las partes intervinientes en un alquieler.
